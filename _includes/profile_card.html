@@ -1,15 +1,17 @@
+{% assign author = site.data.authors[page.author] %}
+
 <aside class="profile-card">
     <header>
       <!-- here’s the avatar -->
       <a target="_blank" href="#">
-        <img src="{{ site.data.authors[author].image }}" class="hoverZoomLink">
+        <img src="{{ author.image }}" class="hoverZoomLink">
       </a>
   
       <!-- the username -->
-      <h1>{{ site.data.authors[author].name }}</h1>
+      <h1>{{ author.name }}</h1>
   
       <!-- and role or location -->
-      <h2>{{ site.data.authors[author].role }}</h2>
+      <h2>{{ author.role }}</h2>
   
     </header>
   
@@ -17,7 +19,7 @@
     <div class="profile-bio">
   
     <p>
-        {{ site.data.authors[author].bio }}
+        {{ author.bio }}
     </p>
   
     </div>
@@ -35,7 +37,7 @@
         </a>
       </li> -->
       <li>
-        <a target="_blank" href="{{ site.data.authors[author].GitHub }}">
+        <a target="_blank" href="{{ author.github }}">
           <i class="fa fa-github"></i>
         </a>
       </li>

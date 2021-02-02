@@ -1,2 +1,120 @@
 // Import Core Clean Blog SCSS
 @import "../assets/vendor/startbootstrap-clean-blog/scss/clean-blog.scss";
+
+// Our css
+
+// Profile card
+
+.profile-card {
+  z-index: 2;
+  overflow: hidden;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+  width: 280px;
+  height: 440px;
+  background: #FFFFFF;
+  border-radius: 4px;
+
+  h1 {
+    font-size: unset
+  }
+
+  h2 {
+    font-size: unset;
+  }
+  
+  header {
+    width: inherit;
+    height: 250px;
+    padding: 10px 20px 10px 20px;
+    display: inline-block;
+    background: #FFFFFF;
+    color: #000000;
+    text-align: center;
+
+    h1 {
+      color: #FF5722;
+    }
+
+    a {
+      display: inline-block;
+      text-align: center;
+      position: relative;
+      margin: 25px 30px;
+      
+      >img {
+        width: 120px;
+        max-width: 100%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -webkit-transition: -webkit-box-shadow 0.3s ease;
+        transition: box-shadow 0.3s ease;
+        -webkit-box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
+        box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
+      }
+
+    }
+  }
+
+  .profile-bio {
+    width: inherit;
+    height: 140px;
+    display: inline-block;
+    background: #FFFFFF;
+    color: #333333;
+    text-align: center;
+    p {
+      margin: 0px 10px;
+    }
+  }
+
+  .profile-social-links {
+    width: inherit;
+    height: 40px;
+    display: inline-block;
+    margin: 0px;
+    padding: 15px 20px;
+    background: #FFFFFF;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    li {
+      list-style: none;
+      margin: -5px 0px 0px 0px;
+      padding: 0px;
+      float: left;
+      width: 25%;
+      text-align: center;
+      a {
+        display: inline-block;
+        color: red;
+        width: 24px;
+        height: 24px;
+        position: relative;
+        overflow: hidden!important;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+
+        i {
+          position: relative;
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+}
+
+.profile-card header a:hover > img {
+  -webkit-box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-social-links li a img,
+.profile-social-links li a svg {
+  width: 24px;
+}

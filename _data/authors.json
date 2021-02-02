@@ -1,9 +1,16 @@
 {
-    "nicolas": {
+    "Nicolas Anquetil": {
         "name": "Nicolas Anquetil",
         "role": "Moose expert",
         "bio": "Software engineer researcher specialized in software evolution",
         "github": "https://github.com/nicolasanquetil",
         "image": "https://avatars.githubusercontent.com/u/14889146"
+    },
+    "Benoît Verhaeghe": {
+        "name": "Benoît Verhaeghe",
+        "role": "Cookie Lover",
+        "bio": "PhD Student at Berger-Levrault on GUI migration",
+        "github": "https://github.com/badetitou",
+        "image": "https://avatars.githubusercontent.com/u/6225039"
     }
 }

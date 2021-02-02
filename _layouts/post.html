@@ -30,9 +30,10 @@ layout: default
 
   <div class="container">
     <div class="row">
+      <div class="col-lg-2">
+      {% include profile_card.html %}
+    </div>
       <div class="col-lg-10 col-md-10 mx-auto">
-
-        {% include profile_card.html content=page.author %}
 
         {{ content }}
 
