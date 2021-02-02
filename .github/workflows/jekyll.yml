@@ -1,0 +1,43 @@
+name: Jekyll site CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  github-pages:
+
+    runs-on: ubuntu-latest
+    steps:
+    
+    
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+     
+     # Runs a single command using the runners shell
+    - name: cd on workspace
+      run: cd $GITHUB_WORKSPACE
+
+      # Use GitHub Actions' cache to shorten build times and decrease load on servers
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    
+    - name: Jekyll Actions
+    # You may pin to the exact commit or the version.
+    # uses: helaili/jekyll-action@57a6a260778ffcec2b3ffb312f6e515e14e9fe62
+      uses: helaili/jekyll-action@2.0.4
+      env:
+          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+      #with:
+        # The Jekyll website source directory
+        #jekyll_src: # optional
+        # The Jekyll Gemfile directory
+        #gem_src: # optional
+        # The target branch name the sources get pushed to
+        #target_branch: # optional

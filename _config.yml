@@ -1,0 +1,25 @@
+title:              Moosetechnology
+email:              
+description:        Analyse and model your software system
+author:             Moosetechnology
+baseurl:            
+url:                "https://moosetechnology.github.io"
+
+# Social Profiles
+twitter_username:   
+github_username:    moosetechnology
+facebook_username:  
+instagram_username:  
+linkedin_username:
+
+# Add your google-analytics ID here to activate google analytics
+# google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
+
+# Build settings
+markdown:           kramdown
+paginate:           5
+paginate_path:      "/posts/page:num/"
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site
