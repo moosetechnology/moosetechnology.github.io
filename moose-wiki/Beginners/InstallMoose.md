@@ -38,7 +38,7 @@ Once the image downloaded, you just need to run it with from the Pharo Launcher.
 
 If you want to access all versions of Moose, instead of the most recent ones, you can use the GitHub releases. To do so, add this project into the pharo launcher:
 
-- Download the PharoLauncher (see Step 1 of previous section)
+- Download the PharoLauncher (see Step 1 of the previous section)
 - Open PharoLauncher
 - Open a playground (Ctrl + O, Ctrl + W)
 - Execute the following piece of code

@@ -136,7 +136,7 @@ Fame (the meta-meta model used by Moose) defines the following type for properti
 - Boolean
 - Object
 
-> Using the *Object*, you will not be able to export the property in *.mse* and *.json* (see: [import and export model](/Users/ImportingAndExportingModels)).
+> Using the *Object*, you will not be able to export the property in *.mse* and *.json* (see: [import and export model](/moose-wiki/Users/ImportingAndExportingModels)).
 
 So, when creating the *mse* or *JSON* of a meta-model these type can appear in the `ref`.
 

@@ -147,4 +147,4 @@ Then to generate the code, one also needs to perform a little hack (that has bee
 
 ## Create mse file for other languages
 
-To create mse files for other programming languages please refer to the [parser section](./../README#Parser).
+To create mse files for other programming languages please refer to the [parser section](./../index#Parser).

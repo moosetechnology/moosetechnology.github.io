@@ -6,7 +6,7 @@ title: 'Define a baseline loading Moose only if not present'
 
 # Define a baseline loading Moose only if not present
 
-Moose is a big project and loading it all the time is long. 
+Moose is a big project and loading it all the time is long.
 
 Multiple peoples came to me asking if there was a way in the baseline of a project to say "Load Moose only if needed".
 
