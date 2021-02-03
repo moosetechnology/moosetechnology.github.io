@@ -26,20 +26,19 @@
   
     <!-- some social links to show off -->
     <ul class="profile-social-links">
-      <!-- <li>
-        <a target="_blank" href="https://www.facebook.com/creativedonut">
-          <i class="fa fa-facebook"></i>
-        </a>
-      </li> -->
-      <!-- <li>
-        <a target="_blank" href="https://twitter.com/dropyourbass">
+      {% if author.twitter %}
+      <li>
+        <a target="_blank" href="{{ author.twitter }}">
           <i class="fa fa-twitter"></i>
         </a>
-      </li> -->
+      </li>
+      {% endif %}
+      {% if author.github %}
       <li>
         <a target="_blank" href="{{ author.github }}">
           <i class="fa fa-github"></i>
         </a>
       </li>
+      {% endif %}
     </ul>
   </aside>
