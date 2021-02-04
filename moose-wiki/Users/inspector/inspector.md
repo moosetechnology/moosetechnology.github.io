@@ -43,7 +43,7 @@ Model properties include the number of classes and methods that are interesting 
 When inspecting the model, the inspector shows us several categories that we can use to navigate inside the model.
 To navigate, you only need to click on an item of the shown list.
 
-![Example browsing model](browse.gif)
+![Example browsing model](browse.gif){: .img-fill }
 
 > Items that begin with `All model` are concepts that have been imported in the model.
 > In category such as `all classes`, we explore *normal* concepts and *stubs*
@@ -62,6 +62,6 @@ To do so, one needs:
 3. transform the moose group into a moose specialized group
 4. use the moose extension
 
-![Example to show system complexity](system-complexity.gif)
+![Example to show system complexity](system-complexity.gif){: .img-fill }
 
 ## Creating its plugins
