@@ -22,26 +22,25 @@ Here, we will not detail the JSON format but how it **must** be used to be loade
 
 ```json
 [
-    {
+  {
+    "FM3": "EntityTypeName",
+    "id": 1,
+    "propertyOne": "string property value"
+  },
+  {
+    "FM3": "AnotherAnotherEntityType",
+    "id": 2,
+    "entityProperty": { 
         "FM3": "EntityTypeName",
-        "id": 1,
-        "propertyOne": "string property value"
-    },
-    {
-        "FM3": "AnotherAnotherEntityType",
-        "id": 2,
-        "entityProperty": { 
-            "FM3": "EntityTypeName",
-            "id": 3,
-            "propertyInteger": 42
-        }
-    },
-    {
-        "FM3": "AnotherAnotherEntityType",
-        "id": 4,
-        "propertyThatReferesAnotherEntity": { "ref": 1 }
-    },
-    
+        "id": 3,
+        "propertyInteger": 42
+    }
+  },
+  {
+    "FM3": "AnotherAnotherEntityType",
+    "id": 4,
+    "propertyThatReferesAnotherEntity": { "ref": 1 }
+  }
 ]
 ```
 

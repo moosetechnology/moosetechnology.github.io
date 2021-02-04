@@ -29,7 +29,8 @@ Visually, the model appears in the list of models from the Moose Panel.
 Another way is to import the model from a playground by executing (in the case of a FamixJava model):
 
 ```st
-'./path/to/file.mse' asFileReference readStreamDo: [:stream | model := FamixJavaModel importMSEFromStream: stream].
+'./path/to/file.mse' asFileReference readStreamDo:
+    [:stream | model := FamixJavaModel importMSEFromStream: stream].
 ```
 
 More information about MSE are available [here](./fileFormat#mse).
