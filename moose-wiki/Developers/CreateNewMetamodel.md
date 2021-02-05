@@ -1,6 +1,6 @@
 ---
 layout: page
-background: '/img/bg-index.jpg'
+background: '/img/bg-wiki.jpg'
 title: 'Create a new Meta-model'
 ---
 
