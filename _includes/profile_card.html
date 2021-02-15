@@ -40,5 +40,26 @@
         </a>
       </li>
       {% endif %}
+      {% if author.linkedin %}
+      <li>
+        <a target="_blank" href="{{ author.linkedin }}">
+          <i class="fa fa-linkedin"></i>
+        </a>
+      </li>
+      {% endif %}
+      {% if author.orcid %}
+      <li>
+        <a target="_blank" href="{{ author.orcid }}">
+          <i class="fab  fa-orcid"></i>
+        </a>
+      </li>
+      {% endif %}
+      {% if author.personnal-website %}
+      <li>
+        <a target="_blank" href="{{ author.personnal-website }}">
+          <i class="fa fa-external-link"></i>
+        </a>
+      </li>
+      {% endif %}
     </ul>
   </aside>
