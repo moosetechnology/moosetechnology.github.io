@@ -80,6 +80,15 @@ Example:
 !["My hint"](/img/posts/2021-02-04-Coasters/coastersUML.png){: .img-fill }
 ```
 
+The images are zoomable by default (the JavaScript code is under `/assets/lightense.min.js`).
+If you need an image to not be zoomable, add the `.no-lightense` class.
+
+Example:
+
+```md
+!["My hint"](/img/posts/2021-02-04-Coasters/coastersUML.png){: .no-lightense }
+```
+
 #### Add/edit an author
 
 If it is the first time you write for the Moose blog, or if you want to edit your information, you might be interested by the `authors.json` file.
