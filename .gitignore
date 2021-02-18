@@ -4,3 +4,5 @@ node_modules
 Gemfile.lock
 *.gem
 .jekyll-cache
+.bundle
+vendor/
