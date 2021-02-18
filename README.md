@@ -1,4 +1,4 @@
-# MooseTechnology web site - Blog and wiki <!-- omit in toc --> 
+# MooseTechnology web site - Blog and wiki <!-- omit in toc -->
 
 - [Installation & Setup](#installation--setup)
 - [Moose Blog](#moose-blog)
@@ -16,7 +16,7 @@ To install locally the website:
 2. Clone the project
 3. Build your site and serve it: `bundle exec jekyll serve`
 
-Assuming there are no errors and the site is building properly, the website is served at [localhost:4000](localhost:4000).    ```
+Assuming there are no errors and the site is building properly, the website is served at [localhost:4000](localhost:4000).
 
 ## Moose Blog
 
@@ -43,7 +43,7 @@ Example in yaml:
 ---
 layout: post
 title: "Micro-Visitors for Parsing Programming Languages"
-subtitle: My super nice subtitle 
+subtitle: My super nice subtitle
 date: 2021-01-26 23:45:13 -0400
 background: '/img/posts/bg-posts.jpg'
 author: Nicolas Anquetil
@@ -135,7 +135,6 @@ Remember that the drafts are not displayed in the website (but can be seen in th
 
 When all reviews are done, move the draft file from `_drafts` folder to the `_posts` folder.
 Then, `commit` and `push`.
-GitHub compiles the website and put it live under few minutes. 
+GitHub compiles the website and put it live under few minutes.
 
 ## Moose Wiki
-
