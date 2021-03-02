@@ -117,7 +117,7 @@ While the `nsURI` is more internal/maintenance related (it can be used to propos
 I thus set the two values to:
 
 * `nsURI` = `https://coaster/1.0`
-* `nsPrefix` = `Ct`.
+* `nsPrefix` = `Ct`
 
 With this, we are ready to generate the code of our generator.
 
@@ -129,6 +129,27 @@ Once the metamodel is validated, it generate the Fame generator code using [Mako
 
 
 ### Install the code generator
+
+The generator installation is pretty simple if you have the right tools.
+You can find the code on github at [this address](https://github.com/aranega/famegenerator).
+You can install all the dependencies manually on your system, but the proper way of dealing with the dependencies would be to use a virtual environement (a virtualenv).
+Virtualenvs creation and activation can be somehow complicated if you are not used to.
+To ease this step, the repository contains a `Pipfile` to be used with `pipenv`.
+If you don't have `pipenv` installed on your machine, feel free to install it, it helps you to create virtualenvs from `Pipfile` with all the required dependencies and ease also their activation.
+In our case, with `pipenv`, the installation is pretty forward:
+
+```bash
+$ git clone https://github.com/aranega/famegenerator.git
+$ cd famegenerator
+$ pipenv install
+```
+
+And your good to go, `pipenv` creates a virtualenv and installs all the dependencies isolated in your virtualenv.
+Now, each time you want to use the created virtualenv, you can just enter in the directory where the code of the generator is installed and just activate the virtualenv:
+
+```bash
+$ pipenv shell
+```
 
 
 ### Generate the code of your Generator
