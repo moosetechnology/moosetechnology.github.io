@@ -8,7 +8,7 @@ author: Vincent Aranega
 comments: true
 ---
 
-Building metamodels for Fame and Famix is currently done through a generator.
+[Building metamodels](https://modularmoose.org/moose-wiki/Developers/CreateNewMetamodel) for Fame and Famix is currently done through a generator. 
 The generator consists in various special methods that need to be implemented, _eg_, one that will create all metaclasses, another that will create all attributes for each metaclass,...
 The metamodel's artifact are created programmatically using pure Smalltalk syntax extended with specific operators to easily express relationships and cardinalities (`<>-`, `*-*`, `<>-*`, ...).
 For more details, please refer to the [article about "Coaster"]({% post_url 2021-02-04-Coasters %}), written by Benoît Verhaeghe.
