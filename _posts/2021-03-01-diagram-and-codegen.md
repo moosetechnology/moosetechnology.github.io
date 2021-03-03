@@ -5,6 +5,7 @@ subtitle: "Generate your Generator"
 date: 2021-03-02 16:38:00 -0400
 background: '/img/posts/bg-posts.jpg'
 author: Vincent Aranega
+comments: true
 ---
 
 Building metamodels for Fame and Famix is currently done through a generator.
