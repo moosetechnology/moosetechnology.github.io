@@ -69,7 +69,7 @@ Thus, the alignment that we will keep here is:
 Attributes in Fame are modeled by the concept of `FM3Property`.
 Attributes represent a property of a metaclass/trait and are usually bound to objects outside of the Fame "ecosystem" (as `String` that comes from Pharo for example).
 The same concept can be found in Ecore with the `EAttribute` concept.
-On the contrary of attributes in Fame, `EAttribute` in Ecore can own default values (and a various set of other attributes that we will not consider here).
+On the contrary of attributes in Fame, `EAttribute` in Ecore can own default values (and a set of other attributes that we will not consider here).
 Consequently, we can directly align simple `EAttribute` to Fame attribute, ignoring the default value if one is set.
 In this condition, the alignment is:
 
@@ -103,10 +103,10 @@ For this blogpost, three tools have been tested, two web-based one and a desktop
 * [EMF.cloud](https://www.eclipse.org/emfcloud/) (web-based)
 
 They all work well and have their pros and cons.
-As example/illustration of this section I used GenMyModel (I worked there for few years, I know well the tool), but the design process is the same whatever the used tool.
+As example/illustration of this section I used GenMyModel (I worked there for some years, I know well the tool), but the design process is the same whatever the used tool.
 
 When you design your metamodel for Fame using a graphical Ecore editor, you just focus on the concepts you want to represent.
-The metamodel we are going to design is the same presented by Benoît in his [article about "Coaster"]({% post_url 2021-02-04-Coasters %}).
+The metamodel we are going to design is the one presented by Benoît in his [article about "Coaster"]({% post_url 2021-02-04-Coasters %}).
 
 The designed Ecore metamodel can be found [at this address](https://app.genmymodel.com/api/repository/aranega/Coaster) and it looks like this:
 
@@ -135,7 +135,7 @@ You can find the code on GitHub at [this address](https://github.com/aranega/fam
 You can install all the dependencies manually on your system, but the proper way of dealing with the dependencies would be to use a virtual environment (a virtualenv).
 Virtualenvs creation and activation can be somehow complicated if you are not used to it.
 To ease this step, the repository contains a `Pipfile` to be used with `pipenv`.
-If you don't have `pipenv` installed on your machine, feel free to install it, it helps you to create virtualenvs from `Pipfile` with all the required dependencies and ease also their activation.
+If you don't have `pipenv` installed on your machine, feel free to install it, it helps you creating virtualenvs from `Pipfile` with all the required dependencies and ease also their activation.
 In our case, with `pipenv`, the installation is pretty forward:
 
 ```bash
@@ -144,7 +144,7 @@ $ cd famegenerator
 $ pipenv install
 ```
 
-And your good to go, `pipenv` creates a virtualenv and installs all the dependencies isolated in your virtualenv.
+And you're good to go, `pipenv` creates a virtualenv and installs all the dependencies isolated in your virtualenv.
 Now, each time you want to use the created virtualenv, you can just enter in the directory where the code of the generator is installed and just activate the virtualenv:
 
 ```bash
@@ -247,7 +247,7 @@ CoasterGenerator >> defineRelations [
 ]
 ```
 
-We find back all the information we put in our design, relationships, names, metaclasses...
+We find back all the information we put in our design, relationships, names, metaclasses, ...
 This file can be directly imported in Moose and used to generate the metamodel code:
 
 ```st
