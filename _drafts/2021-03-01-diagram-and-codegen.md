@@ -107,7 +107,7 @@ As example/illustration of this section I used GenMyModel (I worked there for fe
 When you design your metamodel for Fame using a graphical Ecore editor, you just focus on the concepts you want to represent.
 The metamodel we are going to design is the same presented by Benoît in his [article about "Coaster"]({% post_url 2021-02-04-Coasters %}).
 
-The designed Ecore metamodel can be found [at this address](https://app.genmymodel.com/api/repository/longduzboub/Coaster) and it looks like this:
+The designed Ecore metamodel can be found [at this address](https://app.genmymodel.com/api/repository/aranega/Coaster) and it looks like this:
 
 !["Coaster Metamodel in Ecore"](https://app.genmymodel.com/api/projects/_vgiYcHuVEeuCM8KqVoRWiA/diagrams/_vgiYcnuVEeuCM8KqVoRWiA/svg){: .img-fill }
 
