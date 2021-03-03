@@ -16,5 +16,16 @@
         "personnal-website": "http://badetitou.github.io/",
         "orcid": "https://orcid.org/0000-0002-4588-2698",
         "image": "https://avatars.githubusercontent.com/u/6225039"
+    },
+    "Vincent Aranega": {
+        "name": "Vincent Aranega",
+        "role": "MDE and beers lover",
+        "bio": "Software engineer researcher focused on MDE and Language engineering",
+        "github": "https://github.com/aranega",
+        "twitter": "https://twitter.com/VincentAranega",
+        "linkedin": "https://www.linkedin.com/in/aranega/",
+        "personnal-website": "https://aranega.github.io/",
+        "orcid": "https://orcid.org/0000-0003-4465-1289",
+        "image": "https://avatars.githubusercontent.com/u/2317394"
     }
 }
