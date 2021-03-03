@@ -33,9 +33,9 @@ After installing and running Moose, one typically:
 A popular meta-model is the Java meta-model:
 
 - [Famix Maker](https://github.com/moosetechnology/Moose-Easy)
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue)
+  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [Analyse Java Project](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html)
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue)
+  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 
 You may also use models for other programming languages (see also the [Parsers](#Parsers) section):
 
@@ -45,18 +45,18 @@ You may also use models for other programming languages (see also the [Parsers](
 ### Performing queries
 
 - [Moose Query](https://moosequery.ferlicot.fr/)
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue)
+  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [Tree Query](https://github.com/juliendelplanque/TreeQuery)
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue)
+  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 
 ### Visualizing a model
 
 Visualizations are built with the [Roassal tool](https://github.com/ObjectProfile/Roassal3.git)
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue)
+  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 
 ### More advanced tools
 
-- [Inspector](Users/inspector/inspector) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow)
+- [Inspector](Users/inspector/inspector) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 - [Meta Browser](Users/metaBrowser)
 
 ## FOR DEVELOPERS
@@ -66,7 +66,7 @@ To be able to take advantage of all the existing tools, this implies writing a p
 There are also other possible actions.
 
 - [Library of pre- defined entites/traits](Developers/predefinedEntities)
-  ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow)
+  ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 - [Creating a meta-model](Developers/CreateNewMetamodel)
 - [Define baseline loading moose](Developers/DefineBaselineLoadingMoose) for your own projects
 
@@ -78,13 +78,13 @@ There are different (so-called) parsers already created at various stages of pro
 Note: they do more than parsing since they also resolve names in the parsed code and this is not a small task.
 
 - [Petit Parser](https://github.com/moosetechnology/PetitParser) - Write "easily" a Parser with Moose 
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue)
+  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [VerveineJ](Developers/Parsers/VerveineJ) - Generate an mse from a Java project
 - [C#](https://github.com/feenkcom/roslyn2famix) - A parser for C# (using Roselyn) that should be able to export a Moose model
 - [PowerBuilderParser](Developers/Parsers/PowerBuilderParser) - Generate an mse from a Powerbuilder project
-  ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow)
+  ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 - [FAST](Developers/Parsers/FAST) - Represent the AST in Famix
-![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow)
+![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 
 ## OTHER DOCUMENTATION
 
@@ -94,6 +94,6 @@ It offers multiple services ranging from importing and parsing data, to modeling
 The following resources are also useful to understand Moose:
 
 - [Moose Technology](http://moosetechnology.org/) - the main web site for Moose.
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue)
+  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [The Moose Book](http://themoosebook.org/) - a tutorial for using Moose to analyze Java source code (Moose 6).
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue)
+  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}

@@ -4,6 +4,7 @@ title: "Micro-Visitors for Parsing Programming Languages"
 date: 2021-01-26 23:45:13 -0400
 background: '/img/posts/bg-posts.jpg'
 author: Nicolas Anquetil
+comments: true
 ---
 
 

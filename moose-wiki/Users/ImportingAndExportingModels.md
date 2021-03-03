@@ -30,7 +30,7 @@ Another way is to import the model from a playground by executing (in the case o
 
 ```st
 './path/to/file.mse' asFileReference readStreamDo:
-    [:stream | model := FamixJavaModel importMSEFromStream: stream].
+    [:stream | model := FamixJavaModel importFromMSEStream: stream].
 ```
 
 More information about MSE are available [here](./fileFormat#mse).
@@ -46,7 +46,8 @@ It is also possible to do it programmatically by executing:
 model exportToMSE.
 
 "will write the mse in mseFile.mse"
-model exportToMSEStream: ('path/to/new/mseFile.mse' asFileReference writeStream).
+'path/to/new/file.mse' asFileReference writeStreamDo: 
+    [:stream | model exportToMSEStream: stream ].
 ```
 
 ## Importing and exporting with JSON
@@ -56,13 +57,8 @@ As one can import and export using MSE, it is possible to import and export usin
 To import a model from a JSON format, you can execute the following snippet:
 
 ```st
-myModel := '/path/to/file.json' asFileReference readStreamDo: [ :aStream |
-    (FMImporter model: FAMIXModel new) autorizeDandlingReferencesAtEnd
-            parser: FMJSONParser;
-            stream: aStream;
-            run;
-            model.            
-    ]
+'/path/to/file.json' asFileReference readStreamDo:
+    [ :aStream | model := FamixJavaModel importFromJSONStream: stream ]       
 ```
 
 > Sugar methods will be added in future release
@@ -74,7 +70,8 @@ To export using the JSON format programmatically:
 model exportToJSON.
 
 "will write the json in mseFile.json"
-'path/to/new/mseFile.json' asFileReference writeStreamDo: [:stream | model exportToJSONStream: stream ].
+'path/to/file.json' asFileReference writeStreamDo: 
+    [:stream | model exportToJSONStream: stream ].
 ```
 
 ## Importing Pharo code

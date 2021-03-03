@@ -4,81 +4,68 @@
 
 <script src="{{"/assets/scripts.js" | relative_url }}"></script>
 
-{% if page.url contains 'contact' %}
-  <!-- Form Validation -->
-  <script src="{{"/assets/vendor/startbootstrap-clean-blog/js/jqBootstrapValidation.js" | relative_url }}"></script>
-  <!-- Send Form -->
-  <script>
-    $(function () {
+<script src="{{"/assets/lightense.min.js" | relative_url }}"></script>
 
-      $("#contactForm input,#contactForm textarea").jqBootstrapValidation({
-        preventSubmit: true,
-        submitError: function ($form, event, errors) {
-          // additional error messages or events
-        },
-        submitSuccess: function ($form, event) {
-          event.preventDefault(); // prevent default submit behaviour
-          // get values from FORM
-          var name = $("input#name").val();
-          var email = $("input#email").val();
-          var phone = $("input#phone").val();
-          var message = $("textarea#message").val();
-          var firstName = name; // For Success/Failure Message
-          // Check for white space in name for Success/Fail message
-          if (firstName.indexOf(' ') >= 0) {
-            firstName = name.split(' ').slice(0, -1).join(' ');
-          }
-          $this = $("#sendMessageButton");
-          $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
-          $.ajax({
-            url: "//formspree.io/{{ site.email }}",
-            type: "POST",
-            data: {
-              name: name,
-              phone: phone,
-              email: email,
-              message: message
-            },
-            cache: false,
-            success: function () {
-              // Success message
-              $('#success').html("<div class='alert alert-success'>");
-              $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;").append("</button>");
-              $('#success > .alert-success').append("<strong>Your message has been sent. </strong>");
-              $('#success > .alert-success').append('</div>');
-              //clear all fields
-              $('#contactForm').trigger("reset");
-            },
-            error: function () {
-              // Fail message
-              $('#success').html("<div class='alert alert-danger'>");
-              $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;").append("</button>");
-              $('#success > .alert-danger').append($("<strong>").text("Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!"));
-              $('#success > .alert-danger').append('</div>');
-              //clear all fields
-              $('#contactForm').trigger("reset");
-            },
-            complete: function () {
-              setTimeout(function () {
-                $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
-              }, 1000);
-            }
-          });
-        },
-        filter: function () {
-          return $(this).is(":visible");
-        }
-      });
 
-      $("a[data-toggle=\"tab\"]").click(function (e) {
-        e.preventDefault();
-        $(this).tab("show");
-      });
+<script>
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+
+      // Example: Event Hooks
+      beforeShow(config) {
+        var beforeShowAttr = config.target.getAttribute("before-show-alert");
+        beforeShowAttr && alert(beforeShowAttr);
+      },
+      afterShow(config) {
+        var afterShowAttr = config.target.getAttribute("after-show-alert");
+        afterShowAttr && alert(afterShowAttr);
+      },
+      beforeHide(config) {
+        var beforeHideMessage = config.target.getAttribute("before-hide-alert");
+        beforeHideMessage && alert(beforeHideMessage);
+      },
+      afterHide(config) {
+        var afterHideMessage = config.target.getAttribute("after-hide-alert");
+        afterHideMessage && alert(afterHideMessage);
+      }
     });
+  }, false);
 
-    /*When clicking on Full hide fail/success boxes */
-    $('#name').focus(function () {
-      $('#success').html('');
-    });
-  </script>
-{% endif %}
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>

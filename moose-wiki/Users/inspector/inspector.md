@@ -23,7 +23,7 @@ In the following, we will present the main features.
 It is super easy to browse a model with the Moose Inspector.
 From an open playground (or Moose Playground) execute `inspect` on the variable that contains the model.
 
-![Open inspector example](open.gif)
+![Open inspector example](open.gif){: .img-fill }
 
 Several actions are then available:
 
