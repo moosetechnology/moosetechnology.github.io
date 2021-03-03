@@ -2,7 +2,7 @@
 layout: post
 title: "Model your Fame/Famix Metamodel using Graphical Editors"
 subtitle: "Generate your Generator"
-date: 2021-02-18 16:38:00 -0400
+date: 2021-03-02 16:38:00 -0400
 background: '/img/posts/bg-posts.jpg'
 author: Vincent Aranega
 ---
