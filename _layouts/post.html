@@ -21,6 +21,7 @@ layout: default
               <a href="#">{% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}</a>
               on {{ page.date | date: '%B %d, %Y' }} &middot; {% include read_time.html
               content=page.content %}
+              {% if page.update_date %}<br><br> Updated: {{ page.update_date | date: '%B %d, %Y' }}{% endif %}
             </span>
           </div>
         </div>
