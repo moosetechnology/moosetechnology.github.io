@@ -121,8 +121,21 @@
 
 }
 
+.team-presentation .profile-card{
+  margin: 1rem;
+  @media (min-width: 1420px) {
+    width: 280px;
+    transform: translate(0%,0%);
+  }
+}
+
 // Image override
 
 .img-fill {
   width: 100%;
+}
+
+.highlight-word {
+  color: #777;
+  font-style: italic;
 }

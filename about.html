@@ -1,12 +1,51 @@
 ---
 layout: page
-title: About Me
-description: This is what I do.
+title: About Us
 background: '/img/bg-about.jpg'
 ---
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed quisquam ut perspiciatis, repudiandae nulla animi iste vel, praesentium repellendus molestias aliquid consequatur, earum rem qui error voluptates eius enim consequuntur!</p>
+<h2>Community</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex alias, earum consectetur quia natus ducimus voluptate explicabo, hic porro reprehenderit, quasi? Tenetur ipsum distinctio laboriosam perspiciatis officiis dolore, architecto id.</p>
+<h3>Moose is a community. <span class="highlight-word">Get involved.</span></h3>
+The Moose project started in 1996 at the University of Bern.
+Its original goal was to build a language independent meta-model for software analysis.
+Since then, it grew to become an open platform for various types of software and data analyses.
+Its development is currently supported by several research groups, startups and contributors.
 
-<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam inventore aspernatur repellendus incidunt adipisci modi voluptates recusandae iste eligendi, repudiandae corporis quod aut, optio! Explicabo quaerat unde voluptatem! Itaque, eum!</p>
+<h2>Team</h2>
+
+<div class="team-presentation row">
+    {% for au in site.data.authors %}
+
+        {% assign a = au[0] %}
+        <div class="col-lg-4 col-md-6 mx-auto">
+            {% include profile_card.html author=a %}
+        </div>
+    {% endfor %}
+</div>
+
+<b>And also</b>
+
+<ul>
+    <li>
+        <a href="http://bergel.eu/">Prof. Alexandre Bergel</a>
+    </li>
+    <li>
+        <a href="http://andreichis.com/">Dr. Andrei Chis</a>
+    </li>
+    <li>
+        <a href="http://stephane.ducasse.free.fr/">Dr. Stéphane Ducasse</a>
+    </li>
+    <li>
+        <a href="http://tudorgirba.com/">Dr. Tudor Girba</a>
+    </li>
+    <li>
+        Pavel Krivanek
+    </li>
+    <li>
+        <a href="https://ferlicot.fr/">Cyril Ferlicot-Delbecque</a>
+    </li>
+    <li>
+        <a href="https://github.com/orgs/moosetechnology/people">And more...</a>
+    </li>
+</ul>
