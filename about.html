@@ -1,12 +1,101 @@
 ---
 layout: page
-title: About Me
-description: This is what I do.
+title: About Us
 background: '/img/bg-about.jpg'
 ---
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed quisquam ut perspiciatis, repudiandae nulla animi iste vel, praesentium repellendus molestias aliquid consequatur, earum rem qui error voluptates eius enim consequuntur!</p>
+<h2>Community</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex alias, earum consectetur quia natus ducimus voluptate explicabo, hic porro reprehenderit, quasi? Tenetur ipsum distinctio laboriosam perspiciatis officiis dolore, architecto id.</p>
+<h3>Moose is a community. <span class="highlight-word">Get involved.</span></h3>
+The Moose project started in 1996 at the University of Bern.
+Its original goal was to build a language independent meta-model for software analysis.
+Since then, it grew to become an open platform for various types of software and data analyses.
+Its development is currently supported by several research groups, startups and contributors.
 
-<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam inventore aspernatur repellendus incidunt adipisci modi voluptates recusandae iste eligendi, repudiandae corporis quod aut, optio! Explicabo quaerat unde voluptatem! Itaque, eum!</p>
+<ul>
+    <li>
+        <span class="highlight-word">Join</span> the <a href="https://sympa.inria.fr/sympa/subscribe/moose">mailing list</a>.
+    </li>
+    <li>
+        <span class="highlight-word">Follow</span> <a href="https://twitter.com/moosetechnology">@moosetechnology</a>.
+    </li>
+    <li>
+        <span class="highlight-word">Check</span> the code from <a href="https://github.com/moosetechnology/Moose">GitHub</a>.
+    </li>
+    <li>
+        <span class="highlight-word">Raise</span> an <a href="https://github.com/moosetechnology/Moose/issues">issue</a>.
+    </li>
+    <li>
+        <span class="highlight-word">Write</span> your story in the <a href="https://modularmoose.org/posts/">blog</a>.
+    </li>
+    <li>
+        <span class="highlight-word">Code & Learn</span> during the <a href="https://github.com/moosetechnology/Famix/projects/1#column-11845458">Moose Dojo</a>.
+    </li>
+</ul>
+
+<h2>Team</h2>
+
+<div class="team-presentation row">
+    {% for au in site.data.authors %}
+
+        {% assign a = au[0] %}
+        <div class="col-lg-4 col-md-6 mx-auto">
+            {% include profile_card.html author=a %}
+        </div>
+    {% endfor %}
+</div>
+
+<b>And also</b>
+
+<ul>
+    <li>
+        <a href="http://bergel.eu/">Prof. Alexandre Bergel</a>
+    </li>
+    <li>
+        <a href="http://andreichis.com/">Dr. Andrei Chis</a>
+    </li>
+    <li>
+        <a href="http://stephane.ducasse.free.fr/">Dr. Stéphane Ducasse</a>
+    </li>
+    <li>
+        <a href="http://tudorgirba.com/">Dr. Tudor Girba</a>
+    </li>
+    <li>
+        Pavel Krivanek
+    </li>
+    <li>
+        <a href="https://ferlicot.fr/">Cyril Ferlicot-Delbecque</a>
+    </li>
+    <li>
+        <a href="https://github.com/orgs/moosetechnology/people">And more...</a>
+    </li>
+</ul>
+
+<h2>Partners</h2>
+
+<div class="row partners">
+    <div class="col-lg-2 col-md-6 mx-auto">
+        <a href="http://scg.unibe.ch"><img class="partner-logo" src="{{ "/img/about/contributor-unibe.jpg" | relative_url }}"></a>
+    </div>
+    <div class="col-lg-3 col-md-6 mx-auto">
+        <a href="http://rmod.inria.fr"><img class="partner-logo" src="{{ "/img/about/contributor-rmod.png" | relative_url }}"></a>
+    </div>
+    <div class="col-lg-3 col-md-6 mx-auto">
+        <a href="http://pleiad.dcc.uchile.cl"><img class="partner-logo" src="{{ "/img/about/contributor-pleiad.png" | relative_url }}"></a>
+    </div>
+    <div class="col-lg-3 col-md-6 mx-auto">
+        <a href="http://www.inf.usi.ch/faculty/lanza/reveal.html"><img class="partner-logo" src="{{ "/img/about/contributor-usi.png" | relative_url }}"></a>
+    </div>
+    <div class="col-lg-3 col-md-6 mx-auto">
+        <a href="http://www.ummisco.ird.fr/"><img class="partner-logo" src="{{ "/img/about/contributor-ummisco.jpg" | relative_url }}"></a>
+    </div>
+    <div class="col-lg-3 col-md-6 mx-auto">
+        <a href="http://feenk.com"><img class="partner-logo" src="{{ "/img/about/contributor-feenk.png" | relative_url }}"></a>
+    </div>
+    <div class="col-lg-3 col-md-6 mx-auto">
+        <a href="http://objectprofile.com"><img class="partner-logo" src="{{ "/img/about/contributor-objectprofile.png" | relative_url }}"></a>
+    </div>
+    <div class="col-lg-3 col-md-6 mx-auto">
+        <a href="http://legacycode.nl"><img class="partner-logo" src="{{ "/img/about/contributor-sensus.png" | relative_url }}"></a>
+    </div>
+</div>

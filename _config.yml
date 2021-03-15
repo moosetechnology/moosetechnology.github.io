@@ -1,12 +1,12 @@
 title:              Moosetechnology
-email:              
+email:              https://sympa.inria.fr/sympa/subscribe/moose
 description:        Analyse and model your software system
 author:             Moosetechnology
 baseurl:            
 url:                "https://moosetechnology.github.io"
 
 # Social Profiles
-twitter_username:   
+twitter_username:   moosetechnology
 github_username:    moosetechnology
 facebook_username:  
 instagram_username:  

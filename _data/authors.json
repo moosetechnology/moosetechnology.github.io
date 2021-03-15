@@ -30,5 +30,14 @@
         "personnal-website": "https://aranega.github.io/",
         "orcid": "https://orcid.org/0000-0003-4465-1289",
         "image": "https://avatars.githubusercontent.com/u/2317394"
+    },
+    "Pascal Zaragoza": {
+        "name": "Pascal Zaragoza",
+        "role": "Microservice Expert",
+        "bio": "PhD Student at <a href='http://berger-levrault.com/'>Berger-Levrault</a> on backend migration towards a microservice-oriented architecture",
+        "github": "https://github.com/greenpanther93",
+        "linkedin": "https://www.linkedin.com/in/pascal-zaragoza-406120a9/",
+        "orcid": "https://orcid.org/0000-0002-5033-6392",
+        "image": "https://avatars.githubusercontent.com/u/8062930"
     }
 }
