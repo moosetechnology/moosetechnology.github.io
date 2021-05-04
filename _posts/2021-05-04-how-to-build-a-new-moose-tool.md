@@ -21,7 +21,8 @@ Also, it provides the logic to connect the browser to the Moose bus.
 
 So, let us get started. We will create a “Moose Inspector”. It would be like the Pharo’s inspector but as a Moose browser. Firstly, we create the subclass as following:
 
-```MiAbstractBrowser subclass: #MiInspectorBrowser
+```
+MiAbstractBrowser subclass: #MiInspectorBrowser
 		instanceVariableNames: 'stInspector'
 		classVariableNames: '' 
 		package: 'Moose-Core-Inspector'
@@ -43,7 +44,8 @@ We instantiate stInspector variable an instance of Pharo’s inspector. Then we 
 
 Now we are going to implement accept method. This method returns a Boolean which tells us if the entities received on the bus are usable in this browser. As we are building an inspector all entities can be accepted. So, we are going to return true always.
 
-```accept: anEntity
+```
+accept: anEntity
 
 	^ true
 ```
@@ -113,4 +115,4 @@ Because the method is defined in `MooseObject`, any subclass (MooseModel, MooseE
 
 That it is! Now we run again: `MiInspectorBrowser runMe` and we will se that the new tab now appears.
 
-!["MiAbstactBrowser toolbar"](/img/posts/2021-05-04-how-to-build-a-new-moose-tool/midas-inspector-background.png){: .img-fill }
+!["MiAbstactBrowser toolbar"](/img/posts/2021-05-04-how-to-build-a-new-moose-tool/inspector-background.png){: .img-fill }
