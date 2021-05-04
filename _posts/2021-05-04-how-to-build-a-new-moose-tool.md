@@ -6,7 +6,7 @@ title: "How to build a new Moose tool: The MooseInspector"
 header-img: img/posts/DSM.jpg
 subtitle: >-
   In this post I am going to show you how to create a new Moose Tool Browser from scratch. How to connect this new tool to the Moose Data bus to listen and to propagate new entities. 
-background: '\img\posts\2021-05-04-how-to-build-a-new-moose-tool\moose-inspector-background.png'
+background: '/img/posts/bg-posts.jpg'
 date: 2021-05-04 13:45:00
 author: Sebastian Jordan
 ---
@@ -115,4 +115,4 @@ Because the method is defined in `MooseObject`, any subclass (MooseModel, MooseE
 
 That it is! Now we run again: `MiInspectorBrowser runMe` and we will se that the new tab now appears.
 
-!["MiAbstactBrowser toolbar"](/img/posts/2021-05-04-how-to-build-a-new-moose-tool/inspector-background.png){: .img-fill }
+!["Moose Inspector"](/img/posts/2021-05-04-how-to-build-a-new-moose-tool/moose-inspector-final.png){: .img-fill }
