@@ -88,6 +88,8 @@ Moose does not offer ready-made solutions for these other languages, but for mos
 An important note is that the code does not have to be fully functioning.
 It merely needs to be loadable in the Pharo image.
 
+![Gif showing the manipulation to load Pharo model from Moose](img/importingAndExportingModels/importSTModel.gif){: .img-fill }
+
 ### From code
 
 It is possible to create a model of Pharo code programmatically.
