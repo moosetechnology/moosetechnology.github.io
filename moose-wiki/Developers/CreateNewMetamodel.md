@@ -33,7 +33,7 @@ These are described in [another page](predefinedEntities) ![Unfinished](https://
 
 ## Set up
 
-First of all, we need to [download Moose](../Beginners/InstallMoose.md) version 7 or higher.
+First of all, we need to [download Moose](../Beginners/InstallMoose) version 7 or higher.
 
 The first step is to create a FamixMetamodelGenerator.
 It will describe our meta-model.
@@ -98,7 +98,7 @@ This can be done with the `#newClassNamed:comment:` method.
 class := builder newClassNamed: #Class comment: 'I represent a Smalltalk class'.
 ```
 
-It is also possible to use entities that are already defined in a [library of predefined entities](predefinedEntities.md) or in another meta-model (see [submetamodels](#introducing-submetamodels)).
+It is also possible to use entities that are already defined in a [library of predefined entities](predefinedEntities) or in another meta-model (see [submetamodels](#introducing-submetamodels)).
 
 ### Define hierarchy
 
