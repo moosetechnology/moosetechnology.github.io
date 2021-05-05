@@ -44,6 +44,7 @@ You may also use models for other programming languages (see also the [Parsers](
 
 ### Performing queries
 
+- [Typical Queries](./Users/typicalQueries) - presents how to perform typical queries
 - [Moose Query](https://moosequery.ferlicot.fr/)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [Tree Query](https://github.com/juliendelplanque/TreeQuery)
