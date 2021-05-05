@@ -21,72 +21,72 @@ Also, it provides the logic to connect the browser to the Moose bus.
 
 So, let us get started. We will create a “Moose Inspector”. It would be like the Pharo’s inspector but as a Moose browser. Firstly, we create the subclass as following:
 
-```
+```st
 MiAbstractBrowser subclass: #MiInspectorBrowser
-		instanceVariableNames: 'stInspector'
-		classVariableNames: '' 
-		package: 'Moose-Core-Inspector'
+    instanceVariableNames: 'stInspector'
+    classVariableNames: '' 
+    package: 'Moose-Core-Inspector'
 ```
 
 As one can see, it has one instance variable which will hold an instance of Pharo’s inspector: `StInspector`.
 
 Now, we must implement some basic methods. First let us implement `initializePresenters` method:
 
-```
+```st
 initializePresenters
 
-	super initializePresenters.
-	stInspector := self instantiate: StInspectorPresenter.
-	stInspector model: self model
+    super initializePresenters.
+    stInspector := self instantiate: StInspectorPresenter.
+    stInspector model: self model
 ```
 
 We instantiate stInspector variable an instance of Pharo’s inspector. Then we set the inspector model to be the same as the browser model.
 
 Now we are going to implement accept method. This method returns a Boolean which tells us if the entities received on the bus are usable in this browser. As we are building an inspector all entities can be accepted. So, we are going to return true always.
 
-```
+```st
 accept: anEntity
 
-	^ true
+    ^ true
 ```
 
 Then, we must implement `followAction` method. This method manages the browser when new entities are received from the bus. In this case, we only must update the inspector with the new entity.
 
 Note: `toSelect` instance variable is the new received entity. It is automatically updated when the browser receives a new entity. The logic is in the superclass, so we do not have to worry about that.
 
-```
+```st
 followAction
 
-	(self accept: toSelect) ifFalse: [ ^ self ].
-	stInspector model: toSelect
+    (self accept: toSelect) ifFalse: [ ^ self ].
+    stInspector model: toSelect
 ```
 
 Next, the `miSelectedItem` method tells the bus what to propagate (when the user hits the “Propagate” button). In this case we want to propagate the object selected in the last inspector page.
 
-```
+```st
 miSelectedItem
 
-	| lastInspectorPage |
-	lastInspectorPage := stInspector millerList pages last.
-	^ lastInspectorPage model inspectedObject
+    | lastInspectorPage |
+    lastInspectorPage := stInspector millerList pages last.
+    ^ lastInspectorPage model inspectedObject
 ```
 
 Now we have all the logic and we can define the layout of this new browser. To do that, we must implement the `defaultSpec` method that is on the class side of `MiInspectorBrowser`. We must take the layout of the superclass (contains the toolbar) and add the subpresenters.
 
-```
+```st
 defaultSpec
 
-	^ super defaultSpec
-		add: #stInspector;
-		yourself
+    ^ super defaultSpec
+        add: #stInspector;
+        yourself
 ```
 
 Finally, we can define which will be the default model on which the browser will open. This is in case the bus does not have any entities. We want the Moose models, so:
 
-```
+```st
 newModel
 
-	^ MooseModel root entities
+    ^ MooseModel root entities
 ```
 
 Optionally, we can override class side methods `title` and `windowSize`.
@@ -100,17 +100,18 @@ The new browser is not effective yet. We want to add some custom tabs to inspect
 
 We will migrate the old “Properties” tab that is found in `MooseFinder`. The code is in `MooseObject>>#mooseFinderPropertiesIn:` We only have to rewrite it using Spec framework and use the pragma `<inspectorPresentationOrder:title:>`. We will create a method in MooseObject called `inspectorPropertiesIn`.
 
-```
+```st
 inspectorPropertiesIn
 
-	<inspectorPresentationOrder: 2 title: 'Properties'>
-	^ SpTablePresenter new
-		items: self mooseInterestingEntity mooseDescription allPrimitiveProperties;
-		sortingBlock: [ :x :y | x name < y name ];
-		addColumn: (SpStringTableColumn title: 'Properties' evaluated: #name);
-		addColumn: (SpStringTableColumn title: 'Value' evaluated: [ :each | (self mooseInterestingEntity 		mmGetProperty: each) asString ]);
-		yourself
+    <inspectorPresentationOrder: 2 title: 'Properties'>
+    ^ SpTablePresenter new
+        items: self mooseInterestingEntity mooseDescription allPrimitiveProperties;
+        sortingBlock: [ :x :y | x name < y name ];
+        addColumn: (SpStringTableColumn title: 'Properties' evaluated: #name);
+        addColumn: (SpStringTableColumn title: 'Value' evaluated: [ :each | (self mooseInterestingEntity mmGetProperty: each) asString ]);
+        yourself
 ```
+
 Because the method is defined in `MooseObject`, any subclass (MooseModel, MooseEntity, …) will have this tab when displayed in the inspector.
 
 That it is! Now we run again: `MiInspectorBrowser runMe` and we will se that the new tab now appears.
