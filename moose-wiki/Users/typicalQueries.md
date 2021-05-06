@@ -11,6 +11,7 @@ We present how to perform the queries in a playground or with the visual tool pr
 
 - [Queries](#queries)
   - [God classes](#god-classes)
+  - [God cyclomatic complexity](#god-cyclomatic-complexity)
   - [Deprecated methods](#deprecated-methods)
   - [Dead methods](#dead-methods)
   - [Application tests](#application-tests)
@@ -35,6 +36,20 @@ Or by number of methods:
 
 ```st
 model allModelClasses select: [ :each | each numberOfMethods > 50 ]
+```
+
+### God cyclomatic complexity
+
+The [cyclomatic complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) presents the complixity of a program.
+It basically corresponds to the number of possible branch in a method.
+The less cyclomatic complexity for a method the better it is.
+
+The following script sort the methods extracted in a model by their cyclomatic complexity.
+
+```st
+((self model allBehaviourals)
+    collect: [ :entity | entity -> entity cyclomaticComplexity ]
+    thenSelect: [ :assoc | assoc value > 3 ]) asOrderedCollection sort: #value descending
 ```
 
 ### Deprecated methods
