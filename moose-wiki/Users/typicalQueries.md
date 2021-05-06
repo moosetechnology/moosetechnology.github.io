@@ -20,7 +20,6 @@ We present how to perform the queries in a playground or with the visual tool pr
   - [Packages cycles](#packages-cycles)
 - [Developers](#developers)
   - [Meta-model UML](#meta-model-uml)
-- [Sources](#sources)
 
 ## Queries
 
@@ -153,9 +152,3 @@ builder build.
 builder canvas @ RSHierarchyPacker.
 builder canvas
 ```
-
-## Sources
-
-The queries presented here were first presented in:
-
-- [Benoît Verhaeghe's website](https://badetitou.github.io/misc/moose/pharo/2019/09/13/OOAnalysis/)
