@@ -7,6 +7,8 @@ title: "Typical Queries"
 This page aims to present different queries one might want to perform when analyzing a model.
 It can be used as a baseline for further analysis.
 
+We present how to perform the queries in a playground or with the visual tool proposed by Moose.
+
 - [Queries](#queries)
   - [God classes](#god-classes)
   - [Deprecated methods](#deprecated-methods)
@@ -20,19 +22,27 @@ It can be used as a baseline for further analysis.
 
 ### God classes
 
-By lines:
+God classes are classes that *knows too much* or *does too much*.
+One way to find god classes is to count the number of lines or the number of methods of a class.
+
+Using a playground, one can perform query on a model to retrieve the god classes by number of lines:
 
 ```st
 model allModelClasses select: [ :each | each numberOfLinesOfCode > 150 ]
 ```
 
-By method:
+Or by number of methods:
 
 ```st
 model allModelClasses select: [ :each | each numberOfMethods > 50 ]
 ```
 
 ### Deprecated methods
+
+Deprecated methods are methods existing in the current version of an application, and that will disapear in the next version.
+Such method should not be used.
+
+In Java, it is possible to retrieve the deprecated methods by searching the method with the `@Deprecated` annotation.
 
 ```st
 model allModelMethods
@@ -42,6 +52,11 @@ model allModelMethods
 ```
 
 ### Dead methods
+
+Dead methods are method that are not invoked by any other methods.
+
+> Be carefull, some methods might not be directly call but are referenced thanks to abstraction or are dedicated to be extended by another application.
+> It is often the case when dealing with framework.
 
 ```st
 model allModelMethods
