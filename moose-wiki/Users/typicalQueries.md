@@ -23,7 +23,7 @@ We present how to perform the queries in a playground or with the visual tool pr
 
 ### God classes
 
-God classes are classes that *knows too much* or *does too much*.
+[God classes](https://en.wikipedia.org/wiki/God_object) are classes that *knows too much* or *does too much*.
 One way to find god classes is to count the number of lines or the number of methods of a class.
 
 Using a playground, one can perform query on a model to retrieve the god classes by number of lines:
