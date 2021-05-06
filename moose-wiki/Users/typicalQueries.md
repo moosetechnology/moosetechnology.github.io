@@ -16,7 +16,10 @@ We present how to perform the queries in a playground or with the visual tool pr
   - [Dead methods](#dead-methods)
   - [Application tests](#application-tests)
 - [Visualizations](#visualizations)
+  - [Class hierarchy](#class-hierarchy)
   - [Packages cycles](#packages-cycles)
+- [Developers](#developers)
+  - [Meta-model UML](#meta-model-uml)
 - [Sources](#sources)
 
 ## Queries
@@ -91,9 +94,31 @@ model allModelMethods
 
 ## Visualizations
 
+### Class hierarchy
+
+The class hierarchy present the classes of a model with their hierarchy links (*e.g.* superclass, subclasses, ...).
+It also includes the methods and attributes of each class.
+
+![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense }
+
+```st
+builder := RSUMLClassBuilder new.
+classes := mooseModel allModelClasses.
+builder modelDescriptor
+        instVars: [ :aFamixClass | aFamixClass attributes ];
+        instVarSelector: [:aFamixAttribute | aFamixAttribute name];
+        methods: [ :aFamixClass | aFamixClass methods];
+        methodSelector: [:aFamixMethod | aFamixMethod name].
+
+builder classes: classes.
+builder build.
+builder canvas @ RSHierarchyPacker.
+builder canvas
+```
+
 ### Packages cycles
 
-![Moose version](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense }
+![Moose 8 version](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense }
 
 ```st
 tarjan := MalTarjan new.
@@ -101,6 +126,32 @@ tarjan nodes: model allModelNamespaces.
 tarjan edges: model allModelNamespaces from: #yourself toAll: [ :a | a allProvidersAtScope: FamixTNamespace ].
 tarjan run.
 tarjan inspect
+```
+
+## Developers
+
+### Meta-model UML
+
+It is possible to visualize the meta-model with a class hierarchy.
+
+![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense }
+
+```st
+builder := RSUMLClassBuilder new.
+
+classes := FamixJavaModel metamodel classes.
+
+builder modelDescriptor
+        instVars: [ :metaDescription | metaDescription primitiveProperties ];
+        instVarSelector: [:metaDescription | metaDescription implementingSelector];
+        methods: [ :metaDescription | metaDescription complexProperties];
+        methodSelector: [:metaDescription | metaDescription implementingSelector].
+
+builder classes: classes.
+
+builder build.
+builder canvas @ RSHierarchyPacker.
+builder canvas
 ```
 
 ## Sources
