@@ -1,7 +1,5 @@
 ---
 layout: post
-# comments: true
-# published: true
 title: "How to build a new Moose tool: The MooseInspector"
 header-img: img/posts/DSM.jpg
 subtitle: >-
@@ -9,6 +7,7 @@ subtitle: >-
 background: '/img/posts/bg-posts.jpg'
 date: 2021-05-04 13:45:00
 author: Sebastian Jordan
+comments: true
 ---
 ## How to build a new Moose tool: The MooseInspector
 

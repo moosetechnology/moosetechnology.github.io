@@ -1,6 +1,5 @@
 ---
 layout: post
-# comments: true
 # published: true
 title: Dependency Structure Matrix for a Java project using Moose
 header-img: img/posts/DSM.jpg
@@ -10,6 +9,7 @@ background: '/img/posts/2021-04-20-DSM-Java-Moose/DSM.jpg'
 date: 2021-04-20 10:12:00
 background: '/img/posts/bg-posts.jpg'
 author: Christopher Fuhrman
+comments: true
 ---
 ## Dependency Structure Matrix for a Java project using Moose
 
