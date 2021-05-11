@@ -195,5 +195,81 @@ ConnectMetamodelGenerator class >> #submetamodels
     ^ #'CM'
 ```
 
-### Define remote entities
+### Connect remote entities
 
+Before creating the connection, we must declare in the new meta-model the entities that will be contected.
+To do so, we declare them as remoteEntity.
+
+```st
+ConnectMetamodelGenerator >> #defineClasses
+    super defineClasses.
+    coasterCountry := self remoteEntity: #Country withPrefix: #CC.
+    worldCountry := self remoteEntity: #Country withPrefix: #W
+```
+
+Then, it is possible to connect the two entities as classic one.
+
+```st
+ConnectMetamodelGenerator >> #defineRelations
+    super defineRelations.
+    coasterCountry - worldCountry
+```
+
+### Build a model with two connected submetamodels
+
+Once the generator is created, we can generate the connection by generating the new meta-model.
+To do so, execute in a playground:
+
+```st
+ConnectMetamodelGenerator generate
+```
+
+Then, it is possible to create a model with all the entities and to link the two meta-models.
+In the following, we present a script that create a model.
+
+```st
+connectedModel := CMModel new.
+
+coaster1 := CCCoaster new.
+coaster2 := CCCoaster new.
+coaster3 := CCCoaster new.
+
+coasterFranceCountry := CCCountry new name: #'France'; yourself.
+coasterFranceCountry addCoaster: coaster1.
+coasterFranceCountry addCoaster: coaster2.
+
+coasterGermanyCountry := CCCountry new name: #'Germany'; yourself.
+coasterGermanyCountry addCoaster: coaster3.
+
+wFranceCountry := WCountry new name: #'France'; yourself.
+wGermanyCountry := WCountry new name: #'Germany'; yourself.
+
+continent := WContinent new name: #Europe; yourself.
+continent addCountry: wFranceCountry.
+continent addCountry: wGermanyCountry.
+
+coasterFranceCountry country: wFranceCountry.
+coasterGermanyCountry country: wGermanyCountry.
+
+
+connectedModel addAll: 
+    { coaster1. coaster2 . coaster3 . 
+    coasterFranceCountry . coasterGermanyCountry . 
+    wFranceCountry . wGermanyCountry . continent }.
+```
+
+Based on the preceding model, it is possible to create query that will request the coaster and the world meta-model.
+For instance, the following snippet count the number of coasters by country in the Europe continent:
+
+```st
+europe := (connectedModel allWithType: WContinent)
+    detect: [ :continent | continent name = #Europe ].
+(europe countries collect: [ :country | 
+    country name -> country country coasters size ]) asDictionary 
+```
+
+## Conclusion
+
+In this post, we saw how one can extend and connect meta-models using Famix Generator.
+This feature is very helpfull when you need to improve a meta-model without modifying it directly.
+If you need more control on the generated entities (*e.g.*, name of the relations, *etc.*), please have a look at the [create meta-model wiki page](/moose-wiki/Developers/CreateNewMetamodel).
