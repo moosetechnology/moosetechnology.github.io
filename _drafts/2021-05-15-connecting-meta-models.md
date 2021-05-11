@@ -197,7 +197,7 @@ ConnectMetamodelGenerator class >> #submetamodels
 
 ### Connect remote entities
 
-Before creating the connection, we must declare in the new meta-model the entities that will be contected.
+Before creating the connection, we must declare, in the new meta-model, the entities that will be contected.
 To do so, we declare them as remoteEntity.
 
 ```st
