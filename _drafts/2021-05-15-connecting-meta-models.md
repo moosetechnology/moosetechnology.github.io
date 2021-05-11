@@ -137,4 +137,63 @@ myExtendedModel add: (CCEEvent new name: 'Beer party'; yourself)
 
 ## Connecting meta-models
 
-## And for Famix
+We saw that one can extend a meta-model by creating a new one based on the pre-existing entities.
+It is also possible to connect two existing meta-models together.
+
+To so one, one first need two meta-models to be connected.
+As example, we will connect our coaster meta-model, with the world meta-model.
+The world meta-model aims to represent the world, with its continent, countries, regions and cities.
+
+### The world meta-model
+
+We will not detail how to implement the world meta-model.
+The figure below illustrated the meta-model.
+
+![World meta-model](/img/posts/2021-05-15-connecting-meta-models/world-meta-model.drawio.svg){: .img-fill }
+
+### Connecting world meta-model with Coaster meta-model
+
+Our goal is to connect the coaster meta-model with the world meta-model.
+To do so, we will connect the *country* concept of each meta-model.
+
+![Connected meta-model](/img/posts/2021-05-15-connecting-meta-models/connected-meta-model.drawio.svg){: .img-fill }
+
+As a first step, you should install both the coaster meta-model and the world meta-model.
+Again, both are available in my [GitHub repository](https://github.com/badetitou/CoastersCollector).
+
+Then, we create a new meta-model generator that will perform the connection.
+
+```st
+FamixMetamodelGenerator subclass: #ConnectMetamodelGenerator
+    instanceVariableNames: ''
+    classVariableNames: ''
+    package: 'Connect-Model-Generator'
+```
+
+### Declare submetamodels
+
+To connect together the two meta-models, we must first declare them in our connector meta-model.
+To do so, we define the `#submetamodels` method.
+
+```st
+ConnectMetamodelGenerator class >> #submetamodels
+
+    ^ { WorldMetamodelGenerator . CoasterCollectorMetamodelGenerator }
+```
+
+And, as for every meta-model generator, we define a prefix and a package name.
+
+```st
+ConnectMetamodelGenerator class >> #packageName
+
+    ^ #'Connect-Model'
+```
+
+```st
+ConnectMetamodelGenerator class >> #submetamodels
+
+    ^ #'CM'
+```
+
+### Define remote entities
+
