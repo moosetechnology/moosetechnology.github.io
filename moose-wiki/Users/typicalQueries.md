@@ -10,6 +10,9 @@ It can be used as a baseline for further analysis.
 We present how to perform the queries in a playground or with the visual tool proposed by Moose.
 
 - [Queries](#queries)
+  - [Find entity](#find-entity)
+    - [Class with a specific name](#class-with-a-specific-name)
+    - [Classes with their name beginning with or ending with](#classes-with-their-name-beginning-with-or-ending-with)
   - [God classes](#god-classes)
   - [God cyclomatic complexity](#god-cyclomatic-complexity)
   - [Deprecated methods](#deprecated-methods)
@@ -22,6 +25,29 @@ We present how to perform the queries in a playground or with the visual tool pr
   - [Meta-model UML](#meta-model-uml)
 
 ## Queries
+
+### Find entity
+
+#### Class with a specific name
+
+The shortest way to find a class with the good name is to use the `detect` method.
+
+```st
+classes := model allWithType: FamixStClass.
+withPrefix := classes detect: [ :class | class name = #'MyClassName' ].
+```
+
+#### Classes with their name beginning with or ending with
+
+When performing queries, it is often usefull to start with a substep of class by looking at their names.
+This can be done easily using the `beginWith:` and the `endWith` methods.
+
+```st
+classes := model allWithType: FamixStClass.
+withPrefix := classes select: [ :class | class name beginsWith: #'MyPrefix' ].
+
+withSuffix := classes select: [ :class | class name endsWith: #'MySuffix' ]
+```
 
 ### God classes
 
