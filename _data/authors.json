@@ -47,5 +47,23 @@
         "github": "https://github.com/ClotildeToullec",
         "linkedin": "https://www.linkedin.com/in/clotilde-toullec-3aa685105/",
         "image": "https://avatars.githubusercontent.com/u/39184695"
+    },
+    "Christopher Fuhrman": {
+        "name": "Christopher Fuhrman",
+        "role": "Moose herder",
+        "bio": "Software engineering researcher specializing in software design",
+        "github": "https://github.com/fuhrmanator",
+        "twitter": "https://twitter.com/thefuhrmanator",
+        "personnal-website": "https://fuhrmanator.github.io/",
+        "orcid": "https://orcid.org/0000-0001-8010-1087",
+        "image": "https://avatars.githubusercontent.com/u/7606540"
+    },
+    "Sebastian Jordan": {
+    "name": "Sebastian Jordan",
+    "role": "Moose developer",
+    "bio": "Software engineer",
+    "github": "https://github.com/jordanmontt",
+    "image": "https://avatars.githubusercontent.com/u/33934979",
+    "linkedin": "https://linkedin.com/in/jordanmontt"
     }
 }

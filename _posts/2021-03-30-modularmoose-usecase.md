@@ -5,6 +5,7 @@ subtitle: New modular Moose browsers are put to the test
 date: 2021-03-30 12:45:13
 background: '/img/posts/bg-posts.jpg'
 author: Clotilde Toullec
+comments: true
 ---
 
 # Introduction

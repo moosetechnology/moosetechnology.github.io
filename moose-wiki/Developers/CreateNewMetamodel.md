@@ -12,7 +12,7 @@ The meta-model describes the entities that compose a program in the given langua
 
 In the following, we describe how to create a new meta-model or extend an existing one.
 Moose being more specifically dedicated to source code analysis, there are a number of pre-set entities/traits that should help one define new meta-models for a given programming language.
-These are described in [another page](predefinedEntities.md) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow.svg?style=flat).
+These are described in [another page](predefinedEntities) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow.svg?style=flat).
 
 
 - [Set up](#set-up)
@@ -33,7 +33,7 @@ These are described in [another page](predefinedEntities.md) ![Unfinished](https
 
 ## Set up
 
-First of all, we need to [download Moose](../Beginners/InstallMoose.md) version 7 or higher.
+First of all, we need to [download Moose](../Beginners/InstallMoose) version 7 or higher.
 
 The first step is to create a FamixMetamodelGenerator.
 It will describe our meta-model.
@@ -98,7 +98,7 @@ This can be done with the `#newClassNamed:comment:` method.
 class := builder newClassNamed: #Class comment: 'I represent a Smalltalk class'.
 ```
 
-It is also possible to use entities that are already defined in a [library of predefined entities](predefinedEntities.md) or in another meta-model (see [submetamodels](#introducing-submetamodels)).
+It is also possible to use entities that are already defined in a [library of predefined entities](predefinedEntities) or in another meta-model (see [submetamodels](#introducing-submetamodels)).
 
 ### Define hierarchy
 
