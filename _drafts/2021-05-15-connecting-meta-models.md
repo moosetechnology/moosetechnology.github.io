@@ -7,11 +7,11 @@ author: Benoît Verhaeghe
 comments: true
 ---
 
-Sometimes, a model does not have all the information you want.
+Sometimes, a meta-model does not have all the information you want.
 Or, you want to connect it with another one.
-A classic example is going from an abstract level to another.
+A classic example is linking a meta-model at an abstract level to a more concrete meta-model.
 
-In this blog post, I will show you how to extend and connect a meta-model with another.
+In this blog post, I will show you how to extend and connect a meta-model with another (or reuse a pre-existing meta-model into your own meta-model).
 We will use the [Coaster example]({% post_url 2021-02-04-Coasters %}).
 
 ## Extending the Coaster meta-model
@@ -36,7 +36,7 @@ We can download it from my [Coaster GitHub repository](https://github.com/badeti
 
 You should have a named `CoasterCollectorMetamodelGenerator` in your image.
 This is the generator of the original meta-model.
-We will now create another generator connected with the original one.
+We will now create another generator reusing the original one.
 
 First, we create a new generator for our extended meta-model.
 
@@ -50,7 +50,7 @@ FamixMetamodelGenerator subclass: #CoasterExtendedMetamodelGenerator
 Then, we link our generator with the original one.
 To do so, we will use the [submetamodels feature](/moose-wiki/Developers/CreateNewMetamodel#introducing-submetamodels) of the generator.
 We only have to implement the `#submetamodels` method in the class side of our new generator.
-This method should return an array including the generators of the submetamodels.
+This method should return an array including the generators of the submetamodels that we want to reuse.
 
 ```st
 CoasterExtendedMetamodelGenerator class >> #submetamodels
@@ -98,7 +98,7 @@ CoasterExtendedMetamodelGenerator >> #defineClasses
     creator := self remoteEntity: #Creator withPrefix: #CC 
 ```
 
-> We refer a remote entity by sending `#remoteEntity:withPrefix:` to `self` and not using the `builder`.
+> We refer to a remote entity by sending `#remoteEntity:withPrefix:` to `self` and not using the `builder`.
 > Indeed, the entity is already created.
 
 ### Using remote entity
@@ -140,21 +140,22 @@ myExtendedModel add: (CCEEvent new name: 'Beer party'; yourself)
 We saw that one can extend a meta-model by creating a new one based on the pre-existing entities.
 It is also possible to connect two existing meta-models together.
 
-To so one, one first need two meta-models to be connected.
-As example, we will connect our coaster meta-model, with the world meta-model.
+To do so, let's assume we have two existing meta-models to be connected.
+As an example, we will connect our coaster meta-model, with the world meta-model.
 The world meta-model aims to represent the world, with its continent, countries, regions and cities.
 
 ### The world meta-model
 
 We will not detail how to implement the world meta-model.
-The figure below illustrated the meta-model.
+But the generator is available in my [GitHub repository](https://github.com/badetitou/CoastersCollector).
+The figure below illustrates the meta-model.
 
 ![World meta-model](/img/posts/2021-05-15-connecting-meta-models/world-meta-model.drawio.svg){: .img-fill }
 
 ### Connecting world meta-model with Coaster meta-model
 
 Our goal is to connect the coaster meta-model with the world meta-model.
-To do so, we will connect the *country* concept of each meta-model.
+To do so, we will connect the *country* concepts of each meta-model.
 
 ![Connected meta-model](/img/posts/2021-05-15-connecting-meta-models/connected-meta-model.drawio.svg){: .img-fill }
 
@@ -228,8 +229,7 @@ Then, it is possible to create a model with all the entities and to link the two
 In the following, we present a script that create a model.
 
 ```st
-connectedModel := CMModel new.
-
+"create the entities"
 coaster1 := CCCoaster new.
 coaster2 := CCCoaster new.
 coaster3 := CCCoaster new.
@@ -248,10 +248,12 @@ continent := WContinent new name: #Europe; yourself.
 continent addCountry: wFranceCountry.
 continent addCountry: wGermanyCountry.
 
+"connect CCountries to WCountries"
 coasterFranceCountry country: wFranceCountry.
 coasterGermanyCountry country: wGermanyCountry.
 
-
+"put all entities into the same model"
+connectedModel := CMModel new.
 connectedModel addAll: 
     { coaster1. coaster2 . coaster3 . 
     coasterFranceCountry . coasterGermanyCountry . 
@@ -264,9 +266,12 @@ For instance, the following snippet count the number of coasters by country in t
 ```st
 europe := (connectedModel allWithType: WContinent)
     detect: [ :continent | continent name = #Europe ].
-(europe countries collect: [ :country | 
-    country name -> country country coasters size ]) asDictionary 
+(europe countries collect: [ :eCountry | 
+    eCountry name -> eCountry country coasters size ]) asDictionary 
 ```
+
+The `coutry:` and `coutry` methods are accessors that allow to set and recover one `CCCountry` (resp. `WCountry`) into a `WCountry` (resp. `CCCountry`).
+The accessors names are the same in both classes and were generated automatically from the declaration of the relationship in `defineRelations` (this is normal behaviour of the generator, not specific to using sub-models.
 
 ## Conclusion
 
