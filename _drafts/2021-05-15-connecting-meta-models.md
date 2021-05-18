@@ -98,7 +98,7 @@ CoasterExtendedMetamodelGenerator >> #defineClasses
     creator := self remoteEntity: #Creator withPrefix: #CC 
 ```
 
-> We refer a remote entity by sending `#remoteEntity:withPrefix:` to `self` and not using the `builder`.
+> We refer to a remote entity by sending `#remoteEntity:withPrefix:` to `self` and not using the `builder`.
 > Indeed, the entity is already created.
 
 ### Using remote entity
