@@ -29,6 +29,7 @@ From the Pharo Launcher, you can download a Moose image.
 It corresponds to a Pharo image (see the [pharo open documentation](https://github.com/pharo-open-documentation)) with the Moose tools installed.
 
 The [ReadMe](https://github.com/moosetechnology/Moose#readme) of the Moose project describes how to get the latest Moose image.
+It is usually safe to take the highest version available even if marked 'developement'.
 
 Once the image downloaded, you just need to run it with from the Pharo Launcher.
 
