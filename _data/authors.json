@@ -59,11 +59,19 @@
         "image": "https://avatars.githubusercontent.com/u/7606540"
     },
     "Sebastian Jordan": {
-    "name": "Sebastian Jordan",
-    "role": "Moose developer",
-    "bio": "Software engineer",
-    "github": "https://github.com/jordanmontt",
-    "image": "https://avatars.githubusercontent.com/u/33934979",
-    "linkedin": "https://linkedin.com/in/jordanmontt"
+        "name": "Sebastian Jordan",
+        "role": "Moose developer",
+        "bio": "Software engineer",
+        "github": "https://github.com/jordanmontt",
+        "image": "https://avatars.githubusercontent.com/u/33934979",
+        "linkedin": "https://linkedin.com/in/jordanmontt"
+    },
+    "Théo Lanord": {
+        "name": "Théo Lanord",
+        "role": "Trainee / Apprentice engineer",
+        "bio": "Student at <a href='http://www.polytech-lille.fr/'>Polytech Lille</a> in IS (Computer Science and Statistics)",
+        "github": "https://github.com/enwiro",
+        "linkedin": "https://www.linkedin.com/in/théo-lanord/",
+        "image": "https://avatars.githubusercontent.com/u/58632394?v=4"
     }
 }
