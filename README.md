@@ -127,6 +127,13 @@ To do so execute:
 bundle exec jekyll serve --draft
 ```
 
+In addition, if you put a date that is future for the publication, you must add `--future` to your command to see your post appear.
+To do so execute:
+
+```sh
+bundle exec jekyll serve --draft --future
+```
+
 ### Review a draft
 
 When someone have created a draft, we should review it before putting it live.
