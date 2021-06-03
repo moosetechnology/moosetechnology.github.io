@@ -29,8 +29,8 @@ For example, for the basic [Coasters collection]({% post_url 2021-02-04-Coasters
 CoasterCollectorMetamodelGenerator generate
 ```
 
-`FamixMMUMLDocumentor`, the tool I am going to present to you, is based on the generated meta-model.
-There is also another tool, *which I do not recommend for studying meta-models*, based on the meta-model builder, `FmxMBPlantTextVisitor`.
+`FamixMMUMLDocumentor`, the tool I am going to present to you, is based on the generated meta-model. Therefore, it is particularly suitable for models with subMetamodels (*Cf.* beWithStub option).
+It is important to note that another tool, based on the meta-model builder, exists : `FmxMBPlantTextVisitor`. It can be interesting if you need to display the compositions.
 
 I would also like to make one last remark, most of the information given in this post can be found in the comment of the `FamixMMUMLDocumentor` class.
 Finally, there is the [plantUML server](http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000) to run your plantUML code directly on the web.
