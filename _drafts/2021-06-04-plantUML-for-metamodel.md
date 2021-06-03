@@ -7,22 +7,22 @@ author: Théo Lanord
 comments: true
 ---
 
-When you want to be interested in a meta-model of which you are not the creator, it is sometimes difficult to understand only via its declaration in the code.
-It would be best if you actually visualized it in a different way.
+When you are interested in a meta-model of which you are not the creator, it is sometimes difficult to understand it only using the declarations in the code.
+It would be best if you can actually visualize it in a different way.
 What better way to go back to a very efficient meta-model visualization tool: UML.
 
-In this blog, I will show you how to generate plantUML code from a generated meta-model.
+In this blog, I will show you how to generate [plantUML](https://plantuml.com/) code from a generated meta-model.
 For that, I will take the example of the evolution of the meta-model on coasters:
 
 - [Coasters collection]({% post_url 2021-02-04-Coasters %})
 - [Connecting/Extending meta-models]({% post_url 2021-05-15-connecting-meta-models %})
 
 There is no need to do these posts to understand this one.
-I would even say that precisely the subject: to study an unknown meta-model.
+I would even say that this is precisely the subject: to study an unknown meta-model.
 
 ## Prerequisite and details
 
-First of all, and if it has not already been done, do not forget to download and generate your meta template via its generator.
+First of all, and if it has not already been done, do not forget to download and generate the meta-models using its generator.
 For example, for the basic [Coasters collection]({% post_url 2021-02-04-Coasters %}), the code is available on [Coaster GitHub repository](https://github.com/badetitou/CoastersCollector) and it can be generate with:
 
 ```st
@@ -30,18 +30,18 @@ CoasterCollectorMetamodelGenerator generate
 ```
 
 Indeed, `FamixMMUMLDocumentor`, the tool I am going to demonstrate to you, is based on the generated meta-model.
-I specify this because there is another tool, *which I do not recommend for this use*, based on the meta-model builder, `FmxMBPlantTextVisitor`.
+There is also another tool, *which I do not recommend for studying meta-models*, based on the meta-model builder, `FmxMBPlantTextVisitor`.
 
-I would also like to make one last remark, most of the information given in this post is easily found in the Comment of the `FamixMMUMLDocumentor`.
+I would also like to make one last remark, most of the information given in this post can be found in the comment of the `FamixMMUMLDocumentor` class.
 Finally, there is the [plantUML server](http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000) to run your plantUML code directly on the web.
-So let's continue and generate our visualizations ! :smile:
+So let's continue and generate our visualizations! :smile:
 
 ## Global approach
 
 ### Generation on the whole meta-model
 
-Let's say we know that there is a meta-model on coasters whose builder is: `CoasterCollectorMetamodelGenerator`
-Since we need the generated model and not the builder, we will look at the prefix defined in `CoasterCollectorMetamodelGenerator class >> prefix` and deduce the model name, which consists of the model prefix followed by the word `Model`.
+Let's say we know that there is a meta-model on coasters whose builder is `CoasterCollectorMetamodelGenerator`.
+Since we need the generated model and not the builder, we will look at the prefix defined in `CoasterCollectorMetamodelGenerator class >> #prefix` and deduce the model name, which consists of the model prefix followed by the word `Model`.
 
 In this case, for `CoasterCollectorMetamodelGenerator`, the model is called `CCModel`.
 From here, we have all the elements to generate the plantUML code associated with the model via the following code:
@@ -56,7 +56,7 @@ The generation is done by instantiating a `FamixMMUMLDocumentor` for which we pr
 
 ![UML representation of Coaster meta-model](/img/posts/2021-06-04-plantUML-for-metamodel/CCModel-plantUML.svg){: .img-fill }
 
-We can now compare this generated UML representation to the basic one that helped create the generator, or that has been used to generate the generator :smile: (Cf. [Model your Fame/Famix meta-model using Graphical Editors]({% post_url 2021-03-01-diagram-and-codegen %})).
+We can now compare the generated UML representation to the basic one that helped create the generator or that has been used to generate the generator :smile: (*Cf.* [Model your Fame/Famix meta-model using Graphical Editors]({% post_url 2021-03-01-diagram-and-codegen %})).
 
 !["coasters UML"](/img/posts/2021-02-04-Coasters/coaster-model.drawio.svg){: .img-fill }
 
@@ -68,7 +68,7 @@ However, generation options allow solving this problem (and many others).
 
 ### generatePlantUMLModelWithout
 
-Indeed, it is possible to ask to generate the plantUML code without a defined collection of entities. For example, if you don't want the `CCModel` to appear.
+Indeed, it is possible to ask to generate the plantUML code without a defined collection of entities. For example, if you do not want the `CCModel` to appear.
 
 ```st
 FamixMMUMLDocumentor new
@@ -99,7 +99,7 @@ This can be useful if you are interested in certain entities.
 
 ### beWithStub
 
-Finally, there is one last interesting possibility.
+Finally, there is one last exciting possibility.
 If we take the case of the evolution of the coasters meta-model extended in terms of creators [Connecting/Extending meta-models]({% post_url 2021-05-15-connecting-meta-models %}).
 
 ![Extended Coaster meta-model](/img/posts/2021-05-15-connecting-meta-models/extended-coaster-model.drawio.svg){: .img-fill }
@@ -129,7 +129,7 @@ FamixMMUMLDocumentor new
 
 We can see that `Event` inherits from an external class `Creator`, coming from the subMetamodel `CoasterCollectorMetamodelGenerator`.
 
-It would indeed be interesting to be able to generate the subMetamodel as well in order to have a better overall view, maybe an improvement track?
+It would indeed be interesting to generate the subMetamodel view as well in order to have a better overall view, maybe an improvement track?
 
 ### Output to a file
 
@@ -170,4 +170,4 @@ The rest of the notations respect the UML standard.
 ## Conclusion
 
 In this post, we have seen how to visualize a meta-model using `FamixMMUMLDocumentor`.
-This feature is very useful for understanding complex meta-models and allows (almost) automatic documentation.
+This feature is handy for understanding complex meta-models and allows (almost) automatic documentation.
