@@ -8,9 +8,10 @@
     - [Test your draft locally](#test-your-draft-locally)
   - [Review a draft](#review-a-draft)
 - [Moose Wiki](#moose-wiki)
+
 ## Installation & Setup
 
-To install locally the website:
+To install the website locally:
 
 1. Install [jekyll](https://jekyllrb.com/docs/installation/).
 2. Clone the project
@@ -55,12 +56,13 @@ Or in json:
 ```json
 ---
 {
-  "layout": post,
+  "layout": "post",
   "title": "Micro-Visitors for Parsing Programming Languages",
   "subtitle": "My super nice subtitle",
-  "date": 2021-01-26 23:45:13 -0400,
-  "background": '/img/posts/bg-posts.jpg',
-  "author": Nicolas Anquetil
+  "date": "2021-01-26 23:45:13 -0400",
+  "background": "/img/posts/bg-posts.jpg",
+  "author": "Nicolas Anquetil",
+  "comment": "true"
 }
 ---
 ```
