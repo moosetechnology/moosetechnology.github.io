@@ -8,7 +8,7 @@ comments: true
 ---
 
 When you are interested in a meta-model of which you are not the creator, it is sometimes difficult to understand it only using the declarations in the code.
-It would be best if you can actually visualize it in a different way.
+It would be best if you could actually visualize it in a different way.
 What better way to go back to a very efficient meta-model visualization tool: UML.
 
 In this blog, I will show you how to generate [plantUML](https://plantuml.com/) code from a generated meta-model.
@@ -29,7 +29,7 @@ For example, for the basic [Coasters collection]({% post_url 2021-02-04-Coasters
 CoasterCollectorMetamodelGenerator generate
 ```
 
-Indeed, `FamixMMUMLDocumentor`, the tool I am going to demonstrate to you, is based on the generated meta-model.
+`FamixMMUMLDocumentor`, the tool I am going to present to you, is based on the generated meta-model.
 There is also another tool, *which I do not recommend for studying meta-models*, based on the meta-model builder, `FmxMBPlantTextVisitor`.
 
 I would also like to make one last remark, most of the information given in this post can be found in the comment of the `FamixMMUMLDocumentor` class.
@@ -165,7 +165,7 @@ In summary, we have 5 specific notations:
   - Line:     Black T on yellow background with `External` label
 - Use of traits:    Dashed arrow
 
-The rest of the notations respect the UML standard.
+The rest of the notations follows the UML standard.
 
 ## Conclusion
 
