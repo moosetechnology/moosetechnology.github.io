@@ -30,7 +30,7 @@ We present how to perform the queries in a playground or with the visual tool pr
 
 #### Class with a specific name
 
-The shortest way to find a class with the good name is to use the `detect` method.
+The shortest way to find a class with a name is to use the `detect` method.
 
 ```st
 classes := model allWithType: FamixStClass.
@@ -39,7 +39,7 @@ withPrefix := classes detect: [ :class | class name = #'MyClassName' ].
 
 #### Classes with their name beginning with or ending with
 
-When performing queries, it is often usefull to start with a substep of class by looking at their names.
+When performing queries, it is often useful to start with a substep of classes by looking at their names.
 This can be done easily using the `beginWith:` and the `endWith` methods.
 
 ```st
@@ -54,13 +54,13 @@ withSuffix := classes select: [ :class | class name endsWith: #'MySuffix' ]
 [God classes](https://en.wikipedia.org/wiki/God_object) are classes that *knows too much* or *does too much*.
 One way to find god classes is to count the number of lines or the number of methods of a class.
 
-Using a playground, one can perform query on a model to retrieve the god classes by number of lines:
+Using a playground, one can perform a query on a model to retrieve the god classes by numbers of lines:
 
 ```st
 model allModelClasses select: [ :each | each numberOfLinesOfCode > 150 ]
 ```
 
-Or by number of methods:
+Or by numbers of methods:
 
 ```st
 model allModelClasses select: [ :each | each numberOfMethods > 50 ]
@@ -69,10 +69,10 @@ model allModelClasses select: [ :each | each numberOfMethods > 50 ]
 ### God cyclomatic complexity
 
 The [cyclomatic complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) presents the complixity of a program.
-It basically corresponds to the number of possible branch in a method.
-The less cyclomatic complexity for a method the better it is.
+It basically corresponds to the number of possible branches in a method.
+The less cyclomatic complexity for a method, the better it is.
 
-The following script sort the methods extracted in a model by their cyclomatic complexity.
+The following script sorts the methods extracted in a model by their cyclomatic complexity.
 
 ```st
 ((self model allBehaviourals)
@@ -82,8 +82,8 @@ The following script sort the methods extracted in a model by their cyclomatic c
 
 ### Deprecated methods
 
-Deprecated methods are methods existing in the current version of an application, and that will disapear in the next version.
-Such method should not be used.
+Deprecated methods are methods existing in the current version of an application, and that will disappear in the next version.
+Such a method should not be used.
 
 In Java, it is possible to retrieve the deprecated methods by searching the method with the `@Deprecated` annotation.
 
@@ -96,10 +96,10 @@ model allModelMethods
 
 ### Dead methods
 
-Dead methods are method that are not invoked by any other methods.
+Dead methods are methods that are not invoked by any other methods.
 
-> Be carefull, some methods might not be directly call but are referenced thanks to abstraction or are dedicated to be extended by another application.
-> It is often the case when dealing with framework.
+> Be careful; some methods might not be directly called but are referenced thanks to abstraction or are dedicated to be extended by another application.
+> It is often the case when dealing with a framework.
 
 ```st
 model allModelMethods
@@ -121,7 +121,7 @@ model allModelMethods
 
 ### Class hierarchy
 
-The class hierarchy present the classes of a model with their hierarchy links (*e.g.* superclass, subclasses, ...).
+The class hierarchy presents the classes of a model with their hierarchy links (*e.g.* superclass, subclasses, ...).
 It also includes the methods and attributes of each class.
 
 ![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense }
