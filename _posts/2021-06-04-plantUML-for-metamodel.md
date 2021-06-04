@@ -159,10 +159,10 @@ In summary, we have 5 specific notations:
 
 - Internal entity notations:
   - Class:    Black C on white background
-  - Line:     Black T on grey background
+  - Trait:    Black T on grey background
 - External entity notations:
   - Class:    Black C on yellow background with `External` label
-  - Line:     Black T on yellow background with `External` label
+  - Trait:    Black T on yellow background with `External` label
 - Use of traits:    Dashed arrow
 
 The rest of the notations follows the UML standard.
