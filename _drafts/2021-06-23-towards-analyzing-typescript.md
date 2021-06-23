@@ -20,12 +20,12 @@ Before we consider TypeScript, let's look at how things work with Java:
 
 ## What's needed to analyze TypeScript?
 
-If we want to do the same thing for TypeScript, we'd need:
+If we want to do the same thing for TypeScript, we would need:
 
 - an equivalent of VerveineJ (importer) for TypeScript files,
 - a Famix model of TypeScript.
  
-Creating a parser and importer for TypeScript is no small task, but TypeScript is a popular environment and we can use [`ts-morph`](https://ts-morph.com/) to faciliate the navigation of the TypeScript AST.
+Creating a parser and importer for TypeScript is no small task, but TypeScript is a popular environment and we can use [`ts-morph`](https://ts-morph.com/) to facilitate the navigation of the TypeScript AST.
 There's also a very cool [visualization of TypeScript ASTs](https://ts-ast-viewer.com/#), which will be useful for understanding and debugging.
 
 Designing a new meta-model for TypeScript is definitely not trivial, because it requires a deep understanding of the language.
@@ -88,9 +88,10 @@ The following chart shows distributions of Cyclomatic Complexities of methods fo
 
 ## Limits of modeling TypeScript in a Java metamodel
 
-Here are some of the obvious things in TypeScript (Javascript) that are hard to fit into a Java model:
+Here are some of the obvious things in TypeScript (Javascript) that don't quite fit into a Java model:
 
 - Functions can exist in the global namespace. A workaround proposed by one team was to create a "Global" class in the Java model, and just put functions there as static methods.
+- Functions can exist in methods, but maybe this is possible to model in a newer metamodel for Java that supports lambdas. The API from pascalerni/famix supports and older metamodel for Java.
 - `string`, `number`, `any` are types in TypeScript, but they do not really map to primitive types or classes in Java. 
 - TypeScript doesn't have packages like Java, although it does have ways to specify namespaces and avoid naming conflicts.
 
