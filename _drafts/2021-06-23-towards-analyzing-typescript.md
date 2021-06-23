@@ -3,7 +3,7 @@ layout: post
 title: "Towards analyzing TypeScript with Moose"
 subtitle: "I discuss an imperfect but useful approach to analyze TypeScript projects using existing elements."
 date: 2021-06-23 12:00:00 -0400
-background: '/img/posts/2021-06-04-plantUML-for-metamodel/bg-post.jpg'
+background: '/img/posts/towards-analyzing-typescript/patchwork-beads-by-various-brennemans.jpg'
 author: Christopher Fuhrman
 comments: true
 
@@ -61,16 +61,41 @@ The original FameJava was used to generate the Java API for use with FAMIX 3.0 m
 This fork generates (via Java) a TypeScript API.
 Clever and useful!
 
-So, let's try 
+So, let's try to create an importer using `ts-morph` and the `famix` packages that will model TypeScript programs in a Java metamodel.
+As a first try, model only the object-oriented elements of TypeScript, such as classes, methods, attributes, etc.
 
-To integrate:
+This is actually the project I proposed to students in an advanced-topics software design course at my university during the winter of 2021. 
 
-- Rapid analysis of TypeScript using a Java Metamodel
-- explain what Pascal Erni did for ABAP
-- Propose reusing his FAME API in TypeScript combined with ts-morph (TS parser)
-- explain a couple limitations, point to the results (repos) from the students
-- talk about challenges of defining a TS metamodel
+## Results
+
+Several teams set out to achieve this goal, although none of the students had ever done parsing or Pharo before.
+Many were familiar with node and TypeScript.
+
+I'm happy to say that they *all* were successful (in varying degrees) in writing an importer for TypeScript that allowed analyses to be done in Moose and Pharo, and their results are all on GitHub:
+
+[Team 1](https://github.com/Start2Run/TypeScript2Famix) | [Team 2](https://github.com/Imonor/ProjetFamix) | [Team 3](https://github.com/xamrol/prj-mgl843) | [Team 4](https://github.com/km229/mseTsGenerator)
+|:--:|:--:|:--:|:--:|
+
+Here are some visualizations produced by Team 4 using Roassal on models loaded into Moose.
+
+The first shows the Weighted Method Count (sum) for classes in several TypeScript projects. The cyclomatic complexity values were calculated using another npm package (`ts-complex`) in the TypeScript importer:
+
+![WMC for various typescript projects](/img/posts/towards-analyzing-typescript/WMC_typescript_projects_team04.png){: .img-fill }
+
+The following chart shows distributions of Cyclomatic Complexities of methods for various classes in the `prisma` project:
+
+![CC for prisma project in typescript](/img/posts/towards-analyzing-typescript/CC_prisma_team04.png){: .img-fill }
+
+## Limits of modeling TypeScript in a Java metamodel
+
+Here are some of the obvious things in TypeScript (Javascript) that are hard to fit into a Java model:
+
+- Functions can exist in the global namespace. A workaround proposed by one team was to create a "Global" class in the Java model, and just put functions there as static methods.
+- `string`, `number`, `any` are types in TypeScript, but they do not really map to primitive types or classes in Java. 
+- TypeScript doesn't have packages like Java, although it does have ways to specify namespaces and avoid naming conflicts.
 
 ## Conclusion
 
+Even though a formal model in TypeScript doesn't (yet) exist in Famix, it's possible to perform useful analyses of TypeScript using the FAMIX 3.0 (Java) metamodel, thanks to packages, tools and APIs developed and reused in the npm and Moose communities. 
 
+Photo credit: "[patchwork beads](https://www.flickr.com/photos/brenneman/6062001126/)" ([CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)) by [various brennemans](https://www.flickr.com/people/brenneman/)
