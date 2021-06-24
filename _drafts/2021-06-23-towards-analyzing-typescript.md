@@ -11,7 +11,7 @@ comments: true
 
 TypeScript is a more and more popular programming language, and so it would be great if we could analyze TypeScript projects using Moose.
 As of the time of writing, no meta-model (or importer) exists for the TypeScript language in Moose.
-First, what are the pieces of the puzzle needed analyze TypeScript with Moose? 
+First, what are the pieces of the puzzle needed to analyze TypeScript with Moose?
 Before we consider TypeScript, let's look at how things work with Java:
 
 ![Elements of analyzing a Java project](/img/posts/towards-analyzing-typescript/puzzle.drawio.svg){: .img-fill }
@@ -73,8 +73,8 @@ Many were familiar with node and TypeScript.
 
 I'm happy to say that they *all* were successful (in varying degrees) in writing an importer for TypeScript that allowed analyses to be done in Moose and Pharo, and their results are all on GitHub:
 
-[Team 1](https://github.com/Start2Run/TypeScript2Famix) | [Team 2](https://github.com/Imonor/ProjetFamix) | [Team 3](https://github.com/xamrol/prj-mgl843) | [Team 4](https://github.com/km229/mseTsGenerator)
-|:--:|:--:|:--:|:--:|
+[Team 1](https://github.com/Start2Run/TypeScript2Famix) \| [Team 2](https://github.com/Imonor/ProjetFamix) \| [Team 3](https://github.com/xamrol/prj-mgl843) \| [Team 4](https://github.com/km229/mseTsGenerator)
+
 
 Here are some visualizations produced by Team 4 using Roassal on models loaded into Moose.
 
@@ -99,4 +99,4 @@ Here are some of the obvious things in TypeScript (Javascript) that don't quite 
 
 Even though a formal model in TypeScript doesn't (yet) exist in Famix, it's possible to perform useful analyses of TypeScript using the FAMIX 3.0 (Java) metamodel, thanks to packages, tools and APIs developed and reused in the npm and Moose communities. 
 
-Photo credit: "[patchwork beads](https://www.flickr.com/photos/brenneman/6062001126/)" ([CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)) by [various brennemans](https://www.flickr.com/people/brenneman/)
+> Photo credit: "[patchwork beads](https://www.flickr.com/photos/brenneman/6062001126/)" ([CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)) by [various brennemans](https://www.flickr.com/people/brenneman/)
