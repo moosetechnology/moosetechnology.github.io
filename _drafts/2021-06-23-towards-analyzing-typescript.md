@@ -29,15 +29,15 @@ Creating a parser and importer for TypeScript is no small task, but TypeScript i
 There's also a very cool [visualization of TypeScript ASTs](https://ts-ast-viewer.com/#), which will be useful for understanding and debugging.
 
 Designing a new meta-model for TypeScript is definitely not trivial, because it requires a deep understanding of the language.
-On the other hand, once a meta-model exists, it's easy to *generate* using FamixNG domain-specific language.
+On the other hand, once a meta-model exists, it's [easy to *generate* using FamixNG domain-specific language](https://modularmoose.org/moose-wiki/Developers/CreateNewMetamodel).
 
-Pragmatically speaking, do we need a perfect model of TypeScript to analyze it?
+Pragmatically speaking, do we need a *perfect* model of TypeScript to analyze it?
 
 ## abap2famix
 
-> "All models are wrong, but some are useful." --[maybe not](https://en.wikipedia.org/wiki/All_models_are_wrong) George Box...
+> "All models are wrong, but some are useful." --[maybe not George Box](https://en.wikipedia.org/wiki/All_models_are_wrong)
 
-By searching the web for TypeScript and Moose I discovered a GitHub project called [pascalerni/abap2famix](https://github.com/pascalerni/abap2famix). 
+By searching the web for TypeScript and Moose, I discovered a GitHub project called [pascalerni/abap2famix](https://github.com/pascalerni/abap2famix). 
 It is an [ABAP](https://en.wikipedia.org/wiki/ABAP) importer (written in TypeScript) that models ABAP projects using [FAMIX 3.0 (compatibility meta-model for Java)](https://www.researchgate.net/publication/265428652_MSE_and_FAMIX_30_an_Interexchange_Format_and_Source_Code_Model_Family).
 Java and ABAP are indeed different languages, but perhaps the differences are not so important if we want to do some static analysis?
 Seems like a pragmatic approach!
@@ -61,10 +61,12 @@ The original FameJava was used to generate the Java API for use with FAMIX 3.0 m
 This fork generates (via Java) a TypeScript API.
 Clever and useful!
 
-So, let's try to create an importer using `ts-morph` and the `famix` packages that will model TypeScript programs in a Java metamodel.
+## Drivers, start your engines!
+
+So, what if we try to create an importer using `ts-morph` and the `famix` packages that will model TypeScript programs in a Java metamodel?
 As a first try, model only the object-oriented elements of TypeScript, such as classes, methods, attributes, etc.
 
-This is actually the project I proposed to students in an advanced-topics software design course at my university during the winter of 2021. 
+This is actually the project I proposed to students in an [advanced-topics software design course at my university](https://www.etsmtl.ca/etudes/cours/MGL843) during the winter of 2021.
 
 ## Results
 
@@ -74,7 +76,6 @@ Many were familiar with node and TypeScript.
 I'm happy to say that they *all* were successful (in varying degrees) in writing an importer for TypeScript that allowed analyses to be done in Moose and Pharo, and their results are all on GitHub:
 
 [Team 1](https://github.com/Start2Run/TypeScript2Famix) \| [Team 2](https://github.com/Imonor/ProjetFamix) \| [Team 3](https://github.com/xamrol/prj-mgl843) \| [Team 4](https://github.com/km229/mseTsGenerator)
-
 
 Here are some visualizations produced by Team 4 using Roassal on models loaded into Moose.
 
