@@ -10,7 +10,7 @@ comments: true
 ---
 
 TypeScript is a more and more popular programming language, and so it would be great if we could analyze TypeScript projects using Moose.
-As of the time of writing, no meta-model (or importer) exists for the TypeScript language in Moose.
+At the time of writing, no meta-model (or importer) exists for the TypeScript language in Moose.
 First, what are the pieces of the puzzle needed to analyze TypeScript with Moose?
 Before we consider TypeScript, let's look at how things work with Java:
 
@@ -42,7 +42,7 @@ It is an [ABAP](https://en.wikipedia.org/wiki/ABAP) importer (written in TypeScr
 Java and ABAP are indeed different languages, but perhaps the differences are not so important if we want to do some static analysis?
 Seems like a pragmatic approach!
 
-Looking at the node packages used by abap2famix I discovered [famix](https://www.npmjs.com/package/famix) (a TypeScript implementation of Famix, which facilitates creating FAMIX 3.0 entities from TypeScript).
+Looking at the node packages used by abap2famix I discovered [famix](https://www.npmjs.com/package/famix), a TypeScript implementation of Famix, which facilitates creating FAMIX 3.0 entities from TypeScript.
 Its source is at [pascalerni/famix](https://github.com/pascalerni/famix), and I could see that much of it was generated, e.g., in [class.ts](https://github.com/pascalerni/famix/blob/d68d11cbbc3f8423dcd1acd46da602ea13e2b1f4/src/model/famix/class.ts#L1) there's proof it was not written by hand:
 
 ```typescript
@@ -92,7 +92,7 @@ The following chart shows distributions of Cyclomatic Complexities of methods fo
 Here are some of the obvious things in TypeScript (Javascript) that don't quite fit into a Java model:
 
 - Functions can exist in the global namespace. A workaround proposed by one team was to create a "Global" class in the Java model, and just put functions there as static methods.
-- Functions can exist in methods, but maybe this is possible to model in a newer metamodel for Java that supports lambdas. The API from pascalerni/famix supports and older metamodel for Java.
+- Functions can exist in methods, but maybe this is possible to model in a newer metamodel for Java that supports lambdas. The API from pascalerni/famix supports an older metamodel for Java.
 - `string`, `number`, `any` are types in TypeScript, but they do not really map to primitive types or classes in Java. 
 - TypeScript doesn't have packages like Java, although it does have ways to specify namespaces and avoid naming conflicts.
 
