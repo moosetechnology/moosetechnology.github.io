@@ -10,7 +10,7 @@ comments: true
 ---
 
 TypeScript is a more and more popular programming language, and so it would be great if we could analyze TypeScript projects using Moose.
-At of the time of writing, no meta-model (or importer) exists for the TypeScript language in Moose.
+At the time of writing, no meta-model (or importer) exists for the TypeScript language in Moose.
 First, what are the pieces of the puzzle needed to analyze TypeScript with Moose?
 Before we consider TypeScript, let's look at how things work with Java:
 
