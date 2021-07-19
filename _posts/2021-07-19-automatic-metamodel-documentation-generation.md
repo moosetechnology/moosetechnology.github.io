@@ -3,7 +3,7 @@ author: Benoît Verhaeghe
 layout: post
 title: "Automatic meta-model documentation generation"
 subtitle: "How to use GitHub actions to update its meta-model UML?"
-background: '/img/posts/bg-posts.jpg'
+background: '/img/posts/2021-07-19-automatic-metamodel-documentation-generation/bg.png'
 date:  2021-07-19 08:00:00 +200
 comments: true
 ---
