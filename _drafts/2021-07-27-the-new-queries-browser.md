@@ -1,0 +1,78 @@
+---
+layout: post
+title: "Introducing the new Queries Browser"
+header-img: img/posts/DSM.jpg
+subtitle: >-
+  Here I am going to show you the brand new queries browser!
+background: '/img/posts/bg-posts.jpg'
+date: 2021-07-27 13:45:00
+author: Sebastian Jordan
+comments: true
+---
+
+## What is a Famix query?
+Let's say that you want to know which classes of your Moose model are stub. That means: which classes are not defined in your Moose model but are used by some of your defined classes. Those classes are part of your model although they are not part of your code.
+Checking those stub classes is easy. You only have to create a Boolean query (assuming that your model contains only classes) with the property `isStub`. Like:
+
+```st
+FQBooleanQuery property: #isStub
+```
+
+But, creating queries programmatically can be a tedious task. Of course, not all the queries that you want to create are not so frivolous as the one in the example. With queries with lots of children, the code is not easy to understand at first sight.
+
+## Queries browser
+The new Queries Browser was developed to create queries in a more visually way. This is a Moose tool that allows you to create and manipulate queries without the need of knowing the FamixQueries syntax or how to instantiate them. It has a nice and intuitive user interface.
+
+!["The brand new Queries Browser"](/img/posts/2021-07-27-the-new-queries-browser/and-query.png){: .img-fill }
+
+If you want to know:
+1. What are all the classes that are not stub.
+2. What are the entities with incoming references and inheritances.
+3. What are the entities that have more than 50 lines of code.
+4. Finally, what is the intersection of those three queries.
+
+This is an easy task for the Queries Browser. First, we need to create a type query that filters all the entities except the classes. For do that, we select Type Query in the queries browser and then unselect all the types except the classes.
+
+!["Type Query"](/img/posts/2021-07-27-the-new-queries-browser/type-query.png){: .img-fill }
+
+Then, we create a child query from the Type Query. This child is going to be a Boolean Query that has the property `isStub`.
+
+!["The brand new Queries Browser"](/img/posts/2021-07-27-the-new-queries-browser/child-of-type-query.png){: .img-fill }
+
+Now, we create a Complement Query, a.k.a Negation Query, and choose the Boolean Query to be the query to be negated.
+
+!["The brand new Queries Browser"](/img/posts/2021-07-27-the-new-queries-browser/negation-query.png){: .img-fill }
+
+Now we have the first task completed: All the classes that are not stub.
+
+For the second task, we need to create another query, a Navigation Query, select the `Incoming` direction and only select the associations `Reference` and `Inheritance`.
+
+The third one is also simple, we only need to create a Numeric Query, select the property number of lines of code, the operator `>` and put the value 50.
+
+Now, our Queries Browser looks like this:
+
+!["The brand new Queries Browser"](/img/posts/2021-07-27-the-new-queries-browser/numeric-query.png){: .img-fill }
+
+For the final task we need to create an And Query, a.k.a Intersection Query, click on the "+" button to add a new query to intersect, and select the three previous queries that we created.
+
+!["The brand new Queries Browser"](/img/posts/2021-07-27-the-new-queries-browser/and-query.png){: .img-fill }
+
+If we wanted to the the above queries programmatically, the code would have look like this:
+
+```st
+(FQComplementQuery new beChildOf: (FQBooleanQuery property: #isStub))
+& (FQNavigationQuery incoming associations: {
+		 FamixStReference.
+		 FamixStInheritance }) & (FQNumericQuery
+	 property: #numberOfLinesOfCodeWithMoreThanOneCharacter
+	 comparator: #>
+	 valueToCompare: 50)
+```
+
+The code is also shown in the "Current query code tab":
+!["The brand new Queries Browser"](/img/posts/2021-07-27-the-new-queries-browser/current-code.png){: .img-fill }
+
+
+## Conclusion
+
+The new Queries Browser can simplify the way that the Famix Queries are created and make it more visual and understandable. Even that the example in this post is not complex it made easier our tasks. Analyzing models with real-life examples can lead to very nested queries. Create those queries programmatically can be very tedious and error-prone. The Queries Browser is here to help us in those cases. :smile:
