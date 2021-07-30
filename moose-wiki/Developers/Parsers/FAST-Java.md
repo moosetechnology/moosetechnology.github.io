@@ -56,7 +56,7 @@ JavaSmaCCProgramNodeImporterVisitor new parseCodeMethodString: 'public void onCl
 One nice way to explore a FAST model is to use the source code and the tree extensions of the inspector.
 It allows one the navigate in a FAST model and see the code corresponding to each node.
 
-To use it, execute the code to create a model with `Ctrl+I`.
+To use it, execute the code to create a model with <kbd>Ctrl</kbd>+<kbd>I</kbd>.
 It opens an inspector on the imported model.
 
 Then, select a method entity.
