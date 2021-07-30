@@ -2,6 +2,11 @@
 TraitA <|.. MyClass
 TraitB <|.. MyClass
 
-TraitA : methodXY()
-TraitB : methodXY()
+class TraitA << (T,#FF7700) >> {
+    methodXY()
+}
+
+class TraitB << (T,#FF7700) >> {
+    methodXY()
+}
 @enduml
