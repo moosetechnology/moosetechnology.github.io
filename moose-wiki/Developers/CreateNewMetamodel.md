@@ -6,14 +6,13 @@ title: 'Create a new Meta-model'
 
 # Create a new Meta-model (FamixNG: since Moose 7) <!-- omit in toc -->
 
-To analyse a system in a given programming language, Moose must have a meta-model for that language.
-For example for Java, the meta-model defines that Java programs have classes, containing methods, invoking other methods, etc.
+To analyze a system in a given programming language, Moose must have a meta-model for that language.
+For example, for Java, the meta-model defines that Java programs have classes, containing methods, invoking other methods, etc.
 The meta-model describes the entities that compose a program in the given language and how they are related.
 
 In the following, we describe how to create a new meta-model or extend an existing one.
 Moose being more specifically dedicated to source code analysis, there are a number of pre-set entities/traits that should help one define new meta-models for a given programming language.
 These are described in [another page](predefinedEntities) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow.svg?style=flat).
-
 
 - [Set up](#set-up)
 - [Basic meta-model](#basic-meta-model)
@@ -25,6 +24,9 @@ These are described in [another page](predefinedEntities) ![Unfinished](https://
 - [Introducing traits](#introducing-traits)
   - [Using traits in a meta-model](#using-traits-in-a-meta-model)
   - [Dealing with trait conflict](#dealing-with-trait-conflict)
+- [Additional features](#additional-features)
+  - [Generating test method](#generating-test-method)
+  - [Generating Famix Group](#generating-famix-group)
 - [Introducing submetamodels](#introducing-submetamodels)
   - [Set up submetamodels](#set-up-submetamodels)
   - [Define remote entities and traits](#define-remote-entities-and-traits)
@@ -69,7 +71,7 @@ DemoMetamodelGenerator class >> #prefix
 
 In this section, we will see how to create a simple meta-model.
 
-To design a meta-model, we need to specify its entities, their relations and their properties.
+To design a meta-model, we need to specify its entities, their relations, and their properties.
 
 You may also consult a [presentation of Famix generator](https://www.slideshare.net/JulienDelp/famix-nextgeneration) from Julien Delplanque.
 
@@ -132,7 +134,7 @@ DemoMetamodelGenerator>>#defineHierarchy
 
 Then we will define the relations between the entities.
 Multiple relations are available in Famix.
-In the following we present the relations and the keywords to define them.
+In the following, we present the relations and the keywords to define them.
 
 |      method       | binary |
 | :---------------: | :----: |
@@ -219,7 +221,7 @@ It is possible to force a full (clean) generation of the model with: `DemoMetamo
 ### Using traits in a meta-model
 
 In addition to the entities, we can use traits to add information to the meta-model.
-Traits are a flexible tool to avoid problems with multiple inheritance.
+Traits are a flexible tool to avoid problems with multiple inheritances.
 Traits are defined in the same way as entities.
 In our previous example, classes are inside a package.
 However, we forgot that a package can also contain another package, and we need to model that.
@@ -274,7 +276,7 @@ It is also possible to use traits that are already defined in another meta-model
 ### Dealing with trait conflict
 
 When a class inherits from two different traits that both defined a method with the same name, there is a conflict between the trait.
-This is a classic problem when allowing multiple inheritance.
+This is a classic problem when allowing multiple inheritances.
 
 ![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/img/create-new-metamodel/multi-inheritance.puml&fmt=svg)
 
@@ -288,7 +290,7 @@ The Famix Generator proposes two ways to deal with such a problem:
 - `inheritsFromTrait:without:`
 
 The first one, `withPrecedenceOf`, specifies which trait should be used in favor of the other one.
-In our case, considering we want to use the `methodXY` of `TraitA`, the code will look like:
+In our case, considering we want to use the `methodXY` of `TraitA`, the code will look like this:
 
 ```st
 defineHierarchy
@@ -299,8 +301,8 @@ defineHierarchy
 ```
 
 The second option, `inheritsFromTrait:without:`, is about using a trait without some methods.
-This time, we replace the common `--|>` by the new selector and we specify the method we do not want to use.
-The final code will look like:
+This time, we replace the common `--|>` with the new selector, and we specify the method we do not want to use.
+The final code will look like this:
 
 ```st
 defineHierarchy
@@ -308,6 +310,82 @@ defineHierarchy
     myClass --|> traitA.
     myClass inheritsFromTrait: traitB without: #methodXY.
 ```
+
+## Additional features
+
+### Generating test method
+
+When using a model, it is often required to select entities that are of a specified kind.
+It is the case when needed all the `FamixJavaClass` of a group.
+
+The good practice in Pharo is to use a `isXXX` method that is defined at the top of the hierarchy and returns `false`.
+Then, one overrides this method for the entity that returns `true`.
+
+To automatically generate the `isXXX` methods, the generator comes with the `withTesting` method.
+
+In our `FamixJavaClass` example, one can modify the `FamixJavaGenerator` as follow:
+
+```st
+FamixJavaGenerator>>defineClasses
+    super defineClasses.
+    "..."
+
+    class := builder newClassNamed: #Class.
+    class withTesting.
+
+    "..."
+
+```
+
+This creates the following methods:
+
+```st
+FamixJavaClass>>#isClass
+
+    <generated>
+    ^ true
+```
+
+```st
+FamixJavaEntity>>#isClass
+
+    <generated>
+    ^ false
+```
+
+### Generating Famix Group
+
+Another nice feature of Moose is the *Group*.
+It allows one to create query and inspector extensions based on the *type* of a group.
+A *typed group* is a group that contains only elements of a *type*.
+For example, a `FamixJavaClassGroup` only contains `FamixJavaClass` entities.
+These kinds of groups are subclasses of `MooseSpecializedGroup` and can be created using `asMooseSpecializedGroup` on any collections or moose entities.
+
+To generate the group classes, the generator comes with the `withGroup` method.
+One only needs to use it on the concept defined in the generator.
+
+In our `FamixJavaClass` example, one can modify the `FamixJavaGenerator` as follow:
+
+```st
+FamixJavaGenerator>>defineClasses
+    super defineClasses.
+    "..."
+
+    class := builder newClassNamed: #Class.
+    class withGroup.
+
+    "..."
+```
+
+This will generates the following class:
+
+```st
+MooseSpecializedGroup subclass: #FamixJavaClassGroup
+    instanceVariableNames: ''
+    classVariableNames: ''
+    package: 'Famix-Java-Entities-Entities'
+```
+
 
 ## Introducing submetamodels
 
