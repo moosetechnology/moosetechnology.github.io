@@ -104,5 +104,5 @@ importer := aBlock
 importer run.
 ```
 
-When using a Moose image, some methods are implemented to simply the script.
-For instance, once can use `FamixJavaModel>>#importFromJSONStream:` and `FamixJavaModel>>#importFromMSEStream:`.
+When using a Moose image, some methods are implemented to simplify the script.
+For instance, one can use `FamixJavaModel>>#importFromJSONStream:` and `FamixJavaModel>>#importFromMSEStream:`.
