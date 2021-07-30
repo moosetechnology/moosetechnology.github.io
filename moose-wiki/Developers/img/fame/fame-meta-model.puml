@@ -33,7 +33,7 @@ class Property {
     derived : Boolean
 }
 
-Element -- Element
+Element --> Element
 
 Type *--"0..*" Property
 Type --"0..*" Trait
@@ -45,6 +45,6 @@ Class --> Class : subclass
 
 Package --"0..*" Property : extensions
 
-Property -- Property : opposite
-Property -- Object : defaultValue
+Property --> Property : opposite
+Property --> Object : defaultValue
 @enduml
