@@ -19,7 +19,7 @@ In the following, we mainly present the Pharo implementation and usage of Fame.
 
 ## Meta-model
 
-![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/img/fame/fame-meta-model.puml&fmt=svg)
+![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/img/fame/fame-meta-model.puml&fmt=svg){: .img-fill }
 
 ### Main concepts
 
