@@ -1,6 +1,7 @@
 ---
 layout: page
 background: '/img/bg-wiki.jpg'
+title: FAST
 ---
 
 # FAST [![Moose 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense}](https://github.com/moosetechnology/FAST)

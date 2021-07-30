@@ -1,6 +1,7 @@
 ---
 layout: page
 background: '/img/bg-wiki.jpg'
+title: FAST-Java
 ---
 
 # FAST-Java <!-- omit in toc -->
