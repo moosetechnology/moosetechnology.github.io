@@ -59,8 +59,8 @@ Visualizations are built with the [Roassal tool](https://github.com/ObjectProfil
 
 ### More advanced tools
 
-- [Inspector](Users/inspector/inspector) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
-- [Meta Browser](Users/metaBrowser)
+- [Inspector](Users/inspector/inspector) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
+- [Meta Browser](Users/metaBrowser) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
 
 ## FOR DEVELOPERS
 
