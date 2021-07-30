@@ -23,6 +23,8 @@ These are described in [another page](predefinedEntities) ![Unfinished](https://
   - [Define properties](#define-properties)
   - [Generate](#generate)
 - [Introducing traits](#introducing-traits)
+  - [Using traits in a meta-model](#using-traits-in-a-meta-model)
+  - [Dealing with trait conflict](#dealing-with-trait-conflict)
 - [Introducing submetamodels](#introducing-submetamodels)
   - [Set up submetamodels](#set-up-submetamodels)
   - [Define remote entities and traits](#define-remote-entities-and-traits)
@@ -214,6 +216,8 @@ It is possible to force a full (clean) generation of the model with: `DemoMetamo
 
 ## Introducing traits
 
+### Using traits in a meta-model
+
 In addition to the entities, we can use traits to add information to the meta-model.
 Traits are a flexible tool to avoid problems with multiple inheritance.
 Traits are defined in the same way as entities.
@@ -267,12 +271,65 @@ DemoMetamodelGenerator>>#defineRelations
 
 It is also possible to use traits that are already defined in another meta-model (see [submetamodels](#introducing-submetamodels)).
 
+### Dealing with trait conflict
+
+When a class inherits from two different traits that both defined a method with the same name, there is a conflict between the trait.
+This is a classic problem when allowing multiple inheritance.
+
+{% mermaid %}
+classDiagram
+    class TraitA {
+        << trait >>
+        +methodXY()
+    }
+    class TraitB {
+        << trait >>
+        +methodXY()
+    }
+    class MyClass{
+    }
+
+    TraitA <|.. MyClass
+    TraitB <|.. MyClass
+{% endmermaid %}
+
+In this example, the class `MyClass` uses the traits `TraitA` and `TraitB`.
+Both traits define the method `methodXY`.
+In such a situation, there is a trait conflict.
+
+The Famix Generator proposes two ways to deal with such a problem:
+
+- `withPrecedenceOf`
+- `inheritsFromTrait:without:`
+
+The first one, `withPrecedenceOf`, specifies which trait should be used in favor of the other one.
+In our case, considering we want to use the `methodXY` of `TraitA`, the code will look like:
+
+```st
+defineHierarchy
+    super defineHierarchy.
+    myClass --|> traitA.
+    myClass --|> traitB.
+    myClass withPrecedenceOf: traitA.
+```
+
+The second option, `inheritsFromTrait:without:`, is about using a trait without some methods.
+This time, we replace the common `--|>` by the new selector and we specify the method we do not want to use.
+The final code will look like:
+
+```st
+defineHierarchy
+    super defineHierarchy.
+    myClass --|> traitA.
+    myClass inheritsFromTrait: traitB without: #methodXY.
+```
+
 ## Introducing submetamodels
 
 One powerful feature of Famix is the possibility to use submetamodels.
 It allows one to extend or compose several meta-models.
 
-There are two way of extending of meta-model:
+There are two ways of extending of meta-model:
 
 1. Create a generator that extends the first one.
 2. Create a separate generator that declares another as submetamodel.
@@ -284,9 +341,10 @@ In the following, we present how to configure a generator for submetamodels.
 ### Set up submetamodels
 
 In this example, we will create a new generator that will add the interface entity that will be use to represent an interface.
-The interface is packageable and contain methods.
+The interface is packageable and contains methods.
 
-> Note that it is done in an example. The best way in this case would be to modify the previous generator.
+> Note that it is done in an example.
+> The best way, in this case, would be to modify the previous generator.
 
 First of all, we create a new generator:
 
