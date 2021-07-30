@@ -20,6 +20,13 @@
         "orcid": "https://orcid.org/0000-0002-4588-2698",
         "image": "https://avatars.githubusercontent.com/u/6225039"
     },
+    "Anne Etien": {
+        "name": "Anne Etien",
+        "role": "Moose expert",
+        "bio": "Software engineer researcher specialized in software evolution",
+        "github": "https://github.com/anneetien",
+        "image": "https://avatars.githubusercontent.com/u/17824579?"
+    },
     "Vincent Aranega": {
         "name": "Vincent Aranega",
         "role": "MDE and beers lover",
