@@ -39,7 +39,7 @@ If you want to access all versions of Moose, instead of the most recent ones, yo
 
 - Download the PharoLauncher (see Step 1 of the previous section)
 - Open PharoLauncher
-- Open a playground (Ctrl + O, Ctrl + W)
+- Open a playground (<kbd>Ctrl</kbd> + <kbd>O</kbd>, <kbd>Ctrl</kbd> + <kbd>W</kbd>)
 - Execute the following piece of code
 
 ```st
