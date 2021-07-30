@@ -1,100 +1,114 @@
 ---
 layout: post
-title: "Label Contractor for improving readability of a visualization"
-subtitle: In this post I am going to show you how to contract labels in a visualization using the Label Contractor
-date: 2021-07-23 16:30:28 -0400
+title: "Label Contractor for shortning labels"
+subtitle: In this post I am going to show you how to contract labels to display more information
+date: 2021-07-29 16:30:28 -0400
 background: '/img/posts/bg-posts.jpg'
 author: Réda Id-taleb
 ---
 
-# **Introduction** 
-The visualization construction is not always optimal. In particular, the visualization can contain elements with long names, which poses clarity problems or sometimes a very spread out visualizations, making them difficult to read. If you have to zoom in to read the labels in the visualization, it loses interest in synthesizing the information.
+# Introduction
 
-The Label Contractor project comes to solve this problem. 
+When there are long labels in a visualization the displayed elements can overlap which renders the visualization very difficult to read, or the elements have to be very spread out (to not overlap)
+and then the visualization does not fit in a normal screen or paper.
+
+The Label Contractor project comes to solve this problem by offering several ways to reduce the length of labels (hence its name).
+
+For example:
+```Smalltalk
+LbCContractor new
+ removeVowels;
+ reduce: 'MergedSuperClasses'.
+```
+will return 'MrgdSprClsss' by suppressing all vowels from the label.
+
 
 In this blog post, I will explain how you can apply a reduction following different strategies and how you can combine them.  
 
-# **Label Contractor Description**
-The idea was to build a "tool" that can reduce labels without losing informations, and the easiest and most obvious way is to provide the user with a set of strategies, allowing him to apply them separately or in combination.
-
-# **Implementation choices**
-First of all, before starting talking about the implemented strategies, I decided that the contractor should take into account the reduction of labels representing the full qualified filename. For that, I have chosen to remove the "path" part by default. 
-
-Example:
-```Smalltalk
-LbCContractor new 
-	reduce: '/home/idtaleb/Label Contractor/images/src/LbCContractor.st'
-```
----> LbCContractor.st  
-
-So removing the "path" part is not considered a strategy(maybe it will be in the future, we'll see ...), but it is a behavior common to all strategies.
-
-Notice that you can still keep the "path" part. 
-
-To keep path use #keepPath:
+# How to install the project
+In order to install this project, on a Pharo 9.0/Moose Suite 9.0 image execute the following script in the Playground:
 
 ```Smalltalk
-LbCContractor new 
-    keepPath;
-	reduce: '/home/idtaleb/Label Contractor/images/src/LbCContractor.st'
+Metacello new
+  baseline: 'LabelContractor';
+  repository: 'github://reda-idtaleb/LabelContractor/src';
+  load
 ```
-
-One more thing, in some strategies, I supposed that the labels contain words respecting the Camel Case, so a tokenizer was essential to detect each word of labels.
-
-# **Description of the contraction strategies**
-Currently there is 13 strategies and in what follow i will explain what each strategy can do and how to apply it.
-
-## **Remove Filename Extension**
-remove extension of a filename. The extension is the part after the last dot('.')
-
+### Load full project
+The full project includes examples of the application of the LabelContractor on visualizations and on [Spec2](https://github.com/pharo-spec/Spec). Execute the following script in the Playground: 
 ```Smalltalk
-LbCContractor new 
-	reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest.st'
-```
-## **Remove Substrings**
-It is a hierarchy of strategies which removes the words of a label.
+Metacello new
+  baseline: 'LabelContractor';
+  repository: 'github://reda-idtaleb/LabelContractor/src';
+  load: 'full'.
+``` 
 
-Notice that by default there's no case sensitive when you enter the words, but you can "activate" the case sensitive.
+# Label Contractor Description
 
-### **Remove Any Substrings**
-This strategy accepts one or a collection of the substring to be removed, and it removes all the occurrences of these substrings and only the existing words in the label.
+The idea was to build a tool that can reduce labels without losing too much information, and is to provide the user with a set of strategies, allowing him to apply them separately or in combination.
 
-Example with only one substring to remove:
+There are startegies for: removing some arbitrary substring from labels, removing all vowels, removing fully qualified path names, etc.
+
+## Implementation choices
+
+The contraction of labels is based on two decisions:
+- First, filenames are treated by default to remove the full pathname, therefore '/home/idtaleb/Label Contractor/images/src/LbCContractor.st' will be truncated as 'LbCContractor.st'.
+If a label is not a filename, this has no effect on it;
+- Second, some strategies working on words assume the labels follow the CamelCase convention.
+
+Currently these decisions are hardcoded in the contractor, but they will be implemented as normal strategies in the future.
+
+There are 13 strategies that we are going to review now.
+
+### Remove Filename Extension
+
+This strategy removes the extension of filenames. The extension is the part of the label after the last dot ('.')
+
 ```Smalltalk
 LbCContractor new
- removeSubstring: 'merged';
- reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'.  
+	removeFilenameExtension ;
+	reduce: 'LbCContractor.st'
 ```
-	--> ClySuperclassesAndInheritedTraitsHierarchyTest
 
-Example with a collection of substrings:
+will return 'LbCContractor'.
+
+### Abbreviate Names
+
+This strategy abbreviates the words in the label to their first capital letter.
+As explained before, the label is assumed to follow the CamelCase convention.
+Only the first three words can be abbreviated (if there are more than three words).
+On top of that, the last word is not abbreviated.
+
 ```Smalltalk
 LbCContractor new
- removeSubstring: #('cly' 'merged' 'and' 'test');
- reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'.  
+ abbreviateNames;
+ reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'
 ```
-	--> 'SuperclassesInheritedTraitsHierarchy'
+will return 'CMSAndInheritedTraitsHierarchyTest' (only the first tree words Cly, Merged, and Superclasses were abbreviated).
 
-### **Remove Prefix**
-The same idea, but the word to be removed must be a prefix. In addition, if a collection of words is given, we remove only the word that is the prefix of a label.
+### Remove Vowels
+This strategy removes all vowels from the label.
+Notice that the first letter of a word is always kept whether it is a vowel or a consonant.
 
-### **Remove Suffix**
-This strategy is similar to the last one, except that we remove the suffix words.
+Note: In English, the letter 'y' is sometimes considered a vowel and sometimes a consonant.
+This strategy assumes that 'y' is a consonnant when it is followed by a vowel like in 'layer'.
 
-## **Remove Words**
-It's very similar to the [Remove Substrings](#Remove-Substrings) hierarchy, except that the words to be removed must be specified by its indexes(supposing that the Camel Case is respected). Also you can give an index or a collection of indexes.
+```Smalltalk
+LbCContractor new
+ removeVowels;
+ reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'
+```
+will return 'ClMrgdSprclsssAndInhrtdTrtsHrrchTst'.
 
-### **Remove Any Words**
-The same as [Remove Any Substrings](#Remove-Any-Substrings), you can give an index or a collection of indexes of the words you want to remove.
+```Smalltalk
+LbCContractor new
+ removeVowels;
+ reduce: 'layer'
+```
+will return 'lyr'.
 
-### **Remove First Word**
-Removes automatically the first word
-
-### **Remove Last Word**
-Removes automatically the last word
-
-## **Susbtitute Substring**
-Allow you to replace a word by another one. If the word appears more than once, then all occurrences of the word will be replaced.
+### Susbtitute Substring
+This strategy replaces a word by another one. If the word appears more than once, then all occurrences of the word will be replaced.
 
 Example:
 ```Smalltalk
@@ -102,56 +116,124 @@ LbCContractor new
  substitute: 'Superclasses' by: 'Sc';
  reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'  
 ```
-	--> 'ClyMergedScAndInheritedTraitsHierarchyTest'
+will return 'ClyMergedScAndInheritedTraitsHierarchyTest'.
 
-## **Abreviate Names**
-Abbreviate the names of the label to its first capital letters. The last name is never abbreviated.
+## Size Reduction Strategies
 
-By default, the 3 first names are abreviated:
-```Smalltalk
-LbCContractor new
- abbreviateNames;
- reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'.
-```
-	--> CMSAndInheritedTraitsHierarchyTest
+There are three strategies based on specifically fixing a maximal size for the contracted label.
 
-## **Remove Vowels**
-Sometimes removing the vowels from a word still makes it understandable. So that's why this strategy exists.
-Notice that the first letter  of a word is always kept whether it is a vowel or a consonant.
+### Remove Frequent Letters
 
-Note: In English, the letter 'y' is sometimes a vowel and sometimes a consonant, so it is only removed if it represents a vowel (according to the grammar rules of the language).
+This strategy removes the frequent letters until having the maximal size.
+The startegy is not case sensitive, meaning that a 'T' is counted as a 't'.
 
 ```Smalltalk
 LbCContractor new
- removeVowels;
+ removeFrequentLettersUpTo: 20;
  reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'.
 ```
-	--> ClMrgdSprclsssAndInhrtdTrtsHrrchTst
 
-## **Size Reduction Strategies**
-It's a hierarchy of 3 strategies that reduce labels until having a size specified by the user. So the user specifies the size to which the label will be reduced, and the label is reduced according to the chosen strategy.
+will return 'ClyMgdpcldIhidiHichy'.
 
-By default, I have chosen to reduce the labels to a size of 8.
+removing the letters (number of apparition in parentheses) 'e' (8), 'r' (6), 's' (6), 'u' (1), 'a' (4), 'n' (2), and 't' (5).
 
-### **Remove Frequent Letters**
-It removes the frequent letters until having the size specified by the user.
+### Ellipsis
+
+This strategy keeps the beginning and the end of the label and replace the middle by ellipsis represented as a '~'. 
+The default size is eight, so it keeps the first four characters and the last four characters af the label and separates them with a tilde '~'.
+The default size can be changed.
 
 ```Smalltalk
 LbCContractor new
- removeFrequentLettersUpTo: 12;
+ ellipsis;
+ reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'
+```
+will return 'ClyM~Test'.
+
+### Pick First Characters
+
+This strategy takes the first eight characters of a label.
+Again, the default size can be changed.
+
+```Smalltalk
+LbCContractor new
+ pickFirstCharacters;
  reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'.
 ```
-	--> ClyMgdpcldIhidiHichy
+will return 'ClyMerge' (the first eight letters are kept)
 
-### **Ellipsis**
-Keep the beginning and the end and separate them with a '~'. For example, since the default size is 8 so I take the first 4 characters and the last 4 characters and I separate them with '~'.
+## Remove Substrings
 
-### **Pick First Letters**
-Take the first characters of a label, so the size specified by the user corresponds to the characters to keep.
+This is another group of three strategies that remove some given substring from a label.
 
-# **Strategies Combination**
-There's 2 ways to combine the strategies, in the both cases the user must provides the strategies: 
-- The user provides an order of strategies, so we apply them one by one:
+Notice that by default the startegies are not case sensitive.
+
+
+### Remove Any Substrings
+
+This strategy accepts one or a collection of substring to be removed, and it removes all the occurrences of these substrings in the label.
+
+An example with only one substring to remove:
+```Smalltalk
+LbCContractor new
+ removeSubstring: 'Merged';
+ reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' 
+```
+will return 'ClySuperclassesAndInheritedTraitsHierarchyTest'. 
+
+An other example with a collection of substrings:
+```Smalltalk
+LbCContractor new
+ removeSubstrings: #('cly' 'merged' 'and' 'test');
+ reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' 
+```
+will return 'SuperclassesInheritedTraitsHierarchy'.
+
+### Remove Prefix
+
+The same idea, this strategy removes the prefix of the label. In addition, if a collection of words is given, it removes only the word that is the prefix of a label.
+
+```Smalltalk
+LbCContractor new
+ removePrefix: 'Cly';
+ reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' 
+```
+will return 'MergedSuperclassesAndInheritedTraitsHierarchyTest'.
+
+### Remove Suffix
+
+This strategy is similar to the last one, except that it removes the suffix substrings.
+
+## Remove Words At
+
+This is a group of three strategies which is very similar to the [Remove Substrings](#Remove-Substrings) group, except that it removes words in the label (assuming a CamelCase convention).
+The words to remove are specified by their indexes.
+
+### Remove Any Words At
+
+This strategy removes words of the label, that are specified by their indexes. 
+Like [Remove Any Substrings](#Remove-Any-Substrings), you can give an index or a collection of indexes of the words to remove.
+
+```Smalltalk
+LbCContractor new
+ removeWordAt: 2;
+ reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' 
+```
+will return 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' (the second word, 'Merged' was removed).
+
+### Remove First Word
+
+This strategy removes automatically the first word of the label.
+
+### Remove Last Word
+
+This strategy removes automatically the last word of the label.
+
+## Strategies Combination
+
+Finally, there are two ways to combine the strategies together, in the both cases the user must provides the strategies:
+
+- The user provides the strategies in the order to apply them:
 ```Smalltalk
 LbCContractor new
  ellipsisUpTo: 20;
@@ -159,10 +241,12 @@ LbCContractor new
  removeSubstrings: #('Merged' 'Test');
  reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'.
 ```
-	--> ClMrgdS~rrchTst
+will return 'ClMrgdS~rrchTst' by applying first 'ellipsisUpTo:', then 'removeVowels', and then 'removeSubstrings:'.
+Note that the last one was actually not applied because the other two had already changed the label, and the ellipsis is shorter than expected because 'removeVowels' came after.
+
 - Combining following predefined priorities: 
 
-Sometimes you can make the wrong order and therefore you will have an unreasonable result(as in the previous example, the substrings are not removed, because removeVowels was the first strategy which means that the words to be removed are not available anymore :) )
+To avoid unreasonable result (as in the previous example), the strategies have built-in priorities that can be applied with 'usingPriorities'.
 
 The same example but with priorities:
 ```Smalltalk
@@ -173,109 +257,16 @@ LbCContractor new
  removeSubstrings: #('Merged' 'Test');
  reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest'.
 ```
-	--> ClSprclsss~dTrtsHrrch
-The result is not the same, because the substrings are removed before applying removeVowels strategy(according to the priority system below).
+will return 'ClSprclsss~dTrtsHrrch'
 
-The priority system is defined as(the color green means that the strategy has the highest priority):
+The result is different, because the substrings were removed before applying removeVowels strategy which was itself applied before 'ellipsisUpTo:'.
+
+The priority system is defined as follows (the color green means that the strategy has the highest priority):
 
 <img src="/img/posts/2021-07-23-label-contractor/strategies_priorities.png" width="350"/>
 
-# **Conclusion**
-In this post, we have seen how to compact labels in a visualization using the LabelContractor. The goal is to improve the readability of a visualization while retaining the necessary information.
+# Conclusion
+
+In this post, we have seen how to compact labels in a visualization using the LabelContractor. The goal is to improve the readability of a visualization while retaining as much information as possible.
 
 Note that LabelContractor is not just for visualizations, but you can use it whenever you want.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
