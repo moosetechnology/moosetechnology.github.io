@@ -276,22 +276,7 @@ It is also possible to use traits that are already defined in another meta-model
 When a class inherits from two different traits that both defined a method with the same name, there is a conflict between the trait.
 This is a classic problem when allowing multiple inheritance.
 
-{% mermaid %}
-classDiagram
-    class TraitA {
-        << trait >>
-        +methodXY()
-    }
-    class TraitB {
-        << trait >>
-        +methodXY()
-    }
-    class MyClass{
-    }
-
-    TraitA <|.. MyClass
-    TraitB <|.. MyClass
-{% endmermaid %}
+![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/img/create-new-metamodel/multi-inheritance.puml&fmt=svg)
 
 In this example, the class `MyClass` uses the traits `TraitA` and `TraitB`.
 Both traits define the method `methodXY`.

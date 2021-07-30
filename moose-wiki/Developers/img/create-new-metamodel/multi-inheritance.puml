@@ -1,0 +1,7 @@
+@startuml
+TraitA <|.. MyClass
+TraitB <|.. MyClass
+
+TraitA : methodXY()
+TraitB : methodXY()
+@enduml

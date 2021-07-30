@@ -22,7 +22,3 @@ plugins:
   - jekyll-sitemap
   - jekyll-mermaid
   - jemoji
-
-mermaid:
-  src: '/js/mermaid.min.js'
-  src_config: '/js/mermaid_config.js'
