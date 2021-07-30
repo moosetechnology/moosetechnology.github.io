@@ -42,6 +42,11 @@ You may also use models for other programming languages (see also the [Parsers](
 - [Importing and exporting models](Users/ImportingAndExportingModels)
 - [Moose supported file format](./Users/fileFormat)
 
+#### Famix AST (FAST)
+
+- [FAST](Developers/Parsers/FAST) - Represent the AST in Famix
+- [FAST-Java](Developers/Parsers/FAST-Java) - Represent the Java AST in Famix
+
 ### Performing queries
 
 - [Typical Queries](./Users/typicalQueries) - presents how to perform typical queries
@@ -84,7 +89,6 @@ There are different (so-called) parsers already created at various stages of pro
 - [C#](https://github.com/feenkcom/roslyn2famix) - A parser for C# (using Roselyn) that should be able to export a Moose model
 - [PowerBuilderParser](Developers/Parsers/PowerBuilderParser) - Generate an mse from a Powerbuilder project
   ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
-- [FAST](Developers/Parsers/FAST) - Represent the AST in Famix
 
 ## OTHER DOCUMENTATION
 
