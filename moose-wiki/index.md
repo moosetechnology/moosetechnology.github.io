@@ -37,6 +37,8 @@ A popular meta-model is the Java meta-model:
 - [Analyse Java Project](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 
+#### Other programming languages
+
 You may also use models for other programming languages (see also the [Parsers](#Parsers) section):
 
 - [Importing and exporting models](Users/ImportingAndExportingModels)
@@ -85,7 +87,6 @@ There are different (so-called) parsers already created at various stages of pro
 - [PowerBuilderParser](Developers/Parsers/PowerBuilderParser) - Generate an mse from a Powerbuilder project
   ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 - [FAST](Developers/Parsers/FAST) - Represent the AST in Famix
-![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 
 ## OTHER DOCUMENTATION
 
