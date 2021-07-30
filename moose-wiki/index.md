@@ -76,7 +76,7 @@ There are also other possible actions.
 Parsing source code to analyze is an important part of Moose.
 There are different (so-called) parsers already created at various stages of progress that you can use and/or contribute to.
 
-Note: they do more than parsing since they also resolve names in the parsed code and this is not a small task.
+> Note: they do more than parsing since they also resolve names in the parsed code and this is not a small task.
 
 - [Petit Parser](https://github.com/moosetechnology/PetitParser) - Write "easily" a Parser with Moose 
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
