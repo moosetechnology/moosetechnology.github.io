@@ -31,15 +31,15 @@ In order to install this project, on a Pharo 9.0/Moose Suite 9.0 image execute t
 ```Smalltalk
 Metacello new
   baseline: 'LabelContractor';
-  repository: 'github://reda-idtaleb/LabelContractor/src';
+  repository: 'github://moosetechnology/LabelContractor/src';
   load
 ```
-### Load full project
-The full project includes examples of the application of the LabelContractor on visualizations and on [Spec2](https://github.com/pharo-spec/Spec). Execute the following script in the Playground: 
+
+The full project including examples of the application of LabelContractor on visualizations and [Spec2](https://github.com/pharo-spec/Spec) can be obtained with:
 ```Smalltalk
 Metacello new
   baseline: 'LabelContractor';
-  repository: 'github://reda-idtaleb/LabelContractor/src';
+  repository: 'github://moosetechnology/LabelContractor/src';
   load: 'full'.
 ``` 
 
@@ -125,6 +125,8 @@ There are three strategies based on specifically fixing a maximal size for the c
 ### Remove Frequent Letters
 
 This strategy removes the frequent letters until having the maximal size.
+The frequency of letters is hard coded from know frequency of letters in english texts.
+Letters are removed, one at a time, from the most frequent (in english) to the least frequent until the label is the maximum size.
 The startegy is not case sensitive, meaning that a 'T' is counted as a 't'.
 
 ```Smalltalk
@@ -135,7 +137,7 @@ LbCContractor new
 
 will return 'ClyMgdpcldIhidiHichy'.
 
-removing the letters (number of apparition in parentheses) 'e' (8), 'r' (6), 's' (6), 'u' (1), 'a' (4), 'n' (2), and 't' (5).
+removing the letters (number of apparition in parentheses) 'e', 'r', 's', 'u', 'a', 'n', and 't'.
 
 ### Ellipsis
 
@@ -191,14 +193,15 @@ will return 'SuperclassesInheritedTraitsHierarchy'.
 
 ### Remove Prefix
 
-The same idea, this strategy removes the prefix of the label. In addition, if a collection of words is given, it removes only the word that is the prefix of a label.
+The same idea, this strategy removes the prefix of the label if it matches the given prefix:
+A collection of prefixes can be given if the same contractor is applied to several labels (with different prefixes).
 
 ```Smalltalk
 LbCContractor new
- removePrefix: 'Cly';
+ removePrefix: 'ClyMerge';
  reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' 
 ```
-will return 'MergedSuperclassesAndInheritedTraitsHierarchyTest'.
+will return 'dSuperclassesAndInheritedTraitsHierarchyTest'.
 
 ### Remove Suffix
 
@@ -223,11 +226,11 @@ will return 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' (the second w
 
 ### Remove First Word
 
-This strategy removes automatically the first word of the label.
+This strategy removes automatically the first word of the label, whatever it is.
 
 ### Remove Last Word
 
-This strategy removes automatically the last word of the label.
+This strategy removes automatically the last word of the label, whatever it is.
 
 ## Strategies Combination
 
@@ -263,7 +266,7 @@ The result is different, because the substrings were removed before applying rem
 
 The priority system is defined as follows (the color green means that the strategy has the highest priority):
 
-<img src="/img/posts/2021-07-23-label-contractor/strategies_priorities.png" width="350"/>
+<img src="/img/posts/2021-07-29-label-contractor/strategies_priorities.png" width="350"/>
 
 # Conclusion
 
