@@ -42,6 +42,11 @@ You may also use models for other programming languages (see also the [Parsers](
 - [Importing and exporting models](Users/ImportingAndExportingModels)
 - [Moose supported file format](./Users/fileFormat)
 
+#### Famix AST (FAST)
+
+- [FAST](Developers/Parsers/FAST) - Represent the AST in Famix
+- [FAST-Java](Developers/Parsers/FAST-Java) - Represent the Java AST in Famix
+
 ### Performing queries
 
 - [Typical Queries](./Users/typicalQueries) - presents how to perform typical queries
@@ -57,8 +62,8 @@ Visualizations are built with the [Roassal tool](https://github.com/ObjectProfil
 
 ### More advanced tools
 
-- [Inspector](Users/inspector/inspector) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
-- [Meta Browser](Users/metaBrowser)
+- [Inspector](Users/inspector/inspector) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
+- [Meta Browser](Users/metaBrowser) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
 
 ## FOR DEVELOPERS
 
@@ -76,7 +81,7 @@ There are also other possible actions.
 Parsing source code to analyze is an important part of Moose.
 There are different (so-called) parsers already created at various stages of progress that you can use and/or contribute to.
 
-Note: they do more than parsing since they also resolve names in the parsed code and this is not a small task.
+> Note: they do more than parsing since they also resolve names in the parsed code and this is not a small task.
 
 - [Petit Parser](https://github.com/moosetechnology/PetitParser) - Write "easily" a Parser with Moose 
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
@@ -84,8 +89,10 @@ Note: they do more than parsing since they also resolve names in the parsed code
 - [C#](https://github.com/feenkcom/roslyn2famix) - A parser for C# (using Roselyn) that should be able to export a Moose model
 - [PowerBuilderParser](Developers/Parsers/PowerBuilderParser) - Generate an mse from a Powerbuilder project
   ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
-- [FAST](Developers/Parsers/FAST) - Represent the AST in Famix
-![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
+
+### Advanced developers
+
+- [Fame](Developers/Fame) --- The meta-meta-model
 
 ## OTHER DOCUMENTATION
 

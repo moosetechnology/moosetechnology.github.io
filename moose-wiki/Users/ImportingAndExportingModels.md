@@ -58,7 +58,7 @@ To import a model from a JSON format, you can execute the following snippet:
 
 ```st
 '/path/to/file.json' asFileReference readStreamDo:
-    [ :aStream | model := FamixJavaModel importFromJSONStream: stream ]       
+    [ :stream | model := FamixJavaModel new importFromJSONStream: stream ]       
 ```
 
 > Sugar methods will be added in future release
