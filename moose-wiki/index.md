@@ -46,6 +46,7 @@ You may also use models for other programming languages (see also the [Parsers](
 
 - [FAST](Developers/Parsers/FAST) - Represent the AST in Famix
 - [FAST-Java](Developers/Parsers/FAST-Java) - Represent the Java AST in Famix
+- [FAST-Pharo](Developers/Parsers/FAST-Pharo) - Represent the Pharo AST in Famix
 
 ### Performing queries
 
