@@ -241,7 +241,7 @@ LbCContractor new
   reduce: 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' 
 ```
 
-will return 'ClyMergedSuperclassesAndInheritedTraitsHierarchyTest' (the second word, 'Merged' was removed).
+will return 'ClySuperclassesAndInheritedTraitsHierarchyTest' (the second word, 'Merged' was removed).
 
 #### Remove First Word
 
