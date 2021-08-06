@@ -17,9 +17,9 @@ It comes with a meta-model, an importer, and tools to manipulate and explore mod
 
 ## FAST-Pharo meta-model
 
-![FAST-Pharo meta-model](https://raw.githubusercontent.com/moosetechnology/FAST-Pharo/532a3cc515a8f21c8be1f729aa14cb974ddac78f/fast-pharo.svg){: .img-fill }
+![FAST-Pharo meta-model](https://raw.githubusercontent.com/moosetechnology/FAST-Pharo/v2-doc/fast-pharo.svg){: .img-fill }
 
-[Full Image](https://raw.githubusercontent.com/moosetechnology/FAST-Pharo/532a3cc515a8f21c8be1f729aa14cb974ddac78f/fast-pharo.svg)
+[Full Image](https://raw.githubusercontent.com/moosetechnology/FAST-Pharo/v2-doc/fast-pharo.svg)
 
 ## Importer
 
