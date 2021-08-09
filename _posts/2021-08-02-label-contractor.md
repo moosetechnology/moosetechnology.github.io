@@ -5,6 +5,7 @@ subtitle: In this post I am going to show you how to contract labels to display 
 date: 2021-08-02 16:30:28 -0400
 background: '/img/posts/bg-posts.jpg'
 author: Réda Id-taleb
+comments: true
 ---
 
 ## Introduction
