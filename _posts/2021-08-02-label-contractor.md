@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Label Contractor for shortning labels"
+title: "Label Contractor for shortening labels"
 subtitle: In this post I am going to show you how to contract labels to display more information
 date: 2021-08-02 16:30:28 -0400
 background: '/img/posts/bg-posts.jpg'
