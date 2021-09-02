@@ -72,6 +72,38 @@ Then, by clicking on the **Propagate** button of the inspector, you'll get the s
 
 ![Propagate to source code browser](res/moose-in-action/propagate-source-code.png){: .img-fill }
 
+## Analyze the result
+
+We now have the 28 classes that are deprecated in our system.
+Next, we need to check which of those are not used.
+Or if we think in terms of clients and providers, which of the deprecated classes do not have client classes.
+Go back to the pane with having 28 classes, open the script area, and execute the following expression:
+
+```st
+self select: [ :each | each clientTypes isEmpty]
+```
+
+We get 14 classes that can be removed immediately.
+
+![Requiest empty clientTypes list](res/moose-in-action/deprecated-classes-empty-client.png)
+
+To retrive the other classes, execute the following expression:
+
+```st
+self select: [ :each | each clientTypes isNotEmpty ]
+```
+
+This leaves us with 14 classes that cannot be removed because they are still being used.
+So, what should we do about these ?
+It would be great to know how these classes are being used.
+Perhaps there is one deprecated class that is used in several places.
+Or maybe there is one non-deprecated class that uses multiple deprecated ones.
+Or it can also be that multiple deprecated classes call each other.
+A plain list presentation is not quite ideal to exhibit these patterns.
+So, let's build a visualization instead.
+
+![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
+
 ## Contributors
 
 This wiki page was first created for [the moosebook](http://www.themoosebook.org/book).
