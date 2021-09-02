@@ -19,7 +19,7 @@ The main Moose source code repository on GitHub is: [https://github.com/moosetec
 ## FOR BEGINNERS
 
 - [Install Moose](Beginners/InstallMoose)
-- [Moose in action](Beginners/moose-in-action) ![Moose 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense} ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
+- [Moose in action](Beginners/moose-in-action) ![Moose 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense}
 
 ## FOR USERS
 

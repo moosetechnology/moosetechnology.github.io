@@ -94,15 +94,6 @@ self select: [ :each | each clientTypes isNotEmpty ]
 ```
 
 This leaves us with 14 classes that cannot be removed because they are still being used.
-So, what should we do about these ?
-It would be great to know how these classes are being used.
-Perhaps there is one deprecated class that is used in several places.
-Or maybe there is one non-deprecated class that uses multiple deprecated ones.
-Or it can also be that multiple deprecated classes call each other.
-A plain list presentation is not quite ideal to exhibit these patterns.
-So, let's build a visualization instead.
-
-![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 
 ## Contributors
 
