@@ -85,7 +85,7 @@ self select: [ :each | each clientTypes isEmpty]
 
 We get 14 classes that can be removed immediately.
 
-![Requiest empty clientTypes list](res/moose-in-action/deprecated-classes-empty-client.png)
+![Requiest empty clientTypes list](res/moose-in-action/deprecated-classes-empty-client.png){: .img-fill }
 
 To retrive the other classes, execute the following expression:
 
