@@ -19,7 +19,7 @@ In the following, we mainly present the Pharo implementation and usage of Fame.
 
 ## Meta-model
 
-![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/img/fame/fame-meta-model.puml&fmt=svg){: .img-fill }
+![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/img/fame/fame-meta-model.puml&fmt=svg){: .img-fill }
 
 ### Main concepts
 
@@ -54,7 +54,7 @@ Fame is implemented in the following programming languages:
 The last stable version of Fame is always includeds in Moose.
 The project can be found in the packages prefixed with `Fame-`.
 
-It is also possible to install Fame in a fresh [Pharo](http://pharo-project.org/) image.
+It is also possible to install Fame in a fresh [Pharo](https://pharo-project.org/) image.
 To do so, execute the following script:
 
 ```st
