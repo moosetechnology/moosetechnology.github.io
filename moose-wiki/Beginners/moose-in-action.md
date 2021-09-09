@@ -18,7 +18,7 @@ This is an analysis.
 
 We first need to build a model of our system, and for this we will use [VerveineJ](../Developers/Parsers/VerveineJ):
 
-- Download and unzip [version 2.0.0](https://codeload.github.com/moosetechnology/VerveineJ/zip/refs/tags/v2.0.0).
+- Download and unzip [version 2.0.2](https://codeload.github.com/moosetechnology/VerveineJ/zip/refs/tags/v2.0.2).
 - Create an ArgoUML-0-34 folder.
 - Download the [ArgoUML version 0.34 sources](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-src.zip) and place them in ArgoUML-0-34/src folder (the name of the src folder can be arbitrary)
 - Download the [ArgoUML version 0.34 libraries](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-libs.zip) and place them in ArgoUML-0-34/libs folder (the name of the libs folder can be arbitrary)
