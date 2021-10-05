@@ -3,6 +3,7 @@ author: Benoît Verhaeghe
 layout: post
 title: "Migrating internationalization files"
 subtitle: "A nice MDE example"
+background: '/img/posts/bg-posts.jpg'
 date:   2021-10-01 12:00:00 +200
 ---
 
