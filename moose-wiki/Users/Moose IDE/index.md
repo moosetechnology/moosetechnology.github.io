@@ -17,9 +17,9 @@ On this page, we group the documentation for each tool.
 - [Logger Browser](#logger-browser)
 - [Moose Inspector](#moose-inspector)
 - [Tree browsers](#tree-browsers)
-  - [Tree Browser](#tree-browser)
-  - [Tree visualization browser](#tree-visualization-browser)
-  - [Tree Map Browser](#tree-map-browser)
+    - [Tree Browser](#tree-browser)
+    - [Tree visualization browser](#tree-visualization-browser)
+    - [Tree Map Browser](#tree-map-browser)
 
 ## Moose Toolbar
 
@@ -132,14 +132,14 @@ All these browsers can be found under the *Dependency* menu entry.
 
 ![Dependency](./img/show-tree.png){: .img-fill .img-center }
 
-### Tree Browser
+#### Tree Browser
 
 The *Tree Browser* presents an entity and allows one to explore the contained entities.
 For instance, one can see the methods of a class, and the local attribute of a method.
 
 ![Tree browser](./img/tree-browser.png){: .img-fill .img-center }
 
-### Tree visualization browser
+#### Tree visualization browser
 
 When a group of entity is explored, the *Tree Visualization Browser* presents them as a tree.
 
@@ -148,7 +148,7 @@ When a group of entity is explored, the *Tree Visualization Browser* presents th
 In the example, we performed a query that gives us a group of classes and methods.
 By propagating the result to the *Tree Visualization Browser*, we got a visualization telling us that these methods are defined in the class.
 
-### Tree Map Browser
+#### Tree Map Browser
 
 The *Tree Map Browser* is a visual way to explore the contained entities.
 
