@@ -16,6 +16,10 @@ On this page, we group the documentation for each tool.
 - [Queries Browser](#queries-browser)
 - [Logger Browser](#logger-browser)
 - [Moose Inspector](#moose-inspector)
+- [Tree browsers](#tree-browsers)
+  - [Tree Browser](#tree-browser)
+  - [Tree visualization browser](#tree-visualization-browser)
+  - [Tree Map Browser](#tree-map-browser)
 
 ## Moose Toolbar
 
@@ -120,3 +124,36 @@ To do so, by clicking on the script button, one can write any piece of code they
 
 > Be carefull, when performing customized script, you can leave the Moose Environment.
 > You may want to learn more Pharo before performing such complex script
+
+## Tree browsers
+
+There are three browsers that allows you to visualize and explore a model and its entity as a tree.
+All these browsers can be found under the *Dependency* menu entry.
+
+![Dependency](./img/show-tree.png)
+
+### Tree Browser
+
+The *Tree Browser* presents an entity and allows one to explore the contained entities.
+For instance, one can see the methods of a class, and the local attribute of a method.
+
+![Tree browser](./img/tree-browser.png)
+
+### Tree visualization browser
+
+When a group of entity is explored, the *Tree Visualization Browser* presents them as a tree.
+
+![Tree visualization](./img/tree-visualisation.png)
+
+In the example, we performed a query that gives us a group of classes and methods.
+By propagating the result to the *Tree Visualization Browser*, we got a visualization telling us that these methods are defined in the class.
+
+### Tree Map Browser
+
+The *Tree Map Browser* is a visual way to explore the contained entities.
+
+![Tree Map Browser](./img/tree-map.png).
+
+In the example, we are exploring the `RBMethodNodeTest` class (as for the Tree Browser example).
+The main box represents the class, the box inside it the methods of the classes, and inside the methods are the local variables.
+One can click on each box to open or close the box and explore the contained entities.
