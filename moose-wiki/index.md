@@ -19,6 +19,7 @@ The main Moose source code repository on GitHub is: [https://github.com/moosetec
 ## FOR BEGINNERS
 
 - [Install Moose](Beginners/InstallMoose)
+- [Moose in action](Beginners/moose-in-action) ![Moose 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense}
 
 ## FOR USERS
 
@@ -46,6 +47,7 @@ You may also use models for other programming languages (see also the [Parsers](
 
 - [FAST](Developers/Parsers/FAST) - Represent the AST in Famix
 - [FAST-Java](Developers/Parsers/FAST-Java) - Represent the Java AST in Famix
+- [FAST-Pharo](Developers/Parsers/FAST-Pharo) - Represent the Pharo AST in Famix
 
 ### Performing queries
 
@@ -108,7 +110,7 @@ It offers multiple services ranging from importing and parsing data, to modeling
 
 The following resources are also useful to understand Moose:
 
-- [Moose Technology](http://moosetechnology.org/) - the main web site for Moose.
+- [Moose Technology](https://moosetechnology.org/) - the main web site for Moose.
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [The Moose Book](http://themoosebook.org/) - a tutorial for using Moose to analyze Java source code (Moose 6).
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}

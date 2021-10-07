@@ -17,9 +17,9 @@ It comes with a meta-model, an importer, and tools to manipulate and explore mod
 
 ## FAST-Java meta-model
 
-![FAST-Java meta-model](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/8ceb4e8d23bda1c57a151879b7fae50cd6fdb290/fast-java.svg){: .img-fill }
+![FAST-Java meta-model](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v2-doc/fast-java.svg){: .img-fill }
 
-[Full Image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/8ceb4e8d23bda1c57a151879b7fae50cd6fdb290/fast-java.svg)
+[Full Image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v2-doc/fast-java.svg)
 
 ## Importer
 
