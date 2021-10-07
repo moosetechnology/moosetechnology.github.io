@@ -6,7 +6,7 @@ subtitle: 'Explore your application'
 ---
 
 Moose IDE is a group of tools connected the one with the others that one can use to explore a model.
-In this page, we group the documentation for each tool.
+On this page, we group the documentation for each tool.
 
 - [Moose Toolbar](#moose-toolbar)
 - [Moose IDE Overview](#moose-ide-overview)
@@ -15,10 +15,11 @@ In this page, we group the documentation for each tool.
 - [Models Browser](#models-browser)
 - [Queries Browser](#queries-browser)
 - [Logger Browser](#logger-browser)
+- [Moose Inspector](#moose-inspector)
 
 ## Moose Toolbar
 
-The Moose toolbar is group of entries in the main Pharo toolbar that provides a fast access to all the Moose IDE tools.
+The Moose toolbar is a group of entries in the main Pharo toolbar that provides fast access to all the Moose IDE tools.
 
 ![Moose toolbar](./img/moose-bar.png){: .img-fill }
 
@@ -31,9 +32,9 @@ The toolbar is divided into three categories.
 ## Moose IDE Overview
 
 The *Moose IDE Overview* is the entry point to perform analysis with Moose.
-It presents the current *Browsers* and *Buses* in the Moose envionement.
+It presents the current *Browsers* and *Buses* in the Moose environment.
 
-This browser offers two main features: opening a new browser, and creating a new bus.
+This browser offers two main features: opening a new browser and creating a new bus.
 
 ![Moose Overview IDE](./img/moose-overview-ide.png){: .img-fill }
 
@@ -67,30 +68,55 @@ They are three ways to load a model:
 
 - With the mse button: load a model store in a MSE file
 - With the json button: load a model store in a JSON file
-- With the st button: create a smalltalk model based on the code of the current Moose image
+- With the st button: create a Smalltalk model based on the code of the current Moose image
 
 When importing a model from a file (JSON or MSE), a popup appears.
 You have to select the kind of model that will be populated.
-It it important to select the model that have the correct metamodel.
+It is important to select the model that has the correct metamodel.
 For instance, to analyze a Java Project, you have to select *FamixJavaModel*.
 
 ## Queries Browser
 
-The "Queries Browser" is one of the most powerful tool of Moose.
+The "Queries Browser" is one of the most powerful tools of Moose.
 It allows one to perform advanced queries on any model based on the meta-model.
 
 ![Queries Browser](./img/queries-browser.png)
 
-There are two panes: the one at the top of the window contains the query performed on the previous result (or the root elements), the panel at the botom presents the result grouped by element type.
+There are two panes: the one at the top of the window contains the query performed on the previous result (or the root element), the panel at the bottom presents the result grouped by element type.
 
-To create a new query on the root element, one can click on the green *"+"*, and to create a query on the previous query, one can click on the right-hand arrow, and press *Add a child query*.
+To create a new query on the root element, one can click on the green *"+"*, and to create a query on the previous query, one can click on the right-hand arrow and press *Add a child query*.
 
 ## Logger Browser
 
-The logger browser keeps a trace of evrything you explore (*i.e.* that goes into a bus).
+The logger browser keeps a trace of everything you explore (*i.e.* that goes into a bus).
 
 ![Logger Browser](./img/logger-browser.png)
 
 You can visualize multiple buses, after selecting an element, propagating it again, and clear the logger if too many items are present.
 
+## Moose Inspector
 
+Moose Inspector is an advanced and **convenient** tool to explore a model or any moose entity.
+
+![Moose Inspector](./img/inspector-browser.png)
+
+The moose inspector is divided into several horizontal panels.
+Each panel is composed of several tabs.
+Standard tabs are *Navigation*, *Moose Properties*, *Fame*.
+
+When inspecting an element, a panel inside the moose inspector is opened.
+By default, the *Navigation* tab is also opened.
+It allows you to see the other concept linked to the one currently inspected.
+For example: when inspecting a Java class, it shows the subclasses, the superclass, and the methods and the attributes of the class.
+By selecting an element, a second panel will open next to the original one inspecting the selected elements.
+
+When inspecting specific kind of entity, new tab might appears.
+They offer to the end user new way to visualize their data.
+For instance, when inspecting a group of classes, on can see it as a UML schema, a system complexity, or with a nesting view.
+Or, when inspecting a class, one can see its corresponding blueprint.
+
+It is also possible to perform advanced query from the Moose Inspector.
+To do so, by clicking on the script button, one can write any piece of code they want to executed on the inpected entity.
+
+> Be carefull, when performing customized script, you can leave the Moose Environment.
+> You may want to learn more Pharo before performing such complex script
