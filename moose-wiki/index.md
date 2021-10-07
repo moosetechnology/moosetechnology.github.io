@@ -62,7 +62,8 @@ You may also use models for other programming languages (see also the [Parsers](
 Moose IDE is a group of tools that one can use to explore a model.
 In this section, we group the documentation for each tool.
 
-- [Moose IDE](Users/Moose%20IDE/)
+- [Moose IDE Browsers](Users/Moose%20IDE/browsers)
+- [Moose IDE Workflow](Users/Moose%20IDE/workflow) --- Usage of buses in Moose IDE ![TO START](https://img.shields.io/badge/Progress-Not%20started-red){: .no-lightense}
 
 ### Visualizing a model
 
