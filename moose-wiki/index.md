@@ -55,12 +55,19 @@ You may also use models for other programming languages (see also the [Parsers](
 - [Tree Query](https://github.com/juliendelplanque/TreeQuery)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 
+### Moose IDE
+
+Moose IDE is a group of tools that one can use to explore a model.
+In this section, we group the documentation for each tool.
+
+- [Moose IDE](Users/Moose%20IDE/)
+
 ### Visualizing a model
 
 Visualizations are built with the [Roassal tool](https://github.com/ObjectProfile/Roassal3.git)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 
-### More advanced tools
+### Moose 8 documentation ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
 
 - [Inspector](Users/inspector/inspector) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
 - [Meta Browser](Users/metaBrowser) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
@@ -97,7 +104,7 @@ There are different (so-called) parsers already created at various stages of pro
 ## OTHER DOCUMENTATION
 
 Moose is an extensive platform for software and data analysis.
-It offers multiple services ranging from importing and parsing data, to modeling, to measuring, querying, mining, and to building interactive and visual analysis tools. 
+It offers multiple services ranging from importing and parsing data, to modeling, to measuring, querying, mining, and to building interactive and visual analysis tools.
 
 The following resources are also useful to understand Moose:
 
