@@ -21,7 +21,7 @@ On this page, we group the documentation for each tool.
 
 The Moose toolbar is a group of entries in the main Pharo toolbar that provides fast access to all the Moose IDE tools.
 
-![Moose toolbar](./img/moose-bar.png){: .img-fill }
+![Moose toolbar](./img/moose-bar.png){: .img-fill .img-center }
 
 The toolbar is divided into three categories.
 
@@ -36,13 +36,13 @@ It presents the current *Browsers* and *Buses* in the Moose environment.
 
 This browser offers two main features: opening a new browser and creating a new bus.
 
-![Moose Overview IDE](./img/moose-overview-ide.png){: .img-fill }
+![Moose Overview IDE](./img/moose-overview-ide.png){: .img-fill .img-center }
 
 ### Opening Browser
 
 To open a browser, select in the menu the browser you want to open.
 
-![Opening Browser](./img/openning-browser.png){: .img-fill }
+![Opening Browser](./img/openning-browser.png){: .img-fill .img-center }
 
 The browser opens itself in the Moose environment.
 Then, you can see an entry in the Moose IDE Overview browser corresponding to this browser.
@@ -52,7 +52,7 @@ This is a nice feature when you have several browsers opened and need to find a 
 By checking the `Open in page` checkbox, the browser opens itself inside the Moose IDE Overview browser.
 It alows you to keep at the same place every browser you want.
 
-![Open in page](./img/open-in-page.png){: .img-fill }
+![Open in page](./img/open-in-page.png){: .img-fill .img-center }
 
 ### Creating a new bus
 
@@ -62,7 +62,7 @@ It alows you to keep at the same place every browser you want.
 
 The *Models Browser* allows one to load a model in the Moose environment.
 
-![Models Browser](./img/models-browser.png)
+![Models Browser](./img/models-browser.png){: .img-fill .img-center }
 
 They are three ways to load a model:
 
@@ -80,7 +80,7 @@ For instance, to analyze a Java Project, you have to select *FamixJavaModel*.
 The "Queries Browser" is one of the most powerful tools of Moose.
 It allows one to perform advanced queries on any model based on the meta-model.
 
-![Queries Browser](./img/queries-browser.png)
+![Queries Browser](./img/queries-browser.png){: .img-fill .img-center }
 
 There are two panes: the one at the top of the window contains the query performed on the previous result (or the root element), the panel at the bottom presents the result grouped by element type.
 
@@ -90,7 +90,7 @@ To create a new query on the root element, one can click on the green *"+"*, and
 
 The logger browser keeps a trace of everything you explore (*i.e.* that goes into a bus).
 
-![Logger Browser](./img/logger-browser.png)
+![Logger Browser](./img/logger-browser.png){: .img-fill .img-center }
 
 You can visualize multiple buses, after selecting an element, propagating it again, and clear the logger if too many items are present.
 
@@ -98,7 +98,7 @@ You can visualize multiple buses, after selecting an element, propagating it aga
 
 Moose Inspector is an advanced and **convenient** tool to explore a model or any moose entity.
 
-![Moose Inspector](./img/inspector-browser.png)
+![Moose Inspector](./img/inspector-browser.png){: .img-fill }
 
 The moose inspector is divided into several horizontal panels.
 Each panel is composed of several tabs.
