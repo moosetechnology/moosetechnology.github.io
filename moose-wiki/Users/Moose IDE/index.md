@@ -102,7 +102,7 @@ You can visualize multiple buses, after selecting an element, propagating it aga
 
 Moose Inspector is an advanced and **convenient** tool to explore a model or any moose entity.
 
-![Moose Inspector](./img/inspector-browser.png){: .img-fill }
+![Moose Inspector](./img/inspector-browser.png){: .img-fill .img-center }
 
 The moose inspector is divided into several horizontal panels.
 Each panel is composed of several tabs.
@@ -130,20 +130,20 @@ To do so, by clicking on the script button, one can write any piece of code they
 There are three browsers that allows you to visualize and explore a model and its entity as a tree.
 All these browsers can be found under the *Dependency* menu entry.
 
-![Dependency](./img/show-tree.png)
+![Dependency](./img/show-tree.png){: .img-fill .img-center }
 
 ### Tree Browser
 
 The *Tree Browser* presents an entity and allows one to explore the contained entities.
 For instance, one can see the methods of a class, and the local attribute of a method.
 
-![Tree browser](./img/tree-browser.png)
+![Tree browser](./img/tree-browser.png){: .img-fill .img-center }
 
 ### Tree visualization browser
 
 When a group of entity is explored, the *Tree Visualization Browser* presents them as a tree.
 
-![Tree visualization](./img/tree-visualisation.png)
+![Tree visualization](./img/tree-visualisation.png){: .img-fill .img-center }
 
 In the example, we performed a query that gives us a group of classes and methods.
 By propagating the result to the *Tree Visualization Browser*, we got a visualization telling us that these methods are defined in the class.
@@ -152,7 +152,7 @@ By propagating the result to the *Tree Visualization Browser*, we got a visualiz
 
 The *Tree Map Browser* is a visual way to explore the contained entities.
 
-![Tree Map Browser](./img/tree-map.png).
+![Tree Map Browser](./img/tree-map.png){: .img-fill .img-center }
 
 In the example, we are exploring the `RBMethodNodeTest` class (as for the Tree Browser example).
 The main box represents the class, the box inside it the methods of the classes, and inside the methods are the local variables.
