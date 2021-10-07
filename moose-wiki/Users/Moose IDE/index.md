@@ -13,6 +13,7 @@ In this page, we group the documentation for each tool.
   - [Opening Browser](#opening-browser)
   - [Creating a new bus](#creating-a-new-bus)
 - [Models Browser](#models-browser)
+- [Queries Browser](#queries-browser)
 
 ## Moose Toolbar
 
@@ -66,3 +67,19 @@ They are three ways to load a model:
 - With the mse button: load a model store in a MSE file
 - With the json button: load a model store in a JSON file
 - With the st button: create a smalltalk model based on the code of the current Moose image
+
+When importing a model from a file (JSON or MSE), a popup appears.
+You have to select the kind of model that will be populated.
+It it important to select the model that have the correct metamodel.
+For instance, to analyze a Java Project, you have to select *FamixJavaModel*.
+
+## Queries Browser
+
+The "Queries Browser" is one of the most powerful tool of Moose.
+It allows one to perform advanced queries on any model based on the meta-model.
+
+![Queries Browser](./img/queries-browser.png)
+
+There are two panes: the one at the top of the window contains the query performed on the previous result (or the root elements), the panel at the botom presents the result grouped by element type.
+
+To create a new query on the root element, one can click on the gree *"+"*, and to create a query on the previous query, one can click on the right-hand arrow, and press *Add a child query*.
