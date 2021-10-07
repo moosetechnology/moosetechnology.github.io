@@ -82,4 +82,4 @@ It allows one to perform advanced queries on any model based on the meta-model.
 
 There are two panes: the one at the top of the window contains the query performed on the previous result (or the root elements), the panel at the botom presents the result grouped by element type.
 
-To create a new query on the root element, one can click on the gree *"+"*, and to create a query on the previous query, one can click on the right-hand arrow, and press *Add a child query*.
+To create a new query on the root element, one can click on the green *"+"*, and to create a query on the previous query, one can click on the right-hand arrow, and press *Add a child query*.
