@@ -24,6 +24,10 @@ On this page, we group the documentation for each tool.
   - [UML Browser](#uml-browser)
   - [Source code Browser](#source-code-browser)
   - [Files Browser](#files-browser)
+- [Meta Browser](#meta-browser)
+  - [Moose Model Browser](#moose-model-browser)
+  - [Properties Browser](#properties-browser)
+  - [Fame Browser](#fame-browser)
 
 ## Moose Toolbar
 
@@ -196,3 +200,32 @@ The left-hand pane shows the entities in the model that are present at this leve
 
 In the example, we retrieve the three classes in the selected folder: `Bla`, `Label`, and `Widget`.
 And the user is exploring the `Label` and the `Widget` classes.
+
+## Meta Browser
+
+Meta browsers are browsers that present general information on an entity or a model.
+
+### Moose Model Browser
+
+The *Moose model Browser* presents all model entities grouped by entity type.
+It is an excellent browser to select several entities of the same type.
+
+![Moose Model Browser](./img/moose-model-browser.png)
+
+In the above example, the user explores the classes of the model.
+
+### Properties Browser
+
+The *Properties Browser* presents the list of properties of any Moose element.
+
+![Properties Browser](./img/properties-browser.png)
+
+For example, it can present the number of line of code of a class, the number of methods, *etc.*
+
+### Fame Browser
+
+The *Fame Browser* is a *metamodel developer tool* that shows the existing meta properties of an explored element.
+
+![Fame Browser](img/fame-browser.png)
+
+For instance, it allows one to retrieve the navigation properties, the *basic* properties, and their characteristics (*i.e.*, type, derived?, source/target navigation, *etc.*)
