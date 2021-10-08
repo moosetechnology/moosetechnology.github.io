@@ -220,7 +220,7 @@ The *Properties Browser* presents the list of properties of any Moose element.
 
 ![Properties Browser](./img/properties-browser.png)
 
-For example, it can present the number of line of code of a class, the number of methods, *etc.*
+For example, it can present the number of lines of code of a class, the number of methods, *etc.*
 
 ### Fame Browser
 
@@ -228,4 +228,4 @@ The *Fame Browser* is a *metamodel developer tool* that shows the existing meta 
 
 ![Fame Browser](img/fame-browser.png)
 
-For instance, it allows one to retrieve the navigation properties, the *basic* properties, and their characteristics (*i.e.*, type, derived?, source/target navigation, *etc.*)
+For instance, it allows one to retrieve the navigation properties, the *basic* properties, and their characteristics (*i.e.*, type, derived?, source/target navigation, *etc.*).
