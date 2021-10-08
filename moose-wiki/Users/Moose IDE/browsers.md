@@ -24,7 +24,7 @@ On this page, we group the documentation for each tool.
   - [UML Browser](#uml-browser)
   - [Source code Browser](#source-code-browser)
   - [Files Browser](#files-browser)
-- [Meta Browser](#meta-browser)
+- [Meta Browsers](#meta-browsers)
   - [Moose Model Browser](#moose-model-browser)
   - [Properties Browser](#properties-browser)
   - [Fame Browser](#fame-browser)
@@ -201,7 +201,7 @@ The left-hand pane shows the entities in the model that are present at this leve
 In the example, we retrieve the three classes in the selected folder: `Bla`, `Label`, and `Widget`.
 And the user is exploring the `Label` and the `Widget` classes.
 
-## Meta Browser
+## Meta Browsers
 
 Meta browsers are browsers that present general information on an entity or a model.
 
