@@ -23,6 +23,7 @@ On this page, we group the documentation for each tool.
 - [Famix Browsers](#famix-browsers)
   - [UML Browser](#uml-browser)
   - [Source code Browser](#source-code-browser)
+  - [Files Browser](#files-browser)
 
 ## Moose Toolbar
 
@@ -184,3 +185,14 @@ For instance, when clicking on a class of the preceding example, we get its sour
 
 In the example, it shows up the source code of the `RBFormatterTest` class.
 
+### Files Browser
+
+The files browser allows one to explore the model based on the existing files hierarchy.
+It is divided into two panes.
+The right-hand pane shows a file browser where the user can navigate.
+The left-hand pane shows the entities in the model that are present at this level in the file hierarchy (*i.e.* the classes, methods, and attributes defined in the selected directory).
+
+![Files Browser](./img/files-browser.png)
+
+In the example, we retrieve the three classes in the selected folder: `Bla`, `Label`, and `Widget`.
+And the user is exploring the `Label` and the `Widget` classes.
