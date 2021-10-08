@@ -20,6 +20,9 @@ On this page, we group the documentation for each tool.
   - [Tree Browser](#tree-browser)
   - [Tree visualization browser](#tree-visualization-browser)
   - [Tree Map Browser](#tree-map-browser)
+- [Famix Browsers](#famix-browsers)
+  - [UML Browser](#uml-browser)
+  - [Source code Browser](#source-code-browser)
 
 ## Moose Toolbar
 
@@ -157,3 +160,27 @@ The *Tree Map Browser* is a visual way to explore the contained entities.
 In the example, we are exploring the `RBMethodNodeTest` class (as for the Tree Browser example).
 The main box represents the class, the box inside it the methods of the classes, and inside the methods are the local variables.
 One can click on each box to open or close the box and explore the contained entities.
+
+## Famix Browsers
+
+Some browsers are super useful when exploring an application model (*e.g.* a model of a Java application).
+We named this collection of browsers: the *Famix Browsers*.
+
+### UML Browser
+
+The *UML Browser* presents the UML diagram of the selected classes.
+
+![UML Browser](./img/uml-browser.png)
+
+In the example, we query the classes that are not a stub.
+The *UML Browser* presents us the UML of the application.
+
+### Source code Browser
+
+The *Source code Browser* shows the source code of a selected entity if available.
+For instance, when clicking on a class of the preceding example, we get its source code in the *Source code Browser*.
+
+![Source code Browser](./img/source-code-browser.png)
+
+In the example, it shows up the source code of the `RBFormatterTest` class.
+
