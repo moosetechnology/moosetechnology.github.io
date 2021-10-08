@@ -168,14 +168,14 @@ One can click on each box to open or close the box and explore the contained ent
 
 ## Famix Browsers
 
-Some browsers are super useful when exploring an application model (*e.g.* a model of a Java application).
+Some browsers are super helpful when exploring an application model (*e.g.* a model of a Java application).
 We named this collection of browsers: the *Famix Browsers*.
 
 ### UML Browser
 
 The *UML Browser* presents the UML diagram of the selected classes.
 
-![UML Browser](./img/uml-browser.png)
+![UML Browser](./img/uml-browser.png){: .img-fill .img-center }
 
 In the example, we query the classes that are not a stub.
 The *UML Browser* presents us the UML of the application.
@@ -185,7 +185,7 @@ The *UML Browser* presents us the UML of the application.
 The *Source code Browser* shows the source code of a selected entity if available.
 For instance, when clicking on a class of the preceding example, we get its source code in the *Source code Browser*.
 
-![Source code Browser](./img/source-code-browser.png)
+![Source code Browser](./img/source-code-browser.png){: .img-fill .img-center }
 
 In the example, it shows up the source code of the `RBFormatterTest` class.
 
@@ -196,7 +196,7 @@ It is divided into two panes.
 The right-hand pane shows a file browser where the user can navigate.
 The left-hand pane shows the entities in the model that are present at this level in the file hierarchy (*i.e.* the classes, methods, and attributes defined in the selected directory).
 
-![Files Browser](./img/files-browser.png)
+![Files Browser](./img/files-browser.png){: .img-fill .img-center }
 
 In the example, we retrieve the three classes in the selected folder: `Bla`, `Label`, and `Widget`.
 And the user is exploring the `Label` and the `Widget` classes.
@@ -210,7 +210,7 @@ Meta browsers are browsers that present general information on an entity or a mo
 The *Moose model Browser* presents all model entities grouped by entity type.
 It is an excellent browser to select several entities of the same type.
 
-![Moose Model Browser](./img/moose-model-browser.png)
+![Moose Model Browser](./img/moose-model-browser.png){: .img-fill .img-center }
 
 In the above example, the user explores the classes of the model.
 
@@ -218,7 +218,7 @@ In the above example, the user explores the classes of the model.
 
 The *Properties Browser* presents the list of properties of any Moose element.
 
-![Properties Browser](./img/properties-browser.png)
+![Properties Browser](./img/properties-browser.png){: .img-fill .img-center }
 
 For example, it can present the number of lines of code of a class, the number of methods, *etc.*
 
@@ -226,6 +226,6 @@ For example, it can present the number of lines of code of a class, the number o
 
 The *Fame Browser* is a *metamodel developer tool* that shows the existing meta properties of an explored element.
 
-![Fame Browser](img/fame-browser.png)
+![Fame Browser](img/fame-browser.png){: .img-fill .img-center }
 
 For instance, it allows one to retrieve the navigation properties, the *basic* properties, and their characteristics (*i.e.*, type, derived?, source/target navigation, *etc.*).
