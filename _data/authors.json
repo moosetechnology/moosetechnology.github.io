@@ -12,13 +12,21 @@
     "Benoît Verhaeghe": {
         "name": "Benoît Verhaeghe",
         "role": "Cookie Lover",
-        "bio": "R&D engineer at <a href='http://berger-levrault.com/'>Berger-Levrault</a>",
+        "bio": "R&D engineer at <a href='https://berger-levrault.com/'>Berger-Levrault</a>",
         "github": "https://github.com/badetitou",
         "twitter": "https://twitter.com/badetitou",
         "linkedin": "https://www.linkedin.com/in/benoitverhaeghe/",
-        "personnal-website": "http://badetitou.github.io/",
+        "personnal-website": "https://badetitou.github.io/",
         "orcid": "https://orcid.org/0000-0002-4588-2698",
         "image": "https://avatars.githubusercontent.com/u/6225039"
+    },
+    "Anne Etien": {
+        "name": "Anne Etien",
+        "role": "Moose expert",
+        "bio": "Software engineer researcher specialized in software evolution",
+        "github": "https://github.com/anneetien",
+        "image": "https://avatars.githubusercontent.com/u/17824579",
+        "personnal-website": "https://www.cristal.univ-lille.fr/profil/etien/"
     },
     "Vincent Aranega": {
         "name": "Vincent Aranega",
@@ -34,7 +42,7 @@
     "Pascal Zaragoza": {
         "name": "Pascal Zaragoza",
         "role": "Microservice Expert",
-        "bio": "PhD Student at <a href='http://berger-levrault.com/'>Berger-Levrault</a> on backend migration towards a microservice-oriented architecture",
+        "bio": "PhD Student at <a href='https://berger-levrault.com/'>Berger-Levrault</a> on backend migration towards a microservice-oriented architecture",
         "github": "https://github.com/greenpanther93",
         "linkedin": "https://www.linkedin.com/in/pascal-zaragoza-406120a9/",
         "orcid": "https://orcid.org/0000-0002-5033-6392",
@@ -74,5 +82,13 @@
         "github": "https://github.com/enwiro",
         "linkedin": "https://www.linkedin.com/in/théo-lanord/",
         "image": "https://avatars.githubusercontent.com/u/58632394?v=4"
+    },
+    "Réda Id-taleb": {
+        "name": "Réda Id-taleb",
+        "role": "Working on LabelContractor and color palette project for my internship",
+        "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a>",
+        "github": "https://github.com/reda-idtaleb",
+        "linkedin": "https://www.linkedin.com/in/r%C3%A9daid-taleb/",
+        "image": "https://avatars.githubusercontent.com/u/82438570"
     }
 }

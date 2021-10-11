@@ -47,28 +47,28 @@ Using an association involves:
 
 There are five full-fledged associations in FamixNG:
 
-- `FamixTAccess`, from: `FamixTWithAccess`, to: `FamixTAccessible` <details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/access.puml&fmt=svg)</details>
-- `FamixTInheritance`, from: `FamixTWithInheritance`, to: `FamixTWithInheritance`<details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/inheritance.puml&fmt=svg)</details>
-- `FamixTInvocation`, from: `FamixTWithInvocation`, to: `FamixTInvocable`, for OO programs, there is an extra receiver: `FamixTInvocationReceiver`<details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/invocation.puml&fmt=svg)</details>
-- `FamixTReference`, from: `FamixTWithReferences`, to: `FamixTReferenceable`<details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/reference.puml&fmt=svg)</details>
-- `FamixTTraitUsage`, from: `FamixTWithTrait`, to: `FamixTTrait`<details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/usetrait.puml&fmt=svg)</details> 
+- `FamixTAccess`, from: `FamixTWithAccess`, to: `FamixTAccessible` <details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/access.puml&fmt=svg)</details>
+- `FamixTInheritance`, from: `FamixTWithInheritance`, to: `FamixTWithInheritance`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/inheritance.puml&fmt=svg)</details>
+- `FamixTInvocation`, from: `FamixTWithInvocation`, to: `FamixTInvocable`, for OO programs, there is an extra receiver: `FamixTInvocationReceiver`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/invocation.puml&fmt=svg)</details>
+- `FamixTReference`, from: `FamixTWithReferences`, to: `FamixTReferenceable`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/reference.puml&fmt=svg)</details>
+- `FamixTTraitUsage`, from: `FamixTWithTrait`, to: `FamixTTrait`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/usetrait.puml&fmt=svg)</details>
 
 To these five we added two more specialized "associations":
 `DereferencedInvocation` (call of a pointer to a function in C) and `FileInclude` (also in C).
 These do not reify the association as a separate entity, but they might do so in the future.
 For now there are only two traits to put at each end of the relationship:
 
-- `FamixTDereferencedInvocation` and `FamixTWithDereferencedInvocations`<details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/derefInvok.puml&fmt=svg)</details>
-- `FamixTFileInclude` and `FamixTWithFileInclude`<details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/fileInclude.puml&fmt=svg)</details>
+- `FamixTDereferencedInvocation` and `FamixTWithDereferencedInvocations`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/derefInvok.puml&fmt=svg)</details>
+- `FamixTFileInclude` and `FamixTWithFileInclude`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/fileInclude.puml&fmt=svg)</details>
 
 ## Technical Traits
 
 Technical traits do not model programming language entities but are used to implement Moose functionalities.
 
 Currently, this includes several types of `FamixTSourceAnchors` that allow recovering the source code of the entities.
-A typical `FamixTSourceAnchor` contains a filename, and start and end positions in this file.<details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/anchor.puml&fmt=svg)</details>
+A typical `FamixTSourceAnchor` contains a filename, and start and end positions in this file.<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/anchor.puml&fmt=svg)</details>
 
-*Technical traits* may also implement software engineering metric computation (`TLCOMMetrics`), or ways to model the programming language used (all `SourceLanguage`), or be  used to implement the generic [MooseQuery engine](https://moosequery.ferlicot.fr/).<details>![PlantUML Image](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/technic.puml&fmt=svg)</details>
+*Technical traits* may also implement software engineering metric computation (`TLCOMMetrics`), or ways to model the programming language used (all `SourceLanguage`), or be  used to implement the generic [MooseQuery engine](https://moosequery.ferlicot.fr/).<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/technic.puml&fmt=svg)</details>
 
 ## Property Traits
 

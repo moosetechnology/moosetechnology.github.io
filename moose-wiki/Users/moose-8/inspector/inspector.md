@@ -1,5 +1,6 @@
 ---
 layout: page
+background: '/img/bg-wiki.jpg'
 title: 'Inspector'
 ---
 
@@ -16,7 +17,6 @@ In the following, we will present the main features.
   - [Navigating in the model](#navigating-in-the-model)
 - [Inspecting an entity](#inspecting-an-entity)
 - [Inspecting a specialized group](#inspecting-a-specialized-group)
-- [Creating its plugins](#creating-its-plugins)
 
 ## Browsing a model
 
@@ -59,9 +59,7 @@ To do so, one needs:
 
 1. navigate a group of classes
 2. select the interesting classes *(optional)*
-3. transform the moose group into a moose specialized group
+3. transform the moose group into a specialized moose group
 4. use the moose extension
 
 ![Example to show system complexity](system-complexity.gif){: .img-fill }
-
-## Creating its plugins

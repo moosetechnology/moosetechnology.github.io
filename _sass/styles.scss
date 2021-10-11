@@ -135,6 +135,12 @@
   max-width: 100%;
 }
 
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .highlight-word {
   color: #777;
   font-style: italic;
@@ -163,3 +169,5 @@ li {
     text-decoration: none;
   }
 }
+
+@import "copy-from-codeblocks.scss";

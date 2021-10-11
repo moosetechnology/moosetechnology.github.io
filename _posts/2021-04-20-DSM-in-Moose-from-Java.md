@@ -18,7 +18,7 @@ As an extension to [`Analyzing Java With Moose`](https://fuhrmanator.github.io/2
 First, you need to **generate** and **load an MSE file into Moose** for a Java project. Refer to [this post](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html) for those steps, which uses [the Java code from from Head First Design Patterns](https://github.com/bethrobson/Head-First-Design-Patterns).
 
 Roassal (which is a visualization platform that's part of Moose) has a visualization for DSM called *RTDSM*.
-It's explained [here](http://forum.world.st/DSM-td4842409.html), but with Pharo classes.
+It's explained [here](https://forum.world.st/DSM-td4842409.html), but with Pharo classes.
 How to use it with Moose on a Java model?
 
 The key is in the `dependency:` block, which we define using a [Moose Query](https://moosequery.ferlicot.fr/) with `allClients`.

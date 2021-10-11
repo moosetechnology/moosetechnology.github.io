@@ -1,0 +1,12 @@
+@startuml
+TraitA <|.. MyClass
+TraitB <|.. MyClass
+
+class TraitA << (T,#FF7700) >> {
+    methodXY()
+}
+
+class TraitB << (T,#FF7700) >> {
+    methodXY()
+}
+@enduml
