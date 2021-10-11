@@ -67,7 +67,7 @@ One way to find god classes is to count the number of lines or the number of met
 
 Using the [*Queries Browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#queries-browser), one can use the Numeric Query on the classes of a model.
 
-![Numeric Query](./img/query-properties-god-classes.png)
+![Numeric Query](./img/query-properties-god-classes.png){: .img-fill .img-center }
 
 Using a playground, one can perform a query on a model to retrieve the god classes by numbers of lines:
 
