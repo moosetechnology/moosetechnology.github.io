@@ -10,7 +10,7 @@ author: Sebastian Jordan
 comments: true
 ---
 
-## What is a Famix query?
+## What is a Famix Query?
 
 Let's say that you want to know which classes of your Moose model are stub.
 That means: which classes are not defined in your Moose model but are used by some of your defined classes.
@@ -27,7 +27,7 @@ However, creating queries programmatically can be a tedious task.
 Of course, not all the queries are as frivolous as the one in the example.
 For queries with lots of children, the code is not easy to understand at first sight.
 
-## Queries browser
+## Queries Browser
 
 The new Queries Browser was developed to create queries in a more visual way.
 This is a Moose tool that allows one to create and manipulate queries without the need of knowing the FamixQueries syntax or how to instantiate them.
