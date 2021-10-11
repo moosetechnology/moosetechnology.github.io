@@ -3,9 +3,9 @@ layout: post
 title: "Introducing the new Queries Browser"
 header-img: img/posts/DSM.jpg
 subtitle: >-
-  Here I am going to show you the brand new queries browser!
+  Here I am going to show you the new Queries Browser!
 background: '/img/posts/bg-posts.jpg'
-date: 2021-07-27 13:45:00
+date: 2021-10-10 11:00:00
 author: Sebastian Jordan
 comments: true
 ---
@@ -73,17 +73,31 @@ For the final task, we need to create an And Query, a.k.a Intersection Query, cl
 If we wanted to the the above queries programmatically, the code would have look like this:
 
 ```st
-(FQComplementQuery new beChildOf: (FQBooleanQuery property: #isStub))
+(FQComplementQuery queryToNegate:
+	 (FQTypeQuery types: { FamixStClass })
+	 --> (FQBooleanQuery property: #isStub))
 & (FQNavigationQuery incoming associations: {
-        FamixStReference.
-        FamixStInheritance }) & (FQNumericQuery
-    property: #numberOfLinesOfCodeWithMoreThanOneCharacter
-    comparator: #>
-    valueToCompare: 50)
+		 FamixStReference.
+		 FamixStInheritance }) & (FQNumericQuery
+	 property: #numberOfLinesOfCodeWithMoreThanOneCharacter
+	 comparator: #>
+	 valueToCompare: 50)
 ```
 
 The code is also shown in the "Current query code tab":
 !["The brand new Queries Browser"](/img/posts/2021-07-27-the-new-queries-browser/current-code.png){: .img-fill }
+
+## Saving and loading the queries
+
+As you may already noticed, there are two button for saving and loading the queries. The save button saves all queries that are currently present on the queries browser as a STON file. The queries will be saved inside a folder in the same location as the image. The path is determinated in `MiSaveQueriesCommand class>>#path`.
+
+When loading the queries, the saved queries will be put after the queries that are present in the browser, if any. For example, if we save the queries that we have created above.
+
+!["Save queries as"](/img/posts/2021-07-27-the-new-queries-browser/save-queries.png){: .img-fill }
+
+Then, with an empty browser, we create a new query and then loading the file we get:
+
+!["Load queries"](/img/posts/2021-07-27-the-new-queries-browser/load-queries.png){: .img-fill }
 
 ## Conclusion
 
