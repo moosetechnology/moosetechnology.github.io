@@ -235,7 +235,7 @@ For instance, it allows one to retrieve the navigation properties, the *basic* p
 
 The *Meta Browser* helps one to get an overview of the metamodel of any element.
 
-![Meta Browser](./img/meta-browsers.png)
+![Meta Browser](./img/meta-browsers.png){: .img-fill .img-center }
 
 The browser shows the hierarchy of classes at the top-left.
 Selecting a class shows both the references to other classes and the primitive properties.

@@ -72,8 +72,8 @@ Visualizations are built with the [Roassal tool](https://github.com/ObjectProfil
 
 ### Moose 8 documentation ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
 
-- [Inspector](Users/inspector/inspector) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
-- [Meta Browser](Users/metaBrowser) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
+- [Inspector](Users/moose-8/inspector/inspector) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
+- [Meta Browser](Users/moose-8/metaBrowser) ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense}
 
 ## FOR DEVELOPERS
 
