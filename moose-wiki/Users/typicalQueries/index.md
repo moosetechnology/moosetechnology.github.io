@@ -83,7 +83,7 @@ model allModelClasses select: [ :each | each numberOfMethods > 50 ]
 
 ### God cyclomatic complexity
 
-The [cyclomatic complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) presents the complixity of a program.
+The [cyclomatic complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) presents the complexity of a program.
 It basically corresponds to the number of possible branches in a method.
 The less cyclomatic complexity for a method, the better it is.
 
@@ -140,6 +140,11 @@ The class hierarchy presents the classes of a model with their hierarchy links (
 It also includes the methods and attributes of each class.
 
 ![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense }
+
+The easiest way to visualize a class hierarchy is to use the [*UML browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#uml-browser).
+
+It is also possible to script one UML visualisation of Roassal.
+
 
 ```st
 builder := RSUMLClassBuilder new.
