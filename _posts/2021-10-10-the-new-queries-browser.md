@@ -43,7 +43,7 @@ If you want to know:
 4. Finally, what is the intersection of those three queries.
 
 This is an easy task for the Queries Browser. First, we need to create a type query that filters all the entities except the classes.
-To do that, we select Type Query in the queries browser and then unselect all the types except the classes.
+To do that, we select Type Query in the queries browser and then select type "Classes".
 
 !["Type Query"](/img/posts/2021-07-27-the-new-queries-browser/type-query.png){: .img-fill }
 
