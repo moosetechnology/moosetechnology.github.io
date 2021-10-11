@@ -235,7 +235,7 @@ For instance, it allows one to retrieve the navigation properties, the *basic* p
 
 ### Meta Browser
 
-The *Meta Browser* helps one to get an overview of the metamodel of any element.
+The *Meta Browser* helps one to get an overview of the meta-model of any element.
 
 ![Meta Browser](./img/meta-browsers.png){: .img-fill .img-center }
 

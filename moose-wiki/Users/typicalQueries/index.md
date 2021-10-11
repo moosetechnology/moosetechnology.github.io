@@ -198,3 +198,5 @@ builder build.
 builder canvas @ RSHierarchyPacker.
 builder canvas
 ```
+
+A better solution to explore a meta-model is to use the [*Meta Browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#meta-browser) that provides a detailed view on every important aspects of a meta-model.

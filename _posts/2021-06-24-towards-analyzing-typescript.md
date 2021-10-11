@@ -92,7 +92,7 @@ The following chart shows distributions of Cyclomatic Complexities of methods fo
 Here are some of the obvious things in TypeScript (Javascript) that don't quite fit into a Java model:
 
 - Functions can exist in the global namespace. A workaround proposed by one team was to create a "Global" class in the Java model, and just put functions there as static methods.
-- Functions can exist in methods, but maybe this is possible to model in a newer metamodel for Java that supports lambdas. The API from pascalerni/famix supports an older metamodel for Java.
+- Functions can exist in methods, but maybe this is possible to model in a newer meta-model for Java that supports lambdas. The API from pascalerni/famix supports an older meta-model for Java.
 - `string`, `number`, `any` are types in TypeScript, but they do not really map to primitive types or classes in Java. 
 - TypeScript doesn't have packages like Java, although it does have ways to specify namespaces and avoid naming conflicts.
 
