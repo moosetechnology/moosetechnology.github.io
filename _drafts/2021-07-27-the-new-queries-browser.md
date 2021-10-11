@@ -101,4 +101,8 @@ Then, with an empty browser, we create a new query and then loading the file we 
 
 ## Conclusion
 
-The new Queries Browser can simplify the way that the Famix Queries are created and make it more visual and understandable. Even though that the example in this post is not complex, the Queries Browser made easier our tasks. Analyzing models with real-life examples can lead to very nested queries. Create those queries programmatically can be very tedious and error-prone. The Queries Browser is here to help us in those cases. :smile:
+The new Queries Browser can simplify how the Famix Queries are created and make it more visual and understandable.
+Even if the example in this post is not complex, it made our tasks easier.
+Analyzing models with real-life examples can lead to very nested queries.
+Create those queries programmatically can be very tedious and error-prone.
+The Queries Browser is here to help us in those cases. :smile:
