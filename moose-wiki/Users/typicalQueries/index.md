@@ -30,6 +30,17 @@ We present how to perform the queries in a playground or with the visual tool pr
 
 #### Class with a specific name
 
+Using the [*Queries Browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#queries-browser): first, we request all the classes of a model.
+
+![Query All Classes](./img/class-with-name-getClasses.png){: .img-fill .img-center }
+
+Then, we create a subquery that selects the class using their name.
+
+![Select by name](./img/select-name.png){: .img-fill .img-center }
+
+Finally, you can select the entity in the bottom panel.
+
+It is also possible to perform the query in an inspector or playground.
 The shortest way to find a class with a name is to use the `detect` method.
 
 ```st
@@ -53,6 +64,10 @@ withSuffix := classes select: [ :class | class name endsWith: #'MySuffix' ]
 
 [God classes](https://en.wikipedia.org/wiki/God_object) are classes that *knows too much* or *does too much*.
 One way to find god classes is to count the number of lines or the number of methods of a class.
+
+Using the [*Queries Browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#queries-browser), one can use the Numeric Query on the classes of a model.
+
+![Numeric Query](./img/query-properties-god-classes.png)
 
 Using a playground, one can perform a query on a model to retrieve the god classes by numbers of lines:
 
