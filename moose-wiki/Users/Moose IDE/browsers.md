@@ -29,6 +29,8 @@ On this page, we group the documentation for each tool.
   - [Properties Browser](#properties-browser)
   - [Fame Browser](#fame-browser)
   - [Meta Browser](#meta-browser)
+- [Developer tools](#developer-tools)
+  - [Moose Playground](#moose-playground)
 
 ## Moose Toolbar
 
@@ -124,15 +126,15 @@ For example: when inspecting a Java class, it shows the subclasses, the supercla
 By selecting an element, a second panel will open next to the original one inspecting the selected elements.
 
 When inspecting specific kind of entity, new tab might appears.
-They offer to the end user new way to visualize their data.
+They offer to the end-user new way to visualize their data.
 For instance, when inspecting a group of classes, on can see it as a UML schema, a system complexity, or with a nesting view.
 Or, when inspecting a class, one can see its corresponding blueprint.
 
-It is also possible to perform advanced query from the Moose Inspector.
+It is also possible to perform advanced queries from the Moose Inspector.
 To do so, by clicking on the script button, one can write any piece of code they want to executed on the inpected entity.
 
-> Be carefull, when performing customized script, you can leave the Moose Environment.
-> You may want to learn more Pharo before performing such complex script
+> Be careful; when performing customized scripts, you can leave the Moose Environment.
+> You may want to learn more Pharo before performing such a complex script
 
 ## Tree browsers
 
@@ -241,3 +243,27 @@ The browser shows the hierarchy of classes at the top-left.
 Selecting a class shows both the references to other classes and the primitive properties.
 At the bottom, a map of the overall class hierarchies is provided as a visualization.
 Furthermore, the comment of the current selection is shown to the right.
+
+## Developer tools
+
+### Moose Playground
+
+![Not In MooseIDE](https://img.shields.io/badge/-Not%20In%20MooseIDE-yellow){: .no-lightense}
+
+The *Moose Playground* allows one to perform customized scripts.
+This browser is outside the Moose IDE environment.
+Thus you cannot benefit from the buses feature.
+
+> :warning: Be careful; when performing customized scripts, you can leave the Moose Environment.
+> You may want to learn more Pharo before performing such a complex script
+
+The *Moose Playground* with two additional feature compares to a *classic* playground: *Inspect in Moose*, and *Models*.
+
+![Moose Playground](./img/moose-playground.png){: .img-fill .img-center }
+
+The *Inspect in Moose* button allows one to inspect an entity in a [*Moose Inspector*](#moose-inspector).
+Thus, one can create a complex customized script and go back to the MooseIDE environment.
+
+The *Models* feature allows one to get inside the *Moose Playground* a reference to a model loaded using [*Models Browser*](#models-browser).
+
+Thanks to the two features, one can connect custom scripts with the Moose environment.
