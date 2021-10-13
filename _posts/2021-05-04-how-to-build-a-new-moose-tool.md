@@ -41,7 +41,7 @@ initializePresenters
 
 We instantiate stInspector variable an instance of Pharo’s inspector. Then we set the inspector model to be the same as the browser model.
 
-Now we are going to implement `canReceiveEntity` method. This method returns a Boolean which tells us if the entities received on the bus are usable in this browser. As we are building an inspector all entities can be accepted. So, we are going to return true always.
+Now we are going to implement `canReceiveEntity:` method. This method returns a Boolean which tells us if the entities received on the bus are usable in this browser. As we are building an inspector all entities can be accepted. So, we are going to return true always.
 
 ```st
 canReceiveEntity: anEntity
@@ -49,13 +49,14 @@ canReceiveEntity: anEntity
     ^ true
 ```
 
-Then, we must implement `followEntity` method. This method manages the browser when new entities are received from the bus. In this case, we only must update the inspector with the new entity.
+Then, we must implement `followEntity:` method. This method is called when new entities are received from the bus. In this case, we only need update the inspector model with the new entity. This method has the responsibility of defining the behaviour of the browser when new entities arrives from the bus. This is part of the bus mechanism of `MiAbstractBrowser`. This method is called if `canReceiveEntity: anEntity` returns true.
 
 
 ```st
 followEntity: anEntity
 
-    miInspector model: self model.
+    self model: anEntity.
+    miInspector model: self model
 ```
 
 Next, the `miSelectedItem` method tells the bus what to propagate (when the user hits the “Propagate” button). In this case we want to propagate the object selected in the last inspector page.
@@ -68,17 +69,29 @@ miSelectedItem
     ^ lastInspectorPage model inspectedObject
 ```
 
-Now we have all the logic and we can define the layout of this new browser. To do that, we must implement the `defaultSpec` method that is on the class side of `MiInspectorBrowser`. We must take the layout of the superclass (contains the toolbar) and add the subpresenters.
+Now we have all the logic and we can define the layout of this new browser. Now in Spec, the framework used to buld GUi in Pharo, we can implement dynamic layouts. So, we create a `initializeLayout` method. In that method, we take the layout of the super class, which is the toolbar, and we will add the other presenter.
 
 ```st
-defaultSpec
+initializeLayout
 
-    ^ super defaultSpec
-        add: #stInspector;
-        yourself
+	self layout: (SpBoxLayout newTopToBottom
+		add: self class defaultSpec expand: false;
+		add: miInspector;
+		yourself)
 ```
 
-Finally, we can define which will be the default model on which the browser will open. This is in case the bus does not have any entities. We want the Moose models, so:
+And do not forget to call this at the end of `initializePresenters`.
+
+```st
+initializePresenters
+
+    super initializePresenters.
+    stInspector := self instantiate: StInspector.
+    stInspector model: self model.
+    self initializeLayout
+```
+
+Finally, we can define which will be the default model on which the browser will open. This is in case the bus does not have any entities. We want the Moose models, so create on class side:
 
 ```st
 newModel
@@ -111,6 +124,6 @@ inspectorPropertiesIn
 
 Because the method is defined in `MooseObject`, any subclass (MooseModel, MooseEntity, …) will have this tab when displayed in the inspector.
 
-That it is! Now we run again: `MiInspectorBrowser runMe` and we will se that the new tab now appears.
+That it is! Now we run again: `MiInspectorBrowser open` and we will se that the new tab now appears.
 
 !["Moose Inspector"](/img/posts/2021-05-04-how-to-build-a-new-moose-tool/moose-inspector-final.png){: .img-fill }
