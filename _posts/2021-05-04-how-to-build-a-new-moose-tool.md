@@ -41,23 +41,21 @@ initializePresenters
 
 We instantiate stInspector variable an instance of Pharo’s inspector. Then we set the inspector model to be the same as the browser model.
 
-Now we are going to implement accept method. This method returns a Boolean which tells us if the entities received on the bus are usable in this browser. As we are building an inspector all entities can be accepted. So, we are going to return true always.
+Now we are going to implement `canReceiveEntity` method. This method returns a Boolean which tells us if the entities received on the bus are usable in this browser. As we are building an inspector all entities can be accepted. So, we are going to return true always.
 
 ```st
-accept: anEntity
+canReceiveEntity: anEntity
 
     ^ true
 ```
 
-Then, we must implement `followAction` method. This method manages the browser when new entities are received from the bus. In this case, we only must update the inspector with the new entity.
+Then, we must implement `followEntity` method. This method manages the browser when new entities are received from the bus. In this case, we only must update the inspector with the new entity.
 
-Note: `toSelect` instance variable is the new received entity. It is automatically updated when the browser receives a new entity. The logic is in the superclass, so we do not have to worry about that.
 
 ```st
-followAction
+followEntity: anEntity
 
-    (self accept: toSelect) ifFalse: [ ^ self ].
-    stInspector model: toSelect
+    miInspector model: self model.
 ```
 
 Next, the `miSelectedItem` method tells the bus what to propagate (when the user hits the “Propagate” button). In this case we want to propagate the object selected in the last inspector page.
