@@ -3,7 +3,7 @@ layout: post
 title: "How to build a new Moose tool: The MooseInspector"
 header-img: img/posts/DSM.jpg
 subtitle: >-
-  In this post I am going to show you how to create a new Moose Tool Browser from scratch. How to connect this new tool to the Moose Data bus to listen and to propagate new entities. 
+  In this post I am going to show you how to create a new Moose Tool Browser from scratch. How to connect this new tool to the Moose Data bus to listen and to propagate new entities.
 background: '/img/posts/bg-posts.jpg'
 date: 2021-05-04 13:45:00
 author: Sebastian Jordan
@@ -23,7 +23,7 @@ So, let us get started. We will create a “Moose Inspector”. It would be like
 ```st
 MiAbstractBrowser subclass: #MiInspectorBrowser
     instanceVariableNames: 'stInspector'
-    classVariableNames: '' 
+    classVariableNames: ''
     package: 'Moose-Core-Inspector'
 ```
 
@@ -35,7 +35,7 @@ Now, we must implement some basic methods. First let us implement `initializePre
 initializePresenters
 
     super initializePresenters.
-    stInspector := self instantiate: StInspectorPresenter.
+    stInspector := self instantiate: StInspector.
     stInspector model: self model
 ```
 
