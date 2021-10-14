@@ -97,7 +97,7 @@ For example, in the introduction example, the namespace of all entries is *"Edit
 
 I designed a meta-model to represent all those concepts:
 
-![meta-model](/img/posts/2021-10-01-migrating-internationalization/I18N-metamodel.png)
+![meta-model](/img/posts/2021-10-01-Migrating-internationalization/I18N-metamodel.png)
 
 Once the meta-model is designed, we must create an importer that takes `.properties` files as input and produces a model.
 
