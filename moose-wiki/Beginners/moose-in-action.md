@@ -23,10 +23,13 @@ We first need to build a model of our system, and for this we will use [Verveine
 - Download the [ArgoUML version 0.34 sources](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-src.zip) and place them in ArgoUML-0-34/src folder (the name of the src folder can be arbitrary)
 - Download the [ArgoUML version 0.34 libraries](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-libs.zip) and place them in ArgoUML-0-34/libs folder (the name of the libs folder can be arbitrary)
 - Go to the ArgoUML-0-34 folder
-- From the command line execute `path/to/VerveineJ/verveinej.bat -o ArgoUML-0-34.mse -autocp ./libs ./src`
+- From the command line execute `path/to/VerveineJ/verveinej.bat -format json -o ArgoUML-0-34.json -autocp ./libs ./src`
 
-The result is that you will get an ArgoUML-0-34/ArgoUML-0-34.mse file with the serialized model that can be loaded in Moose.
+You can also [download the json file](res/moose-in-action/ArgoUML-0-34.json).
+
+The result is that you will get an ArgoUML-0-34/ArgoUML-0-34.json file with the serialized model that can be loaded in Moose.
 Make sure you have [Moose 9.0 or later](InstallMoose).
+
 
 Starting Moose you see the following window:
 
