@@ -1,0 +1,26 @@
+---
+layout: page
+title: Research
+background: '/img/bg-about.jpg'
+---
+
+<h2>Our publications</h2>
+
+<ul>
+
+{% for reference in site.data.bibliography %}
+
+    <li>
+        {{ reference.title }},
+        <i>
+            {% for author in reference.author %}
+                {{ author.family }} {{ author.given }},
+            {% endfor %}
+        </i>
+         {{ reference.event }},
+         <a href="{{ reference.URL }}">PDF</a>
+    </li>
+
+{% endfor %}
+
+</ul>
