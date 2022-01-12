@@ -18,7 +18,9 @@ background: '/img/bg-about.jpg'
             {% endfor %}
         </i>
          {{ reference.event }},
-         <a href="{{ reference.URL }}">PDF</a>
+         {{ reference.year }},
+         <a href="{{ reference.URL }}">URL</a>,
+         <a href="{{ reference.PDF }}">PDF</a>
     </li>
 
 {% endfor %}

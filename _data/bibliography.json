@@ -16,7 +16,9 @@
 		"source": "Springer Link",
 		"title": "Modular Moose: A New Generation of Software Reverse Engineering Platform",
 		"title-short": "Modular Moose",
-		"URL": "https://arxiv.org/pdf/2011.10975",
+		"PDF": "https://arxiv.org/pdf/2011.10975",
+		"URL": "https://hal.inria.fr/hal-02972159",
+		"year": 2020,
 		"author": [
 			{
 				"family": "Anquetil",
