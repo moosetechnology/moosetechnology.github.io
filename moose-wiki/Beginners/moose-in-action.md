@@ -36,7 +36,9 @@ Open the 'Models browser' tool.
 
 ![Models browser](res/moose-in-action/models-browser.png){: .img-fill }
 
-Click on the MSE button on the top right and load the ArgoUML-0-34.mse file.
+Click on the JSON button on the top right and load the ArgoUML-0-34.json file.
+You need to tell Moose what Famix Meta-Model to use for this file.
+Here you want the Java Meta-Model, hence the FamixJavaModel.
 
 ![Import famix java model](res/moose-in-action/import-jamix-java-model.png){: .img-fill }
 
