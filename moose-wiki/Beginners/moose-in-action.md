@@ -31,7 +31,8 @@ The result is that you will get an ArgoUML-0-34/ArgoUML-0-34.json file with the 
 Make sure you have [Moose 9.0 or later](InstallMoose).
 
 
-Starting Moose you see the following window:
+Starting Moose you see a menu with various tools.
+Open the 'Models browser' tool.
 
 ![Models browser](res/moose-in-action/models-browser.png){: .img-fill }
 
