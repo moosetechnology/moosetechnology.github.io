@@ -69,21 +69,22 @@ In the right pane, you get the list of the deprecated classes in ArgoUML
 
 ## Show source code
 
-Just to make sure that we indeed got deprecated classes, let's investigate one of them and select to view the source code.
-Select one entity and open the source code browser
+Just to make sure that we indeed got deprecated classes, let's investigate one of them and select it to view its source code.
+Select one entity and open the 'Source code' browser ('Specialized Browsers' >> 'Famix' >> 'Source code').
 
 ![Opening source code browser](res/moose-in-action/open-source-code-browser.png){: .img-fill }
 
-Then, by clicking on the **Propagate** button of the inspector, you'll get the source code of the selected class in the source code browser.
+Then, by clicking on the **Propagate** button of the inspector, you'll get the source code of the selected class in the 'Source code' browser.
+Note that this depends on Moose knowing where the files reside on your disk, see the above how to point the model to the sources folder.
 
 ![Propagate to source code browser](res/moose-in-action/propagate-source-code.png){: .img-fill }
 
 ## Analyze the result
 
-We now have the 28 classes that are deprecated in our system.
+We have 28 classes that are deprecated in the system.
 Next, we need to check which of those are not used.
 Or if we think in terms of clients and providers, which of the deprecated classes do not have client classes.
-Go back to the pane with having 28 classes, open the script area, and execute the following expression:
+Go back to the inspector with the pane listing the 28 classes, open the script area again, and execute the following expression:
 
 ```st
 self select: [ :each | each clientTypes isEmpty]
@@ -99,7 +100,7 @@ To retrive the other classes, execute the following expression:
 self select: [ :each | each clientTypes isNotEmpty ]
 ```
 
-This leaves us with 14 classes that cannot be removed because they are still being used.
+This gives 14 classes that cannot be removed because they are still being used.
 
 ## Contributors
 
