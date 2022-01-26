@@ -6,15 +6,15 @@ title: 'Define a baseline loading Moose only if not present'
 
 # Define a baseline loading Moose only if not present
 
-Moose is a big project and loading it all the time is long.
+Moose is a big project and loading it each time can take a long time.
 
-Multiple peoples came to me asking if there was a way in the baseline of a project to say "Load Moose only if needed".
+Multiple people came to me asking if there was a way in the [baseline](https://github.com/pharo-open-documentation/pharo-wiki/blob/master/General/Baselines.md#baselines) of a project to say "Load Moose only if needed".
 
-Since it is a common question here is a guide on how to do that!
+Since it is a common question, here is a guide on how to do that!
 
-One way to do it is to use custom project attributes from Metacello. The principle is simple, depending on the state of your image, you can define project attributes and use them in your baseline.
+One way to do it is to use [custom project attributes from Metacello](https://github.com/pharo-open-documentation/pharo-wiki/blob/master/General/Baselines.md#define-custom-attributes). The principle is simple; depending on the state of your image, you can define project attributes and use them in your baseline.
 
-To define the attributes you need to implement a method #customProjectAttributes that will return an array with the custom attributes. 
+To define the attributes you need to implement a method `#customProjectAttributes` that will return an array with the custom attributes. 
 
 For example, if I just want to ensure any version of Famix is present I can implement it like this:
 
@@ -47,7 +47,7 @@ customProjectAttributes
     ^ attributes asArray
 ```
 
-And now I can use those attributes in a baseline via the #for:do: message.
+And now I can use those attributes in a baseline via the `#for:do:` message.
 
 ## Full example
 
