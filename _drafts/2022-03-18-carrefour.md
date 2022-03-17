@@ -11,7 +11,7 @@ comments: true
 
 # Introduction
 
-In order to analyze software systems, the Famix meta model provides enough abstraction to understand how models work. However when we are interested in details, the FAST (Famix AST) meta model provides less abstraction and gives us more information about our model (for example expression statements, identifiers … etc). In some situations, such as modernization/migration projects, we need the binding between the two meta models. And here Carrefour comes in !
+In order to analyze software systems, the Famix meta model provides enough abstraction to understand how models work. However when we are interested in details, the FAST (Famix AST) meta model provides less abstraction and gives us more information about our model (for example expression statements, identifiers *etc.*). In some situations, such as modernization/migration projects, we need the binding between the two meta models. And here Carrefour comes in!
 
 ![Carrefour](/img/posts/2022-03-18-carrefour/Carrefour.png)
 
