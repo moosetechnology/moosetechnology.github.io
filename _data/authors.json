@@ -90,5 +90,14 @@
         "github": "https://github.com/reda-idtaleb",
         "linkedin": "https://www.linkedin.com/in/r%C3%A9daid-taleb/",
         "image": "https://avatars.githubusercontent.com/u/82438570"
+    },
+    "Ahmed Zaki BENNECER": {
+        "name": "Ahmed Zaki BENNECER",
+        "role": "Working on data flow analysis project for my internship",
+        "bio": "Computer science student at <a href='https://www.esi.dz/'>ESI</a> Algiers",
+        "github": "https://github.com/BennecerZaki",
+        "linkedin": "https://www.linkedin.com/in/bennecer-zaki/",
+        "personnal-website": "https://ahmed-zaki-bennecer.web.app/",
+        "image": "https://avatars.githubusercontent.com/u/45533819"
     }
 }
