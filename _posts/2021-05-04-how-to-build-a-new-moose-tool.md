@@ -56,7 +56,7 @@ Then, we must implement `followEntity:` method. This method is called when new e
 followEntity: anEntity
 
     self model: anEntity.
-    miInspector model: self model
+    stInspector model: self model
 ```
 
 Next, the `miSelectedItem` method tells the bus what to propagate (when the user hits the “Propagate” button). In this case we want to propagate the object selected in the last inspector page.
@@ -76,7 +76,7 @@ initializeLayout
 
 	self layout: (SpBoxLayout newTopToBottom
 		add: self class defaultSpec expand: false;
-		add: miInspector;
+		add: stInspector;
 		yourself)
 ```
 
@@ -100,7 +100,7 @@ newModel
 ```
 
 Optionally, we can override class side methods `title` and `windowSize`.
-We are ready to go. All we must do now is to run `MiInspectorBrowser runMe` on a Playground. This will open our new browser.
+We are ready to go. All we must do now is to run `MiInspectorBrowser open` on a Playground. This will open our new browser.
 
 !["Moose Inspector"](/img/posts/2021-05-04-how-to-build-a-new-moose-tool/moose-inspector-first-part.png){: .img-fill }
 

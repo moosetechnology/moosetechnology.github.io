@@ -12,7 +12,9 @@ comments: true
 ## Introduction
 
 To analyze software systems, the Famix meta-model provides enough abstraction to understand how models work.
+
 However, when we are interested in details, the FAST (Famix AST) meta-model provides less abstraction and gives us more information about our model (for example expression statements, identifiers _etc._).
+
 In some situations, such as modernization/migration projects, we need the binding between the two meta models. And here Carrefour comes in!
 
 ![Carrefour](/img/posts/2022-03-18-carrefour/Carrefour.png){: .img-fill }
@@ -89,6 +91,7 @@ To have a complete vision of the meta-models described above, we give the corres
 
 Once Carrefour has been called and the binding is done, we will have the first links between the meta-models as follows:
 
+
 ![Famix & Fast 1st call](/img/posts/2022-03-18-carrefour/FastandFamix1stCall.jpg){: .img-fill }
 
 ### From FAST to Famix
@@ -101,7 +104,9 @@ To do this, we send the `#famixVariable` message to the `FASTJavaVariableExpress
 ### From Famix to FAST
 
 Now we go in the opposite direction, we will access all the matches of the FAMIX variable `a` in the FAST meta-model.
+
 To do so, we use the `#fastAccesses` message as in the figure:
+
 
 ![fastAccesses Call](/img/posts/2022-03-18-carrefour/FastandFamixBack.jpg){: .img-fill }
 
