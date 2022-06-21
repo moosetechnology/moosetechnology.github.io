@@ -5,7 +5,7 @@ subtitle: Here we will present how to bind FAST with FAMIX
 header-img: img/posts/2022-03-18-carrefour/bg-post.jpg
 author: Ahmed Zaki BENNECER
 background: "/img/posts/2022-03-18-carrefour/bg-post.jpg"
-date: 2022-03-10 10:00:00
+date: 2022-03-18 10:00:00
 comments: true
 ---
 
@@ -91,7 +91,6 @@ To have a complete vision of the meta-models described above, we give the corres
 
 Once Carrefour has been called and the binding is done, we will have the first links between the meta-models as follows:
 
-
 ![Famix & Fast 1st call](/img/posts/2022-03-18-carrefour/FastandFamix1stCall.jpg){: .img-fill }
 
 ### From FAST to Famix
@@ -106,7 +105,6 @@ To do this, we send the `#famixVariable` message to the `FASTJavaVariableExpress
 Now we go in the opposite direction, we will access all the matches of the FAMIX variable `a` in the FAST meta-model.
 
 To do so, we use the `#fastAccesses` message as in the figure:
-
 
 ![fastAccesses Call](/img/posts/2022-03-18-carrefour/FastandFamixBack.jpg){: .img-fill }
 
