@@ -5,7 +5,7 @@ subtitle: Here we will present how to bind FAST with FAMIX
 header-img: img/posts/2022-03-18-carrefour/bg-post.jpg
 author: Ahmed Zaki BENNECER
 background: "/img/posts/2022-03-18-carrefour/bg-post.jpg"
-date: 2022-03-18 10:00:00
+date: 2022-06-30 10:00:00
 comments: true
 ---
 
