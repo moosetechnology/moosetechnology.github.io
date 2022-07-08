@@ -99,5 +99,12 @@
         "linkedin": "https://www.linkedin.com/in/bennecer-zaki/",
         "personnal-website": "https://ahmed-zaki-bennecer.web.app/",
         "image": "https://avatars.githubusercontent.com/u/45533819"
+    },
+    "Romain Degrave": {
+        "name": "Romain Degrave",
+        "role": "Intern working on MooseCritics",
+        "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a> looking for broken code",
+        "github": "https://github.com/RomainDeg",
+        "image": "https://avatars.githubusercontent.com/u/98580879"
     }
 }
