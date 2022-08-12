@@ -62,3 +62,20 @@ Usage:
 |           -excludepath GLOBBINGEXPR           | A globbing expression of file path to exclude from parsing                                                                                                                                                                                                                                    |
 | -1.1 \| -1 \| -1.2 \| -2 \| ... \| -1.7 \| -7 | specifies version of Java                                                                                                                                                                                                                                                                     |
 |      \<files-to-parse>\|\<dirs-to-parse>      | list of source files to parse or directories to search for source files                                                                                                                                                                                                                       |
+
+## Using docker
+
+It is also possible to use VerveineJ with [Docker](https://hub.docker.com/repository/docker/badetitou/verveinej).
+
+To do so, after installing docker:
+
+```sh
+docker pull badetitou/verveinej:v2.0.4
+docker run -v <full/path/toSource>:/src -v [<full/path/toDependency>:/dependency] badetitou/verveinej:v2.0.4 <verveineJOption> .
+```
+
+### Example
+
+```sh
+docker run -v D:\Users\benoit.verhaeghe\Documents\git\badetitou\Carrefour\testing\src\:/src badetitou/verveinej:v2.0.4 -format json -o testoutput.json .
+```
