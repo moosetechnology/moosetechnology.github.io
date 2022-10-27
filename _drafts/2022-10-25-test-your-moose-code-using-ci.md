@@ -256,3 +256,5 @@ It is clear that this solution slows down tests performance, however. But it ens
 A good test practice is thus a mix of both solutions, classic tests in the analysis code, and full scenario tests based on real resources.
 
 Have fun testing your code now!
+
+> Thanks [C. Fuhrman](https://github.com/fuhrmanator) for the typos fixes. :banana:
