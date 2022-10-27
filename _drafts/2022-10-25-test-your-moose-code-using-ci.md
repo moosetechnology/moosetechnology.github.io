@@ -13,26 +13,27 @@ I mean, *really*.
 
 But sometimes, testing is hard, because you do not know how to start (often because it was hard to start with TDD or better XtremTDD :smile:).
 
-One challenging situation is the creation of mock to _represent_ real cases and use them as test resources.
-This situation is common when dealing with code modelization and meta-modelization.
+One challenging situation is the creation of mocks to _represent_ real cases and use them as test resources.
+This situation is common when dealing with code modeling and meta-modeling.
 
-Writing manually a model to test features on it is hard.
-Today, I'll present you how to use GitHub Actions as well as GitLab CI to create tests for the Moose platform based on real resources.
+Writing a model manually to test features on it is hard.
+Today, I'll show you how to use GitHub Actions as well as GitLab CI to create tests for the Moose platform based on real resources.
 
 ---
 
-First of all, let's describe a simple process when working on modelization and meta-modelization.
+First of all, let's describe a simple process when working on modeling and meta-modeling.
 
 [![](https://mermaid.ink/img/pako:eNo9kM1qwzAQhF9F7CmFJK7t1kl86KU_UGigNPTmiyKtbIHkNZLcEILfvVKcVqdvZ0YjsRcQJBFqUIZOouMusI-vpmfxHGh0Ap-jvZiRJb5jq9UT--TO45Vs1IzSBhf7ROwt4px5twPFuv_QLaB7tkdL7jynvj3CEiw6y7WM_7ikxxsIHVpsoI6oyKEPDSxvznVIRofGEDuRM7KBpp9izzhIHvBV6kAO6uBGXAIfAx3Ovfib58yL5q3jFmrFjY-qIS4x3rlAOA9pIa32ITYK6pVukz46E-UuhMHXWZbsdatDNx7XgmzmtUzb6352VVYV1ZYXJVabkj-WpRTHfLdVxUOu5OY-LzhM0_QLk3l7DQ?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNo9kM1qwzAQhF9F7CmFJK7t1kl86KU_UGigNPTmiyKtbIHkNZLcEILfvVKcVqdvZ0YjsRcQJBFqUIZOouMusI-vpmfxHGh0Ap-jvZiRJb5jq9UT--TO45Vs1IzSBhf7ROwt4px5twPFuv_QLaB7tkdL7jynvj3CEiw6y7WM_7ikxxsIHVpsoI6oyKEPDSxvznVIRofGEDuRM7KBpp9izzhIHvBV6kAO6uBGXAIfAx3Ovfib58yL5q3jFmrFjY-qIS4x3rlAOA9pIa32ITYK6pVukz46E-UuhMHXWZbsdatDNx7XgmzmtUzb6352VVYV1ZYXJVabkj-WpRTHfLdVxUOu5OY-LzhM0_QLk3l7DQ){: .img-fill }
 
-When performing a software system analysis using MDE, everything starts with parsing the source code of the application to produce a model.
+When analyzing a software system using MDE, everything starts with parsing the source code of the application to produce a model.
 This model can then be stored in a file.
 Then, we import the file into our analysis environment, and we use the concrete model.
 
-All these steps are performed before using a model.
+All these steps are performed before using the model.
 *However*, when we create tests for the `Use` step, we do not perform all the steps before.
-We create a mock model.
-Even if this situation is comfortable, it is error-prone and makes easy un-synchronization between tools to manipulate a model, and tools that create a model.
+We likely just create a mock model.
+Even if this situation is acceptable<!-- comfortable -->, it is troublesome <!-- why? --> because it disconnects the test from the tools (which can have bugs) that create the model. <!-- makes easy un-synchronization between tools to manipulate a model, and tools that create a model. -->
+<!-- Even if this situation seems  -->
 
 One solution is thus not to create a mock model, but to create mock source code files.
 
@@ -42,20 +43,20 @@ Using mock source code files, we can reproduce the process for each test (or bet
 
 [![](https://mermaid.ink/img/pako:eNpNkEFPwzAMhf9K5NOQtpW10G09cGEgITEJMY69ZInbRiRN5aZM09T_jrMOiRwS-33vRU4uoLxGKKCy_qQaSUG8f5at4HXwAyl8Zjzbe_V960UU7sRi8SQ-JPU4u-7iZEIjdmxDmqBjm62MjWGuxCuXE3lznacwm44p2CsyXfgXvIVMK_boPJ0n9IV9gDk4JCeN5qEvcdISQoMOSyi4rDyxqYT5jVybCBq01ouTJ6tLKNuR7xk6LQO-aBM8QRFowDnIIfjDuVV__eTZGVmTdFBU0vasWi81cuYC4dzF36vNdTLl28rUUR_IstyE0PVFkkS8rPmlw3GpvEt6o-NXNz_bPMnTfCPTDPN1Jh-zTKvjarup0odVpdf3q1TCOI6_M8eLJw?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNpNkEFPwzAMhf9K5NOQtpW10G09cGEgITEJMY69ZInbRiRN5aZM09T_jrMOiRwS-33vRU4uoLxGKKCy_qQaSUG8f5at4HXwAyl8Zjzbe_V960UU7sRi8SQ-JPU4u-7iZEIjdmxDmqBjm62MjWGuxCuXE3lznacwm44p2CsyXfgXvIVMK_boPJ0n9IV9gDk4JCeN5qEvcdISQoMOSyi4rDyxqYT5jVybCBq01ouTJ6tLKNuR7xk6LQO-aBM8QRFowDnIIfjDuVV__eTZGVmTdFBU0vasWi81cuYC4dzF36vNdTLl28rUUR_IstyE0PVFkkS8rPmlw3GpvEt6o-NXNz_bPMnTfCPTDPN1Jh-zTKvjarup0odVpdf3q1TCOI6_M8eLJw){: .img-fill }
 
-In the following, I describe the implementation/set-up of the approach for Pharo and Moose.
+In the following, I describe the implementation and set-up of the approach for analyzing Java code, using Pharo with Moose.
 It consists of the following steps:
 
-- Create mock ressources
+- Create mock resources
 - Create a bridge from your Pharo image to your resources using PharoBridge
-- Create a GitLab Ci or a GitHub Action
+- Create a GitLab CI or a GitHub Action
 - Test :heart:
 
-## Create mock ressources
+## Create mock resources
 
 The first step is to create mock resources.
 To do so, the easiest way is to include them in your git repository.
 
-You should have:
+You should have the following:
 
 ```raw
 > ci // Code executed by the CI
@@ -63,13 +64,13 @@ You should have:
 > tests // Tests ressources
 ```
 
-Inside the `tests` folder, it is possible to add several sub-folders for different test resources.
+Inside the `tests` folder, it is possible to add several subfolders for different test resources.
 
 ## Create a Pharo Bridge
 
 To easily use the folder of the test resource repository from Pharo, we will use the [GitBridge project](https://github.com/jecisc/GitBridge).
 
-The project can be added to your Pharo Baseline with the following piece of code:
+The project can be added to your Pharo Baseline with the following code fragment:
 
 ```st
 spec
@@ -79,7 +80,7 @@ spec
 
 Then, to connect our Pharo project to the test resources, we create a class in one of our packages, a subclass of `GitBridge``.
 
-A full example would be:
+A full example would be as follows:
 
 ```st
 Class {
@@ -102,7 +103,7 @@ MyBridge class >> testsResources [
 
 The method `testsResources` can then be used to access the local folder with the test resources.
 
-**Be careful**, this setup only works locally for now.
+**Warning**: this setup only works locally.
 To use it with GitHub and GitLab, we first have to set up our CI files.
 
 ## Set up CI files
@@ -119,7 +120,7 @@ To set up our CI files, we first create in the `ci` folder of our repository a `
 This code will be run by the CI and register the Pharo project inside the Iceberg tool of Pharo.
 This registration is then used by GitBridge to retrieve the location of the test resources folder.
 
-Then, we have to update the `.smalltalk.ston` file (used by every Smalltalk ci process) and add a reference to our `pretesting.st` file.
+Then, we have to update the `.smalltalk.ston` file (used by every Smalltalk CI process) and add a reference to our `pretesting.st` file.
 
 ```st
 SmalltalkCISpec {
@@ -159,7 +160,7 @@ parse:
       - output.json
 ```
 
-The `parse` stage uses the `v3` of VerveineJ, parses the code, and produces an `output.json`` file including the produced model.
+The `parse` stage uses the `v3` of VerveineJ, parses the code, and produces an `output.json` file including the produced model.
 
 Then, we add the common `tests` stage of Smalltalk ci.
 
@@ -205,16 +206,16 @@ Then, we can add a step that runs VerveineJ using its docker version.
       cd ..
 ```
 
-Note that, before running VerveineJ, we move (*cd) to the tests folder to better deal with source anchors of Moose.
+Note that before running VerveineJ, we change the working directory to the tests folder to better deal with source anchors of Moose.
 
 You can find a [full example in the FamixJavaModelUpdater repository](https://github.com/badetitou/FamixJavaModelUpdater/blob/main/.github/workflows/test.yml)
 
 ## Test
 
-The last step is to adapt your tests to use the produced model.
-To do so, it is possible to remove the creation of the mock model, by loading the model.
+The last step is to adapt your tests to use the model produced from the mock source.
+To do so, it is possible to remove the creation of the mock model by loading the model.
 
-For example:
+Here's an example:
 
 ```st
 externalFamixClass := FamixJavaClass new
@@ -234,7 +235,7 @@ famixModel addAll: {
   myClass }.
 ```
 
-Can be converted into:
+The above can be converted into the following:
 
 ```st
 FJMUBridge testsResources / 'output.json' readStreamDo: [ :stream | 
@@ -250,8 +251,8 @@ externalFamixMethod := famixModel allModelMethods detect: [ :c | c name = 'exter
 
 You can now test your code on a model generated as a real-world model!
 
-It is clear that this solution slows down tests performance, however, it also ensures that your mock model is well-created because it is created by the parser tool.
+It is clear that this solution slows down tests performance, however. But it ensures that your mock model is well created, because it is created by the parser tool (importer).
 
-A good test practice is thus a mix of both solutions, classic tests in the code, and full scenario tests based on real resources.
+A good test practice is thus a mix of both solutions, classic tests in the analysis code, and full scenario tests based on real resources.
 
 Have fun testing your code now!
