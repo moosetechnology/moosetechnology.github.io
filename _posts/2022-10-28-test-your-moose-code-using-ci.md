@@ -2,8 +2,9 @@
 author: Benoît Verhaeghe
 layout: post
 title:  "Test your Moose code using CIs"
-date: 2022-10-25 00:00:00 +200
-tags: misc moose 
+date: 2022-10-28 00:00:00 +200
+tags: misc moose
+background: '/img/posts/bg-posts.jpg'
 comment: true
 ---
 
