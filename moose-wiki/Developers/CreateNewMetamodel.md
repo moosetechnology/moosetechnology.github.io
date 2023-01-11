@@ -471,6 +471,9 @@ DemoInterfaceMetamodelGenerator>>#defineRelations
     ((method property: #interface) comment: 'The interface that own me').
 ```
 
+In the meta-model we can add properties and relations to the remote entity (of the sub-meta-model).
+However, it is not possible to modify the super-class of the remote entity or to add a trait to it.
+
 ### Complementary information
 
 In our example, an interface contains methods and a class contains methods, too.
@@ -478,6 +481,52 @@ However, it is not possible to have *two* main containers for an entity (see [De
 In this case, we can either declare the relation "interface <>-* method" without a primary container, or define
 two Traits in the first meta-model.
 One would be `#TMethod` and the other `#TWithMethods`.
+
+## Back to the Generator
+
+FamixNG offers two super-classes to create a generator:
+- `FamixMetamodelGenerator`
+- `FamixBasicInfrastructureGenerator` (a sub-class of the other one)
+In this page, we used the first one (`FamixMetamodelGenerator`) which is the basic one: it has no entity predefined and we need to declare everything
+
+### Generator super-classes
+
+`FamixBasicInfrastructureGenerator` on the other hand is specialized for meta-models of programming languages.
+It has several entities already defined, for example:
+- `sourcedEntity` that uses `#TSourcedEntity`
+- `namedEntity` that uses `#TNamedEntity`
+- `comment` that inherits from `sourcedEntity` and uses `#TComment`
+- `sourceAnchor` that uses `#TSourceAnchor` and is therefore used by `SourcedEntity` to have access to the actuall source code of an entity.
+- ...
+
+This means that in a generator inheriting from `FamixBasicInfrastructureGenerator`, we can write in `#defineHierarchy`:
+
+```Smalltalk
+myEntity --|> namedEntity.
+```
+Doing this, `myEntity` will inherit from a `NamedEntity` that we did not define (it is provided by `FamixBasicInfrastructureGenerator`) and that has a `name` property.
+
+Most entities that we define in a programming language meta-model have a name and will therefore inherit from this `namedEntity`.
+
+### Advanced sub-meta-model
+
+The meta-models for C and C++ use the two generator super-classes.
+The meta-models are defined so that C++ meta-model "extends" C meta-model (i.e. C-meta-model is a sub-meta-model of C++ meta-model).
+
+The C meta-model generator inherits from `FamixBasicInfrastructureGenerator` because it represents a programming language.
+Therefore it comes with the predefined entities mentionned above.
+
+C++ meta-model is also for a programming language, but the generator is a sub-class of the simpler `FamixMetamodelGenerator` to avoid redefining the entities `NamedEntity`, `SourcedEntity`, or `Comment`.
+Otherwise we would have had two Comment, one for C and one for C++ and they would have been in different inheritance hierarchy (i.e. "incompatible").
+
+Instead in the C++ generator, we say that the C meta-model is a sub-meta-model of the C++ meta-model.
+And in the [`#defineClasses`](#define-entities), we recover the entities defined automatically for the C meta-model and that way we can use them in C++ as we would normally do for a language meta-model generated from a subclass of `FamixBasicInfrastructureGenerator`:
+
+```Smalltalk
+	entity := self remoteEntity: #Entity withPrefix: #FamixC.
+	sourceAnchor := self remoteEntity: #SourceAnchor withPrefix: #FamixC.
+	namedEntity  := self remoteEntity: #SourceLanguage withPrefix: #FamixC.
+```
 
 ## Thanks
 
