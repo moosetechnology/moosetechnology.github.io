@@ -65,17 +65,5 @@ Usage:
 
 ## Using docker
 
-It is also possible to use VerveineJ with [Docker](https://hub.docker.com/repository/docker/badetitou/verveinej).
-
-To do so, after installing docker:
-
-```bash
-docker pull badetitou/verveinej:v2.0.4
-docker run -v <full/path/toSource>:/src -v [<full/path/toDependency>:/dependency] badetitou/verveinej:v2.0.4 <verveineJOption> .
-```
-
-### Example
-
-```bash
-docker run -v D:\Users\benoit.verhaeghe\Documents\git\badetitou\Carrefour\testing\src\:/src badetitou/verveinej:v2.0.4 -format json -o testoutput.json .
-```
+It is also possible to use VerveineJ with [Docker](https://github.com/Evref-BL/VerveineJ-Docker).
+Please look at the repository documentation.
