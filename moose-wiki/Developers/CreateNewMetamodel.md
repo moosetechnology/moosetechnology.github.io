@@ -25,6 +25,7 @@ These are described in [another page](predefinedEntities) ![Unfinished](https://
   - [Using traits in a meta-model](#using-traits-in-a-meta-model)
   - [Dealing with trait conflict](#dealing-with-trait-conflict)
 - [Additional features](#additional-features)
+  - [Generating default attribute value](#generating-default-attribute-value)
   - [Generating test method](#generating-test-method)
   - [Generating Famix Group](#generating-famix-group)
 - [Introducing submetamodels](#introducing-submetamodels)
@@ -312,6 +313,21 @@ defineHierarchy
 ```
 
 ## Additional features
+
+### Generating default attribute value
+
+When defining properties of entities, you might want to assign them default value.
+Default value is the value of a property when it is not explicitly assigned in the code that create the model.
+
+To define a default value, modify the `defineProperty` method as follow:
+
+```st
+defineProperties
+    super defineProperties.
+    bacon property: #isFood type: #Boolean defaultValue: true.
+    bacon property: #eggs type: #Number defaultValue: 12.
+    spam property: #isSomething type: #Boolean defaultValue: false
+```
 
 ### Generating test method
 
