@@ -20,6 +20,7 @@ The main Moose source code repository on GitHub is: [https://github.com/moosetec
 
 - [Install Moose](Beginners/InstallMoose)
 - [Moose in action](Beginners/moose-in-action) ![Moose 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense}
+- A video on [How to use Moose 10 for software analysis](https://www.youtube.com/watch?v=2ILbR5ZrSm8)
 
 ## FOR USERS
 
