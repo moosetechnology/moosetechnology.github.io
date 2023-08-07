@@ -106,5 +106,13 @@
         "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a> looking for broken code",
         "github": "https://github.com/RomainDeg",
         "image": "https://avatars.githubusercontent.com/u/98580879"
+    },
+    "Patricia TOTOUM": {
+        "name": "Patricia TOTOUM",
+        "role": "Intern working on Famix-Aggregator",
+        "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a>",
+        "github": "https://github.com/PatriciaTot",
+        "linkedin": "https://www.linkedin.com/in/patricia-totoum-988179255/",
+        "image": "https://zupimages.net/up/23/31/lxci.jpeg"
     }
 }
