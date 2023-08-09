@@ -8,9 +8,10 @@ author: Thomas Wattebled
 
 # Introduction
 
-In Java generic types allow you to write a general, generic class (or method) that works with different types, allowing for code reuse.
+In Java generic types allow you to write a general, generic class (or method) that works with different types, allowing code reuse.
 
-But their modeling and how it works can be difficult to understand. Let's take an example.
+But their modeling and how it works can be difficult to understand.
+Let's take an example.
 
 ## Generic class
 
@@ -18,31 +19,32 @@ But their modeling and how it works can be difficult to understand. Let's take a
 public class ClassA<T>
 ```
 
-Here, ClassA is a generic class because there is one generic type T.
+Here, `ClassA` is a generic class because there is one generic type T.
 One can not use ClassA without specifying the generic type.
 
 ```java
-ClassA<Integer> class1 = new ClassA<Integer> ;
-ClassA<String> class2 = new ClassA<String>
+ClassA<Integer> class1 = new ClassA<Integer>;
+ClassA<String> class2 = new ClassA<String>;
 ```
 
-`class1` and `class2` are variables of type ClassA, but this time `ClassA` doesn't have a generic type but String or Integer.
+`class1` and `class2` are variables of type ClassA, but this time `ClassA` doesn't have a generic type but `String` or `Integer`.
 So, how do we represent all that?
 
 ![Modelisation_generic](/img/posts/2023-07-13-parametric/Modelisation_generic.png)
 
-We have 5 new traits in our model :
+We have 5 new traits in our meta-model :
 
-- TParametricEntity is used by all parametric entities it can be a ParametricClass, ParametricMethod, ParametricInterface.
-- TConcretisation allows us to have a link between two TParametricEntity. A TParametricEntity can have one or more concretizations with other TParametricEntity. Each TParametricEntity that is a concretization of another TParametricEntity has a genericEntity.
-- TConcreteParameterType for concrete parameters.
-- TGenericParameterType for generic parameters.
-- TParameterConcretisation is the same as TConcretisation but instead of two TParametricEntity it has TConcreteParameter and TGenericParameterType. TGenericParameterType can have one or more concretisations and TConcreteParameterType has generics.
+- `TParametricEntity` is used by all parametric entities. It can be a `ParametricClass`, `ParametricMethod`, and `ParametricInterface`.
+- `TConcretisation` allows one to have a link between two `TParametricEntity`. A `TParametricEntity` can have one or more concretizations with other `TParametricEntity`. Each `TParametricEntity` that is a concretization of another `TParametricEntity` has a genericEntity.
+- `TConcreteParameterType` for concrete parameters.
+- `TGenericParameterType` for generic parameters.
+- `TParameterConcretisation` is the same as `TConcretisation` but instead of two `TParametricEntity` it has `TConcreteParameter` and `TGenericParameterType`. `TGenericParameterType` can have one or more concretisations and `TConcreteParameterType` has generics.
 
-A TParametricEntity knows its concrete and generic parameters.
+A `TParametricEntity` knows its concrete and generic parameters.
 
-ParameterType uses the TWithInheritance trait because in Java we can do this: ```<T extends Object>``` or ```<? super Number>```. For the first, it means that T can be all subclasses of Object and for the second, it means Number and all its superclasses (Number, Object, Serializable).
-ParameterType also uses the TThrowable trait because we can have a genericException so ParameterType should be considered like it.
+`ParameterType` uses the `TWithInheritance` trait because in Java we can do the following: `<T extends Object>` and `<? super Number>`.
+For the first, it means that `T` can be all subclasses of `Object` and for the second, it means `Number` and all its superclasses or interfaces (`Number`, `Object`, `Serializable`).
+`ParameterType` also uses the `TThrowable` trait because we can have a genericException so `ParameterType` should be considered like it.
 
 ```java
 public interface GenericThrower<T extends Throwable> {
@@ -54,21 +56,22 @@ public interface GenericThrower<T extends Throwable> {
 
 ![example](/img/posts/2023-07-13-parametric/exampleParametric.png)
 
-If we take the first class. We have a ParametricClass with one ParameterType name T.
+If we take the first class. We have a `ParametricClass` with one `ParameterType` name `T`.
 
 ![classA<T>](/img/posts/2023-07-13-parametric/genParametric.png)
 
-For the second class, we have a class that extends a parametric class with one parameter named String.
-`String` here is a class. This is not a ParameterType anymore.
+For the second class, we have a class that extends a parametric class with one parameter named `String`.
+`String` here is a class.
+It is not a `ParameterType` anymore.
 
 ![classB extends class<String>](/img/posts/2023-07-13-parametric/classB_extends_classA.png)
 
-So what is the link between the two parametric classes and the parameters T and String?
+So, what is the link between the two parametric classes and the parameters `T` and `String`?
 
 ![concretization](/img/posts/2023-07-13-parametric/concretisation.png)
 
-We have here a Concretisation.
-ClassA with the parameter T has one concretization and the parameter T has one parameter Concretisation that is String.
+We have here a `Concretisation`.
+`ClassA` with the parameter `T` has one concretization and the parameter `T` has one parameter `Concretisation` which is String.
 
 If we take back our first example:
 
@@ -78,10 +81,12 @@ ClassA<Integer> class1 = new ClassA<Integer>
 ClassA<String> class2 = new ClassA<String>
 ```
 
-We have 3 ParametricClass, one ParameterType and two types (String and Integer). T is our ParameterType and has two ParameterConcretisations: String and Integer.
-We can say that T is generic and String or Integer are concrete because we know what they are: classes. ClassA with the ParameterType T (ClassA<T>) has also two concretizations.
+We have three `ParametricClass`, one `ParameterType` and two types (`String` and `Integer`).
+`T` is our `ParameterType` and has two `ParameterConcretisations`: `String` and `Integer`.
+We can say that `T` is generic and `String` or `Integer` are concrete because we know what they are: classes.
+ClassA with the ParameterType T (ClassA<T>) has also two concretizations.
 This is `ClassA<Integer>` and `ClassA<String>`.
-The three different classA know their parameters. T is in genericParameters. String and Integer are in concreteParameters.
+The three different classA know their parameters. `T` is in genericParameters. String and Integer are in concreteParameters.
 
 A class is generic if it has at least one `ParameterType`.
 We can have concretization of a parametric class that is also generic. See the example below:
@@ -92,9 +97,10 @@ public class ParametricClass<T, V, K, Z>
 public class ParametricClass2<Z> extends ParametricClass<String, Integer, Integer, Z>
 ```
 
-The Second ParametricClass has one ParameterType, so the class is generic. The four parameters (T, V, K, Z) has each one concretisation (String, Integer, Integer, Z). Even if Z is still a ParameterType.
+The second ParametricClass has one ParameterType, so the class is generic.
+The four parameters (T, V, K, Z) have each a concretization (String, Integer, Integer, Z). Even if Z is still a ParameterType.
 
-ParametricClass2 has for superclass ParametricClass which has for generic Entity ParametricClass with 4 ParameterTypes.
+ParametricClass2 has for superclass ParametricClass which has for generic entity ParametricClass with 4 ParameterTypes.
 
 ## Generic method
 
