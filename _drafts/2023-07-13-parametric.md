@@ -30,7 +30,7 @@ ClassA<String> class2 = new ClassA<String>;
 `class1` and `class2` are variables of type ClassA, but this time `ClassA` doesn't have a generic type but `String` or `Integer`.
 So, how do we represent all that?
 
-![Modelisation_generic](/img/posts/2023-07-13-parametric/Modelisation_generic.png)
+![Modelisation_generic](/img/posts/2023-07-13-parametric/Modelisation_generic.png){: .img-fill }
 
 We have 5 new traits in our meta-model :
 
@@ -54,21 +54,21 @@ public interface GenericThrower<T extends Throwable> {
 
 ### Let's describe an example
 
-![example](/img/posts/2023-07-13-parametric/exampleParametric.png)
+![example](/img/posts/2023-07-13-parametric/exampleParametric.png){: .img-fill }
 
 If we take the first class. We have a `ParametricClass` with one `ParameterType` name `T`.
 
-![classA<T>](/img/posts/2023-07-13-parametric/genParametric.png)
+![classA<T>](/img/posts/2023-07-13-parametric/genParametric.png){: .img-fill }
 
 For the second class, we have a class that extends a parametric class with one parameter named `String`.
 `String` here is a class.
 It is not a `ParameterType` anymore.
 
-![classB extends class<String>](/img/posts/2023-07-13-parametric/classB_extends_classA.png)
+![classB extends class<String>](/img/posts/2023-07-13-parametric/classB_extends_classA.png){: .img-fill }
 
 So, what is the link between the two parametric classes and the parameters `T` and `String`?
 
-![concretization](/img/posts/2023-07-13-parametric/concretisation.png)
+![concretization](/img/posts/2023-07-13-parametric/concretisation.png){: .img-fill }
 
 We have here a `Concretisation`.
 `ClassA` with the parameter `T` has one concretization and the parameter `T` has one parameter `Concretisation` which is String.
@@ -104,7 +104,7 @@ ParametricClass2 has for superclass ParametricClass which has for generic entity
 
 ## Generic method
 
-![methodParametric](/img/posts/2023-07-13-parametric/methodParametric.png)
+![methodParametric](/img/posts/2023-07-13-parametric/methodParametric.png){: .img-fill }
 
 Let's see what we have here. First of all, we recognize a ParametricClass with one ParameterType. This class has two methods. One is a regular method and the second is a parametricMethod.
 The first one isn't generic because when the class is concretized, the ParameterType T will become String, Integer, Animals... and it will be the same for the method.
