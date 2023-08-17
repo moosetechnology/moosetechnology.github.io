@@ -6,14 +6,14 @@ background: '/img/posts/bg-posts.jpg'
 author: Thomas Wattebled
 ---
 
-# Introduction
+## Introduction
 
 In Java generic types allow you to write a general, generic class (or method) that works with different types, allowing code reuse.
 
 But their modeling and how it works can be difficult to understand.
 Let's take an example.
 
-## Generic class
+### Generic class
 
 ```java
 public class ClassA<T>
@@ -52,7 +52,7 @@ public interface GenericThrower<T extends Throwable> {
 }
 ```
 
-### Let's describe an example
+#### Let's describe an example
 
 ![example](/img/posts/2023-07-13-parametric/exampleParametric.png){: .img-fill }
 
@@ -102,7 +102,7 @@ The four parameters (T, V, K, Z) have each a concretization (String, Integer, In
 
 ParametricClass2 has for superclass ParametricClass which has for generic entity ParametricClass with 4 ParameterTypes.
 
-## Generic method
+### Generic method
 
 ![methodParametric](/img/posts/2023-07-13-parametric/methodParametric.png){: .img-fill }
 
@@ -110,7 +110,7 @@ Let's see what we have here. First of all, we recognize a ParametricClass with o
 The first one isn't generic because when the class is concretized, the ParameterType T will become String, Integer, Animals... and it will be the same for the method.
 The parameter of the first method depends on the class and this is not the case for the second method. That is why the second method is generic, not the first one.
 
-## Example with Pharo
+### Example with Pharo
 
 ```java
 public classA<T>  
@@ -136,6 +136,6 @@ classB := FamixJavaClass named:'ClassB'.
 FamixJavaInheritance new subclass: classB ; superclass: classAcon .
 ```
 
-# Conclusion
+## Conclusion
 
 In this post, we have seen how generics types are modeled with [VerveineJ](https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ) and Moose for code analysis.
