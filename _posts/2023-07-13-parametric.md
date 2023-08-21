@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Representation of parametrics"
+subtitle: "In Java generic types allow you to write a general, generic class (or method) that works with different types, allowing code reuse. But their modeling and how it works can be difficult to understand."
 date: 2023-07-13 12:00:00 
 background: '/img/posts/bg-posts.jpg'
 author: Thomas Wattebled
