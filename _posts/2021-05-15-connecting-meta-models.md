@@ -3,7 +3,7 @@ layout: post
 title: "Connecting/Extending meta-models"
 date: 2021-05-15 12:00:00 -0400
 background: '/img/posts/2021-05-15-connecting-meta-models/bg-post.png'
-author: Benoît Verhaeghe
+author: Benoit Verhaeghe
 comments: true
 ---
 

@@ -7,8 +7,14 @@ background: '/img/bg-post.jpg'
 {% for post in paginator.posts %}
 
 <article class="post-preview">
-  <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-    <h2 class="post-title">{{ post.title }}</h2>
+  {% if post.external_url %}
+  <a href="{{ post.external_url }}">
+  {% else %}
+    <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+  {% endif %}
+  
+    <h2 class="post-title">{{ post.title }}
+      {% if post.external_url %}<i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}</h2>
     {% if post.subtitle %}
     <h3 class="post-subtitle">{{ post.subtitle }}</h3>
     {% else %}
@@ -21,7 +27,8 @@ background: '/img/bg-post.jpg'
     {% else %}
     {{ site.author }}
     {% endif %}
-    on {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}
+    on {{ post.date | date: '%B %d, %Y' }} {% if post.external_url %}{% else %} &middot;   
+    {% include read_time.html content=post.content %}{% endif %}
   </p>
 </article>
 

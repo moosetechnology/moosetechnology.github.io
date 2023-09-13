@@ -1,5 +1,5 @@
 ---
-author: Benoît Verhaeghe
+author: Benoit Verhaeghe
 layout: post
 title: "Migrating internationalization files"
 subtitle: "A nice MDE example"

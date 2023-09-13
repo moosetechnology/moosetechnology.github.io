@@ -1,5 +1,5 @@
 ---
-author: Benoît Verhaeghe
+author: Benoit Verhaeghe
 layout: post
 title: "Automatic meta-model documentation generation"
 subtitle: "How to use GitHub actions to update its meta-model UML?"

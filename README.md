@@ -1,13 +1,13 @@
 # MooseTechnology web site - Blog and wiki <!-- omit in toc -->
 
-- [Installation & Setup](#installation--setup)
+- [Installation \& Setup](#installation--setup)
 - [Moose Blog](#moose-blog)
   - [Create a draft](#create-a-draft)
     - [Add images and figures](#add-images-and-figures)
     - [Add/edit an author](#addedit-an-author)
     - [Test your draft locally](#test-your-draft-locally)
   - [Review a draft](#review-a-draft)
-- [Moose Wiki](#moose-wiki)
+  - [External blog post](#external-blog-post)
 
 ## Installation & Setup
 
@@ -109,8 +109,8 @@ If you want to add other fields, please ask to the website maintainer.
         "github": "https://github.com/nicolasanquetil",
         "image": "https://avatars.githubusercontent.com/u/14889146"
     },
-    "Benoît Verhaeghe": {
-        "name": "Benoît Verhaeghe",
+    "Benoit Verhaeghe": {
+        "name": "Benoit Verhaeghe",
         "role": "Cookie Lover",
         "bio": "PhD Student at Berger-Levrault on GUI migration",
         "github": "https://github.com/badetitou",
@@ -148,4 +148,21 @@ When all reviews are done, move the draft file from `_drafts` folder to the `_po
 Then, `commit` and `push`.
 GitHub compiles the website and put it live under few minutes.
 
-## Moose Wiki
+### External blog post
+
+To add an external blog post, add the `external_url` property in the yaml frontend.
+The `external_site` is not use but might be in the future.
+
+For example:
+
+```yml
+---
+author: Benoit Verhaeghe
+layout: post
+title: "Integrate Software Engineering into the everyday world"
+subtitle: "How Berger-Levrault build Moose visualisation and tools daily using CI"
+date:  2023-09-05 09:00:00 +200
+external_url: https://www.research-bl.com/2023/09/05/integrate-software-engineering-into-the-everyday-world/
+external_site: www.research-bl.com
+---
+```

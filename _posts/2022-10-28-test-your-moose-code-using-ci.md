@@ -1,5 +1,5 @@
 ---
-author: Benoît Verhaeghe
+author: Benoit Verhaeghe
 layout: post
 title:  "Test your Moose code using CIs"
 date: 2022-10-28 00:00:00 +200
