@@ -96,7 +96,8 @@ There are different (so-called) parsers already created at various stages of pro
 
 - [Petit Parser](https://github.com/moosetechnology/PetitParser) - Write "easily" a Parser with Moose 
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
-- [VerveineJ](Developers/Parsers/VerveineJ) - Generate an mse from a Java project
+- [VerveineJ](Developers/Parsers/VerveineJ) - Generate an mse/json from a Java project
+- [VerveineC-Cpp](Developers/Parsers/VerveineC-Cpp) - Generate an mse/json from a C/C++ project
 - [C#](https://github.com/feenkcom/roslyn2famix) - A parser for C# (using Roselyn) that should be able to export a Moose model
 - [PowerBuilderParser](Developers/Parsers/PowerBuilderParser) - Generate an mse from a Powerbuilder project
   ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
