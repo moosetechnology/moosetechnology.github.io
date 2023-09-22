@@ -10,8 +10,10 @@ The first step in the process of analysis is the generation of a model of a give
 Moose can handle multiple types of data and data sources.
 This chapter provides a short guide for how to deal with these.
 
-- [Importing and exporting with MSE](#importing-and-exporting-with-mse)
-- [Importing and exporting with JSON](#importing-and-exporting-with-json)
+- [Importing and exporting from and to files](#importing-and-exporting-from-and-to-files)
+  - [Importing and exporting with MSE](#importing-and-exporting-with-mse)
+  - [Importing and exporting with JSON](#importing-and-exporting-with-json)
+  - [Command line for slow loading](#command-line-for-slow-loading)
 - [Importing Pharo code](#importing-pharo-code)
   - [From GUI](#from-gui)
   - [From code](#from-code)
@@ -19,7 +21,9 @@ This chapter provides a short guide for how to deal with these.
     - [Moose 7](#moose-7)
 - [Create mse file for other languages](#create-mse-file-for-other-languages)
 
-## Importing and exporting with MSE
+## Importing and exporting from and to files
+
+### Importing and exporting with MSE
 
 The preferred way to load a model in Moose is via an MSE file.
 To load an MSE file, all you have to do is to press the _``Import from MSE''_ button in the Moose Panel and indicate the file to load.
@@ -50,7 +54,7 @@ model exportToMSE.
     [:stream | model exportToMSEStream: stream ].
 ```
 
-## Importing and exporting with JSON
+### Importing and exporting with JSON
 
 As one can import and export using MSE, it is possible to import and export using the [JSON format](./fileFormat#json).
 
@@ -72,6 +76,17 @@ model exportToJSON.
 "will write the json in mseFile.json"
 'path/to/file.json' asFileReference writeStreamDo: 
     [:stream | model exportToJSONStream: stream ].
+```
+
+### Command line for slow loading
+
+If you find the loading too slow.
+You can try the following command that will create a process that perform the load with the max priority.
+
+```st
+['/path/to/file.json' asFileReference readStreamDo:
+    [ :stream | model := FamixJavaModel new importFromJSONStream: stream ]
+        ] forkAt:  Processor highestPriority  named: 'LoadJava'.
 ```
 
 ## Importing Pharo code
