@@ -11,8 +11,8 @@ Moose can handle multiple types of data and data sources.
 This chapter provides a short guide for how to deal with these.
 
 - [Importing and exporting from and to files](#importing-and-exporting-from-and-to-files)
-  - [Importing and exporting with MSE](#importing-and-exporting-with-mse)
   - [Importing and exporting with JSON](#importing-and-exporting-with-json)
+  - [Importing and exporting with MSE](#importing-and-exporting-with-mse)
   - [Command line for slow loading](#command-line-for-slow-loading)
 - [Importing Pharo code](#importing-pharo-code)
   - [From GUI](#from-gui)
@@ -23,12 +23,41 @@ This chapter provides a short guide for how to deal with these.
 
 ## Importing and exporting from and to files
 
-### Importing and exporting with MSE
+### Importing and exporting with JSON
 
-The preferred way to load a model in Moose is via an MSE file.
-To load an MSE file, all you have to do is to press the _``Import from MSE''_ button in the Moose Panel and indicate the file to load.
+The preferred way to load a model in Moose is via a JSON file.
+To load an JSON file, all you have to do is to press the _``Import from JSON''_ button in the Moose Panel and indicate the file to load.
 This creates a model, populates it with the entities from the file and adds the model to the repository.
 Visually, the model appears in the list of models from the Moose Panel.
+
+> You can also drag and drop the Json file within the Pharo Image
+
+To import a model from a JSON format, you can execute the following snippet:
+
+```st
+'/path/to/file.json' asFileReference readStreamDo:
+    [ :stream | model := FamixJavaModel new importFromJSONStream: stream ]       
+```
+
+
+More information about JSON format are available [here](./fileFormat#json).
+
+> Sugar methods will be added in future release
+
+To export using the JSON format programmatically:
+
+```st
+"will ask where to create the json file"
+model exportToJSON.
+
+"will write the json in mseFile.json"
+'path/to/file.json' asFileReference writeStreamDo: 
+    [:stream | model exportToJSONStream: stream ].
+```
+
+### Importing and exporting with MSE
+
+As one can import and export using JSON, it is possible to import and export using the [MSE format](./fileFormat#mse).
 
 Another way is to import the model from a playground by executing (in the case of a FamixJava model):
 
@@ -52,30 +81,6 @@ model exportToMSE.
 "will write the mse in mseFile.mse"
 'path/to/new/file.mse' asFileReference writeStreamDo: 
     [:stream | model exportToMSEStream: stream ].
-```
-
-### Importing and exporting with JSON
-
-As one can import and export using MSE, it is possible to import and export using the [JSON format](./fileFormat#json).
-
-To import a model from a JSON format, you can execute the following snippet:
-
-```st
-'/path/to/file.json' asFileReference readStreamDo:
-    [ :stream | model := FamixJavaModel new importFromJSONStream: stream ]       
-```
-
-> Sugar methods will be added in future release
-
-To export using the JSON format programmatically:
-
-```st
-"will ask where to create the json file"
-model exportToJSON.
-
-"will write the json in mseFile.json"
-'path/to/file.json' asFileReference writeStreamDo: 
-    [:stream | model exportToJSONStream: stream ].
 ```
 
 ### Command line for slow loading
@@ -162,4 +167,4 @@ Then to generate the code, one also needs to perform a little hack (that has bee
 
 ## Create mse file for other languages
 
-To create mse files for other programming languages please refer to the [parser section](./../index#Parser).
+To create mse files for other programming languages please refer to the [parser section](./../index#parsers).
