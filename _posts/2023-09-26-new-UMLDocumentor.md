@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Generate a plantUML visualization for a meta-model"
+title: "Generate a class diagram visualization for a meta-model"
 date: 2023-09-26 12:00:00 -0400
 background: '/img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg'
 author: Nicolas Anquetil
@@ -11,12 +11,12 @@ When creating or studying a meta-model, it is often convenient to be able to "se
 
 UML looks like a natural solution for this.
 
-So in the past we had a tool `FamixMMUMLDocumentor` to create UML diagrams of the meta-models through PlantUML (a small languge and a tool to generate UML diagrams).
-The post [Generate a plantUML visualization for a meta-model]({% post_url 2021-02-04-Coasters %}) explained how to use this tool
+So in the past we had a tool to create UML diagrams of the meta-models through PlantUML (a small language and a tool to generate UML diagrams).
+The post [Generate a plantUML visualization for a meta-model]({% post_url 2021-06-04-plantUML-for-metamodel %}) explained how to use this tool
 
 But the tool had some limitations, one of which was that it was not easy to add a different backend than PlantUML.
 
-Therefore, inspired by the previous tool, we redesigned a new tool **FamixUMLDocumentor** with a simpler API and the possibility to add new backends.
+Therefore, inspired by the previous tool, we redesigned a new one, **FamixUMLDocumentor**, with a simpler API and the possibility to add new backends.
 
 ## Simple Use
 

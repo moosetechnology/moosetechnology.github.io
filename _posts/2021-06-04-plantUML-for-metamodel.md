@@ -7,6 +7,13 @@ author: Théo Lanord
 comments: true
 ---
 
+## Note:
+
+This post describes a tool that has been replaced by a new `FamixUMLDocumentor`.
+The new tool is described [in another post]({% post_url 2023-09-26-new-UMLDocumentor %}).
+
+## Old post content
+
 When you are interested in a meta-model of which you are not the creator, it is sometimes difficult to understand it only using the declarations in the code.
 It would be best if you could actually visualize it in a different way.
 What better way to go back to a very efficient meta-model visualization tool: UML.
