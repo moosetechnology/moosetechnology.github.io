@@ -24,7 +24,10 @@ Today, I'll show you how to use GitHub Actions as well as GitLab CI to create te
 
 First of all, let's describe a simple process when working on modeling and meta-modeling.
 
-[![](https://mermaid.ink/img/pako:eNo9kM1qwzAQhF9F7CmFJK7t1kl86KU_UGigNPTmiyKtbIHkNZLcEILfvVKcVqdvZ0YjsRcQJBFqUIZOouMusI-vpmfxHGh0Ap-jvZiRJb5jq9UT--TO45Vs1IzSBhf7ROwt4px5twPFuv_QLaB7tkdL7jynvj3CEiw6y7WM_7ikxxsIHVpsoI6oyKEPDSxvznVIRofGEDuRM7KBpp9izzhIHvBV6kAO6uBGXAIfAx3Ovfib58yL5q3jFmrFjY-qIS4x3rlAOA9pIa32ITYK6pVukz46E-UuhMHXWZbsdatDNx7XgmzmtUzb6352VVYV1ZYXJVabkj-WpRTHfLdVxUOu5OY-LzhM0_QLk3l7DQ?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNo9kM1qwzAQhF9F7CmFJK7t1kl86KU_UGigNPTmiyKtbIHkNZLcEILfvVKcVqdvZ0YjsRcQJBFqUIZOouMusI-vpmfxHGh0Ap-jvZiRJb5jq9UT--TO45Vs1IzSBhf7ROwt4px5twPFuv_QLaB7tkdL7jynvj3CEiw6y7WM_7ikxxsIHVpsoI6oyKEPDSxvznVIRofGEDuRM7KBpp9izzhIHvBV6kAO6uBGXAIfAx3Ovfib58yL5q3jFmrFjY-qIS4x3rlAOA9pIa32ITYK6pVukz46E-UuhMHXWZbsdatDNx7XgmzmtUzb6352VVYV1ZYXJVabkj-WpRTHfLdVxUOu5OY-LzhM0_QLk3l7DQ){: .img-fill }
+```mermaid!
+flowchart LR
+    SourceCode(Source Code) --> Parse --> modelfile(Model File) --> Import --> model(Model in Memory) --> Use
+```
 
 When analyzing a software system using MDE, everything starts with parsing the source code of the application to produce a model.
 This model can then be stored in a file.
@@ -42,7 +45,10 @@ One solution is thus not to create a mock model, but to create mock source code 
 
 Using mock source code files, we can reproduce the process for each test (or better, a group of tests :wink:)
 
-[![](https://mermaid.ink/img/pako:eNpNkEFPwzAMhf9K5NOQtpW10G09cGEgITEJMY69ZInbRiRN5aZM09T_jrMOiRwS-33vRU4uoLxGKKCy_qQaSUG8f5at4HXwAyl8Zjzbe_V960UU7sRi8SQ-JPU4u-7iZEIjdmxDmqBjm62MjWGuxCuXE3lznacwm44p2CsyXfgXvIVMK_boPJ0n9IV9gDk4JCeN5qEvcdISQoMOSyi4rDyxqYT5jVybCBq01ouTJ6tLKNuR7xk6LQO-aBM8QRFowDnIIfjDuVV__eTZGVmTdFBU0vasWi81cuYC4dzF36vNdTLl28rUUR_IstyE0PVFkkS8rPmlw3GpvEt6o-NXNz_bPMnTfCPTDPN1Jh-zTKvjarup0odVpdf3q1TCOI6_M8eLJw?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNpNkEFPwzAMhf9K5NOQtpW10G09cGEgITEJMY69ZInbRiRN5aZM09T_jrMOiRwS-33vRU4uoLxGKKCy_qQaSUG8f5at4HXwAyl8Zjzbe_V960UU7sRi8SQ-JPU4u-7iZEIjdmxDmqBjm62MjWGuxCuXE3lznacwm44p2CsyXfgXvIVMK_boPJ0n9IV9gDk4JCeN5qEvcdISQoMOSyi4rDyxqYT5jVybCBq01ouTJ6tLKNuR7xk6LQO-aBM8QRFowDnIIfjDuVV__eTZGVmTdFBU0vasWi81cuYC4dzF36vNdTLl28rUUR_IstyE0PVFkkS8rPmlw3GpvEt6o-NXNz_bPMnTfCPTDPN1Jh-zTKvjarup0odVpdf3q1TCOI6_M8eLJw){: .img-fill }
+```mermaid!
+flowchart LR
+    SourceCode(Mock Source Code) --> Parse(Parse with Docker) --> modelfile(Model File) --> Import(Import with script) --> model(Model in Memory) --> Test
+```
 
 In the following, I describe the implementation and set-up of the approach for analyzing Java code, using Pharo with Moose.
 It consists of the following steps:
