@@ -10,7 +10,7 @@ It allows to represent software system in a model, to query, manipulate, transfo
 
 Moose is based on Pharo and it's open source under BSD/MIT.
 
-
 | :--: | :--: |
 | [The Wiki](moose-wiki) | [The Blog](posts) |
 | [![](img/coffee96.png)](moose-wiki) |  [![](img/sugar96.png)](posts) |
+{: .table }
