@@ -6,6 +6,7 @@ subtitle: "How Berger-Levrault build Moose visualisation and tools daily using C
 date:  2023-09-05 09:00:00 +200
 external_url: https://www.research-bl.com/2023/09/05/integrate-software-engineering-into-the-everyday-world/
 external_site: www.research-bl.com
+tags: CI
 ---
 
 <a href="https://www.research-bl.com/2023/09/05/integrate-software-engineering-into-the-everyday-world/">

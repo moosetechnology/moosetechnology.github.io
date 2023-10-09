@@ -8,39 +8,43 @@
 .profile-card {
   z-index: 2;
   overflow: hidden;
-  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
+  -webkit-box-shadow:
+    0px 3px 6px rgba(0, 0, 0, 0.16),
+    0px 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow:
+    0px 3px 6px rgba(0, 0, 0, 0.16),
+    0px 3px 6px rgba(0, 0, 0, 0.23);
   width: auto;
   height: auto;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 4px;
   text-align: center;
   margin-bottom: 1rem;
-  
+
   @media (min-width: 1420px) {
     width: 280px;
     transform: translate(-50%, -50%);
   }
 
   h1 {
-    font-size: unset
+    font-size: unset;
   }
 
   h2 {
     font-size: unset;
   }
-  
+
   header {
     width: inherit;
     height: 250px;
     padding: 10px 20px 10px 20px;
     display: inline-block;
-    background: #FFFFFF;
+    background: #ffffff;
     color: #000000;
     text-align: center;
 
     h1 {
-      color: #FF5722;
+      color: #ff5722;
     }
 
     a {
@@ -48,8 +52,8 @@
       text-align: center;
       position: relative;
       margin: 25px 30px;
-      
-      >img {
+
+      > img {
         width: 120px;
         max-width: 100%;
         -webkit-border-radius: 50%;
@@ -59,7 +63,6 @@
         -webkit-box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
         box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
       }
-
     }
 
     a:hover > img {
@@ -72,7 +75,7 @@
     width: inherit;
     height: auto;
     display: block;
-    background: #FFFFFF;
+    background: #ffffff;
     color: #333333;
     text-align: center;
     p {
@@ -84,7 +87,7 @@
     height: 40px;
     display: block;
     padding: 15px 20px;
-    background: #FFFFFF;
+    background: #ffffff;
     text-align: center;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -105,27 +108,27 @@
         width: 24px;
         height: 24px;
         position: relative;
-        overflow: hidden!important;
+        overflow: hidden !important;
 
         i {
           position: relative;
           z-index: 1;
         }
 
-        img, svg {
+        img,
+        svg {
           width: 24px;
         }
       }
     }
   }
-
 }
 
-.team-presentation .profile-card{
+.team-presentation .profile-card {
   margin: 1rem;
   @media (min-width: 1420px) {
     width: 280px;
-    transform: translate(0%,0%);
+    transform: translate(0%, 0%);
   }
 }
 
@@ -154,7 +157,6 @@
   }
 }
 
-
 p {
   a {
     color: #007bff;
@@ -162,10 +164,21 @@ p {
   }
 }
 
-
 li {
   a {
     color: #007bff;
+    text-decoration: none;
+  }
+}
+
+.tags {
+  margin-top: 20px;
+  .tag {
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 5px;
     text-decoration: none;
   }
 }

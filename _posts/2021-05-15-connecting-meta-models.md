@@ -5,6 +5,7 @@ date: 2021-05-15 12:00:00 -0400
 background: '/img/posts/2021-05-15-connecting-meta-models/bg-post.png'
 author: Benoit Verhaeghe
 comments: true
+tags: metamodel
 ---
 
 Sometimes, a meta-model does not have all the information you want.

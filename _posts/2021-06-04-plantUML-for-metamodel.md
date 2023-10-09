@@ -5,6 +5,7 @@ date: 2021-06-04 12:00:00 -0400
 background: '/img/posts/2021-06-04-plantUML-for-metamodel/bg-post.jpg'
 author: Théo Lanord
 comments: true
+tags: documentor
 ---
 
 ## Note:

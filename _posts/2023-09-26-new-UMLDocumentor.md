@@ -5,6 +5,7 @@ date: 2023-09-26 12:00:00 -0400
 background: '/img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg'
 author: Nicolas Anquetil
 comments: true
+tags: documentor
 ---
 
 When creating or studying a meta-model, it is often convenient to be able to "see" it as a whole.

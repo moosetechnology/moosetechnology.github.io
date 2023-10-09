@@ -8,6 +8,7 @@ background: '/img/posts/bg-posts.jpg'
 date: 2022-08-08 15:00:00
 author: Romain Degrave
 comments: true
+tags: browser
 ---
 
 Software projects often leave specific architectural or programming rules that are not checked by the off-the-shelf static analysis tools and linters.  

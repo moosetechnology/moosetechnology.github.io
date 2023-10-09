@@ -1,0 +1,42 @@
+---
+layout: page
+title: Tags
+background: '/img/bg-post.jpg'
+---
+
+<h2>{{ page.tag }}</h2>
+<ul>
+{% for post in page.posts %}
+<article class="post-preview">
+    {% if post.external_url %}
+    <a href="{{ post.external_url }}">
+    {% else %}
+      <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+    {% endif %}
+    
+      <h2 class="post-title">{{ post.title }}
+        {% if post.external_url %}<i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}</h2>
+      {% if post.subtitle %}
+      <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+      {% else %}
+      <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+      {% endif %}
+    </a>
+    <p class="post-meta">Posted by
+      {% if post.author %}
+      {{ post.author }}
+      {% else %}
+      {{ site.author }}
+      {% endif %}
+      on {{ post.date | date: '%B %d, %Y' }} {% if post.external_url %}{% else %} &middot;   
+      {% include read_time.html content=post.content %}{% endif %}
+    </p>
+  </article>
+  
+  <hr>
+{% endfor %}
+</ul>
+
+<div id="tag-cloud">
+  {{ site | tag_cloud }}
+</div>

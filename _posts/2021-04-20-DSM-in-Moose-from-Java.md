@@ -10,6 +10,7 @@ date: 2021-04-20 10:12:00
 background: '/img/posts/bg-posts.jpg'
 author: Christopher Fuhrman
 comments: true
+tags: browser story
 ---
 ## Dependency Structure Matrix for a Java project using Moose
 

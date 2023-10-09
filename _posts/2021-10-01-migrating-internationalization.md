@@ -5,6 +5,7 @@ title: "Migrating internationalization files"
 subtitle: "A nice MDE example"
 background: '/img/posts/bg-posts.jpg'
 date:   2021-10-01 12:00:00 +200
+tags: story
 ---
 
 During my Ph.D. [migration project](https://badetitou.fr/projects/Casino/), I considered the migration of several GUI aspects: 

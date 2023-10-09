@@ -8,6 +8,7 @@ background: '/img/posts/bg-posts.jpg'
 date: 2021-10-10 11:00:00
 author: Sebastian Jordan
 comments: true
+tags: browser
 ---
 
 ## What is a Famix Query?

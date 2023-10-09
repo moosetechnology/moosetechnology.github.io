@@ -6,6 +6,7 @@ date: 2021-03-30 12:45:13
 background: '/img/posts/bg-posts.jpg'
 author: Clotilde Toullec
 comments: true
+tags: story
 ---
 
 # Introduction

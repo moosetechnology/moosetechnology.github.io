@@ -6,7 +6,7 @@ date: 2021-06-23 12:00:00 -0400
 background: '/img/posts/towards-analyzing-typescript/patchwork-beads-by-various-brennemans.jpg'
 author: Christopher Fuhrman
 comments: true
-
+tags: story
 ---
 
 TypeScript is a more and more popular programming language, and so it would be great if we could analyze TypeScript projects using Moose.

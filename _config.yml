@@ -11,6 +11,10 @@ github_username:    moosetechnology
 # Add your google-analytics ID here to activate google analytics
 # google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
 
+tag_page_layout: tag_page
+tag_page_dir: posts/tag
+tag_permalink_style: pretty
+
 # Build settings
 markdown:           kramdown
 highlighter: rouge
@@ -22,3 +26,4 @@ plugins:
   - jekyll-sitemap
   - jemoji
   - jekyll-spaceship
+  - jekyll-seo-tag
