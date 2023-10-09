@@ -48,6 +48,7 @@ subtitle: My super nice subtitle
 date: 2021-01-26 23:45:13 -0400
 background: '/img/posts/bg-posts.jpg'
 author: Nicolas Anquetil
+tags: importers
 ---
 ```
 
@@ -62,7 +63,8 @@ Or in json:
   "date": "2021-01-26 23:45:13 -0400",
   "background": "/img/posts/bg-posts.jpg",
   "author": "Nicolas Anquetil",
-  "comment": "true"
+  "comment": "true",
+  "tags": ["importers"]
 }
 ---
 ```
