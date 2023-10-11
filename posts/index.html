@@ -9,27 +9,27 @@ background: '/img/bg-post.jpg'
 <article class="post-preview">
   {% if post.external_url %}
   <a href="{{ post.external_url }}">
-  {% else %}
+    {% else %}
     <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-  {% endif %}
-  
-    <h2 class="post-title">{{ post.title }}
-      {% if post.external_url %}<i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}</h2>
-    {% if post.subtitle %}
-    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-    {% else %}
-    <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
-    {% endif %}
-  </a>
-  <p class="post-meta">Posted by
-    {% if post.author %}
-    {{ post.author }}
-    {% else %}
-    {{ site.author }}
-    {% endif %}
-    on {{ post.date | date: '%B %d, %Y' }} {% if post.external_url %}{% else %} &middot;   
-    {% include read_time.html content=post.content %}{% endif %}
-  </p>
+      {% endif %}
+
+      <h2 class="post-title">{{ post.title }}
+        {% if post.external_url %}<i class="fa-solid fa-arrow-up-right-from-square"></i>{% endif %}</h2>
+      {% if post.subtitle %}
+      <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+      {% else %}
+      <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+      {% endif %}
+    </a>
+    <p class="post-meta">Posted by
+      {% if post.author %}
+      {{ post.author }}
+      {% else %}
+      {{ site.author }}
+      {% endif %}
+      on {{ post.date | date: '%B %d, %Y' }} {% if post.external_url %}{% else %} &middot;
+      {% include read_time.html content=post.content %}{% endif %}
+    </p>
 </article>
 
 <hr>
@@ -39,17 +39,23 @@ background: '/img/bg-post.jpg'
 <!-- Pager -->
 {% if paginator.total_pages > 1 %}
 
-<div class="clearfix">
+<div class="d-flex justify-content-between">
+  <div>
 
-  {% if paginator.previous_page %}
-  <a class="btn btn-primary float-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr;
-    Newer<span class="d-none d-md-inline"> Posts</span></a>
-  {% endif %}
+    {% if paginator.previous_page %}
+    <a class="btn btn-primary float-left"
+      href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr;
+      Newer<span class="d-none d-md-inline"> Posts</span></a>
+    {% endif %}
 
-  {% if paginator.next_page %}
-  <a class="btn btn-primary float-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older<span class="d-none d-md-inline"> Posts</span> &rarr;</a>
-  {% endif %}
-
+  </div>
+  <div class="ms-auto">
+    {% if paginator.next_page %}
+    <a class="btn btn-primary float-right"
+      href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older<span
+        class="d-none d-md-inline"> Posts</span> &rarr;</a>
+    {% endif %}
+  </div>
 </div>
 
 {% endif %}
