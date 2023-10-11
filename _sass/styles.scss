@@ -1,6 +1,5 @@
 // Import Core Clean Blog SCSS
 @import "../assets/vendor/startbootstrap-clean-blog/scss/clean-blog.scss";
-
 @import "navbar.scss";
 
 // Our css
@@ -154,7 +153,7 @@ body {
 }
 
 .highlight-word {
-  color: #777;
+  color: $primary;
   font-style: italic;
 }
 
