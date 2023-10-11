@@ -50,7 +50,6 @@ const showActiveTheme = (theme, focus = false) => {
 
   btnToActive.classList.add('active')
   btnToActive.setAttribute('aria-pressed', 'true')
-  console.log(activeThemeIcon)
   activeThemeIcon.classList.remove("bi-sun-fill");
   activeThemeIcon.classList.remove("bi-moon-stars-fill");
   activeThemeIcon.classList.remove("bi-circle-half");
