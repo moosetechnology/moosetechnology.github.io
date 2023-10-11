@@ -34,6 +34,9 @@ These are described in [another page](predefinedEntities) ![Unfinished](https://
   - [Define remote hierarchy](#define-remote-hierarchy)
   - [Define remote relations](#define-remote-relations)
   - [Complementary information](#complementary-information)
+- [Back to the Generator](#back-to-the-generator)
+  - [Generator super-classes](#generator-super-classes)
+  - [Advanced sub-meta-model](#advanced-sub-meta-model)
 - [Thanks](#thanks)
 
 ## Set up
@@ -525,6 +528,7 @@ This means that in a generator inheriting from `FamixBasicInfrastructureGenerato
 ```smalltalk
 myEntity --|> namedEntity.
 ```
+
 Doing this, `myEntity` will inherit from a `NamedEntity` that we did not define (it is provided by `FamixBasicInfrastructureGenerator`) and that has a `name` property.
 
 Most entities that we define in a programming language meta-model have a name and will therefore inherit from this `namedEntity`.
@@ -544,9 +548,9 @@ Instead in the C++ generator, we say that the C meta-model is a sub-meta-model o
 And in the [`#defineClasses`](#define-entities), we recover the entities defined automatically for the C meta-model and that way we can use them in C++ as we would normally do for a language meta-model generated from a subclass of `FamixBasicInfrastructureGenerator`:
 
 ```smalltalk
-	entity := self remoteEntity: #Entity withPrefix: #FamixC.
-	sourceAnchor := self remoteEntity: #SourceAnchor withPrefix: #FamixC.
-	namedEntity  := self remoteEntity: #SourceLanguage withPrefix: #FamixC.
+entity := self remoteEntity: #Entity withPrefix: #FamixC.
+sourceAnchor := self remoteEntity: #SourceAnchor withPrefix: #FamixC.
+namedEntity  := self remoteEntity: #SourceLanguage withPrefix: #FamixC.
 ```
 
 ## Thanks
