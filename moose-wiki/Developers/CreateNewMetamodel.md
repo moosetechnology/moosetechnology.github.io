@@ -522,7 +522,7 @@ It has several entities already defined, for example:
 
 This means that in a generator inheriting from `FamixBasicInfrastructureGenerator`, we can write in `#defineHierarchy`:
 
-```Smalltalk
+```smalltalk
 myEntity --|> namedEntity.
 ```
 Doing this, `myEntity` will inherit from a `NamedEntity` that we did not define (it is provided by `FamixBasicInfrastructureGenerator`) and that has a `name` property.
@@ -543,7 +543,7 @@ Otherwise we would have had two Comment, one for C and one for C++ and they woul
 Instead in the C++ generator, we say that the C meta-model is a sub-meta-model of the C++ meta-model.
 And in the [`#defineClasses`](#define-entities), we recover the entities defined automatically for the C meta-model and that way we can use them in C++ as we would normally do for a language meta-model generated from a subclass of `FamixBasicInfrastructureGenerator`:
 
-```Smalltalk
+```smalltalk
 	entity := self remoteEntity: #Entity withPrefix: #FamixC.
 	sourceAnchor := self remoteEntity: #SourceAnchor withPrefix: #FamixC.
 	namedEntity  := self remoteEntity: #SourceLanguage withPrefix: #FamixC.
