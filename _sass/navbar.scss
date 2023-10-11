@@ -46,6 +46,9 @@
             color: $primary;
           }
         }
+        .bi-sun-fill {
+          color: $white;
+        }
       }
     }
   }
@@ -79,6 +82,13 @@
       .navbar-nav {
         > li.nav-item {
           > a {
+            color: var(--bs-body-color);
+            &:focus,
+            &:hover {
+              color: $primary;
+            }
+          }
+          .bi-sun-fill {
             color: var(--bs-body-color);
             &:focus,
             &:hover {
