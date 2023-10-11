@@ -24,7 +24,6 @@ h6 {
 }
 
 a {
-  color: $gray-900;
   @include transition-all;
   &:focus,
   &:hover {
