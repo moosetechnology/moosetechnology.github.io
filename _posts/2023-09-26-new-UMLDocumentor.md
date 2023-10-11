@@ -25,7 +25,8 @@ We illustrate the use with the same [Coaster example]({% post_url 2021-02-04-Coa
 You can also experiment with `FDModel`, a small meta-model used for testing.
 
 You can create a PlantUML script for a UML class of your metamodel with:
-```St
+
+```smalltalk
 FamixUMLDocumentor new
   model: CCModel ;
   generate ;
@@ -39,6 +40,7 @@ The result will be a PlantUML script that you can paste into `https://plantuml.o
 ## FamixDocumentor API
 
 The API for the documenter is as follow:
+
 - `model:` -- adds a meta-model to export. Several meta-models can be exported jointly by adding them one after the other.
 By default each meta-model is automatically assigned a color in which its entities will be drawn.
 - `model:color:` -- same as previous but manually assign a `Color` to the meta-model.
@@ -55,7 +57,8 @@ Can also be used to exlude "stub" classes (see `beWithStubs`).
 
 The backend is normally called by the `FamixUMLDocumentor` but can be called manually.
 For example, the image above can be exported in a PlantUML script with:
-```St
+
+```smalltalk
 documentor := FamixUMLDocumentor new.
 documentor
     model: CCModel ;

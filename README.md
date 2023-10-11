@@ -4,6 +4,7 @@
 - [Moose Blog](#moose-blog)
   - [Create a draft](#create-a-draft)
     - [Add images and figures](#add-images-and-figures)
+    - [Add code block](#add-code-block)
     - [Add/edit an author](#addedit-an-author)
     - [Test your draft locally](#test-your-draft-locally)
   - [Review a draft](#review-a-draft)
@@ -91,6 +92,16 @@ Example:
 
 ```md
 !["My hint"](/img/posts/2021-02-04-Coasters/coastersUML.png){: .no-lightense }
+```
+
+#### Add code block
+
+To add a code block, use the mardown format with
+
+```smalltalk
+'```smalltalk
+myCode := 23
+````'
 ```
 
 #### Add/edit an author
