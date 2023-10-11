@@ -1,19 +1,19 @@
 // Styling for the navbar
 #mainNav {
   position: absolute;
-  border-bottom: 1px solid $gray-200;
-  background-color: white;
+  border-bottom: 1px solid var(--bs-border-color);
+  background-color: var(--bs-body-bg);
   @include sans-serif-font;
   .navbar-brand {
     font-weight: 800;
-    color: $gray-800;
+    color: var(--bs-body-color);
   }
   .navbar-toggler {
     font-size: 12px;
     font-weight: 800;
     padding: 13px;
     text-transform: uppercase;
-    color: $gray-800;
+    color: var(--bs-body-color);
   }
   .navbar-nav {
     > li.nav-item {
@@ -33,7 +33,7 @@
       color: $white;
       &:focus,
       &:hover {
-        color: fade-out($white, .2);
+        color: $primary;
       }
     }
     .navbar-nav {
@@ -43,7 +43,7 @@
           color: $white;
           &:focus,
           &:hover {
-            color: fade-out($white, .2);
+            color: $primary;
           }
         }
       }
@@ -63,14 +63,14 @@
     &.is-fixed {
       /* when the user scrolls down, we hide the header right above the viewport */
       position: fixed;
-      top: -67px;
+      top: -70px;
       -webkit-transition: -webkit-transform 0.2s;
       -moz-transition: -moz-transform 0.2s;
       transition: transform 0.2s;
-      border-bottom: 1px solid darken($white, .05);
-      background-color: fade-out($white, .1);
+      border-bottom: 1px solid var(--bs-border-color);
+      background-color: var(--bs-body-bg);
       .navbar-brand {
-        color: $gray-900;
+        color: var(--bs-body-color);
         &:focus,
         &:hover {
           color: $primary;
@@ -79,7 +79,7 @@
       .navbar-nav {
         > li.nav-item {
           > a {
-            color: $gray-900;
+            color: var(--bs-body-color);
             &:focus,
             &:hover {
               color: $primary;
