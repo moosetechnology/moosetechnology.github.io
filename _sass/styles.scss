@@ -2,6 +2,14 @@
 @import "../assets/vendor/startbootstrap-clean-blog/scss/clean-blog.scss";
 
 // Our css
+body {
+  color: var(--bs-body-color);
+}
+.post-preview{
+  a {
+    color: var(--bs-body-color);
+  }
+}
 
 // Profile card
 
@@ -16,7 +24,7 @@
     0px 3px 6px rgba(0, 0, 0, 0.23);
   width: auto;
   height: auto;
-  background: #ffffff;
+  background: var(--bs-body-bg);
   border-radius: 4px;
   text-align: center;
   margin-bottom: 1rem;
@@ -39,8 +47,8 @@
     height: 250px;
     padding: 10px 20px 10px 20px;
     display: inline-block;
-    background: #ffffff;
-    color: #000000;
+    background: var(--bs-body-bg);;
+    color: var(--bs-body-color);;
     text-align: center;
 
     h1 {
@@ -75,8 +83,8 @@
     width: inherit;
     height: auto;
     display: block;
-    background: #ffffff;
-    color: #333333;
+    background: var(--bs-body-bg);;
+    color: var(--bs-body-color);;
     text-align: center;
     p {
       margin: 0px 10px;
@@ -87,7 +95,7 @@
     height: 40px;
     display: block;
     padding: 15px 20px;
-    background: #ffffff;
+    background: var(--bs-body-bg);;
     text-align: center;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -106,7 +114,6 @@
         display: inline-block;
         color: red;
         width: 24px;
-        height: 24px;
         position: relative;
         overflow: hidden !important;
 
