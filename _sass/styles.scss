@@ -183,4 +183,17 @@ li {
   }
 }
 
+.masthead {
+  .container {
+    position: inherit;
+    z-index: 1; 
+  }
+}
+
+.post-preview {
+  a {
+    text-decoration: none;
+  }
+}
+
 @import "copy-from-codeblocks.scss";
