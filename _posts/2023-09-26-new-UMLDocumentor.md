@@ -35,7 +35,7 @@ FamixUMLDocumentor new
 
 The result will be a PlantUML script that you can paste into `https://plantuml.org/` to get this UML class diagram:
 
-![Generated UML class of the Coaster meta-model](/img/posts/2023-09-26-new-UMLDocumentor/CCModel-plantUML.png)
+![Generated UML class of the Coaster meta-model](/img/posts/2023-09-26-new-UMLDocumentor/CCModel-plantUML.png){: .img-fluid}
 
 ## FamixDocumentor API
 

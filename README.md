@@ -77,12 +77,12 @@ Then write the content of your post
 If you want to add an image or a figure, please add the file under `img/posts/<your-post-name>/myFile.png`.
 
 You may want the figure to automatically scale with the post width.
-To do so add the class `.img-fill` to the image.
+To do so add the class `.img-fluid` to the image.
 
 Example:
 
 ```md
-!["My hint"](/img/posts/2021-02-04-Coasters/coastersUML.png){: .img-fill }
+!["My hint"](/img/posts/2021-02-04-Coasters/coastersUML.png){: .img-fluid }
 ```
 
 The images are zoomable by default (the JavaScript code is under `/assets/lightense.min.js`).
