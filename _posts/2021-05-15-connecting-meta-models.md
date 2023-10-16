@@ -26,7 +26,7 @@ My model is not able to represent this situation.
 So, there are two possibilities: I can fix my meta-model, or I can extend it with a new concept.
 Here, we will see how I can extend it.
 
-![Extended Coaster meta-model](/img/posts/2021-05-15-connecting-meta-models/extended-coaster-model.drawio.svg){: .img-fill }
+![Extended Coaster meta-model](/img/posts/2021-05-15-connecting-meta-models/extended-coaster-model.drawio.svg){: .img-fluid }
 
 As presented in the above figure, we add the Events concept as a kind of Creator.
 
@@ -151,14 +151,14 @@ We will not detail how to implement the world meta-model.
 But the generator is available in my [GitHub repository](https://github.com/badetitou/CoastersCollector).
 The figure below illustrates the meta-model.
 
-![World meta-model](/img/posts/2021-05-15-connecting-meta-models/world-meta-model.drawio.svg){: .img-fill }
+![World meta-model](/img/posts/2021-05-15-connecting-meta-models/world-meta-model.drawio.svg){: .img-fluid }
 
 ### Connecting world meta-model with Coaster meta-model
 
 Our goal is to connect the coaster meta-model with the world meta-model.
 To do so, we will connect the *country* concepts of each meta-model.
 
-![Connected meta-model](/img/posts/2021-05-15-connecting-meta-models/connected-meta-model.drawio.svg){: .img-fill }
+![Connected meta-model](/img/posts/2021-05-15-connecting-meta-models/connected-meta-model.drawio.svg){: .img-fluid }
 
 As a first step, you should install both the coaster meta-model and the world meta-model.
 Again, both are available in my [GitHub repository](https://github.com/badetitou/CoastersCollector).
