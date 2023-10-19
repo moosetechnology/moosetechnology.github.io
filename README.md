@@ -22,6 +22,8 @@ Assuming there are no errors and the site is building properly, the website is s
 
 ## Moose Blog
 
+> All files must respect the kebabCase (HelloWorld -> hello-world. Lowercase separated by `-`)
+
 ### Create a draft
 
 To create a new blog post, you should first create a draft that will be reviewed by other people.
