@@ -10,7 +10,6 @@ It allows to represent software system in a model, to query, manipulate, transfo
 
 Moose is based on Pharo and it's open source under BSD/MIT.
 
-
 <div class="container text-center">
   <div class="row">
     <div class="col">

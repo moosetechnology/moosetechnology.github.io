@@ -2,14 +2,16 @@ title:              Moosetechnology
 email:              https://sympa.inria.fr/sympa/subscribe/moose
 description:        Analyse and model your software system
 author:             Moosetechnology
-baseurl:            
-url:                "https://moosetechnology.github.io"
+baseurl:            "/"
+url:                "https://modularmoose.org"
 
 twitter_username:   moosetechnology
 github_username:    moosetechnology
 
-# Add your google-analytics ID here to activate google analytics
-# google_analytics:   UA-XXXXXXXXX-X # out your google-analytics code
+algolia:
+  application_id: 'PL2KTNHITW'
+  index_name: modularmoose
+  nodes_to_index: page, post
 
 tag_page_layout: tag_page
 tag_page_dir: posts/tag
