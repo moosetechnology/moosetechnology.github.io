@@ -32,7 +32,8 @@ After installing and running Moose, one typically:
 
 ### Loading a model
 
-You can find different 
+You can find different Famix Model depending on the programming language.
+You'll find here a first list of Famix model and generic tools ways to load Famix model
 
 #### Famix Java
 
@@ -46,6 +47,8 @@ A popular meta-model is the Java meta-model:
 #### Famix SQL
 
 - [Getting started with FamixSQL](./Users/famix-sql/getting-started-with-famixsql)
+
+#### Other programming languages
 
 You may also use models for other programming languages (see also the [Parsers](#Parsers) section):
 
