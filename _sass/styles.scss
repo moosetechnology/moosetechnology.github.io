@@ -206,3 +206,20 @@ li {
 }
 
 @import "copy-from-codeblocks.scss";
+
+[data-bs-theme="dark"] {
+  --docsearch-primary-color: var(--bs-body-color);
+  --docsearch-text-color: var(--bs-body-color);
+  --docsearch-searchbox-background: var(--bs-body-bg);
+  --docsearch-modal-background: var(--bs-body-bg);
+  --docsearch-footer-background: var(--bs-body-bg);
+  --docsearch-hit-background: var(--bs-body-bg);
+  --docsearch-hit-active-color: var(--bs-emphasis-color);
+  --docsearch-highlight-color: var(--bs-secondary-color);
+  --docsearch-searchbox-focus-background: var(--bs-body-bg);
+  --docsearch-hit-color: var(--bs-body-color);
+  --docsearch-key-gradient: linear-gradient(-225deg,#d5dbe4,#f8f8f8);
+  --docsearch-hit-shadow: var(--bs-box-shadow);
+  --docsearch-searchbox-shadow: 0rem 0.2rem 0.2rem rgba(128, 128, 128, 0.2);
+
+}
