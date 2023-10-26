@@ -22,7 +22,7 @@ What better way to go back to a very efficient meta-model visualization tool: UM
 In this blog, I will show you how to generate [plantUML](https://plantuml.com/) code from a generated meta-model.
 For that, I will take the example of the evolution of the meta-model on coasters:
 
-- [Coasters collection]({% post_url 2021-02-04-Coasters %})
+- [Coasters collection]({% post_url 2021-02-04-coasters %})
 - [Connecting/Extending meta-models]({% post_url 2021-05-15-connecting-meta-models %})
 
 There is no need to do these posts to understand this one.
@@ -31,7 +31,7 @@ I would even say that this is precisely the subject: to study an unknown meta-mo
 ## Prerequisite and details
 
 First of all, and if it has not already been done, do not forget to download and generate the meta-models using its generator.
-For example, for the basic [Coasters collection]({% post_url 2021-02-04-Coasters %}), the code is available on [Coaster GitHub repository](https://github.com/badetitou/CoastersCollector) and it can be generate with:
+For example, for the basic [Coasters collection]({% post_url 2021-02-04-coasters %}), the code is available on [Coaster GitHub repository](https://github.com/badetitou/CoastersCollector) and it can be generate with:
 
 ```st
 CoasterCollectorMetamodelGenerator generate

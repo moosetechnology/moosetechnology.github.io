@@ -82,7 +82,6 @@ To be able to take advantage of all the existing tools, this implies writing a p
 There are also other possible actions.
 
 - [Library of pre- defined entites/traits](Developers/predefinedEntities)
-  ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 - [Creating a meta-model](Developers/CreateNewMetamodel)
 - [Dealing with a new language](Developers/dealing-with-a-new-language)
 - [Define baseline loading moose](Developers/DefineBaselineLoadingMoose) for your own projects

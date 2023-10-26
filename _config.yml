@@ -2,7 +2,7 @@ title:              Moosetechnology
 email:              https://sympa.inria.fr/sympa/subscribe/moose
 description:        Analyse and model your software system
 author:             Moosetechnology
-baseurl:            "/"
+baseurl:            ""
 url:                "https://modularmoose.org"
 
 twitter_username:   moosetechnology

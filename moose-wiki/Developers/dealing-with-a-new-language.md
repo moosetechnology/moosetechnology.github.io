@@ -82,5 +82,5 @@ It is an common advice, it is important for us to remind you that!
 Also, remember, you first want to represent the entities you will use for your analysis.
 
 To create the metamodel in pharo, you should look at the [full documentation](https://modularmoose.org/moose-wiki/Developers/CreateNewMetamodel).
-If it is your first meta-model, you can look for the [Coaster Meta-model tutorial](https://modularmoose.org/2021/02/15/Coasters.html).
-Finally, use the [UMLDocumentor](https://modularmoose.org/2023/09/26/new-UMLDocumentor.html) to *see* your meta-model.
+If it is your first meta-model, you can look for the [Coaster Meta-model tutorial]({% post_url 2021-02-04-coasters %}).
+Finally, use the [UMLDocumentor]({% post_url 2023-09-26-new-UMLDocumentor %}) to *see* your meta-model.

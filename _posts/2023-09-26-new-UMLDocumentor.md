@@ -21,7 +21,7 @@ Therefore, inspired by the previous tool, we redesigned a new one, **FamixUMLDoc
 
 ## Simple Use
 
-We illustrate the use with the same [Coaster example]({% post_url 2021-02-04-Coasters %}) already used previously.
+We illustrate the use with the same [Coaster example]({% post_url 2021-02-04-coasters %}) already used previously.
 You can also experiment with `FDModel`, a small meta-model used for testing.
 
 You can create a PlantUML script for a UML class of your metamodel with:
