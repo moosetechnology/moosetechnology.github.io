@@ -8,6 +8,10 @@ url:                "https://modularmoose.org"
 twitter_username:   moosetechnology
 github_username:    moosetechnology
 
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:name
 
 tag_page_layout: tag_page
 tag_page_dir: posts/tag
