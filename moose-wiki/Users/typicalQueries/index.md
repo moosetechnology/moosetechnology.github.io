@@ -30,7 +30,7 @@ We present how to perform the queries in a playground or with the visual tool pr
 
 #### Class with a specific name
 
-Using the [*Queries Browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#queries-browser): first, we request all the classes of a model.
+Using the [*Queries Browser*]({{ site.baseurl }}/moose-wiki/Users/moose-ide/browsers#queries-browser): first, we request all the classes of a model.
 
 ![Query All Classes](./img/class-with-name-getClasses.png){: .img-fill .img-center }
 
@@ -65,7 +65,7 @@ withSuffix := classes select: [ :class | class name endsWith: #'MySuffix' ]
 [God classes](https://en.wikipedia.org/wiki/God_object) are classes that *knows too much* or *does too much*.
 One way to find god classes is to count the number of lines or the number of methods of a class.
 
-Using the [*Queries Browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#queries-browser), one can use the Numeric Query on the classes of a model.
+Using the [*Queries Browser*]({{ site.baseurl }}/moose-wiki/Users/moose-ide/browsers#queries-browser), one can use the Numeric Query on the classes of a model.
 
 ![Numeric Query](./img/query-properties-god-classes.png){: .img-fill .img-center }
 
@@ -141,7 +141,7 @@ It also includes the methods and attributes of each class.
 
 ![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense }
 
-The easiest way to visualize a class hierarchy is to use the [*UML browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#uml-browser).
+The easiest way to visualize a class hierarchy is to use the [*UML browser*]({{ site.baseurl }}/moose-wiki/Users/moose-ide/browsers#uml-browser).
 
 It is also possible to script one UML visualisation of Roassal.
 
@@ -199,4 +199,4 @@ builder canvas @ RSHierarchyPacker.
 builder canvas
 ```
 
-A better solution to explore a meta-model is to use the [*Meta Browser*]({{ site.baseurl }}/moose-wiki/Users/Moose%20IDE/browsers#meta-browser) that provides a detailed view on every important aspects of a meta-model.
+A better solution to explore a meta-model is to use the [*Meta Browser*]({{ site.baseurl }}/moose-wiki/Users/moose-ide/browsers#meta-browser) that provides a detailed view on every important aspects of a meta-model.

@@ -32,6 +32,10 @@ After installing and running Moose, one typically:
 
 ### Loading a model
 
+You can find different 
+
+#### Famix Java
+
 A popular meta-model is the Java meta-model:
 
 - [Famix Maker](https://github.com/moosetechnology/Moose-Easy)
@@ -39,10 +43,14 @@ A popular meta-model is the Java meta-model:
 - [Analyse Java Project](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 
+#### Famix SQL
+
+- [Getting started with FamixSQL](./Users/famix-sql/getting-started-with-famixsql)
+
 You may also use models for other programming languages (see also the [Parsers](#Parsers) section):
 
 - [Importing and exporting models](Users/ImportingAndExportingModels)
-- [Moose supported file format](./Users/fileFormat)
+- [Moose supported file format](./Users/file-format)
 
 #### Famix AST (FAST)
 
@@ -63,7 +71,7 @@ You may also use models for other programming languages (see also the [Parsers](
 Moose IDE is a group of tools that one can use to explore a model.
 In this section, we group the documentation for each tool.
 
-- [Moose IDE Browsers](Users/Moose%20IDE/browsers)
+- [Moose IDE Browsers](Users/moose-ide/browsers)
 
 ### Visualizing a model
 
