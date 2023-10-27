@@ -14,14 +14,18 @@ Moose is based on Pharo and it's open source under BSD/MIT.
   <div class="row">
     <div class="col">
       <a href="moose-wiki">
-        <img src="img/coffee96.png"/>
-      <div>Moose Wiki</div>
+        <div>
+          <img src="img/coffee96.png" style="pointer-events: none"/>
+          <div>Moose Wiki</div>
+        </div>
       </a>
     </div>
     <div class="col">
       <a href="posts">
-       <img src="img/sugar96.png"/>
-      <div>Posts</div>
+        <div>
+          <img src="img/sugar96.png" style="pointer-events: none"/>
+          <div>Posts</div>
+        </div>
       </a>
     </div>
   </div>
