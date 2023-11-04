@@ -10,18 +10,19 @@ FAST-Java is a [FAST](FAST) meta-model used to represent AST of a Java class or 
 It comes with a meta-model, an importer, and tools to manipulate and explore models.
 
 - [FAST-Java meta-model](#fast-java-meta-model)
-- [Importer](#importer)
+- [Usage](#usage)
   - [Installation](#installation)
   - [Import](#import)
+  - [Export to Java code](#export-to-java-code)
 - [Tools](#tools)
 
 ## FAST-Java meta-model
 
-![FAST-Java meta-model](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v2-doc/fast-java.svg){: .img-fill }
+![FAST-Java meta-model](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v3-doc/fast-java.svg){: .img-fill }
 
-[Full Image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v2-doc/fast-java.svg)
+[Full Image](https://raw.githubusercontent.com/moosetechnology/FAST-JAVA/v3-doc/fast-java.svg)
 
-## Importer
+## Usage
 
 ### Installation
 
@@ -50,6 +51,29 @@ For example, the following script import the method `onClick`
 JavaSmaCCProgramNodeImporterVisitor new parseCodeMethodString: 'public void onClick(ClickEvent event) {
   view.setDisplayView(view.new InnerClass());
 }'
+```
+
+### Export to Java code
+
+As it is impossible to create a model from a code snippet, it is also possible to regenerate the Java code from an existing FAST-Java model.
+To do so, one can use the `FASTJavaExportVisitor`.
+
+This tool uses as input any node of the AST and export the corresponding code.
+
+The following snippet present an example of `FASTJavaExportVisitor` usage.
+
+```st
+model := JavaSmaCCProgramNodeImporterVisitor new parseCodeMethodString: 'public void onClick(ClickEvent event) {
+  view.setDisplayView(new InnerClass());
+}'.
+
+methodNode := (model allWithType: FASTJavaMethodEntity) anyOne.
+
+FASTJavaExportVisitor new export: methodNode.
+ "'public void onClick(ClickEvent event) {
+  view.setDisplayView(new InnerClass());
+}
+'"
 ```
 
 ## Tools
