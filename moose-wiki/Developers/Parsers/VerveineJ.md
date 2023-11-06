@@ -62,6 +62,7 @@ Usage:
 |           -excludepath GLOBBINGEXPR           | A globbing expression of file path to exclude from parsing                                                                                                                                                                                                                                    |
 | -1.1 \| -1 \| -1.2 \| -2 \| ... \| -1.7 \| -7 | specifies version of Java                                                                                                                                                                                                                                                                     |
 |      \<files-to-parse>\|\<dirs-to-parse>      | list of source files to parse or directories to search for source files                                                                                                                                                                                                                       |
+{: .table }
 
 ## Using docker
 
