@@ -106,7 +106,7 @@ They all work well and have their pros and cons.
 As example/illustration of this section I used GenMyModel (I worked there for some years, I know well the tool), but the design process is the same whatever the used tool.
 
 When you design your meta-model for Fame using a graphical Ecore editor, you just focus on the concepts you want to represent.
-The meta-model we are going to design is the one presented by Benoît in his [article about "Coaster"]({% post_url 2021-02-04-coasters %}).
+The meta-model we are going to design is the one presented by Benoit in his [article about "Coaster"]({% post_url 2021-02-04-coasters %}).
 
 The designed Ecore meta-model can be found [at this address](https://app.genmymodel.com/api/repository/aranega/Coaster) and it looks like this:
 

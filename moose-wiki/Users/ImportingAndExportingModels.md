@@ -91,7 +91,7 @@ You can try the following command that will create a process that perform the lo
 ```st
 ['/path/to/file.json' asFileReference readStreamDo:
     [ :stream | model := FamixJavaModel new importFromJSONStream: stream ]
-        ] forkAt:  Processor highestPriority  named: 'LoadJava'.
+        ] forkAt: Processor highestPriority  named: 'LoadJava'.
 ```
 
 ## Importing Pharo code

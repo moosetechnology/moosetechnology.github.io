@@ -41,8 +41,9 @@ A popular meta-model is the Java meta-model:
 
 - [Famix Maker](https://github.com/moosetechnology/Moose-Easy)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
-- [Analyse Java Project](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html)
+- [Analyze Java Project](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
+- [Generate Java code from a Model](Users/famix-java/generate-java-code)
 
 #### Famix SQL
 
