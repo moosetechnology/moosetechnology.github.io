@@ -54,7 +54,7 @@ Fame is implemented in the following programming languages:
 The last stable version of Fame is always includeds in Moose.
 The project can be found in the packages prefixed with `Fame-`.
 
-It is also possible to install Fame in a fresh [Pharo](https://pharo-project.org/) image.
+It is also possible to install Fame in a fresh [Pharo](https://pharo.org/) image.
 To do so, execute the following script:
 
 ```st
