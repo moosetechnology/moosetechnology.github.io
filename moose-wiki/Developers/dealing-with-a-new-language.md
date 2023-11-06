@@ -66,7 +66,7 @@ Once you have your AST parser, you can create a High level importer.
 This step should be performed at the same time as [Creating a meta-model](#creating-a-meta-model) one.
 It consists on:
 
-- generating the model you want in a [Moose accepted file format](https://modularmoose.org/moose-wiki/Users/fileFormat).
+- generating the model you want in a [Moose accepted file format](https://modularmoose.org/moose-wiki/Users/file-format).
 - Or, if you work within Pharo, creating the model directly using Pharo code.
 
 In the **first case**, you have two options:

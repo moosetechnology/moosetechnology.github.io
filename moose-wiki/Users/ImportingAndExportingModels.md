@@ -40,7 +40,7 @@ To import a model from a JSON format, you can execute the following snippet:
 ```
 
 
-More information about JSON format are available [here](./fileFormat#json).
+More information about JSON format are available [here](./file-format#json).
 
 > Sugar methods will be added in future release
 
@@ -57,7 +57,7 @@ model exportToJSON.
 
 ### Importing and exporting with MSE
 
-As one can import and export using JSON, it is possible to import and export using the [MSE format](./fileFormat#mse).
+As one can import and export using JSON, it is possible to import and export using the [MSE format](./file-format#mse).
 
 Another way is to import the model from a playground by executing (in the case of a FamixJava model):
 
@@ -66,7 +66,7 @@ Another way is to import the model from a playground by executing (in the case o
     [:stream | model := FamixJavaModel importFromMSEStream: stream].
 ```
 
-More information about MSE are available [here](./fileFormat#mse).
+More information about MSE are available [here](./file-format#mse).
 
 Once a model is loaded, it can be easily exported as an MSE file.
 This can be done via the contextual menu of the model.

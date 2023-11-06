@@ -68,7 +68,7 @@ Metacello new
 
 ### Export
 
-Fame supports [two file formats](/moose-wiki/Users/fileFormat) to export meta-models: MSE, and JSON.
+Fame supports [two file formats](/moose-wiki/Users/file-format) to export meta-models: MSE, and JSON.
 
 The new JSON file format should be chosen preferably.
 It can use with the following script:
