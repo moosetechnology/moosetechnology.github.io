@@ -7,7 +7,6 @@ author: Nicolas Anquetil
 comments: true
 ---
 
-
 For Moose, I had to design a number of parsers for various languages ([Java](https://github.com/NicolasAnquetil/VerveineJ),
 [Ada](https://github.com/NicolasAnquetil/Ada2Famix),
 C/C++,
@@ -36,14 +35,16 @@ This makes it more complex to develop and maintain all the "visitXYZ" methods.
 ## Micro-Visitor
 
 On the other hand, a visitor typically has a small state:
+
 - the name of the file being parsed;
 - a context stack of the visit (_eg_ visiting a method, inside a class, inside a file);
 - a model of the result being built by the visitor (*eg* a Moose model).
 
 As a result, I came up with the notion of **micro-visitors** specialized for a single task.
 For example, for VerveineJ, I have 10 (concrete) micro-visitors, 4 to create entities and 6 to create dependencies between them:
+
 - `VisitorPackageDef`, creating Famix packages;
-- `VisitorClassMethodDef`, creating Famix classes and methodes;
+- `VisitorClassMethodDef`, creating Famix classes and methods;
 - `VisitorVarsDef`, creating Famix attribute, parameter, local variable definition;
 - `VisitorComments`, creating comments in all Famix entities;
 - `VisitorInheritanceRef`, creating inheritances between classes
