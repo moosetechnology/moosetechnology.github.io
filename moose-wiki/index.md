@@ -45,13 +45,17 @@ A popular meta-model is the Java meta-model:
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [Generate Java code from a Model](Users/famix-java/generate-java-code)
 
+#### Famix TypeScript
+
+- [TypeScript support for Moose](https://fuhrmanator.github.io/2023/09/15/TypeScript-support-in-Moose.html) ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
+
 #### Famix SQL
 
 - [Getting started with FamixSQL](./Users/famix-sql/getting-started-with-famixsql)
 
 #### Other programming languages
 
-You may also use models for other programming languages (see also the [Parsers](#Parsers) section):
+You may also use models for other programming languages (see also the [Parsers](#parsers) section):
 
 - [Importing and exporting models](Users/ImportingAndExportingModels)
 - [Moose supported file format](./Users/file-format)
