@@ -49,7 +49,7 @@ FamixMetamodelGenerator subclass: #CoasterExtendedMetamodelGenerator
 ```
 
 Then, we link our generator with the original one.
-To do so, we will use the [submetamodels feature](/moose-wiki/Developers/CreateNewMetamodel#introducing-submetamodels) of the generator.
+To do so, we will use the [submetamodels feature](/moose-wiki/Developers/create-new-metamodel#introducing-submetamodels) of the generator.
 We only have to implement the `#submetamodels` method in the class side of our new generator.
 This method should return an array including the generators of the submetamodels that we want to reuse.
 
@@ -278,4 +278,4 @@ The accessors names are the same in both classes and were generated automaticall
 
 In this post, we saw how one can extend and connect meta-models using Famix Generator.
 This feature is very helpfull when you need to improve a meta-model without modifying it directly.
-If you need more control on the generated entities (*e.g.*, name of the relations, *etc.*), please have a look at the [create meta-model wiki page](/moose-wiki/Developers/CreateNewMetamodel).
+If you need more control on the generated entities (*e.g.*, name of the relations, *etc.*), please have a look at the [create meta-model wiki page](/moose-wiki/Developers/create-new-metamodel).

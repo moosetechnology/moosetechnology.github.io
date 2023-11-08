@@ -29,7 +29,7 @@ Creating a parser and importer for TypeScript is no small task, but TypeScript i
 There's also a very cool [visualization of TypeScript ASTs](https://ts-ast-viewer.com/#), which will be useful for understanding and debugging.
 
 Designing a new meta-model for TypeScript is definitely not trivial, because it requires a deep understanding of the language.
-On the other hand, once a meta-model exists, it's [easy to *generate* using FamixNG domain-specific language](https://modularmoose.org/moose-wiki/Developers/CreateNewMetamodel).
+On the other hand, once a meta-model exists, it's [easy to *generate* using FamixNG domain-specific language](https://modularmoose.org/moose-wiki/Developers/create-new-metamodel).
 
 Pragmatically speaking, do we need a *perfect* model of TypeScript to analyze it?
 

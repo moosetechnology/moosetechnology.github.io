@@ -10,7 +10,7 @@ To analyze a system in a given programming language, Moose must have a meta-mode
 For example, for Java the meta-model defines that Java programs have classes, containing methods, invoking other methods, etc.
 The meta-model describes the entities that compose a program in the given language and how they are related.
 
-On another page, we explain how to [define a meta-model](CreateNewMetamodel): create new entities, define relationships, properties, etc.
+On another page, we explain how to [define a meta-model](create-new-metamodel): create new entities, define relationships, properties, etc.
 On this page, we present the library of predefined entities that is part of FamixNG and helps declaring new entities by offering typical properties / relationships that are needed.
 
 In FamixNG, recurrent properties are modeled into traits.

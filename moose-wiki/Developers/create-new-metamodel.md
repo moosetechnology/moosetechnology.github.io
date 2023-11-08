@@ -4,8 +4,6 @@ background: '/img/bg-wiki.jpg'
 title: 'Create a new Meta-model'
 ---
 
-# Create a new Meta-model ![Moose 7](https://img.shields.io/badge/Moose-7-%23aac9ff.svg){: .no-lightense} ![Moose 8](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense} ![Moose 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense} <!-- omit in toc -->
-
 To analyze a system in a given programming language, Moose must have a meta-model for that language.
 For example, for Java, the meta-model defines that Java programs have classes, containing methods, invoking other methods, etc.
 The meta-model describes the entities that compose a program in the given language and how they are related.
