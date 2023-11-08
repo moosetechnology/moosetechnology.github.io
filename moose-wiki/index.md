@@ -94,7 +94,7 @@ Visualizations are built with the [Roassal tool](https://github.com/ObjectProfil
 ## FOR DEVELOPERS
 
 A typical development action in Moose is to add a new programming language to the ones already understood.
-To be able to take advantage of all the existing tools, this implies writing a parser for the language ([see below](#Parsers)) and [creating a new meta-model](Developers/CreateNewMetamodel).
+To be able to take advantage of all the existing tools, this implies writing a parser for the language ([see below](#parsers)) and [creating a new meta-model](Developers/CreateNewMetamodel).
 There are also other possible actions.
 
 - [Library of pre- defined entites/traits](Developers/predefinedEntities)
