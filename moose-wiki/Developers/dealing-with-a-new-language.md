@@ -4,8 +4,8 @@ background: '/img/bg-wiki.jpg'
 title: 'Dealing with a new language'
 ---
 
-We want to analyse a programming language that is not supported by Moose *yet*, but we do not know how to start?
-This is a page that you **definitly** should read.
+We want to analyze a programming language that is not supported by Moose *yet*, but we do not know how to start?
+This is a page that you **definitely** should read.
 We present the most important aspect that one must not forgot when it comes to support a new language (or other).
 
 - [What do you want?](#what-do-you-want)
@@ -18,18 +18,18 @@ We present the most important aspect that one must not forgot when it comes to s
 
 ## What do you want?
 
-The first question you should asked yourself is, what do you want to analyse?
+The first question you should asked yourself is, what do you want to analyze?
 
 Depending on the subject, we will not contribute in the same way.
-For instance, analysing Java code is not the same as analysing Swing Application, or analysing how developers work with Java.
-And when thinking about analysing Java code, you might want to understand how classes interact with each other, or how modules you conceived interact with each others.
+For instance, analyzing Java code is not the same as analyzing Swing Application, or analyzing how developers work with Java.
+And when thinking about analyzing Java code, you might want to understand how classes interact with each other, or how modules you conceived interact with each others.
 
 ## A basic process when dealing with model
 
 ```mermaid!
 flowchart LR
     yourCode(Your Code) ---> astParser(AST Parser)
-    astParser --> FirstAnalysis(low level - Visualisation)
+    astParser --> FirstAnalysis(low level - Visualization)
     FirstAnalysis --> AST(AST figures)
     FirstAnalysis --> Dependencies(Import dependencies)
         astParser --> HighlevelImporter(High level importer)
@@ -38,7 +38,7 @@ flowchart LR
         Model --> Export(Export)
         Model --> AllDep(All Dependencies)
         Model --> HugeData(Huge data analysis)
-        Model --> Visualisation(HighLevel - Visualisation)
+        Model --> Visualization(HighLevel - Visualization)
     end
 ```
 
@@ -47,12 +47,12 @@ flowchart LR
 ### AST parser
 
 The AST parser is one of the mandatory tool.
-If you wanna analyse something that is a not a programming language, such as a Git project for example, you need to find the API. It can looks like a web API (rest for example), or a library call API.
+If you wanna analyze something that is a not a programming language, such as a Git project for example, you need to find the API. It can looks like a web API (rest for example), or a library call API.
 
 First, consider using an existing parser instead of creating a new one.
 For instance, in Java we use `JDT`, for the C programming language `CDT` of eclipse, and for TypeScript `ts-morph`.
 
-Also, the more challengind part is the `symbolic resolution` of the code.
+Also, the more challenging part is the `symbolic resolution` of the code.
 You should look for AST parser that have this feature enabled.
 
 If you have no AST Parser existing, you can use a parser generator inside Pharo. We advice you two options:
@@ -81,6 +81,6 @@ It is an common advice, it is important for us to remind you that!
 
 Also, remember, you first want to represent the entities you will use for your analysis.
 
-To create the metamodel in pharo, you should look at the [full documentation](https://modularmoose.org/moose-wiki/Developers/CreateNewMetamodel).
+To create the meta-model in pharo, you should look at the [full documentation](https://modularmoose.org/moose-wiki/Developers/CreateNewMetamodel).
 If it is your first meta-model, you can look for the [Coaster Meta-model tutorial]({% post_url 2021-02-04-coasters %}).
 Finally, use the [UMLDocumentor]({% post_url 2023-09-26-new-UMLDocumentor %}) to *see* your meta-model.
