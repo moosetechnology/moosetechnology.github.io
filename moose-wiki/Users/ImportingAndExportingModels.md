@@ -85,14 +85,29 @@ model exportToMSE.
 
 ### Command line for slow loading
 
+#### Increase the process priority
+
 If you find the loading too slow.
 You can try the following command that will create a process that perform the load with the max priority.
 
 ```st
 ['/path/to/file.json' asFileReference readStreamDo:
     [ :stream | model := FamixJavaModel new importFromJSONStream: stream ]
-        ] forkAt: Processor highestPriority  named: 'LoadJava'.
+        ] forkAt: Processor highestPriority named: 'LoadJava'.
 ```
+
+#### Reducing other processes priority
+
+- have a model.json and a folder with the model's source code.
+- have a Pharo image with Moose
+- drag/drop the model.json file into Pharo's World
+- setup the import from the screen (just set the right paths)
+- Changing process priorities :
+  - In the System > System Process Browser menu
+  - The priority of a process increases (the higher the priority, the higher the priority of the process).
+  - You need to lower the priority of Morphic (in charge of the Pharo UI). It should be around 40, so we need to lower it to 30.
+  - This will freeze the UI until the end of the import.
+  - Please wait.
 
 ## Importing Pharo code
 
