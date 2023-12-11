@@ -1,9 +1,8 @@
 ---
 layout: page
 background: '/img/bg-wiki.jpg'
+title: VerveineJ
 ---
-
-# VerveineJ
 
 VerveineJ is a tool written in java that create a *json* or a  _mse_ file from Java source code.
 
@@ -63,6 +62,18 @@ Usage:
 | -1.1 \| -1 \| -1.2 \| -2 \| ... \| -1.7 \| -7 | specifies version of Java                                                                                                                                                                                                                                                                     |
 |      \<files-to-parse>\|\<dirs-to-parse>      | list of source files to parse or directories to search for source files                                                                                                                                                                                                                       |
 {: .table }
+
+### Advanced Options
+
+#### Dealing with accent in code
+
+It is possible to parse code with accent using a Java vm option.
+
+To do so, add the encoding before a double `--`. For example:
+
+```sh
+./verveineJ.sh -Dfile.encoding=ISO-8859-1 -- -format json <...>
+```
 
 ## Using docker
 

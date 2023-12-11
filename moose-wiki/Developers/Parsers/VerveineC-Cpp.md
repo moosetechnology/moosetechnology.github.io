@@ -1,9 +1,8 @@
 ---
 layout: page
 background: '/img/bg-wiki.jpg'
+title: VerveineC-Cpp
 ---
-
-# VerveineC-Cpp
 
 VerveineC-Cpp (VerveineC in short) is a tool written in java that create a *json* or a *mse* file from C/C++ source code.
 
