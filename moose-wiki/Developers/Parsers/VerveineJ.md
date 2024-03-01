@@ -25,11 +25,13 @@ git clone git@github.com:moosetechnology/VerveineJ.git
 
 To use VerveineJ, you can use [Famix Maker](https://github.com/moosetechnology/Moose-Easy) ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue) or from a terminal.
 
-From the terminal, you can use command line as follows:
+From the terminal on Unix systems, you can use command line as follows:
 
 ```sh
 ./verveinej.sh -o MyProject.mse -autocp ../MyProjectDependenciesOrLib/ ../MyProjectSrcFolder/
 ```
+
+On Windows, you should use `verveinej.bat` instead of `verveinej.sh`.
 
 To use the JSON file format, you can specify the output format of VerveineJ:
 
@@ -49,7 +51,7 @@ Usage:
 | :-------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |                      -h                       | prints this message                                                                                                                                                                                                                                                                           |
 |                      -i                       | toggles incremental parsing on (can parse a project in parts that are added to the output file)                                                                                                                                                                                               |
-|             -format (mse\| json)              | specifies the output format (default: MSE)                                                                                                                                                                                                                                                    |
+|             -format (mse\|json)              | specifies the output format (default: MSE)                                                                                                                                                                                                                                                    |
 |                 -prettyPrint                  | toggles the usage of the json pretty printer                                                                                                                                                                                                                                                  |
 | -o &lt;output-file-name&gt;                   | specifies the name of the output file (default: ouput.mse))                                                                                                                                                                                                                                   |
 |                   -summary                    | toggles summarization of information at the level of classes. Summarizing at the level of classes does not produce Methods, Attributes, Accesses, and Invocations. Everything is represented as references between classes: e.g. \"A.m1() invokes B.m2()\" is uplifted to \"A references B\". |
