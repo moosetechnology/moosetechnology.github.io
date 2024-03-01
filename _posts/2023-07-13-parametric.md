@@ -59,13 +59,13 @@ public interface GenericThrower<T extends Throwable> {
 
 If we take the first class. We have a `ParametricClass` with one `ParameterType` name `T`.
 
-![classA<T>](/img/posts/2023-07-13-parametric/genParametric.png){: .img-fill }
+![{{ classA<T> | escape }}](/img/posts/2023-07-13-parametric/genParametric.png){: .img-fill }
 
 For the second class, we have a class that extends a parametric class with one parameter named `String`.
 `String` here is a class.
 It is not a `ParameterType` anymore.
 
-![classB extends class<String>](/img/posts/2023-07-13-parametric/classB_extends_classA.png){: .img-fill }
+![{{ 'classB extends class<String>' | escape }}](/img/posts/2023-07-13-parametric/classB_extends_classA.png){: .img-fill }
 
 So, what is the link between the two parametric classes and the parameters `T` and `String`?
 
@@ -84,10 +84,10 @@ ClassA<String> class2 = new ClassA<String>
 
 We have three `ParametricClass`, one `ParameterType` and two types (`String` and `Integer`).
 `T` is our `ParameterType` and has two `ParameterConcretisations`: `String` and `Integer`.
-We can say that `T` is generic and `String` or `Integer` are concrete because we know what they are: classes.
-ClassA with the ParameterType T (ClassA<T>) has also two concretizations.
-This is `ClassA<Integer>` and `ClassA<String>`.
-The three different classA know their parameters. `T` is in genericParameters. String and Integer are in concreteParameters.
+We can say that `T` is generic and `String` and `Integer` are concrete because we know what they are: classes.
+`ClassA` with the ParameterType `T` (`ClassA<T>`) also has two concretizations.
+These are `ClassA<Integer>` and `ClassA<String>`.
+The three different `classA` know their parameters. `T` is in genericParameters. String and Integer are in concreteParameters.
 
 A class is generic if it has at least one `ParameterType`.
 We can have concretization of a parametric class that is also generic. See the example below:
@@ -101,7 +101,7 @@ public class ParametricClass2<Z> extends ParametricClass<String, Integer, Intege
 The second ParametricClass has one ParameterType, so the class is generic.
 The four parameters (T, V, K, Z) have each a concretization (String, Integer, Integer, Z). Even if Z is still a ParameterType.
 
-ParametricClass2 has for superclass ParametricClass which has for generic entity ParametricClass with 4 ParameterTypes.
+ParametricClass2 has for superclass ParametricClass, which has for generic entity ParametricClass with 4 ParameterTypes.
 
 ### Generic method
 
