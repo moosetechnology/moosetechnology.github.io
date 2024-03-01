@@ -60,7 +60,7 @@ Usage:
 |                 -filecp FILE                  | gather all jars listed in FILE (absolute paths) and put them in the classpath                                                                                                                                                                                                                 |
 |           -excludepath GLOBBINGEXPR           | A globbing expression of file path to exclude from parsing                                                                                                                                                                                                                                    |
 | -1.1 \| -1 \| -1.2 \| -2 \| ... \| -1.7 \| -7 | specifies version of Java                                                                                                                                                                                                                                                                     |
-| &lt;files-to-parse&gt;\|&lt;dirs-to-parse&lt; | list of source files to parse or directories to search for source files                                                                                                                                                                                                                       |
+| &lt;files-to-parse&gt;\|&lt;dirs-to-parse&gt; | list of source files to parse or directories to search for source files                                                                                                                                                                                                                       |
 {: .table }
 
 ### Advanced Options
