@@ -47,22 +47,22 @@ Usage:
 
 `VerveineJ [-h] [-i] [-format (mse|json)] [-prettyPrint] [-o <output-file-name>] [-summary] [-alllocals] [-anchor (none|default|assoc)] [-cp CLASSPATH | -autocp DIR] [-1.1 | -1 | -1.2 | -2 | ... | -1.7 | -7] <files-to-parse> | <dirs-to-parse>"`
 
-|               VerveineJ options               | description                                                                                                                                                                                                                                                                                   |
-| :-------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|                      -h                       | prints this message                                                                                                                                                                                                                                                                           |
-|                      -i                       | toggles incremental parsing on (can parse a project in parts that are added to the output file)                                                                                                                                                                                               |
-|             -format (mse\|json)               | specifies the output format (default: MSE)                                                                                                                                                                                                                                                    |
-|                 -prettyPrint                  | toggles the usage of the json pretty printer                                                                                                                                                                                                                                                  |
-| -o {% raw %}\<output-file-name\>{% endraw %} | specifies the name of the output file (default: ouput.mse)                                                                                                                                                                                                                                    |
-|                   -summary                    | toggles summarization of information at the level of classes. Summarizing at the level of classes does not produce Methods, Attributes, Accesses, and Invocations. Everything is represented as references between classes: e.g. \"A.m1() invokes B.m2()\" is uplifted to \"A references B\". |
-|                  -alllocals                   | Forces outputing all local variables, even those with primitive type (incompatible with \"-summary\")")                                                                                                                                                                                       |
-|    -anchor (none\|entity\|default\|assoc)     | options for source anchor information: - no entity - only named entities \[default\] - named entities+associations (_i.e._ accesses, invocations, references)                                                                                                                                 |
-|                 -cp CLASSPATH                 | classpath where to look for stubs)                                                                                                                                                                                                                                                            |
-|                  -autocp DIR                  | gather all jars in DIR and put them in the classpath                                                                                                                                                                                                                                          |
-|                 -filecp FILE                  | gather all jars listed in FILE (absolute paths) and put them in the classpath                                                                                                                                                                                                                 |
-|           -excludepath GLOBBINGEXPR           | A globbing expression of file path to exclude from parsing                                                                                                                                                                                                                                    |
-| -1.1 \| -1 \| -1.2 \| -2 \| ... \| -1.7 \| -7 | specifies version of Java                                                                                                                                                                                                                                                                     |
-| {% raw %}\<files-to-parse>\|\<dirs-to-parse\>{% endraw %} | list of source files to parse or directories to search for source files                                                                                                                                                                                                                       |
+| VerveineJ options | description |
+| :---: | :--- |
+| `-h`                                      | prints this message |
+| `-i`                                      | toggles incremental parsing on (can parse a project in parts that are added to the output file) |
+| `-format (mse|json)`                      | specifies the output format (default: MSE) |
+| `-prettyPrint`                            | toggles the usage of the json pretty printer |
+| `-o <output-file-name>`                   | specifies the name of the output file (default: ouput.mse) |
+| `-summary`                                | toggles summarization of information at the level of classes. Summarizing at the level of classes does not produce Methods, Attributes, Accesses, and Invocations. Everything is represented as references between classes: e.g. \"A.m1() invokes B.m2()\" is uplifted to \"A references B\". |
+| `-alllocals`                              | Forces outputing all local variables, even those with primitive type (incompatible with \"-summary\") |
+| `-anchor (none|entity|default|assoc)` | options for source anchor information: - no entity - only named entities \[default\] - named entities+associations (_i.e._ accesses, invocations, references) |
+| `-cp CLASSPATH`                           | classpath where to look for stubs |
+| `-autocp DIR`                             | gather all jars in DIR and put them in the classpath |
+| `-filecp FILE`                            | gather all jars listed in FILE (absolute paths) and put them in the classpath |
+| `-excludepath GLOBBINGEXPR`               | A globbing expression of file path to exclude from parsing |
+| `-1.1 | -1 | -1.2 | -2 | ... | -1.7 | -7` | specifies version of Java |
+| `<files-to-parse>|<dirs-to-parse>`        | list of source files to parse or directories to search for source files |
 {: .table }
 
 ### Advanced Options
