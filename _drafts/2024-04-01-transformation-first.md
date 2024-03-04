@@ -11,7 +11,7 @@ tags: transformation
 ---
 
 Sometimes, in order to fix a reccuring bug, or to introduce a new design pattern or to change the architecture of a portion of a software, we as developers have to perform more or less similar edits on our source code to fulfill our objective.  
-When many entities are concerned or that the edits to perform are complicated and take too much time, it can be interesting to consider building a transformation tool to help us and make that task easier.  
+When many entities are concerned or when the edits to perform are complicated and take too much time, it can be interesting to consider building a transformation tool to help us and make that task easier.  
 Fortunately, Moose is here to help with several modeling levels and powerful tools enabling us to build what we need! 
 
 # Preface
@@ -49,7 +49,7 @@ Metacello new
   load
 ```
 
-Secondly, we will use [MoTion](https://github.com/alesshosry/MoTion), an object pattern matcher that will allow us to easily explore the FAST of our methods and find the specific nodes we are looking for.
+Second, we will use [MoTion](https://github.com/alesshosry/MoTion), an object pattern matcher that will allow us to easily explore the FAST of our methods and find the specific nodes we are looking for.
 To load the project, execute this command in a Playground :
 ```smalltalk
 Metacello new
@@ -62,7 +62,7 @@ You will have to then load the `MoTion-Moose` package using Iceberg.
 # Querying the model
 
 Finally done with explainations and setup! :smile:  
-Let us start by creating a class with a `model` instance with accessors, and add a class side initializer method for practical reasons :
+Let us start by creating a class with a `model` instance variable, accessors, and add a class side initializer method for ease of use:
 
 !["Creating our class"](/img/posts/2024-04-01-transformation-first/creating-class.png)
 
@@ -74,9 +74,9 @@ onModel: aMooseModel
 		  yourself
 ```
 
-This class will contain our entire code as it will be pretty short, but of course when working on more important transformations dividing the logic of our tool will help to make it more understandable and maintainable.  
+This class will contain our entire code manipulation logic. It will be pretty short, but of course when working on more important transformations dividing the logic of our tool will help to make it more understandable and maintainable.  
 
-In any case, we will start with a basic Famix query, in order to find the three `logError` methods, which will allow us to easily find their invocations : 
+In any case, we will start with a basic Famix query, in order to find all the implementation of `logError` methods, which will later allow us to easily find their invocations : 
 ```smalltalk
 fetchLogErrorMethods
 
@@ -94,9 +94,9 @@ fetchLogErrorMethodInvocations
 # Using Carrefour
 
 In this context, Carrefour is the perfect tool to use to find the nodes we want to transform in the FAST of our methods.  
-As we already have found the entities that we have to transform in the Famix model, all that remains is building and binding the FAST node of every entity within our method, and then fetch the ones from our method invocations.  
+Now that we found the entities that we have to transform in the Famix model, all that remains is building and binding the FAST node of every entity within our method, and then fetch the ones from our method invocations.  
 
-To do so, we will add two methods to our class. Firstly, a method to fetch the FAST node matching a given method invocation :
+To do so, we will add two methods to our class. First, a method to fetch the FAST node matching a given method invocation :
 ```smalltalk
 fetchFastNodeForFamixInvocation: anInvocation
 
@@ -118,11 +118,12 @@ And just like that, we now have the complete list of FAST nodes to transform!
 
 # Using MoTion
 
-But before celebrating, we should keep in mind that this transformation is a very simple use case. Here, it is easy to find the entities to transform using Famix, but in some other cases it might be much more complex to find the methods that are candidate to a transformation, not to mention every node that must transformed.  
+But before celebrating, we should keep in mind that this transformation is a very simple use case. Here, it is easy to find the entities to transform using Famix, but in some other cases it might be much more complex to find the methods that are candidate to a transformation, not to mention every node that must be transformed.  
 
 In those cases, a good way to make things easier is to divide the logic of this process, and use seperate means to find the methods that are candidate to a transformation and to find the nodes that must be transformed.  
 
-Making queries on the Famix model remains a very reliable way to find the candidates methods, but then what about the nodes?  
+Making queries on the Famix model remains a very reliable way to find the candidates methods, but then what about the nodes inside the AST of these methods?
+Methods can be quite complex (50 lines of code, 100, more...) and the resulting AST is huge. Finding the right node(s) in such AST is difficult.
 That's where MoTion comes in. In order to find the nodes we are looking for, we can define patterns that describe those nodes, and the path to follow through the FAST to be able to reach those nodes.  
 
 But enough description. Time to code! :smile:
