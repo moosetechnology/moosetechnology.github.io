@@ -1,9 +1,11 @@
 ---
 layout: page
 background: '/img/bg-wiki.jpg'
+toc: true
 ---
 
 # Fame <!-- omit in toc -->
+{: .no_toc}
 
 Fame is the meta-meta-model of Famix.
 In the following, we mainly present the Pharo implementation and usage of Fame.

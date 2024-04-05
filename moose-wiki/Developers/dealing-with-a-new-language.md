@@ -2,19 +2,12 @@
 layout: page
 background: '/img/bg-wiki.jpg'
 title: 'Dealing with a new language'
+toc: true
 ---
 
 We want to analyze a programming language that is not supported by Moose *yet*, but we do not know how to start?
 This is a page that you **definitely** should read.
 We present the most important aspect that one must not forgot when it comes to support a new language (or other).
-
-- [What do you want?](#what-do-you-want)
-- [A basic process when dealing with model](#a-basic-process-when-dealing-with-model)
-- [Tool suite to deal with a new language](#tool-suite-to-deal-with-a-new-language)
-  - [AST parser](#ast-parser)
-  - [High level importer](#high-level-importer)
-  - [Creating a meta-model](#creating-a-meta-model)
-
 
 ## What do you want?
 

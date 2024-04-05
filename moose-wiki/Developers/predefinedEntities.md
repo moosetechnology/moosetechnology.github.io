@@ -2,9 +2,11 @@
 layout: page
 background: '/img/bg-wiki.jpg'
 title: 'Predefined Entities'
+toc: true
 ---
 
 # Predefined Entities / Traits in FamixNG <!-- omit in toc -->
+{: .no_toc}
 
 To analyze a system in a given programming language, Moose must have a meta-model for that language.
 For example, for Java the meta-model defines that Java programs have classes, containing methods, invoking other methods, etc.

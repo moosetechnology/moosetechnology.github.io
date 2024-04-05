@@ -2,6 +2,7 @@
 layout: page
 background: '/img/bg-wiki.jpg'
 title: 'Create a new Meta-model'
+toc: true
 ---
 
 To analyze a system in a given programming language, Moose must have a meta-model for that language.
