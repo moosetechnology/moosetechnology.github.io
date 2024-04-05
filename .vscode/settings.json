@@ -3,5 +3,11 @@
         "Benoit",
         "Famix",
         "Pharo"
+    ],
+    "grammarly.selectors": [
+        {
+            "language": "markdown",
+            "scheme": "file"
+        }
     ]
 }

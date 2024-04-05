@@ -5,13 +5,13 @@ background: '/img/bg-wiki.jpg'
 title: 'Getting started with GitProject Health'
 ---
 
-This page presents the starting point if you want to have high level information about your repositories *health*.
+This page presents the starting point if you want to have high-level information about your repositories' _health_.
 
 ## What is GitProject Health
 
-GitProject health is a suit of importers, models, and vizualisations, that enable the analysis of your repositories.
-For instance, you will be able to see the repositories with failing pipelines, the numbers of commits by projets, the authors of commits *etc.*.
-It is also possible to link the repository commits with Famix model to have even more information.
+GitProject health is a suit of importers, models, and visualizations, that enable the analysis of your repositories.
+For instance, you will be able to see the repositories with failing pipelines, the numbers of commits by projects, the authors of commits, _etc_.
+It is also possible to link the repository commits with a Famix model to have even more information.
 
 ## Installation GitProjectHealth
 
@@ -31,12 +31,12 @@ Metacello new
 
 This command will load the GitProjectHealth project as well as all its Pharo dependencies.
 
-> The project was originaly made for GitLab repositories analysis, so some feature might be available only for GitLab. We try to update this documentation with all information as much as we can, do not hesitate to do a pull request if some feature are missing
+> The project was originally made for GitLab repositories analysis, so some feature might be available only for GitLab. We try to update this documentation with all information as much as we can, do not hesitate to do a pull request if some feature are missing
 
 ## Import a model
 
-Once the GitProjectHealth project has been loaded, one has to *import* the project from the Git server to the Moose image.
-As of today, we import a *group of repositories*.
+Once the GitProjectHealth project has been loaded, one has to _import_ the project from the Git server to the Moose image.
+As of today, we import a _group of repositories_.
 
 ### Import a group from GitLab
 
@@ -73,7 +73,7 @@ githubImporter importGroup: 'moosetechnology'.
 
 ### More commits extracted
 
-![Badge gitlab only](https://img.shields.io/badge/GitLab_Only-8A2BE2?logo=gitlab)
+![Badge Gitlab only](https://img.shields.io/badge/GitLab_Only-8A2BE2?logo=gitlab)
 
 You might want to gather more commits for a specific repository.
 To do so in GitLab, we added the following API
@@ -86,7 +86,7 @@ glhImporter importCommitsOf: myProject withStats: true until: '2023-01-01' asDat
 
 ## Visualize
 
-To visualize the group "health"
+To visualize the group's "health"
 
 ```st
 dritGroup := (glhModel allWithType: GLHGroup) detect: [ :group | group id = 137 ].
@@ -96,7 +96,7 @@ canvas open.
 
 ## Export
 
-To export the visualization as a svg image
+To export the visualization as an svg image
 
 ```st
 dritGroup := (glhModel allWithType: GLHGroup) detect: [ :group | group id = 137 ].
