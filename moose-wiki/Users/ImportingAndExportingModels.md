@@ -2,24 +2,15 @@
 layout: page
 background: '/img/bg-wiki.jpg'
 title: 'Importing and exporting models'
+toc: true
 ---
 
 # Importing and exporting models <!-- omit in toc -->
+{: .no_toc}
 
 The first step in the process of analysis is the generation of a model of a given target system or set of data.
 Moose can handle multiple types of data and data sources.
 This chapter provides a short guide for how to deal with these.
-
-- [Importing and exporting from and to files](#importing-and-exporting-from-and-to-files)
-  - [Importing and exporting with JSON](#importing-and-exporting-with-json)
-  - [Importing and exporting with MSE](#importing-and-exporting-with-mse)
-  - [Command line for slow loading](#command-line-for-slow-loading)
-- [Importing Pharo code](#importing-pharo-code)
-  - [From GUI](#from-gui)
-  - [From code](#from-code)
-    - [Moose 8 and above](#moose-8-and-above)
-    - [Moose 7](#moose-7)
-- [Create mse file for other languages](#create-mse-file-for-other-languages)
 
 ## Importing and exporting from and to files
 
@@ -180,6 +171,6 @@ Then to generate the code, one also needs to perform a little hack (that has bee
 'D:/test.mse' asFileReference writeStreamDo: [ :writeStream | MooseModel export: model withMetamodel: model metamodel to: writeStream. ]
 ```
 
-## Create mse file for other languages
+## Create Json/Mse model file for other languages
 
-To create mse files for other programming languages please refer to the [parser section](./../index#parsers).
+To create Json/Mse model file for other programming languages please refer to the [parser section](./../index#parsers).
