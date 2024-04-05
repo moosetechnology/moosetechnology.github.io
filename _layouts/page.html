@@ -23,12 +23,17 @@ layout: default
     </div>
   </header>
 
-  <main class="container">
+  <main class="container-fluid">
     <div class="row">
-      <article class="col-lg-10 col-md-10 mx-auto">
+      <div class="col-lg-2 col-md-2 mx-auto"></div>
+      <article class="col-lg-8 col-md-8 mx-auto" data-bs-spy="scroll" data-bs-target="#navId">
 
         {{ content }}
 
       </article>
+
+      <div class="col-lg-2 col-md-2 mx-auto fs-6" id="navId">
+        {{ content | toc_only}}
+      </div>
     </div>
   </main>

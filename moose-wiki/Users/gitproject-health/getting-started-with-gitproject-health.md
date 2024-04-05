@@ -3,6 +3,7 @@ layout: page
 author: Benoit Verhaeghe
 background: '/img/bg-wiki.jpg'
 title: 'Getting started with GitProject Health'
+toc: true
 ---
 
 This page presents the starting point if you want to have high-level information about your repositories' _health_.

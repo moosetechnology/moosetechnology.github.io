@@ -5,6 +5,7 @@
   - [Create a draft](#create-a-draft)
     - [Add images and figures](#add-images-and-figures)
     - [Add code block](#add-code-block)
+  - [Add a TOC](#add-a-toc)
     - [Add/edit an author](#addedit-an-author)
     - [Test your draft locally](#test-your-draft-locally)
   - [Review a draft](#review-a-draft)
@@ -104,6 +105,17 @@ To add a code block, use the mardown format with
 '```smalltalk
 myCode := 23
 ````'
+```
+
+### Add a TOC
+
+It is possible to add automatically a toc to the right part of any article (blog post still need update).
+To do so, you onyly have to add the toc option in the page header
+
+```yml
+---
+toc: true
+---
 ```
 
 #### Add/edit an author
