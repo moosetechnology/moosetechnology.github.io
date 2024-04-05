@@ -3,6 +3,7 @@ layout: page
 author: Benoit Verhaeghe
 background: '/img/bg-wiki.jpg'
 title: 'Getting started with FamixSQL'
+toc: true
 ---
 
 This page is a guide on how to use Moose to analyze your relational database using FamixSQL.

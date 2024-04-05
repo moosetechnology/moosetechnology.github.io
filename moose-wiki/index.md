@@ -2,14 +2,17 @@
 layout: page
 background: '/img/bg-wiki.jpg'
 title: "Moose Wiki"
+toc: true
 ---
 
-# Moose wiki  <!-- omit in toc -->
+# Moose wiki  <!-- omit in toc --> 
+{: .no_toc}
 
 A wiki gathering documentation related to Moose project.
 The main Moose source code repository on GitHub is: [https://github.com/moosetechnology](https://github.com/moosetechnology)
 
 ## Contents  <!-- omit in toc -->
+{: .no_toc}
 
 - For [Beginners](#for-beginners)
 - For [Users](#for-users)

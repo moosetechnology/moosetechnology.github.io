@@ -2,27 +2,13 @@
 layout: page
 background: '/img/bg-wiki.jpg'
 title: "Typical Queries"
+toc: true
 ---
 
 This page aims to present different queries one might want to perform when analyzing a model.
 It can be used as a baseline for further analysis.
 
 We present how to perform the queries in a playground or with the visual tool proposed by Moose.
-
-- [Queries](#queries)
-  - [Find entity](#find-entity)
-    - [Class with a specific name](#class-with-a-specific-name)
-    - [Classes with their name beginning with or ending with](#classes-with-their-name-beginning-with-or-ending-with)
-  - [God classes](#god-classes)
-  - [God cyclomatic complexity](#god-cyclomatic-complexity)
-  - [Deprecated methods](#deprecated-methods)
-  - [Dead methods](#dead-methods)
-  - [Application tests](#application-tests)
-- [Visualizations](#visualizations)
-  - [Class hierarchy](#class-hierarchy)
-  - [Packages cycles](#packages-cycles)
-- [Developers](#developers)
-  - [Meta-model UML](#meta-model-uml)
 
 ## Queries
 

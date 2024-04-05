@@ -3,6 +3,7 @@ layout: page
 author: Benoit Verhaeghe
 background: '/img/bg-wiki.jpg'
 title: 'Generate Java Code'
+toc: true
 ---
 
 One common action one want to perform is to generate the Java code that corresponds to a model.

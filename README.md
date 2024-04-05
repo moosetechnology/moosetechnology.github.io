@@ -118,6 +118,8 @@ toc: true
 ---
 ```
 
+It is possible to omit a title by adding after the title the `{: .no_toc}` code
+
 #### Add/edit an author
 
 If it is the first time you write for the Moose blog, or if you want to edit your information, you might be interested by the `authors.json` file.
