@@ -55,7 +55,7 @@ A popular meta-model is the Java meta-model:
 
 #### Git Project
 
-- [Getting started with GitProject Healt](./Users/gitproject-health/getting-started-with-gitproject-health)
+- [Getting started with GitProject Health](./Users/gitproject-health/getting-started-with-gitproject-health)
 
 #### Other programming languages
 
