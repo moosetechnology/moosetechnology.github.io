@@ -53,6 +53,10 @@ A popular meta-model is the Java meta-model:
 
 - [Getting started with FamixSQL](./Users/famix-sql/getting-started-with-famixsql)
 
+#### Git Project
+
+- [Getting started with GitProject Healt](./Users/gitproject-health/getting-started-with-gitproject-health)
+
 #### Other programming languages
 
 You may also use models for other programming languages (see also the [Parsers](#parsers) section):
