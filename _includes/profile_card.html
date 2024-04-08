@@ -4,7 +4,11 @@
     <header>
       <!-- here’s the avatar -->
       <a target="_blank" href="#">
-        <img src="{{ author.image }}" class="hoverZoomLink no-lightense">
+        {% if author.gravatar-hash %}
+          <img src="https://gravatar.com/avatar/{{ author.gravatar-hash }}?size=256" class="hoverZoomLink no-lightense">
+        {% elsif author.image %}
+          <img src="{{ author.image }}" class="hoverZoomLink no-lightense">
+        {% endif %}
       </a>
   
       <!-- the username -->

@@ -144,10 +144,13 @@ If you want to add other fields, please ask to the website maintainer.
         "bio": "PhD Student at Berger-Levrault on GUI migration",
         "github": "https://github.com/badetitou",
         "twitter": "https://twitter.com/badetitou",
-        "image": "https://avatars.githubusercontent.com/u/6225039"
+        "image": "https://avatars.githubusercontent.com/u/6225039",
+        "gravatar-hash": "ab4070086241400a4a428bf8994f05e0"
     }
 }
 ```
+
+> As for Benoit, you can use your gravatar-hash instead of a image.
 
 #### Test your draft locally
 
