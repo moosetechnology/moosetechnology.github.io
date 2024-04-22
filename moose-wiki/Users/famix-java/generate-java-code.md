@@ -42,6 +42,48 @@ FAMIX2JavaVisitor new
 However, if you have set a root folder (see [Import model](../ImportingAndExportingModels)), and not modified that much the model, the exporter will retrieve the code of the method to export based on the sources.
 If you need to modify the code of methods, see you next section :smile:
 
+### Example exporting custom made model
+
+You might want to use the exporter capabilities without *importing* a real model first, but by creating yours.
+
+To do so, you can create a simple model and give it to the exporter.
+For instance, the code bellow can be use to generate a class named `MyClass` with one method and one attribute in a package named `fr`.
+
+```st
+"Create a dummy model"
+model := FamixJavaModel new.
+
+"Create a package"
+frPackage := FamixJavaPackage new.
+frPackage name: 'fr'.
+model add: frPackage.
+
+"Create a class"
+class := FamixJavaClass new.
+class name: 'MyClass'.
+frPackage addType: class.
+model add: class.
+
+"Add an attribute to the class"
+classAttribute := FamixJavaAttribute new.
+classAttribute name: 'myAttribute'.
+class addAttribute: classAttribute .
+model add: classAttribute.
+
+"Add a method to the class"
+classMethod := FamixJavaMethod new.
+classMethod name: 'myMethod'.
+class addMethod: classMethod .
+model add: classMethod.
+
+"Export the model"
+FAMIX2JavaVisitor new
+    rootFolder: 'D:\exported' asFileReference;
+    export: model.
+```
+
+The code is exported in the defined `rootFolder`, here it is under the folder *D:\exported*.
+
 ## Export method code
 
 You might want to modify the code inside method and export it.
