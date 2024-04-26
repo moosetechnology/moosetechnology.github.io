@@ -42,7 +42,9 @@ FAMIX2JavaVisitor new
 However, if you have set a root folder (see [Import model](../ImportingAndExportingModels)), and not modified that much the model, the exporter will retrieve the code of the method to export based on the sources.
 If you need to modify the code of methods, see you next section :smile:
 
-### Example exporting custom made model
+## Example
+
+### Example exporting custom-made model
 
 You might want to use the exporter capabilities without *importing* a real model first, but by creating yours.
 
@@ -78,11 +80,32 @@ model add: classMethod.
 
 "Export the model"
 FAMIX2JavaVisitor new
-    rootFolder: 'D:\exported' asFileReference;
-    export: model.
+  rootFolder: 'D:\exported' asFileReference;
+  export: model.
 ```
 
 The code is exported in the defined `rootFolder`, here it is under the folder *D:\exported*.
+
+### Export only part of the model
+
+For some reason, you might not want to export the full model but only part of it.
+We give here examples of how to do it.
+
+#### Export only a class string
+
+It is also possible to use the exporter to generate only the class code (or method, attribute, and so on).
+To do so you only have to change the last lines of the script that perform the export.
+Considering the *export the model example*, replace the last lines with the following:
+
+```st
+visitor := FAMIX2JavaVisitor new.
+String streamContents: [ :stream |
+  visitor currentStream: stream.
+  class accept: visitor ]
+```
+
+In this example, `String streamContents:` is used to create a write stream to populate a String.
+You can also modify this line to export in a specific file, or any other stream API.
 
 ## Export method code
 
