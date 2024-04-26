@@ -16,17 +16,7 @@ We will present here some incorrect, but simplify and useful view to enable begi
 
 ## Class neighborhood
 
-```mermaid!
-classDiagram
-    FamixJavaPackage *--> FamixJavaClass : types
-    FamixJavaPackage --> FamixJavaPackage : parentPackage
-
-    FamixJavaClass *--> "*" FamixJavaMethod : methods
-    FamixJavaClass *--> "*" FamixJavaAttribute : attributes
-
-    FamixJavaInheritance <-- "*" FamixJavaClass : superInheritances
-    FamixJavaClass --> "*" FamixJavaInheritance : subInheritances
-```
+![Parametric schema](./img/class-neighborhood.drawio.svg){: .img-fluid .img-center }
 
 ## Type neighborhood
 
@@ -52,4 +42,4 @@ classDiagram
 Parametric types are probably the most hard to understand.
 We made a [full blog post about this subject]({% post_url 2023-07-13-parametric %}).
 
-![Parametric schema](./img/parametrics.drawio.png){: .img-fluid }
+![Parametric schema](./img/parametrics.drawio.svg){: .img-fluid .img-center }
