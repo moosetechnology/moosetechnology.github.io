@@ -16,7 +16,7 @@ We will present here some incorrect, but simplify and useful view to enable begi
 
 ## Class neighborhood
 
-```mermaid
+```mermaid!
 classDiagram
     class FamixJavaPackage {
 
@@ -51,7 +51,7 @@ classDiagram
 
 ## Type neighborhood
 
-```mermaid
+```mermaid!
 classDiagram
     FamixJavaMethod "*" <--* FamixJavaType : methods
     FamixJavaAttribute "*" <--*  FamixJavaClass: attributes
