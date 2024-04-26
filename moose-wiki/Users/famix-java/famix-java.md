@@ -18,27 +18,6 @@ We will present here some incorrect, but simplify and useful view to enable begi
 
 ```mermaid!
 classDiagram
-    class FamixJavaPackage {
-
-    }
-
-
-    class FamixJavaClass {
-
-    }
-
-    class FamixJavaInheritance {
-
-    }
-
-    class FamixJavaMethod {
-        
-    }
-
-    class FamixJavaAttribute {
-        
-    }
-
     FamixJavaPackage *--> FamixJavaClass : types
     FamixJavaPackage --> FamixJavaPackage : parentPackage
 
