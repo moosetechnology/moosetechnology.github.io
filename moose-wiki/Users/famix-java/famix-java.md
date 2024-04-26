@@ -73,32 +73,4 @@ classDiagram
 Parametric types are probably the most hard to understand.
 We made a [full blog post about this subject]({% post_url 2023-07-13-parametric %}).
 
-```mermaid
-classDiagram
-    class TAssociation
-    class TConcretisation
-    TAssociation <|.. TConcretisation
-    TAssociation <|.. TParameterConcretisation
-    TConcretisation -- TParametricEntity
-    TConcretisation -- TParametricEntity
-
-    TParametricEntity <|.. ParametricClass
-    Class <|-- ParametricClass
-
-    TParametricEntity <|.. ParametricInterface
-    Interface <|-- ParametricInterface
-    TParametricEntity <|.. ParametricMethod
-    ParametricMethod --|> Method
-
-
-    TParameterConcretisation -- TConcreteParameterType
-    TParameterConcretisation -- TGenericParameterType
-
-    TConcreteParameterType <|.. Type
-    TGenericParameterType <|.. ParameterType
-    Type <|-- ParameterType
-    ParameterType --|> TWithInheritance
-    ParameterType --|> TThrowable
-
-
-```
+![Parametric schema](./img/parametrics.drawio.png){: .img-fluid }
