@@ -56,27 +56,36 @@ For instance, the code bellow can be use to generate a class named `MyClass` wit
 model := FamixJavaModel new.
 
 "Create a package"
-frPackage := FamixJavaPackage new.
-frPackage name: 'fr'.
-model add: frPackage.
+frPackage := model newPackageNamed: 'fr'.
 
 "Create a class"
-class := FamixJavaClass new.
-class name: 'MyClass'.
+class := model newClassNamed: 'MyClass'.
 frPackage addType: class.
-model add: class.
+
+
+javaPackage := model newPackageNamed: 'java'.
+javaPackage isStub: true.
+langPackage := model newPackageNamed: 'lang'.
+langPackage isStub: true.
+javaPackage addChildEntity: langPackage.
+
+stringType := model newClassNamed: 'String'.
+stringType isStub: true.
+langPackage addType: stringType.
 
 "Add an attribute to the class"
-classAttribute := FamixJavaAttribute new.
-classAttribute name: 'myAttribute'.
+classAttribute := model newAttributeNamed: 'myAttribute'.
+classAttribute declaredType: stringType.
 class addAttribute: classAttribute .
-model add: classAttribute.
+
+"Add primitive void type"
+primitiveVoid := model newPrimitiveTypeNamed: 'void'.
 
 "Add a method to the class"
-classMethod := FamixJavaMethod new.
-classMethod name: 'myMethod'.
+classMethod := model newMethodNamed: 'myMethod'.
+classMethod isPublic: true.
+classMethod declaredType: primitiveVoid.
 class addMethod: classMethod .
-model add: classMethod.
 
 "Export the model"
 FAMIX2JavaVisitor new
