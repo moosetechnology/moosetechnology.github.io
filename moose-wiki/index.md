@@ -42,6 +42,7 @@ You'll find here a first list of Famix model and generic tools ways to load Fami
 
 A popular meta-model is the Java meta-model:
 
+- [Famix-Java](Users/famix-java/famix-java)
 - [Famix Maker](https://github.com/moosetechnology/Moose-Easy)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [Analyze Java Project](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html)
