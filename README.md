@@ -4,7 +4,8 @@
 - [Moose Blog](#moose-blog)
   - [Create a draft](#create-a-draft)
     - [Add images and figures](#add-images-and-figures)
-      - [Drawio supper](#drawio-supper)
+      - [MermaidJS](#mermaidjs)
+      - [Drawio](#drawio)
     - [Add code block](#add-code-block)
   - [Add a TOC](#add-a-toc)
     - [Add/edit an author](#addedit-an-author)
@@ -98,7 +99,11 @@ Example:
 !["My hint"](/img/posts/2021-02-04-Coasters/coastersUML.png){: .no-lightense }
 ```
 
-##### Drawio supper
+##### MermaidJS
+
+If you use MermaidJS to draw diagram, they will automatically use dark/light theme
+
+##### Drawio
 
 Please to ensure that everybody can easily edit your schema made with drawio, use file extension `.drawio.png`.
 So you can integrate the image easily, and everybody can open your file using drawio
