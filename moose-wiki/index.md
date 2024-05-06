@@ -57,7 +57,7 @@ A popular meta-model is the Java meta-model:
 
 - [Getting started with FamixSQL](./Users/famix-sql/getting-started-with-famixsql)
 
-#### Git Project
+#### Analyze Git Projects and organizations
 
 - [Getting started with GitProject Health](./Users/gitproject-health/getting-started-with-gitproject-health)
 
