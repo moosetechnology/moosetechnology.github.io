@@ -24,7 +24,7 @@ Today, I'll show you how to use GitHub Actions as well as GitLab CI to create te
 
 First of all, let's describe a simple process when working on modeling and meta-modeling.
 
-```mermaid!
+```mermaid
 flowchart LR
     SourceCode(Source Code) --> Parse --> modelfile(Model File) --> Import --> model(Model in Memory) --> Use
 ```
@@ -45,7 +45,7 @@ One solution is thus not to create a mock model, but to create mock source code 
 
 Using mock source code files, we can reproduce the process for each test (or better, a group of tests :wink:)
 
-```mermaid!
+```mermaid
 flowchart LR
     SourceCode(Mock Source Code) --> Parse(Parse with Docker) --> modelfile(Model File) --> Import(Import with script) --> model(Model in Memory) --> Test
 ```

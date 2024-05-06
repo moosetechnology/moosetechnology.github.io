@@ -28,7 +28,7 @@ For instance, it also includes LocalVariable, Parameters, ParametricClasses and 
 
 ## Type neighborhood
 
-```mermaid!
+```mermaid
 classDiagram
     FamixJavaMethod "*" <--* FamixJavaType : methods
     FamixJavaAttribute "*" <--*  FamixJavaClass: attributes

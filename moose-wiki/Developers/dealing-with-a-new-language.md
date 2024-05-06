@@ -19,7 +19,7 @@ And when thinking about analyzing Java code, you might want to understand how cl
 
 ## A basic process when dealing with model
 
-```mermaid!
+```mermaid
 flowchart LR
     yourCode(Your Code) ---> astParser(AST Parser)
     astParser --> FirstAnalysis(low level - Visualization)
