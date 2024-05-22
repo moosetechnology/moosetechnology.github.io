@@ -364,12 +364,12 @@ Methods can also be GenericEntities when the type of one parameter, or the retur
 For example in Java, the get(key) method is generic because the type of the key is K, a ParameterType and it returns a value of type V, another ParameterType: `public V get(K key)'.
 
 In Famix the meta-model for genericity is the following:
-![UML for Genericity meta-model](Diagrams/generics.svg){: .img-fill }
+![UML for generics meta-model](Diagrams/generics.svg)
 
-- a `TParametricEntity` (like Map above) represents an entity that has `TGenericParameterTypes` (like K and V above)
-- `TParametricEntity` is used by `JavaParametricMethod` and `JavaParametricClass` (in the case of Java)
--  a `TParametricEntity` has concretizations which are associations between two ParametricEntity. For example StringMap above is also a ParametricEntity and is a (partial) concretization of Map.
-- When there is a concretization, some ParameterType(s) are made concrete.
-  In the example above (StringMap), String is a `TparameterConcretization`
-    - it is associated with the GenericParameterType it "concretizes" (K in this example), and
-	- it is associated with a specific TConcretization (ie. the fact that StringMap is a concretization of Map)
+- a `TParametricEntity` represents an entity that has `TGenericParameterType`s (like Map having parameter types K and V above);
+- the same `TParametricEntity` may also have `TConcreteParameterType`s (like String for StringMap in the example above);
+- in the case of Java, `TParametricEntity` is used by `JavaParametricMethod` and `JavaParametricClass`;
+- a `TConcretization` is an association between two `TParametricEntity`s (like between Map and StringMap above);
+- a `TParameterConcretization` is an association between a `TGenericParameterType` (like K above) and a `TConcreteParameterType` (like String above);
+- the  `TParameterConcretization` (association between ParameterTypes) is linked to a `TConcretization` (association between ParametricEntities);
+- in the case of Java, any `JavaType` can be used as a  `TConcreteParameterType`

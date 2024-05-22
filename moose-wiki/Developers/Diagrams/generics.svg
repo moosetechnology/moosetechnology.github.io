@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    contentStyleType="text/css"
-   height="454.33698"
+   height="586px"
    preserveAspectRatio="none"
+   style="width:1021px;height:586px;background:#FFFFFF;"
    version="1.1"
-   viewBox="0 0 877.25415 454.33698"
-   width="877.25415"
+   viewBox="0 0 1021 586"
+   width="1021px"
    zoomAndPan="magnify"
-   id="svg33"
+   id="svg39"
    sodipodi:docname="generics.svg"
    inkscape:version="1.3.2 (1:1.3.2+202311252150+091e20ef0f)"
-   inkscape:export-filename="generics2.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
-     id="namedview33"
+     id="namedview39"
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
@@ -27,870 +25,781 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.0543273"
-     inkscape:cx="328.17134"
-     inkscape:cy="269.36607"
-     inkscape:current-layer="layer2" />
+     inkscape:zoom="1.050338"
+     inkscape:cx="510.31192"
+     inkscape:cy="292.7629"
+     inkscape:current-layer="svg39" />
   <defs
-     id="defs1">
-    <marker
-       style="overflow:visible"
-       id="ColoredTriangle"
-       refX="2"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Colored triangle"
-       markerWidth="4"
-       markerHeight="3"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="none">
-      <path
-         transform="scale(0.5)"
-         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.5"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         id="path36" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="ColoredTriangle-6"
-       refX="2"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Colored triangle"
-       markerWidth="4"
-       markerHeight="3"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="none">
-      <path
-         transform="scale(0.5)"
-         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.5"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         id="path36-7" />
-    </marker>
-    <marker
-       style="overflow:visible"
-       id="ColoredTriangle-6-7"
-       refX="2"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Colored triangle"
-       markerWidth="4"
-       markerHeight="3"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="none">
-      <path
-         transform="scale(0.5)"
-         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.5"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         id="path36-7-3" />
-    </marker>
-  </defs>
+     id="defs1" />
   <g
-     inkscape:groupmode="layer"
-     id="layer1"
-     inkscape:label="inheritances"
-     transform="translate(-151.65505,-53.410384)">
+     id="elem_JavaParametricClass">
+    <rect
+       codeLine="7"
+       fill="#ffffcc"
+       height="32"
+       id="JavaParametricClass"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="168"
+       x="12"
+       y="547.55841" />
+    <circle
+       cx="27"
+       cy="563.55841"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse1"
+       r="11" />
     <path
-       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.927068px;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:6.48948, 6.48948;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ColoredTriangle)"
-       d="M 329.35872,326.76646 518.20851,85.660384"
-       id="path35"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       inkscape:connection-end="#elem_TConcreteParameterType" />
-    <path
-       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.927068px;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:6.48948, 6.48948;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ColoredTriangle-6)"
-       d="M 223.01677,475.49737 C 165.99504,407.82636 188.58368,255.34517 273.9694,163.34988"
-       id="path35-5"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       inkscape:connection-end="#elem_TGenericParameterType"
-       sodipodi:nodetypes="cc" />
+       d="m 29.9688,569.199 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6407 -1.3125,-1.6562 -1.3125,-4.7812 0,-3.125 1.3125,-4.7813 1.3282,-1.6562 3.8282,-1.6562 0.7031,0 1.3437,0.1562 0.6563,0.1563 1.2188,0.4532 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0781 -0.6875,1.0625 -0.6875,3.1563 0,2.0937 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2657 0.5938,-0.2812 1.2188,-0.8593 z"
+       fill="#000000"
+       id="path1" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="136"
+       x="41"
+       y="568.40509"
+       id="text1">JavaParametricClass</text>
   </g>
   <g
-     inkscape:groupmode="layer"
-     id="layer2"
-     inkscape:label="main"
-     transform="translate(-151.65505,-53.410384)">
-    <g
-       id="elem_Type"
-       transform="translate(144.90505,227.60737)">
-      <rect
-         codeLine="7"
-         fill="#ffffcc"
-         height="88.890602"
-         id="Type"
-         rx="2.5"
-         ry="2.5"
-         style="stroke:#a9a9a9;stroke-width:0.5"
-         width="189"
-         x="55"
-         y="99" />
-      <circle
-         cx="122.25"
-         cy="115"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse1"
-         r="11" />
-      <path
-         d="m 125.2188,120.6406 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
-         fill="#000000"
-         id="path1" />
-      <line
-         style="stroke:#a9a9a9;stroke-width:0.5"
-         x1="56"
-         x2="243"
-         y1="131"
-         y2="131"
-         id="line1" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="138"
-         x="61"
-         y="147.9951"
-         id="text2">Boolean isTestCase</text>
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="144"
-         x="61"
-         y="164.29201"
-         id="text3">Boolean isInnerClass</text>
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="177"
-         x="61"
-         y="180.5889"
-         id="text4">Boolean isJUnit4TestCase</text>
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="55"
-         x="312"
-         y="268.73669"
-         id="text10-3"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;inline-size:194.534;display:inline;fill:#000000"
-         transform="matrix(1.0260055,0,0,1,-181.28158,-149.44659)"
-         xml:space="preserve"><tspan
-           x="312"
-           y="268.73669"
-           id="tspan9"><tspan
-             dx="0 -1.098533 -1.098533 -1.0985335 -1.0985326 -1.0985326 -1.0985345 -1.0985326"
-             id="tspan8">JavaType</tspan></tspan></text>
-    </g>
-    <g
-       id="g2">
-      <rect
-         codeLine="12"
-         fill="#ffffcc"
-         height="31.966095"
-         id="Concretization"
-         rx="2.8535752"
-         ry="2.4973512"
-         style="stroke:#a9a9a9;stroke-width:0.533906"
-         width="150.66878"
-         x="877.97345"
-         y="317.1514" />
-      <circle
-         cx="893.65918"
-         cy="333.13443"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse4"
-         r="11" />
-      <path
-         d="m 896.628,338.77502 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
-         fill="#000000"
-         id="path4" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="100"
-         x="741.5"
-         y="148.2867"
-         id="text5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.0426px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"
-         transform="matrix(1.0450767,0,0,1,132.76748,189.69442)"><tspan
-           sodipodi:role="line"
-           id="tspan5"
-           x="741.5"
-           y="148.2867">JavaConcretization</tspan></text>
-    </g>
-    <g
-       id="elem_TConcretization"
-       transform="translate(263.65672,92.894693)">
-      <rect
-         codeLine="14"
-         fill="#ffffff"
-         height="32"
-         id="TConcretization"
-         rx="2.5"
-         ry="2.5"
-         style="stroke:#a9a9a9;stroke-width:0.5"
-         width="141"
-         x="531"
-         y="7" />
-      <circle
-         cx="546"
-         cy="23"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse5"
-         r="11" />
-      <path
-         d="m 546.8438,29.75 h -2.4532 V 19.5 H 541.25 v -2.1406 h 8.7344 V 19.5 h -3.1406 z"
-         fill="#000000"
-         id="path5" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="109"
-         x="560"
-         y="27.846701"
-         id="text6">TConcretization</text>
-    </g>
-    <g
-       id="elem_TParameterConcretization"
-       transform="translate(144.90505,227.60737)">
-      <rect
-         codeLine="16"
-         fill="#ffffff"
-         height="32"
-         id="TParameterConcretization"
-         rx="2.5"
-         ry="2.5"
-         style="stroke:#a9a9a9;stroke-width:0.5"
-         width="212"
-         x="278.5"
-         y="127.44" />
-      <circle
-         cx="293.5"
-         cy="143.44"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse6"
-         r="11" />
-      <path
-         d="m 294.3438,150.19 h -2.4532 V 139.94 H 288.75 v -2.1406 h 8.7344 v 2.1406 h -3.1406 z"
-         fill="#000000"
-         id="path6" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="180"
-         x="307.5"
-         y="148.2867"
-         id="text7">TParameterConcretization</text>
-    </g>
-    <g
-       id="g1">
-      <rect
-         codeLine="18"
-         fill="#ffffcc"
-         height="31.955353"
-         id="ParameterType"
-         rx="2.9705546"
-         ry="2.4965119"
-         style="stroke:#a9a9a9;stroke-width:0.544648"
-         width="162.78639"
-         x="151.92737"
-         y="475.51971" />
-      <circle
-         cx="166.90504"
-         cy="491.49738"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse7"
-         r="11" />
-      <path
-         d="m 169.87385,497.13797 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
-         fill="#000000"
-         id="path7" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="105"
-         x="36"
-         y="268.73669"
-         id="text8"
-         transform="matrix(1.037304,0,0,1,141.58914,227.60737)"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-           sodipodi:role="line"
-           id="tspan1"
-           x="36"
-           y="268.73669">JavaParameterType</tspan></text>
-    </g>
-    <g
-       id="elem_TConcreteParameterType"
-       transform="translate(143.24074,46.660384)">
-      <rect
-         codeLine="20"
-         fill="#ffffff"
-         height="32"
-         id="TConcreteParameterType"
-         rx="2.5"
-         ry="2.5"
-         style="stroke:#a9a9a9;stroke-width:0.5"
-         width="210"
-         x="282.5"
-         y="7" />
-      <circle
-         cx="297.5"
-         cy="23"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse8"
-         r="11" />
-      <path
-         d="m 298.3438,29.75 h -2.4532 V 19.5 H 292.75 v -2.1406 h 8.7344 V 19.5 h -3.1406 z"
-         fill="#000000"
-         id="path8" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="178"
-         x="311.5"
-         y="27.846701"
-         id="text9">TConcreteParameterType</text>
-    </g>
-    <g
-       id="elem_ParameterConcretization"
-       transform="translate(158.90505,227.60737)">
-      <rect
-         codeLine="22"
-         fill="#ffffcc"
-         height="31.963905"
-         id="ParameterConcretization"
-         rx="2.8772159"
-         ry="2.4971802"
-         style="stroke:#a9a9a9;stroke-width:0.536094"
-         width="233.62993"
-         x="252.35202"
-         y="247.90805" />
-      <circle
-         cx="266"
-         cy="263.89001"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse9"
-         r="11" />
-      <path
-         d="m 268.9688,269.5306 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
-         fill="#000000"
-         id="path9" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="171"
-         x="312"
-         y="268.73669"
-         id="text10"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"
-         transform="matrix(1.0260055,0,0,1,-42.094865,0)"><tspan
-           sodipodi:role="line"
-           id="tspan2"
-           x="312"
-           y="268.73669">JavaParameterConcretization</tspan></text>
-    </g>
-    <g
-       id="elem_TGenericParameterType"
-       transform="translate(129.08112,124.34988)">
-      <rect
-         codeLine="24"
-         fill="#ffffff"
-         height="32"
-         id="TGenericParameterType"
-         rx="2.5"
-         ry="2.5"
-         style="stroke:#a9a9a9;stroke-width:0.5"
-         width="200"
-         x="47.5"
-         y="7" />
-      <circle
-         cx="62.5"
-         cy="23"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse10"
-         r="11" />
-      <path
-         d="M 63.3438,29.75 H 60.8906 V 19.5 H 57.75 v -2.1406 h 8.7344 V 19.5 h -3.1406 z"
-         fill="#000000"
-         id="path10" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="168"
-         x="76.5"
-         y="27.846701"
-         id="text11">TGenericParameterType</text>
-    </g>
-    <g
-       id="elem_ParametricMethod"
-       transform="translate(156.90505,227.60737)">
-      <rect
-         codeLine="26"
-         fill="#ffffcc"
-         height="31.960226"
-         id="ParametricMethod"
-         rx="2.9171762"
-         ry="2.4968927"
-         style="stroke:#a9a9a9;stroke-width:0.539774"
-         width="184.36554"
-         x="498.16376"
-         y="247.90988" />
-      <circle
-         cx="512.5"
-         cy="263.89001"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse11"
-         r="11" />
-      <path
-         d="m 515.4688,269.5306 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
-         fill="#000000"
-         id="path11" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="126"
-         x="550.5"
-         y="268.73669"
-         id="text12"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"
-         transform="matrix(1.0357936,0,0,1,-45.678456,0)"><tspan
-           sodipodi:role="line"
-           id="tspan3"
-           x="550.5"
-           y="268.73669">JavaParametricMethod</tspan></text>
-    </g>
-    <g
-       id="elem_TParametricEntity"
-       transform="translate(144.90505,227.60737)">
-      <rect
-         codeLine="28"
-         fill="#ffffff"
-         height="32"
-         id="TParametricEntity"
-         rx="2.5"
-         ry="2.5"
-         style="stroke:#a9a9a9;stroke-width:0.5"
-         width="152"
-         x="525.5"
-         y="127.44" />
-      <circle
-         cx="540.5"
-         cy="143.44"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse12"
-         r="11" />
-      <path
-         d="m 541.3438,150.19 h -2.4532 V 139.94 H 535.75 v -2.1406 h 8.7344 v 2.1406 h -3.1406 z"
-         fill="#000000"
-         id="path12" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="120"
-         x="554.5"
-         y="148.2867"
-         id="text13">TParametricEntity</text>
-    </g>
-    <g
-       id="elem_ParametricClass"
-       transform="translate(142.90505,227.60737)">
-      <rect
-         codeLine="30"
-         fill="#ffffcc"
-         height="31.95722"
-         id="ParametricClass"
-         rx="2.9500396"
-         ry="2.4966578"
-         style="stroke:#a9a9a9;stroke-width:0.542779"
-         width="167.56226"
-         x="714.52136"
-         y="247.91139" />
-      <circle
-         cx="729.5"
-         cy="263.89001"
-         fill="#ffffff"
-         style="stroke:#181818;stroke-width:1"
-         id="ellipse13"
-         r="11" />
-      <path
-         d="m 732.4688,269.5306 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6406 -1.3125,-1.6563 -1.3125,-4.7813 0,-3.125 1.3125,-4.7812 1.3282,-1.6563 3.8282,-1.6563 0.7031,0 1.3437,0.1563 0.6563,0.1562 1.2188,0.4531 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0782 -0.6875,1.0625 -0.6875,3.1562 0,2.0938 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2656 0.5938,-0.2813 1.2188,-0.8594 z"
-         fill="#000000"
-         id="path13" />
-      <text
-         fill="#000000"
-         font-family="sans-serif"
-         font-size="14px"
-         lengthAdjust="spacing"
-         textLength="110"
-         x="743.5"
-         y="268.73669"
-         id="text14"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"
-         transform="matrix(1.0575403,0,0,1,-46.739512,0)"><tspan
-           sodipodi:role="line"
-           id="tspan4"
-           x="743.5"
-           y="268.73669">JavaParametricClass</tspan></text>
-    </g>
-    <g
-       id="link_Type_ParameterType"
-       transform="translate(144.90505,227.60737)">
-      <path
-         codeLine="32"
-         d="M 112.6246,203.4769 C 99.6146,224.3069 94.42,232.6 85.06,247.59"
-         fill="none"
-         id="Type-backto-ParameterType"
-         style="stroke:#000000;stroke-width:1" />
-      <polygon
-         fill="none"
-         points="117.7136,206.6553 122.16,188.21 107.5357,200.2984 "
-         style="stroke:#000000;stroke-width:1"
-         id="polygon14" />
-    </g>
-    <g
-       id="link_TParametricEntity_ParametricClass"
-       transform="translate(144.90505,227.60737)">
-      <path
-         codeLine="33"
-         d="M 640.6861,169.6717 C 675.9561,192.3717 726.17,224.7 761.44,247.4"
-         fill="none"
-         id="TParametricEntity-backto-ParametricClass"
-         style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
-      <polygon
-         fill="none"
-         points="643.9333,164.6263 625.55,159.93 637.4388,174.717 "
-         style="stroke:#000000;stroke-width:1"
-         id="polygon15" />
-    </g>
-    <g
-       id="link_TParameterConcretization_ParameterConcretization"
-       transform="translate(144.90505,227.60737)">
-      <path
-         codeLine="37"
-         d="m 384.5,177.93 c 0,22.7 0,46.77 0,69.47"
-         fill="none"
-         id="TParameterConcretization-backto-ParameterConcretization"
-         style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
-      <polygon
-         fill="none"
-         points="390.5,177.93 384.5,159.93 378.5,177.93 "
-         style="stroke:#000000;stroke-width:1"
-         id="polygon19" />
-    </g>
-    <g
-       id="link_TParametricEntity_ParametricMethod"
-       transform="translate(144.90505,227.60737)">
-      <path
-         codeLine="38"
-         d="m 601.2193,177.9294 c -0.19,22.7 -0.3993,46.7706 -0.5893,69.4706"
-         fill="none"
-         id="TParametricEntity-backto-ParametricMethod"
-         style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
-      <polygon
-         fill="none"
-         points="607.2191,177.9796 601.37,159.93 595.2196,177.8792 "
-         style="stroke:#000000;stroke-width:1"
-         id="polygon20" />
-    </g>
+     id="elem_JavaType">
+    <rect
+       codeLine="9"
+       fill="#ffffcc"
+       height="88.890602"
+       id="JavaType"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="189"
+       x="527.5"
+       y="398.6684" />
+    <circle
+       cx="587.75"
+       cy="414.6684"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse2"
+       r="11" />
+    <path
+       d="m 590.7188,420.309 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6407 -1.3125,-1.6562 -1.3125,-4.7812 0,-3.125 1.3125,-4.7813 1.3282,-1.6562 3.8282,-1.6562 0.7031,0 1.3437,0.1562 0.6563,0.1563 1.2188,0.4532 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0781 -0.6875,1.0625 -0.6875,3.1563 0,2.0937 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2657 0.5938,-0.2812 1.2188,-0.8593 z"
+       fill="#000000"
+       id="path2" />
     <text
        fill="#000000"
        font-family="sans-serif"
-       font-size="13px"
+       font-size="14px"
        lengthAdjust="spacing"
-       textLength="129"
-       x="165.0961"
-       y="59.026402"
-       id="text20"
-       transform="rotate(25.06408,0.77171469,495.43366)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-         sodipodi:role="line"
-         id="tspan32"
-         x="165.0961"
-         y="59.026402">genericParameters*</tspan></text>
+       textLength="60"
+       x="608.25"
+       y="419.51511"
+       id="text2">JavaType</text>
+    <line
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       x1="528.5"
+       x2="715.5"
+       y1="430.6684"
+       y2="430.6684"
+       id="line2" />
     <text
        fill="#000000"
        font-family="sans-serif"
-       font-size="13px"
-       lengthAdjust="spacing"
-       textLength="101"
-       x="493.24271"
-       y="116.3937"
-       id="text21"
-       transform="rotate(25.553931,128.2093,519.53387)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-         sodipodi:role="line"
-         id="tspan35"
-         x="493.24271"
-         y="116.3937">genericEntities*</tspan></text>
-    <text
-       fill="#000000"
-       font-family="sans-serif"
-       font-size="13px"
-       lengthAdjust="spacing"
-       textLength="124"
-       x="243.22321"
-       y="59.2117"
-       id="text22"
-       transform="rotate(-90,460.96849,-6.7113689)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-         sodipodi:role="line"
-         id="tspan31"
-         x="243.22321"
-         y="59.2117">concreteParameter</tspan></text>
-    <text
-       fill="#000000"
-       font-family="sans-serif"
-       font-size="13px"
-       lengthAdjust="spacing"
-       textLength="61"
-       x="314.29239"
-       y="116.4044"
-       id="text23"
-       transform="rotate(-90,538.06572,128.1585)">generics*</text>
-    <text
-       fill="#000000"
-       font-family="sans-serif"
-       font-size="13px"
-       lengthAdjust="spacing"
-       textLength="104"
-       x="443.51208"
-       y="59.2117"
-       id="text24"
-       transform="rotate(-32.331896,823.34708,-405.186)">concretizations*</text>
-    <text
-       fill="#000000"
-       font-family="sans-serif"
-       font-size="13px"
-       lengthAdjust="spacing"
-       textLength="174"
-       x="449.55609"
-       y="116.3552"
-       id="text25"
-       transform="rotate(-37.687028,850.76345,101.65292)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-         sodipodi:role="line"
-         id="tspan34"
-         x="449.55609"
-         y="116.3552">parameterConcretizations*</tspan></text>
-    <text
-       fill="#000000"
-       font-family="sans-serif"
-       font-size="13px"
+       font-size="14px"
        lengthAdjust="spacing"
        textLength="138"
-       x="355.39859"
-       y="59.2117"
-       id="text26"
-       transform="rotate(54.485122,421.43795,263.93544)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-         sodipodi:role="line"
-         id="tspan30"
-         x="355.39859"
-         y="59.2117">concreteParameters*</tspan></text>
+       x="533.5"
+       y="447.66351"
+       id="text3">Boolean isTestCase</text>
     <text
        fill="#000000"
        font-family="sans-serif"
-       font-size="13px"
+       font-size="14px"
        lengthAdjust="spacing"
-       textLength="110"
-       x="409.24081"
-       y="121.3856"
-       id="text27"
-       transform="rotate(54.595264,400.70597,452.66416)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-         sodipodi:role="line"
-         id="tspan36"
-         x="409.24081"
-         y="121.3856">concreteEntities*</tspan></text>
+       textLength="144"
+       x="533.5"
+       y="463.96039"
+       id="text4">Boolean isInnerClass</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="177"
+       x="533.5"
+       y="480.2572"
+       id="text5">Boolean isJUnit4TestCase</text>
+  </g>
+  <g
+     id="g39">
+    <rect
+       codeLine="14"
+       fill="#ffffcc"
+       height="32"
+       id="JavaConcretization"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="158"
+       x="7"
+       y="214.6684" />
+    <circle
+       cx="22"
+       cy="230.6684"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse5"
+       r="11" />
+    <path
+       d="m 24.9688,236.309 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6407 -1.3125,-1.6562 -1.3125,-4.7812 0,-3.125 1.3125,-4.7813 1.3282,-1.6562 3.8282,-1.6562 0.7031,0 1.3437,0.1562 0.6563,0.1563 1.2188,0.4532 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0781 -0.6875,1.0625 -0.6875,3.1563 0,2.0937 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2657 0.5938,-0.2812 1.2188,-0.8593 z"
+       fill="#000000"
+       id="path5" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="126"
+       x="36"
+       y="235.51511"
+       id="text6">JavaConcretization</text>
+  </g>
+  <g
+     id="elem_TConcretization">
+    <rect
+       codeLine="16"
+       fill="#ffffff"
+       height="32"
+       id="TConcretization"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="141"
+       x="164.5"
+       y="122.6684" />
+    <circle
+       cx="179.5"
+       cy="138.6684"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse6"
+       r="11" />
+    <path
+       d="m 180.3438,145.4184 h -2.4532 v -10.25 H 174.75 v -2.1406 h 8.7344 v 2.1406 h -3.1406 z"
+       fill="#000000"
+       id="path6" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="109"
+       x="193.5"
+       y="143.51511"
+       id="text7">TConcretization</text>
+  </g>
+  <g
+     id="elem_TParameterConcretization">
+    <rect
+       codeLine="18"
+       fill="#ffffff"
+       height="32"
+       id="TParameterConcretization"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="212"
+       x="305"
+       y="214.6684" />
+    <circle
+       cx="320"
+       cy="230.6684"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse7"
+       r="11" />
+    <path
+       d="m 320.8438,237.4184 h -2.4532 v -10.25 H 315.25 v -2.1406 h 8.7344 v 2.1406 h -3.1406 z"
+       fill="#000000"
+       id="path7" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="180"
+       x="334"
+       y="235.51511"
+       id="text8">TParameterConcretization</text>
+  </g>
+  <g
+     id="elem_JavaParameterType">
+    <rect
+       codeLine="20"
+       fill="#ffffcc"
+       height="32"
+       id="JavaParameterType"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="163"
+       x="488.5"
+       y="547.55841" />
+    <circle
+       cx="503.5"
+       cy="563.55841"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse8"
+       r="11" />
+    <path
+       d="m 506.4688,569.199 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6407 -1.3125,-1.6562 -1.3125,-4.7812 0,-3.125 1.3125,-4.7813 1.3282,-1.6562 3.8282,-1.6562 0.7031,0 1.3437,0.1562 0.6563,0.1563 1.2188,0.4532 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0781 -0.6875,1.0625 -0.6875,3.1563 0,2.0937 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2657 0.5938,-0.2812 1.2188,-0.8593 z"
+       fill="#000000"
+       id="path8" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="131"
+       x="517.5"
+       y="568.40509"
+       id="text9">JavaParameterType</text>
+  </g>
+  <g
+     id="elem_TConcreteParameterType">
+    <rect
+       codeLine="22"
+       fill="#ffffff"
+       height="32"
+       id="TConcreteParameterType"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="210"
+       x="540"
+       y="306.6684" />
+    <circle
+       cx="555"
+       cy="322.6684"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse9"
+       r="11" />
+    <path
+       d="m 555.8438,329.4184 h -2.4532 v -10.25 H 550.25 v -2.1406 h 8.7344 v 2.1406 h -3.1406 z"
+       fill="#000000"
+       id="path9" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="178"
+       x="569"
+       y="327.51511"
+       id="text10">TConcreteParameterType</text>
+  </g>
+  <g
+     id="elem_JavaParameterConcretization">
+    <rect
+       codeLine="24"
+       fill="#ffffcc"
+       height="32"
+       id="JavaParameterConcretization"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="229"
+       x="785.5"
+       y="306.6684" />
+    <circle
+       cx="800.5"
+       cy="322.6684"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse10"
+       r="11" />
+    <path
+       d="m 803.4688,328.309 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6407 -1.3125,-1.6562 -1.3125,-4.7812 0,-3.125 1.3125,-4.7813 1.3282,-1.6562 3.8282,-1.6562 0.7031,0 1.3437,0.1562 0.6563,0.1563 1.2188,0.4532 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0781 -0.6875,1.0625 -0.6875,3.1563 0,2.0937 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2657 0.5938,-0.2812 1.2188,-0.8593 z"
+       fill="#000000"
+       id="path10" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="197"
+       x="814.5"
+       y="327.51511"
+       id="text11">JavaParameterConcretization</text>
+  </g>
+  <g
+     id="elem_TGenericParameterType">
+    <rect
+       codeLine="26"
+       fill="#ffffff"
+       height="32"
+       id="TGenericParameterType"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="200"
+       x="305"
+       y="306.6684" />
+    <circle
+       cx="320"
+       cy="322.6684"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse11"
+       r="11" />
+    <path
+       d="m 320.8438,329.4184 h -2.4532 v -10.25 H 315.25 v -2.1406 h 8.7344 v 2.1406 h -3.1406 z"
+       fill="#000000"
+       id="path11" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="168"
+       x="334"
+       y="327.51511"
+       id="text12">TGenericParameterType</text>
+  </g>
+  <g
+     id="elem_TAssociation">
+    <rect
+       codeLine="28"
+       fill="#ffffff"
+       height="32"
+       id="TAssociation"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="120"
+       x="236"
+       y="30.6684" />
+    <circle
+       cx="251"
+       cy="46.6684"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse12"
+       r="11" />
+    <path
+       d="m 251.8438,53.4184 h -2.4532 v -10.25 H 246.25 v -2.1406 h 8.7344 v 2.1406 h -3.1406 z"
+       fill="#000000"
+       id="path12" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="88"
+       x="265"
+       y="51.515099"
+       id="text13">TAssociation</text>
+  </g>
+  <g
+     id="elem_JavaParametricMethod">
+    <rect
+       codeLine="30"
+       fill="#ffffcc"
+       height="32"
+       id="JavaParametricMethod"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="184"
+       x="215"
+       y="547.55841" />
+    <circle
+       cx="230"
+       cy="563.55841"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse13"
+       r="11" />
+    <path
+       d="m 232.9688,569.199 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6407 -1.3125,-1.6562 -1.3125,-4.7812 0,-3.125 1.3125,-4.7813 1.3282,-1.6562 3.8282,-1.6562 0.7031,0 1.3437,0.1562 0.6563,0.1563 1.2188,0.4532 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0781 -0.6875,1.0625 -0.6875,3.1563 0,2.0937 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2657 0.5938,-0.2812 1.2188,-0.8593 z"
+       fill="#000000"
+       id="path13" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="152"
+       x="244"
+       y="568.40509"
+       id="text14">JavaParametricMethod</text>
+  </g>
+  <g
+     id="elem_TParametricEntity">
+    <rect
+       codeLine="32"
+       fill="#ffffff"
+       height="32"
+       id="TParametricEntity"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="152"
+       x="179"
+       y="427.1084" />
+    <circle
+       cx="194"
+       cy="443.1084"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse14"
+       r="11" />
+    <path
+       d="m 194.8438,449.8584 h -2.4532 v -10.25 H 189.25 v -2.1406 h 8.7344 v 2.1406 h -3.1406 z"
+       fill="#000000"
+       id="path14" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="120"
+       x="208"
+       y="447.95511"
+       id="text15">TParametricEntity</text>
+  </g>
+  <g
+     id="link_JavaType_JavaParameterType">
+    <path
+       codeLine="34"
+       d="m 595.5474,504.3614 c -9.14,20.83 -12.2474,27.907 -18.8274,42.897"
+       fill="none"
+       id="JavaType-backto-JavaParameterType"
+       style="stroke:#000000;stroke-width:1" />
+    <polygon
+       fill="none"
+       points="601.0418,506.7723 602.78,487.8784 590.0531,501.9505 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon15" />
+  </g>
+  <g
+     id="link_TConcreteParameterType_JavaType">
+    <path
+       codeLine="35"
+       d="m 638.5597,356.8185 c -2.91,14.99 -4.0297,20.7499 -8.0497,41.4799"
+       fill="none"
+       id="TConcreteParameterType-backto-JavaType"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="644.4497,357.9619 641.99,339.1484 632.6697,355.6751 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon16" />
+  </g>
+  <g
+     id="link_TConcretization_JavaConcretization">
+    <path
+       codeLine="36"
+       d="m 193.9834,164.4463 c -27.46,16.59 -55.3734,33.4421 -82.7034,49.9521"
+       fill="none"
+       id="TConcretization-backto-JavaConcretization"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="197.0861,169.5818 209.39,155.1384 190.8808,159.3108 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon17" />
+  </g>
+  <g
+     id="link_TAssociation_TConcretization">
+    <path
+       codeLine="37"
+       d="m 275.5555,77.8415 c -11.21,16.55 -18.9155,27.9069 -30.1555,44.4869"
+       fill="none"
+       id="TAssociation-backto-TConcretization"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="280.5232,81.2063 285.65,62.9384 270.5878,74.4766 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon18" />
+  </g>
+  <g
+     id="link_TAssociation_TParameterConcretization">
+    <path
+       codeLine="38"
+       d="m 315.2225,78.0868 c 21.64,34.26 64.4175,101.9516 86.1175,136.2916"
+       fill="none"
+       id="TAssociation-backto-TParameterConcretization"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="320.2953,74.8826 305.61,62.8684 310.1497,81.2909 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon19" />
+  </g>
+  <g
+     id="link_TGenericParameterType_JavaParameterType">
+    <path
+       codeLine="39"
+       d="m 423.2739,354.3795 c 17.57,29.4 48.7161,80.1889 86.7261,133.1789 15.26,21.27 34.37,44.66 46.87,59.57"
+       fill="none"
+       id="TGenericParameterType-backto-JavaParameterType"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="428.4242,351.3015 414.04,338.9284 418.1235,357.4574 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon20" />
+  </g>
+  <g
+     id="link_TParameterConcretization_JavaParameterConcretization">
+    <path
+       codeLine="40"
+       d="m 512.7627,250.3963 c 89.71,16.51 213.2973,39.2621 303.0473,55.7721"
+       fill="none"
+       id="TParameterConcretization-backto-JavaParameterConcretization"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="513.8487,244.4954 495.06,247.1384 511.6767,256.2972 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon21" />
+  </g>
+  <g
+     id="link_TParametricEntity_JavaParametricClass">
+    <path
+       codeLine="41"
+       d="m 219.7754,470.3521 c -30.47,22.7 -72.5054,54.0163 -102.9854,76.7163"
+       fill="none"
+       id="TParametricEntity-backto-JavaParametricClass"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="223.36,475.1636 234.21,459.5984 216.1908,465.5405 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon22" />
+  </g>
+  <g
+     id="link_TParametricEntity_JavaParametricMethod">
+    <path
+       codeLine="42"
+       d="m 269.0323,476.0815 c 9.96,22.7 21.1977,48.2869 31.1677,70.9869"
+       fill="none"
+       id="TParametricEntity-backto-JavaParametricMethod"
+       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
+    <polygon
+       fill="none"
+       points="274.5266,473.6708 261.8,459.5984 263.5379,478.4923 "
+       style="stroke:#000000;stroke-width:1"
+       id="polygon23" />
+  </g>
+  <g
+     id="link_TParameterConcretization_TGenericParameterType">
+    <path
+       codeLine="43"
+       d="m 409.98,246.9384 c -1.1,16.55 -2.85,42.81 -3.96,59.39"
+       fill="none"
+       id="TParameterConcretization-TGenericParameterType"
+       style="stroke:#000000;stroke-width:1" />
     <text
        fill="#000000"
        font-family="sans-serif"
        font-size="13px"
        lengthAdjust="spacing"
        textLength="104"
-       x="605.9425"
-       y="59.2117"
-       id="text28"
-       transform="rotate(-48.524357,872.31891,-62.59965)">concretizations*</text>
-    <text
-       fill="#000000"
-       font-family="sans-serif"
-       font-size="13px"
-       lengthAdjust="spacing"
-       textLength="83"
-       x="602.59558"
-       y="116.4044"
-       id="text29"
-       transform="rotate(-82.541462,802.59743,145.28684)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-         sodipodi:role="line"
-         id="tspan37"
-         x="602.59558"
-         y="116.4044">genericEntity</tspan></text>
-    <text
-       fill="#000000"
-       font-family="sans-serif"
-       font-size="13px"
-       lengthAdjust="spacing"
-       textLength="89"
-       x="679.16748"
-       y="48.0811"
-       id="text30"
-       transform="rotate(92.935436,729.19255,181.75647)">genericization</text>
-    <text
-       fill="#000000"
-       font-family="sans-serif"
-       font-size="13px"
-       lengthAdjust="spacing"
-       textLength="92"
-       x="628.29498"
-       y="116.4044"
-       id="text31"
-       transform="rotate(-46.579048,979.74234,64.733473)">concreteEntity</text>
+       x="289.0799"
+       y="266.60309"
+       id="text23"
+       transform="translate(14.344341,-6.6608023)">concretizations*</text>
     <text
        fill="#000000"
        font-family="sans-serif"
        font-size="13px"
        lengthAdjust="spacing"
        textLength="115"
-       x="55.026699"
-       y="59.2117"
-       id="text32"
-       transform="rotate(41.407528,31.338179,456.35497)"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
-         sodipodi:role="line"
-         id="tspan33"
-         x="55.026699"
-         y="59.2117">genericParameter</tspan></text>
+       x="272.311"
+       y="295.52029"
+       id="text24"
+       transform="translate(18.029905,4.4926015)">genericParameter</text>
+  </g>
+  <g
+     id="link_TParameterConcretization_TConcreteParameterType">
+    <path
+       codeLine="44"
+       d="m 451.23,247.1384 c 42.99,16.54 110.74,42.59 153.68,59.11"
+       fill="none"
+       id="TParameterConcretization-TConcreteParameterType"
+       style="stroke:#000000;stroke-width:1" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="61"
+       x="393.33139"
+       y="266.86691"
+       id="text25"
+       transform="translate(40.768127,-5.0393005)">generics*</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="124"
+       x="448.8627"
+       y="295.56451"
+       id="text26"
+       transform="translate(116.644,6.5008836)">concreteParameter</text>
+  </g>
+  <g
+     id="link_TGenericParameterType_TParametricEntity">
+    <path
+       codeLine="45"
+       d="m 385.39,339.1484 c -28.75,22.7 -82.03,64.77 -110.78,87.48"
+       fill="none"
+       id="TGenericParameterType-TParametricEntity"
+       style="stroke:#000000;stroke-width:1" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="129"
+       x="229.5799"
+       y="358.8801"
+       id="text27"
+       transform="translate(52.546329,-9.0223933)">genericParameters*</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="101"
+       x="296.95761"
+       y="416.07281"
+       id="text28"
+       transform="rotate(-35.184715,311.50293,438.30528)">genericEntities*</text>
+  </g>
+  <g
+     id="link_TConcretization_TParameterConcretization">
+    <path
+       codeLine="47"
+       d="m 265.26,155.1384 c 32.33,16.54 83.29,42.59 115.59,59.11"
+       fill="none"
+       id="TConcretization-TParameterConcretization"
+       style="stroke:#000000;stroke-width:1" />
     <text
        fill="#000000"
        font-family="sans-serif"
        font-size="13px"
        lengthAdjust="spacing"
        textLength="104"
-       x="228.5118"
-       y="116.4704"
+       x="154.3304"
+       y="174.8669"
+       id="text31"
+       transform="translate(123.90357,-9.993063)">concretizations*</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="174"
+       x="169.50841"
+       y="203.7119"
+       id="text32"
+       transform="translate(186.2161,6.627331)">parameterConcretizations*</text>
+  </g>
+  <g
+     id="link_TConcreteParameterType_TParametricEntity">
+    <path
+       codeLine="48"
+       d="m 594.01,339.1484 c -74.74,22.7 -213.26,64.77 -288.01,87.48"
+       fill="none"
+       id="TConcreteParameterType-TParametricEntity"
+       style="stroke:#000000;stroke-width:1" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="138"
+       x="417.76321"
+       y="358.8801"
        id="text33"
-       transform="rotate(41.81803,118.07037,459.47199)">concretizations*</text>
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 530.66983,85.660384 529.47596,355.04737"
-       id="path33"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       inkscape:connection-end="#elem_TParameterConcretization"
-       inkscape:connection-start="#elem_TConcreteParameterType" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 542.1899,85.660384 734.95589,355.04737"
-       id="path34"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       inkscape:connection-start="#elem_TConcreteParameterType"
-       inkscape:connection-end="#elem_TParametricEntity" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 511.32178,355.04737 294.66439,163.34988"
-       id="path2"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       inkscape:connection-start="#elem_TParameterConcretization"
-       inkscape:connection-end="#elem_TGenericParameterType" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 712.76006,355.04737 310.1446,163.34988"
-       id="path3"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 550.45922,355.04737 844.10255,131.89469"
-       id="path14"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       inkscape:connection-start="#elem_TParameterConcretization"
-       inkscape:connection-end="#elem_TConcretization" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 857.71009,131.89469 c 4.66514,110.89577 -15.03622,153.42318 -103.85841,223.15268"
-       id="path27"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       inkscape:connection-start="#elem_TConcretization"
-       inkscape:connection-end="#elem_TParametricEntity"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 857.71009,131.89469 C 756.09004,215.96585 762.15895,248.392 753.85168,355.04737"
-       id="path29"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:connection-end="#elem_TParametricEntity"
-       inkscape:connection-start="#elem_TConcretization" />
-    <path
-       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.927068px;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:6.48948, 6.48948;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ColoredTriangle-6-7)"
-       d="M 936.43007,317.13442 556.96987,85.660384"
-       id="path35-5-1"
-       inkscape:connector-type="polyline"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:connection-end="#elem_TConcreteParameterType" />
+       transform="rotate(-15.828393,541.52568,167.39831)">concreteParameters*</text>
     <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;line-height:1.25;font-family:Times;-inkscape-font-specification:'Times, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-       x="294.66684"
-       y="347.32556"
-       id="text15"><tspan
-         sodipodi:role="line"
-         id="tspan15" /></text>
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="110"
+       x="338.46249"
+       y="435.96552"
+       id="text34"
+       transform="rotate(-15.472504,325.28476,495.96724)">concreteEntities*</text>
+  </g>
+  <g
+     id="link_TConcretization_TParametricEntity">
+    <path
+       codeLine="49"
+       d="m 229.82,155.0784 c -5.81,51.89 5.3,219.82 17.97,271.65"
+       fill="none"
+       id="TConcretization-TParametricEntity"
+       style="stroke:#000000;stroke-width:1" />
     <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24px;line-height:1.25;font-family:Times;-inkscape-font-specification:'Times, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-       x="469.99341"
-       y="443.36206"
-       id="text16"><tspan
-         sodipodi:role="line"
-         id="tspan16" /></text>
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="104"
+       x="244.7439"
+       y="174.7878"
+       id="text35"
+       transform="rotate(-88.450992,277.19599,227.55823)">concretizations*</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="83"
+       x="148.6548"
+       y="415.90701"
+       id="text36"
+       transform="rotate(81.559299,226.73686,421.75676)">genericEntity</text>
+  </g>
+  <g
+     id="g38">
+    <path
+       codeLine="50"
+       d="m 242.22,155.0784 c 12.67,51.89 23.77,219.82 17.95,271.65"
+       fill="none"
+       id="TConcretization-TParametricEntity-1"
+       style="stroke:#000000;stroke-width:1" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="89"
+       x="313.33499"
+       y="164.48779"
+       id="text37"
+       transform="rotate(80.875929,284.29167,121.40849)">genericization</text>
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="13px"
+       lengthAdjust="spacing"
+       textLength="92"
+       x="277.12009"
+       y="415.90701"
+       id="text38"
+       transform="rotate(92.03149,312.16424,369.57777)">concreteEntity</text>
   </g>
 </svg>
