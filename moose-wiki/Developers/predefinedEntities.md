@@ -106,8 +106,7 @@ For the first example we show how we model inheritance in the FamixJava meta-mod
 - `FamixJavaClass` uses `TClass`, ie. a Java class has all properties of the generic class defined in Famix. Note that a Java class also has other properties not shown here.
 - `FamixJavaInheritance` uses the trait `TInheritance` to represent an inheritance relationship.
 
-```plantuml|
-@startuml
+```plantuml!
 hide empty members
 skinparam class {
   BackgroundColor white
@@ -135,7 +134,6 @@ TWithInheritances <|.. TClass
 TClass <|.. FamixJavaClass
 TWithInheritances "subclass" -- "superInheritances*" TInheritance
 TWithInheritances "superclass" -- "subInheritances*" TInheritance
-@enduml
 ```
 
 That way, a `FamixJavaClass` has `superInheritances` and `subInheritances` propperties containing `FamixJavaInheritance` objects.
@@ -148,7 +146,6 @@ For simplification we did not put the FamixJava entities, but there is a `FamixJ
 - `TClass` may be a , ie. a Java class has all properties of the generic class defined in Famix. Note that a Java class also has other properties not shown here.
 - `FamixJavaInheritance` uses the trait `TInheritance` to represent an inheritance relationship.
 
-```plantuml|
 <details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/Diagrams/inheritanceInContext.puml&fmt=svg)</details>
 
 That way, a `FamixJavaClass` has `superInheritances` and `subInheritances` propperties containing `FamixJavaInheritance` objects.
