@@ -99,11 +99,56 @@ There are 38 such *terminal traits* currently in FamixNG.
 We now present UML diagram that show how Association and Property traits are used to create the Terminal traits.
 These UML diagrams give an idea how to combine all traits to create a meta-model for a given programming language.
 
+### Inheritance in context
+
 For the first example we show how we model inheritance in the FamixJava meta-model:
 - `TClass` uses `TWithInheritances`, ie. a generic class may have inheritance relationships
 - `FamixJavaClass` uses `TClass`, ie. a Java class has all properties of the generic class defined in Famix. Note that a Java class also has other properties not shown here.
 - `FamixJavaInheritance` uses the trait `TInheritance` to represent an inheritance relationship.
 
-<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/inheritanceInContext.puml&fmt=svg)</details>
+```plantuml|
+@startuml
+hide empty members
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+class FamixJavaInheritance <<(C,white)>> #FFFFCC {
+}
+class TClass <<(T,white)>> #FFFFCC {
+  Boolean isTestCase
+  Number weightOfAClass
+}
+class TWithInheritances <<(T,white)>> #CCFFFF {
+  Number subclassHierarchyDepth
+  Number hierarchyNestingLevel
+  Number numberOfSubclasses
+  Number numberOfDirectSubclasses
+}
+class FamixJavaClass <<(C,white)>> #FFFFCC {
+}
+class TInheritance <<(T,white)>> #CCFFFF {
+}
+TInheritance <|.. FamixJavaInheritance
+TWithInheritances <|.. TClass
+TClass <|.. FamixJavaClass
+TWithInheritances "subclass" -- "superInheritances*" TInheritance
+TWithInheritances "superclass" -- "subInheritances*" TInheritance
+@enduml
+```
+
+That way, a `FamixJavaClass` has `superInheritances` and `subInheritances` propperties containing `FamixJavaInheritance` objects.
+
+### Invocation in context
+
+We now look at how invocations are used.
+For simplification we did not put the FamixJava entities, but there is a `FamixJavaMethod` directly using `TMethod` and we saw `FamixJavaClass` in the previous example:
+- `TWithStatements` uses `TWithInvocations`, ie. an entity with statements (eg. a function, a procedure, a method,...) may have invocations
+- `TClass` may be a , ie. a Java class has all properties of the generic class defined in Famix. Note that a Java class also has other properties not shown here.
+- `FamixJavaInheritance` uses the trait `TInheritance` to represent an inheritance relationship.
+
+```plantuml|
+<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/Diagrams/inheritanceInContext.puml&fmt=svg)</details>
 
 That way, a `FamixJavaClass` has `superInheritances` and `subInheritances` propperties containing `FamixJavaInheritance` objects.
