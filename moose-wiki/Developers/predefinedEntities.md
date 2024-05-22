@@ -141,11 +141,51 @@ That way, a `FamixJavaClass` has `superInheritances` and `subInheritances` propp
 ### Invocation in context
 
 We now look at how invocations are used.
-For simplification we did not put the FamixJava entities, but there is a `FamixJavaMethod` directly using `TMethod` and we saw `FamixJavaClass` in the previous example:
+For simplification we did not put the FamixJava entities, but there is a `FamixJavaMethod` directly using `TMethod` and we saw `FamixJavaClass` using `TClass` in the previous example:
 - `TWithStatements` uses `TWithInvocations`, ie. an entity with statements (eg. a function, a procedure, a method,...) may have invocations
-- `TClass` may be a , ie. a Java class has all properties of the generic class defined in Famix. Note that a Java class also has other properties not shown here.
-- `FamixJavaInheritance` uses the trait `TInheritance` to represent an inheritance relationship.
+- `TMethod` uses `TWithStatements` and thus can make invocations
+- `TMethod` uses `TInvocable` and thus can receive invocations
+- `TClass` uses `TInvocationsReceiver` because classes may receive (static) messages
 
-<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/Diagrams/inheritanceInContext.puml&fmt=svg)</details>
+```plantuml!
+hide empty members
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+class TInvocation <<(T,white)>> #CCFFFF {
+}
+class TClass <<(T,white)>> #FFFFCC {
+  Boolean isTestCase
+  Number weightOfAClass
+}
+class TWithStatements <<(T,white)>> #FFFFFF {
+  Number numberOfStatements
+}
+class TMethod <<(T,white)>> #FFFFCC {
+}
+class TInvocable <<(T,white)>> #CCFFFF {
+}
+class TWithMethods <<(T,white)>> #FFFFFF {
+  Number numberOfAbstractMethods
+  Number numberOfMethods
+  Number weightedMethodCount
+  Number tightClassCohesion
+}
+class TInvocationsReceiver <<(T,white)>> #CCFFFF {
+}
+class TWithInvocations <<(T,white)>> #CCFFFF {
+  Number numberOfOutgoingInvocations
+}
+TWithMethods <|.. TClass
+TInvocationsReceiver <|.. TClass
+TWithInvocations <|.. TWithStatements
+TInvocable <|.. TMethod
+TWithStatements <|.. TMethod
+TInvocation "outgoingInvocations*" -- "sender" TWithInvocations
+TMethod "methods*" --o "parentType" TWithMethods
+TInvocation "receivingInvocations*" -- "receiver" TInvocationsReceiver
+TInvocation "incomingInvocations*" -- "candidates*" TInvocable
+```
 
-That way, a `FamixJavaClass` has `superInheritances` and `subInheritances` propperties containing `FamixJavaInheritance` objects.
