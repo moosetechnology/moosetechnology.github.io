@@ -20,8 +20,12 @@ New entities are created as classes composed from these existing traits.
 Some common entities (like Packages) are also proposed, precomposed with common traits.
 Here we list all currently available traits.
 
-FamixNG is still under development, and the library of available traits is subject to change.
-The following should nevertheless help users make sense of the more than one hundred traits available.
+FamixNG is under continuous development, and the library of available traits is subject to change.
+The following should nevertheless help users make sense of the more than 130 traits available.
+
+We will first present the different [Association Traits](#categories-of-trait) that are used, some adding very specific properties, some working in group,...
+Then we will show how some of these [traits are composed](#putting-it-all-together) to make more complex entities.
+We finish by presenting the traits for [modelling genericity](#genericity) which is a complex issue.
 
 ## Categories of traits
 
@@ -33,7 +37,7 @@ First, one can divide the set of traits into four categories:
 
 They are described as follows:
 
-## Association Traits
+### Association Traits
 
 Association traits model the fact that an entity is used (referred to) in the source code.
 Such a reference creates an association between the using entity (refers to) and the entity that is used (is referred to).
@@ -68,7 +72,7 @@ For now there are only two traits to put at each end of the relationship:
 <details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/derefInvok.puml&fmt=svg)</details>
 - `FamixTFileInclude` and `FamixTWithFileInclude`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/fileInclude.puml&fmt=svg)</details>
 
-## Technical Traits
+### Technical Traits
 
 Technical traits do not model programming language entities but are used to implement Moose functionalities.
 
@@ -77,14 +81,14 @@ A typical `FamixTSourceAnchor` contains a filename, and start and end positions 
 
 *Technical traits* may also implement software engineering metric computation (`TLCOMMetrics`), or ways to model the programming language used (all `SourceLanguage`), or be  used to implement the generic [MooseQuery engine](https://moosequery.ferlicot.fr/).<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/technic.puml&fmt=svg)</details>
 
-## Property Traits
+### Property Traits
 
 Property traits model composable properties that source code entities may possess.
 Some examples are `FamixTNamedEntity` (entities that have a name), `FamixTTypedEntity` (entities that are statically typed), or a number of entities modeling ownership: `FamixTWithGlobalVariables` (entities that can own `FamixTGlobalVariables`), `FamixTWithFunctions` (entities that can own `FamixTFunctions`), ... 
 
 There are 46 *property traits* currently in FamixNG including 38 traits modeling ownership of various possible kinds of entities (`FamixTWith...`).
 
-## Terminal Traits
+### Terminal Traits
 
  Terminal traits model entities that can be found in the source code such as `Functions`, `Classes`, `Exceptions`, ...
 These entities are often defined as a composition of some of the *property traits*.
@@ -189,7 +193,6 @@ TInvocation "receivingInvocations*" -- "receiver" TInvocationsReceiver
 TInvocation "incomingInvocations*" -- "candidates*" TInvocable
 ```
 
-
 ### Reference in context
 
 References are relationship between methods (`TWithStatements`) and types (`TType`` are `TReferenceable`)
@@ -268,7 +271,6 @@ TWithMethods "parentType" o-- "methods*" TMethod
 TWithReferences "referencer" -- "outgoingReferences*" TReference
 ```
 
-
 ### Access in context
 
 Finally, we look at the access relationship and how it is used.
@@ -345,3 +347,29 @@ TWithMethods "parentType" o-- "methods*" TMethod
 TAttribute "attributes*" --o "parentType" TWithAttributes
 TAccessible "variable" -- "incomingAccesses*" TAccess
 ```
+
+## Genericity
+
+Genericity in OO languages allows to define a class or method which will apply to several not specified types.
+For example in Java a Map associates key of an unspecified type to values of another unspecified type.
+Map is a generic class, also called ParametricClass (this is the term we use in Famix).
+The definition of Map in Java looks like this: `class Map<K,V>` where K is the ParameterType of the keys and V the ParameterType of the values.
+
+Generic types can then be made concrete by specifying some or all their ParameterTypes.
+For example we could create a StringMap with `class StringMap<V> extends Map<String,V>`.
+In this new type, the K ParameterType is made concrete by setting it to be String, but the type is still generic because V is not concrete.
+StringMap is a generic type with only one ParameterType: V.
+
+Methods can also be GenericEntities when the type of one parameter, or the return type of the method is a ParameterType.
+For example in Java, the get(key) method is generic because the type of the key is K, a ParameterType and it returns a value of type V, another ParameterType: `public V get(K key)'.
+
+In Famix the meta-model for genericity is the following:
+![UML for Genericity meta-model](Diagrams/generics.svg){: .img-fill }
+
+- a `TParametricEntity` (like Map above) represents an entity that has `TGenericParameterTypes` (like K and V above)
+- `TParametricEntity` is used by `JavaParametricMethod` and `JavaParametricClass` (in the case of Java)
+-  a `TParametricEntity` has concretizations which are associations between two ParametricEntity. For example StringMap above is also a ParametricEntity and is a (partial) concretization of Map.
+- When there is a concretization, some ParameterType(s) are made concrete.
+  In the example above (StringMap), String is a `TparameterConcretization`
+    - it is associated with the GenericParameterType it "concretizes" (K in this example), and
+	- it is associated with a specific TConcretization (ie. the fact that StringMap is a concretization of Map)
