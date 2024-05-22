@@ -189,3 +189,159 @@ TInvocation "receivingInvocations*" -- "receiver" TInvocationsReceiver
 TInvocation "incomingInvocations*" -- "candidates*" TInvocable
 ```
 
+
+### Reference in context
+
+References are relationship between methods (`TWithStatements`) and types (`TType`` are `TReferenceable`)
+
+Additionally, the diagram shows how variables (`TStructuralEntity`) and methods (`TMethods` using `TWithStatements`) are `TTypedEntity` which have a property `declaredType` pointing to a `TType` also.
+This property does not use the `TReference` association because it is a 1-to-n relationship.
+
+```plantuml!
+hide empty members
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+class TType <<(T,white)>> #FFFFCC {
+}
+class TAttribute <<(T,white)>> #FFFFCC {
+  Number hierarchyNestingLevel
+}
+class TStructuralEntity <<(T,white)>> #FFFFFF {
+}
+class TParameter <<(T,white)>> #FFFFCC {
+}
+class TWithParameters <<(T,white)>> #FFFFFF {
+  Number numberOfParameters
+}
+class TTypedEntity <<(T,white)>> #FFFFFF {
+}
+class TWithReferences <<(T,white)>> #CCFFFF {
+}
+class TReference <<(T,white)>> #CCFFFF {
+}
+class TReferenceable <<(T,white)>> #CCFFFF {
+}
+class TWithLocalVariables <<(T,white)>> #FFFFFF {
+}
+class TWithMethods <<(T,white)>> #FFFFFF {
+  Number numberOfAbstractMethods
+  Number numberOfMethods
+  Number weightedMethodCount
+  Number tightClassCohesion
+}
+class TClass <<(T,white)>> #FFFFCC {
+  Boolean isTestCase
+  Number weightOfAClass
+}
+class TWithAttributes <<(T,white)>> #FFFFFF {
+  Number numberOfAttributes
+}
+class TWithStatements <<(T,white)>> #FFFFFF {
+  Number numberOfStatements
+}
+class TLocalVariable <<(T,white)>> #FFFFCC {
+}
+class TMethod <<(T,white)>> #FFFFCC {
+}
+TStructuralEntity <|.. TLocalVariable
+TReferenceable <|.. TType
+TTypedEntity <|.. TStructuralEntity
+TStructuralEntity <|.. TAttribute
+TStructuralEntity <|.. TParameter
+TType <|.. TClass
+TWithAttributes <|.. TClass
+TWithMethods <|.. TClass
+TWithReferences <|.. TWithStatements
+TTypedEntity <|.. TMethod
+TWithLocalVariables <|.. TMethod
+TWithParameters <|.. TMethod
+TWithStatements <|.. TMethod
+TReference "incomingReferences*" -- "referredType" TReferenceable
+TType "declaredType" -- "typedEntities*" TTypedEntity
+TParameter "parameters*" --o "parentBehaviouralEntity" TWithParameters
+TWithLocalVariables "parentBehaviouralEntity" o-- "localVariables*" TLocalVariable
+TAttribute "attributes*" --o "parentType" TWithAttributes
+TWithMethods "parentType" o-- "methods*" TMethod
+TWithReferences "referencer" -- "outgoingReferences*" TReference
+```
+
+
+### Access in context
+
+Finally, we look at the access relationship and how it is used.
+Accesses are made from methods (`TMethods` using `TWithStatements`, itself using `TWithAccesses`) to variables (`TStructuralEntity` uses `TAccessible`).
+
+```plantuml!
+hide empty members
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+class TAttribute <<(T,white)>> #FFFFCC {
+  Number hierarchyNestingLevel
+}
+class TStructuralEntity <<(T,white)>> #FFFFFF {
+}
+class TParameter <<(T,white)>> #FFFFCC {
+}
+class TWithParameters <<(T,white)>> #FFFFFF {
+  Number numberOfParameters
+}
+class TWithAccesses <<(T,white)>> #CCFFFF {
+}
+class TWithLocalVariables <<(T,white)>> #FFFFFF {
+}
+class TWithMethods <<(T,white)>> #FFFFFF {
+  Number numberOfAbstractMethods
+  Number numberOfMethods
+  Number weightedMethodCount
+  Number tightClassCohesion
+}
+class TClass <<(T,white)>> #FFFFCC {
+  Boolean isTestCase
+  Number weightOfAClass
+}
+class TWithAttributes <<(T,white)>> #FFFFFF {
+  Number numberOfAttributes
+}
+class TAccessible <<(T,white)>> #CCFFFF {
+  Number numberOfLocalAccesses
+  Number numberOfAccesses
+  Number numberOfGlobalAccesses
+  Number numberOfAccessingMethods
+  Number numberOfAccessingClasses
+}
+class TWithStatements <<(T,white)>> #FFFFFF {
+  Number numberOfStatements
+}
+class TAccess <<(T,white)>> #CCFFFF {
+  Boolean isRead
+  Boolean isWrite
+  Boolean isReadWriteUnknown
+}
+class TLocalVariable <<(T,white)>> #FFFFCC {
+}
+class TMethod <<(T,white)>> #FFFFCC {
+}
+TAccessible <|.. TStructuralEntity
+TStructuralEntity <|.. TAttribute
+TStructuralEntity <|.. TParameter
+TWithAttributes <|.. TClass
+TWithMethods <|.. TClass
+TWithAccesses <|.. TWithStatements
+TStructuralEntity <|.. TLocalVariable
+TWithLocalVariables <|.. TMethod
+TWithParameters <|.. TMethod
+TWithStatements <|.. TMethod
+TWithAccesses "accessor" -- "accesses*" TAccess
+TAccessible -- "accessors*" TWithAccesses
+TWithLocalVariables "parentBehaviouralEntity" o-- "localVariables*" TLocalVariable
+TParameter "parameters*" --o "parentBehaviouralEntity" TWithParameters
+TWithMethods "parentType" o-- "methods*" TMethod
+TAttribute "attributes*" --o "parentType" TWithAttributes
+TAccessible "variable" -- "incomingAccesses*" TAccess
+```
