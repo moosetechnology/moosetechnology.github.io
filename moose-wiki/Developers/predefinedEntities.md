@@ -26,7 +26,6 @@ The following should nevertheless help users make sense of the more than one hun
 ## Categories of traits
 
 First, one can divide the set of traits into four categories:
-- [Categories of traits](#categories-of-traits)
 - [Association Traits](#association-traits)
 - [Technical Traits](#technical-traits)
 - [Property Traits](#property-traits)
@@ -49,18 +48,24 @@ Using an association involves:
 
 There are five full-fledged associations in FamixNG:
 
-- `FamixTAccess`, from: `FamixTWithAccess`, to: `FamixTAccessible` <details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/access.puml&fmt=svg)</details>
-- `FamixTInheritance`, from: `FamixTWithInheritance`, to: `FamixTWithInheritance`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/inheritance.puml&fmt=svg)</details>
-- `FamixTInvocation`, from: `FamixTWithInvocation`, to: `FamixTInvocable`, for OO programs, there is an extra receiver: `FamixTInvocationReceiver`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/invocation.puml&fmt=svg)</details>
-- `FamixTReference`, from: `FamixTWithReferences`, to: `FamixTReferenceable`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/reference.puml&fmt=svg)</details>
-- `FamixTTraitUsage`, from: `FamixTWithTrait`, to: `FamixTTrait`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/usetrait.puml&fmt=svg)</details>
+- `FamixTAccess`, from: `FamixTWithAccess`, to: `FamixTAccessible`
+<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/access.puml&fmt=svg)</details>
+- `FamixTInheritance`, from: `FamixTWithInheritance`, to: `FamixTWithInheritance`
+<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/inheritance.puml&fmt=svg)</details>
+- `FamixTInvocation`, from: `FamixTWithInvocation`, to: `FamixTInvocable`, for OO programs, there is an extra receiver: `FamixTInvocationReceiver`
+<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/invocation.puml&fmt=svg)</details>
+- `FamixTReference`, from: `FamixTWithReferences`, to: `FamixTReferenceable`
+<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/reference.puml&fmt=svg)</details>
+- `FamixTTraitUsage`, from: `FamixTWithTrait`, to: `FamixTTrait`
+<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/usetrait.puml&fmt=svg)</details>
 
 To these five we added two more specialized "associations":
 `DereferencedInvocation` (call of a pointer to a function in C) and `FileInclude` (also in C).
 These do not reify the association as a separate entity, but they might do so in the future.
 For now there are only two traits to put at each end of the relationship:
 
-- `FamixTDereferencedInvocation` and `FamixTWithDereferencedInvocations`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/derefInvok.puml&fmt=svg)</details>
+- `FamixTDereferencedInvocation` and `FamixTWithDereferencedInvocations`
+<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/derefInvok.puml&fmt=svg)</details>
 - `FamixTFileInclude` and `FamixTWithFileInclude`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/fileInclude.puml&fmt=svg)</details>
 
 ## Technical Traits
@@ -88,3 +93,17 @@ For example, `FamixTClass` is composed of: `FamixTInvocationsReceiver` (class ca
 The name *terminal trait* refers to the fact that they can be used directly to create a programming language concept (a class, a package), whereas *property traits* are typically composed with other traits to make a meaningful programming language concept.
 
 There are 38 such *terminal traits* currently in FamixNG.
+
+## Putting it all together
+
+We now present UML diagram that show how Association and Property traits are used to create the Terminal traits.
+These UML diagrams give an idea how to combine all traits to create a meta-model for a given programming language.
+
+For the first example we show how we model inheritance in the FamixJava meta-model:
+- `TClass` uses `TWithInheritances`, ie. a generic class may have inheritance relationships
+- `FamixJavaClass` uses `TClass`, ie. a Java class has all properties of the generic class defined in Famix. Note that a Java class also has other properties not shown here.
+- `FamixJavaInheritance` uses the trait `TInheritance` to represent an inheritance relationship.
+
+<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/inheritanceInContext.puml&fmt=svg)</details>
+
+That way, a `FamixJavaClass` has `superInheritances` and `subInheritances` propperties containing `FamixJavaInheritance` objects.
