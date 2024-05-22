@@ -351,13 +351,14 @@ TAccessible "variable" -- "incomingAccesses*" TAccess
 ## Genericity
 
 Genericity in OO languages allows to define a class or method which will apply to several not specified types.
-For example in Java a Map associates key of an unspecified type to values of another unspecified type.
-Map is a generic class, also called ParametricClass (this is the term we use in Famix).
-The definition of Map in Java looks like this: `class Map<K,V>` where K is the ParameterType of the keys and V the ParameterType of the values.
+For example in Java a Map associates keys of an unspecified type to values of another unspecified type.
+Map is a generic class, (also called parametric class, this is the term we use in Famix).
+The definition of Map in Java looks like this: `class Map<K,V>` where K and V are the ParameterTypes of the ParametricClass.
 
 Generic types can then be made concrete by specifying some or all their ParameterTypes.
 For example we could create a StringMap with `class StringMap<V> extends Map<String,V>`.
-In this new type, the K ParameterType is made concrete by setting it to be String, but the type is still generic because V is not concrete.
+In this new type, the ParameterType K is made concrete by setting it to be String.
+The StringMap type is still generic because V is not concrete.
 StringMap is a generic type with only one ParameterType: V.
 
 Methods can also be GenericEntities when the type of one parameter, or the return type of the method is a ParameterType.
@@ -366,10 +367,10 @@ For example in Java, the get(key) method is generic because the type of the key 
 In Famix the meta-model for genericity is the following:
 ![UML for generics meta-model](Diagrams/generics.svg)
 
-- a `TParametricEntity` represents an entity that has `TGenericParameterType`s (like Map having parameter types K and V above);
-- the same `TParametricEntity` may also have `TConcreteParameterType`s (like String for StringMap in the example above);
+- a `TParametricEntity` represents an entity that has `TGenericParameterType`s (like Map having parameter types K and V in the example above);
+- the same `TParametricEntity` may also have `TConcreteParameterType`s (like String for StringMap above);
 - in the case of Java, `TParametricEntity` is used by `JavaParametricMethod` and `JavaParametricClass`;
 - a `TConcretization` is an association between two `TParametricEntity`s (like between Map and StringMap above);
 - a `TParameterConcretization` is an association between a `TGenericParameterType` (like K above) and a `TConcreteParameterType` (like String above);
-- the  `TParameterConcretization` (association between ParameterTypes) is linked to a `TConcretization` (association between ParametricEntities);
+- a  `TParameterConcretization` (association between ParameterTypes) is linked to a `TConcretization` (association between ParametricEntities);
 - in the case of Java, any `JavaType` can be used as a  `TConcreteParameterType`
