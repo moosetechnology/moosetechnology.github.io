@@ -25,12 +25,87 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.050338"
-     inkscape:cx="510.31192"
-     inkscape:cy="292.7629"
+     inkscape:zoom="1.7041198"
+     inkscape:cx="401.08682"
+     inkscape:cy="292.52638"
      inkscape:current-layer="svg39" />
   <defs
-     id="defs1" />
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="marker18"
+       refX="3"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Colored triangle"
+       markerWidth="4"
+       markerHeight="3"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="none">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.5"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path18" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker16"
+       refX="3"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Colored triangle"
+       markerWidth="4"
+       markerHeight="3"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="none">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.5"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path16" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="ColoredTriangle"
+       refX="3"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Colored triangle"
+       markerWidth="4"
+       markerHeight="3"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="none">
+      <path
+         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.25"
+         d="M 2.885,0 -1.44,2.5 v -5 z"
+         id="path4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="ColoredTriangle-4"
+       refX="3"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Colored triangle"
+       markerWidth="4"
+       markerHeight="3"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="none">
+      <path
+         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.25"
+         d="M 2.885,0 -1.44,2.5 v -5 z"
+         id="path4-7" />
+    </marker>
+  </defs>
   <g
      id="elem_JavaParametricClass">
     <rect
@@ -66,7 +141,8 @@
        id="text1">JavaParametricClass</text>
   </g>
   <g
-     id="elem_JavaType">
+     id="elem_JavaType"
+     transform="translate(46.158818,-21.001494)">
     <rect
        codeLine="9"
        fill="#ffffcc"
@@ -236,7 +312,8 @@
        id="text8">TParameterConcretization</text>
   </g>
   <g
-     id="elem_JavaParameterType">
+     id="elem_JavaParameterType"
+     transform="translate(96.546814,-1.7466861)">
     <rect
        codeLine="20"
        fill="#ffffcc"
@@ -406,7 +483,8 @@
        id="text13">TAssociation</text>
   </g>
   <g
-     id="elem_JavaParametricMethod">
+     id="elem_JavaParametricMethod"
+     transform="translate(-28.208294,0.12836539)">
     <rect
        codeLine="30"
        fill="#ffffcc"
@@ -474,34 +552,6 @@
        id="text15">TParametricEntity</text>
   </g>
   <g
-     id="link_JavaType_JavaParameterType">
-    <path
-       codeLine="34"
-       d="m 595.5474,504.3614 c -9.14,20.83 -12.2474,27.907 -18.8274,42.897"
-       fill="none"
-       id="JavaType-backto-JavaParameterType"
-       style="stroke:#000000;stroke-width:1" />
-    <polygon
-       fill="none"
-       points="601.0418,506.7723 602.78,487.8784 590.0531,501.9505 "
-       style="stroke:#000000;stroke-width:1"
-       id="polygon15" />
-  </g>
-  <g
-     id="link_TConcreteParameterType_JavaType">
-    <path
-       codeLine="35"
-       d="m 638.5597,356.8185 c -2.91,14.99 -4.0297,20.7499 -8.0497,41.4799"
-       fill="none"
-       id="TConcreteParameterType-backto-JavaType"
-       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
-    <polygon
-       fill="none"
-       points="644.4497,357.9619 641.99,339.1484 632.6697,355.6751 "
-       style="stroke:#000000;stroke-width:1"
-       id="polygon16" />
-  </g>
-  <g
      id="link_TConcretization_JavaConcretization">
     <path
        codeLine="36"
@@ -544,20 +594,6 @@
        id="polygon19" />
   </g>
   <g
-     id="link_TGenericParameterType_JavaParameterType">
-    <path
-       codeLine="39"
-       d="m 423.2739,354.3795 c 17.57,29.4 48.7161,80.1889 86.7261,133.1789 15.26,21.27 34.37,44.66 46.87,59.57"
-       fill="none"
-       id="TGenericParameterType-backto-JavaParameterType"
-       style="stroke:#000000;stroke-width:1;stroke-dasharray:7, 7" />
-    <polygon
-       fill="none"
-       points="428.4242,351.3015 414.04,338.9284 418.1235,357.4574 "
-       style="stroke:#000000;stroke-width:1"
-       id="polygon20" />
-  </g>
-  <g
      id="link_TParameterConcretization_JavaParameterConcretization">
     <path
        codeLine="40"
@@ -598,6 +634,46 @@
        points="274.5266,473.6708 261.8,459.5984 263.5379,478.4923 "
        style="stroke:#000000;stroke-width:1"
        id="polygon23" />
+  </g>
+  <g
+     id="elem_JavaParametricMethod-1"
+     transform="translate(160.85291,0.64534677)">
+    <rect
+       codeLine="30"
+       fill="#ffffcc"
+       height="30.888264"
+       id="JavaParametricMethod-0"
+       rx="2.5"
+       ry="2.5"
+       style="stroke:#a9a9a9;stroke-width:0.5"
+       width="195.57581"
+       x="215"
+       y="547.55841" />
+    <circle
+       cx="230"
+       cy="563.55841"
+       fill="#ffffff"
+       style="stroke:#181818;stroke-width:1"
+       id="ellipse13-6"
+       r="11" />
+    <path
+       d="m 232.9688,569.199 q -0.5782,0.2969 -1.2188,0.4375 -0.6406,0.1563 -1.3437,0.1563 -2.5,0 -3.8282,-1.6407 -1.3125,-1.6562 -1.3125,-4.7812 0,-3.125 1.3125,-4.7813 1.3282,-1.6562 3.8282,-1.6562 0.7031,0 1.3437,0.1562 0.6563,0.1563 1.2188,0.4532 v 2.7187 q -0.625,-0.5781 -1.2188,-0.8437 -0.5937,-0.2813 -1.2187,-0.2813 -1.3438,0 -2.0313,1.0781 -0.6875,1.0625 -0.6875,3.1563 0,2.0937 0.6875,3.1719 0.6875,1.0625 2.0313,1.0625 0.625,0 1.2187,-0.2657 0.5938,-0.2812 1.2188,-0.8593 z"
+       fill="#000000"
+       id="path13-3" />
+    <text
+       fill="#000000"
+       font-family="sans-serif"
+       font-size="14px"
+       lengthAdjust="spacing"
+       textLength="152"
+       x="244"
+       y="568.40509"
+       id="text14-2"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="244"
+         y="568.40509">JavaParametricInterface</tspan></text>
   </g>
   <g
      id="link_TParameterConcretization_TGenericParameterType">
@@ -802,4 +878,38 @@
        id="text38"
        transform="rotate(92.03149,312.16424,369.57777)">concreteEntity</text>
   </g>
+  <path
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00157;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:7.01099, 7.01099;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ColoredTriangle)"
+     d="M 649.0479,545.81172 422.49892,338.6684"
+     id="path3"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     inkscape:connection-start="#elem_JavaParameterType"
+     inkscape:connection-end="#elem_TGenericParameterType"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00157;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:7.01099, 7.01099;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ColoredTriangle-4)"
+     d="M 445.62744,548.20376 284.02163,459.1084"
+     id="path3-6"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cc"
+     inkscape:connection-start="#elem_JavaParametricMethod-1"
+     inkscape:connection-end="#elem_TParametricEntity" />
+  <path
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00157;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker16)"
+     d="m 666.73144,545.81172 0.91452,-79.25422"
+     id="path15"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     inkscape:connection-start="#elem_JavaParameterType"
+     inkscape:connection-end="#elem_JavaType" />
+  <path
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00157;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker18)"
+     d="m 657.80824,377.6669 -9.0821,-38.9985"
+     id="path17"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     inkscape:connection-start="#elem_JavaType"
+     inkscape:connection-end="#elem_TConcreteParameterType" />
 </svg>

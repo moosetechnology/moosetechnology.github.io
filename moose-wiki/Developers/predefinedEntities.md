@@ -371,7 +371,7 @@ In Famix the meta-model for genericity is the following:
 
 - a `TParametricEntity` represents an entity that has `TGenericParameterType`s (like Map having parameter types K and V in the example above);
 - the same `TParametricEntity` may also have `TConcreteParameterType`s (like String for StringMap above);
-- in the case of Java, `TParametricEntity` is used by `JavaParametricMethod` and `JavaParametricClass`;
+- in the case of Java, `TParametricEntity` is used by `JavaParametricMethod`, `JavaParametricClass` and `JavaParametricInterface`;
 - a `TConcretization` is an association between two `TParametricEntity`s (like between Map and StringMap above);
 - a `TParameterConcretization` is an association between a `TGenericParameterType` (like K above) and a `TConcreteParameterType` (like String above);
 - a  `TParameterConcretization` (association between ParameterTypes) is linked to a `TConcretization` (association between ParametricEntities);
