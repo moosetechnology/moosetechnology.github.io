@@ -367,6 +367,7 @@ Methods can also be GenericEntities when the type of one parameter, or the retur
 For example in Java, the get(key) method is generic because the type of the key is K, a ParameterType and it returns a value of type V, another ParameterType: `public V get(K key)'.
 
 In Famix the meta-model for genericity is the following:
+
 ![UML for generics meta-model](Diagrams/generics.svg)
 
 - a `TParametricEntity` represents an entity that has `TGenericParameterType`s (like Map having parameter types K and V in the example above);
