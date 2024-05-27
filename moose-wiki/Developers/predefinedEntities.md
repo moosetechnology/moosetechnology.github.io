@@ -30,10 +30,17 @@ We finish by presenting the traits for [modelling genericity](#genericity) which
 ## Categories of traits
 
 First, one can divide the set of traits into four categories:
-- [Association Traits](#association-traits)
-- [Technical Traits](#technical-traits)
-- [Property Traits](#property-traits)
-- [Terminal Traits](#terminal-traits)
+- [Categories of traits](#categories-of-traits)
+  - [Association Traits](#association-traits)
+  - [Technical Traits](#technical-traits)
+  - [Property Traits](#property-traits)
+  - [Terminal Traits](#terminal-traits)
+- [Putting it all together](#putting-it-all-together)
+  - [Inheritance in context](#inheritance-in-context)
+  - [Invocation in context](#invocation-in-context)
+  - [Reference in context](#reference-in-context)
+  - [Access in context](#access-in-context)
+- [Genericity](#genericity)
 
 They are described as follows:
 
@@ -53,15 +60,156 @@ Using an association involves:
 There are five full-fledged associations in FamixNG:
 
 - `FamixTAccess`, from: `FamixTWithAccess`, to: `FamixTAccessible`
-<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/access.puml&fmt=svg)</details>
+<details>
+```plantuml!
+@startuml
+hide empty members
+
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+
+class TAccess << (T,lightGrey) >> {
+  Boolean isWrite
+  Boolean isRead
+  Boolean isReadWriteUnknown
+}
+class TAccessible << (T,lightGrey) >> {
+  Number numberOfAccessingMethods
+  Number numberOfAccesses
+  Number numberOfLocalAccesses
+  Number numberOfAccessingClasses
+  Number numberOfGlobalAccesses
+}
+class TWithAccesses << (T,lightGrey) >> {
+}
+
+
+TAccess " *incomingAccesses" -- "variable" TAccessible
+TAccess " *accesses" -- "accessor" TWithAccesses
+TAccessible -- " *accessors" TWithAccesses
+
+
+@enduml
+```
+</details>
+
 - `FamixTInheritance`, from: `FamixTWithInheritance`, to: `FamixTWithInheritance`
-<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/inheritance.puml&fmt=svg)</details>
+<details>
+```plantuml!
+@startuml
+hide empty members
+
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+
+class TInheritance << (T,lightGrey) >> {
+}
+class TWithInheritances << (T,lightGrey) >> {
+  Number totalNumberOfSubclasses
+  Number numberOfDirectSubclasses
+  Number subclassHierarchyDepth
+  Number numberOfSubclasses
+  Number hierarchyNestingLevel
+}
+
+
+TInheritance " *subInheritances" -- "superclass" TWithInheritances
+TInheritance " *superInheritances" -- "subclass" TWithInheritances
+
+
+@enduml
+```
+</details>
 - `FamixTInvocation`, from: `FamixTWithInvocation`, to: `FamixTInvocable`, for OO programs, there is an extra receiver: `FamixTInvocationReceiver`
-<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/invocation.puml&fmt=svg)</details>
+<details>
+```plantuml!
+@startuml
+hide empty members
+
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+
+class TInvocation << (T,lightGrey) >> {
+}
+class TWithInvocations << (T,lightGrey) >> {
+}
+class TInvocable << (T,lightGrey) >> {
+}
+class TInvocationsReceiver << (T,lightGrey) >> {
+}
+
+
+TInvocation " *receivingInvocations" -- "receiver" TInvocationsReceiver
+TInvocation " *outgoingInvocations" -- "sender" TWithInvocations
+TInvocation " *incomingInvocations" -- " *candidates" TInvocable
+
+
+@enduml
+```
+</details>
 - `FamixTReference`, from: `FamixTWithReferences`, to: `FamixTReferenceable`
-<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/reference.puml&fmt=svg)</details>
+<details>
+```plantuml!
+@startuml
+hide empty members
+
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+
+class TReference << (T,lightGrey) >> {
+}
+class TWithReferences << (T,lightGrey) >> {
+}
+class TReferenceable << (T,lightGrey) >> {
+}
+
+
+TReference " *incomingReferences" -- "referredType" TReferenceable
+TReference " *outgoingReferences" -- "referencer" TWithReferences
+
+
+@enduml
+```
+</details>
 - `FamixTTraitUsage`, from: `FamixTWithTrait`, to: `FamixTTrait`
-<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/usetrait.puml&fmt=svg)</details>
+<details>
+```plantuml!
+@startuml
+hide empty members
+
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+
+class TTraitUsage << (T,lightGrey) >> {
+}
+class TWithTraits << (T,lightGrey) >> {
+}
+class TTrait << (T,lightGrey) >> {
+}
+
+
+TTraitUsage " *incomingTraitUsages" -- "trait" TTrait
+TTrait " *traits" -- "traitOwner" TWithTraits
+
+
+@enduml
+```
+</details>
 
 To these five we added two more specialized "associations":
 `DereferencedInvocation` (call of a pointer to a function in C) and `FileInclude` (also in C).
@@ -69,8 +217,54 @@ These do not reify the association as a separate entity, but they might do so in
 For now there are only two traits to put at each end of the relationship:
 
 - `FamixTDereferencedInvocation` and `FamixTWithDereferencedInvocations`
-<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/derefInvok.puml&fmt=svg)</details>
-- `FamixTFileInclude` and `FamixTWithFileInclude`<details>![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moose-wiki/master/Developers/Diagrams/fileInclude.puml&fmt=svg)</details>
+<details>
+```plantuml!
+@startuml
+hide empty members
+
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+
+class TDereferencedInvocation << (T,lightGrey) >> {
+}
+class TWithDereferencedInvocations << (T,lightGrey) >> {
+}
+
+
+TDereferencedInvocation " *dereferencedInvocations" -- "referencer" TWithDereferencedInvocations
+
+
+@enduml
+```
+</details>
+- `FamixTFileInclude` and `FamixTWithFileInclude`
+<details>
+```plantuml!
+@startuml
+hide empty members
+
+skinparam class {
+  BackgroundColor white
+  ArrowColor black
+  BorderColor darkGray
+}
+
+class TFileInclude << (T,lightGrey) >> {
+}
+class TWithFileIncludes << (T,lightGrey) >> {
+}
+
+
+TFileInclude " *outgoingIncludeRelations" -- "source" TWithFileIncludes
+TFileInclude " *incomingIncludeRelations" -- "target" TWithFileIncludes
+
+
+@enduml
+```
+</details>
 
 ### Technical Traits
 
