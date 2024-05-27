@@ -352,19 +352,19 @@ TAccessible "variable" -- "incomingAccesses*" TAccess
 
 (note: the same meta-model is also described in this [blog post](https://modularmoose.org/posts/2023-07-13-parametric)).
 
-Genericity in OO languages allows to define a class or method which will apply to several not specified types.
+Genericity in OO languages allows to define a class, an interface, or a method which will apply to several not specified types.
 For example in Java a Map associates keys of an unspecified type to values of another unspecified type.
-Map is a generic class, (also called parametric class, this is the term we use in Famix).
-The definition of Map in Java looks like this: `class Map<K,V>` where K and V are the ParameterTypes of the ParametricClass.
+Map is a generic interface, (also called parametric interface, this is the term we use in Famix).
+The definition of Map in Java looks like this: `interface Map<K,V>` where K and V are the ParameterTypes of the ParametricInterface.
 
 Generic types can then be made concrete by specifying some or all their ParameterTypes.
-For example we could create a StringMap with `class StringMap<V> extends Map<String,V>`.
+For example we could create a StringMap with `class StringMap<V> implements Map<String,V>`.
 In this new type, the ParameterType K is made concrete by setting it to be String.
 The StringMap type is still generic because V is not concrete.
 StringMap is a generic type with only one ParameterType: V.
 
 Methods can also be GenericEntities when the type of one parameter, or the return type of the method is a ParameterType.
-For example in Java, the get(key) method is generic because the type of the key is K, a ParameterType and it returns a value of type V, another ParameterType: `public V get(K key)'.
+For example in Java, the get(key) method (in Map) is generic because the type of the key is K, a ParameterType and it returns a value of type V, another ParameterType: `public V get(K key)'.
 
 In Famix the meta-model for genericity is the following:
 
