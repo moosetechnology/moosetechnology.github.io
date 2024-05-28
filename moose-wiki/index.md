@@ -88,6 +88,7 @@ Moose IDE is a group of tools that one can use to explore a model.
 In this section, we group the documentation for each tool.
 
 - [Moose IDE Browsers](Users/moose-ide/browsers)
+- [Moose Exporter](Users/moose-ide/moose-exporter)
 
 ### Visualizing a model
 
