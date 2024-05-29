@@ -89,6 +89,7 @@ In this section, we group the documentation for each tool.
 
 - [Moose IDE Browsers](Users/moose-ide/browsers)
 - [Moose Exporter](Users/moose-ide/moose-exporter)
+- [Moose Critics](Users/moose-ide/moose-critics)
 
 ### Visualizing a model
 

@@ -12,22 +12,22 @@ tags: browser
 ---
 
 Software projects often leave specific architectural or programming rules that are not checked by the off-the-shelf static analysis tools and linters.  
-But MooseCritics is now here to make such things easy !
+But MooseCritics is now here to make such things easy!
 
 ## Setting up for rule making
 
-The first step in order to use this tool is of course to open its browser, findable in the Moose menu under the name *Moose Critic Browser*.  
-As every other tool of MooseIDE, we also need to propagate a model to give our tool entities to analyse. For this analysis, we will use a model of ArgoUML, an open-source Java project used in this [wiki](/moose-wiki/Beginners/moose-in-action).  
+The first step to use this tool is of course to open its browser, findable in the Moose menu under the name *Moose Critic Browser*.
+As with every other tool of MooseIDE, we also need to propagate a model to give our tool entities to analyze. For this analysis, we will use a model of ArgoUML, an open-source Java project used in this [wiki](/moose-wiki/Beginners/moose-in-action).  
 
 !["MooseCritics browser"](/img/posts/2022-08-08-moosecritics/browser-ready.png){: .img-fill }
 
 ## Rules and how to write them
 
-Rules in MooseCritics are divided in two components : Context, and Condition.  
+Rules in MooseCritics are divided into two components: Context, and Condition.  
 A context is a collection of entities to specify the scope of our analysis. Using this, we are only executing our rules on the relevant entities for them.  
-Once we have a context, we add conditions to it, to verify the validity of every entity belonging to this context. 
+Once we have a context, we add conditions to it, to verify the validity of every entity belonging to this context.
 
-Let's start building a few of those, to appreciate how easy and versatile this system can be !  
+Let's start building a few of those, to appreciate how easy and versatile this system can be!
 
 ### Contexts
 
@@ -37,14 +37,14 @@ To begin, we will right-click on the *root context*, the root of our rules, doin
 
 As you can see, a context has three properties :
 
-- Name : the name of our context  
-- Context Block : a code block, using as parameter the collection given by the parent context, and that must return a collection of entities
-- Summary : a quick explanation of the selection performed
+- Name: the name of our context  
+- Context Block: a code block, using as a parameter the collection given by the parent context, and that must return a collection of entities
+- Summary: a quick explanation of the selection performed
 
-In this case the selection is very basic (keeping only the classes defined within our model), but any way of manipulating a collection (so long as it remains a collection) can be used to make a very specific choice of entities.  
+In this case, the selection is very basic (keeping only the classes defined within our model), but any way of manipulating a collection (so long as it remains a collection) can be used to make a very specific choice of entities.  
 But for now, let's keep things simple, and add a few more contexts to our root.  
 
-First we select methods...
+First, we select methods...
 
 ```st
 "Title:"
@@ -56,7 +56,6 @@ First we select methods...
 ```
 
 ... and secondly attributes.
-
 
 ```st
 "Title:"
@@ -70,7 +69,6 @@ First we select methods...
 Once this is all done, we are met with this screen :
 
 !["Three contexts"](/img/posts/2022-08-08-moosecritics/three-contexts.png){: .img-fill }
-
 
 ### Conditions
 
@@ -125,7 +123,7 @@ For the conditions, our perceptive minds did not forget about the attributes, so
 	'Every attribute accessed without the use of a getter or setter method.'
 ```
 
-For a final rule, let's work a bit more on our context.   
+For a final rule, let's work a bit more on our context.
 Let's say we want to build a rule around getter methods, to verify that their cyclomatic complexity is equal to 1.  
 For that, we can start by making a new context, using the "Methods" context as its parent :
 
@@ -159,9 +157,9 @@ We are now done with all of our rules. To get the result of our new conditions, 
 
 ## Saving and loading the rules
 
-Our work is now done, but we would like to be able to monitor the state of our project in the long run, and to simplify this, we can export and import sets of rules build with MooseCritics.  
+Our work is now done, but we would like to be able to monitor the state of our project in the long run, and to simplify this, we can export and import sets of rules built with MooseCritics.  
 
-For that, by pressing the "Export rules" button, we can choose where we wish to save our rules. The loading works similarly, and will restore the tree as it was when it was saved (if rules were already present, the imported rules are added after those).
+For that, by pressing the "Export rules" button, we can choose where we wish to save our rules. The loading works similarly and will restore the tree as it was when it was saved (if rules were already present, the imported rules are added after those).
 
 !["Export window"](/img/posts/2022-08-08-moosecritics/export-window.png){: .img-fill }
 
@@ -174,6 +172,5 @@ The exported selection will be the violations found in the right pane when using
 
 ## Conclusion
 
-MooseCritics enables us to verify the validity of our defined rules and puts us in the right direction to correct our mistakes by finding violations. Dividing our model into contexts allows us to make specific analysis while working on a large scale.  
-Even if most of the examples showed here are fairly simple, MooseCritics is able to represent complex structural rules using Famix properties and will surely make your life easier when it comes to software analysis using Moose. :smile:
-
+MooseCritics enables us to verify the validity of our defined rules and puts us in the right direction to correct our mistakes by finding violations. Dividing our model into contexts allows us to make specific analyses while working on a large scale.  
+Even if most of the examples shown here are fairly simple, MooseCritics can represent complex structural rules using Famix properties and will surely make your life easier when it comes to software analysis using Moose. :smile:
