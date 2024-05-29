@@ -87,6 +87,44 @@ The import is made the same way using the `Import rules` button.
 
 ## Use it programmatically
 
+It is also possible to interact with the Moose Critics project through its UI model API.
+
+In the following script, we
+
+1. Create a browser with a new underlying model
+2. Add pre-defined rules saved in a Ston file
+3. Fill the entities list against which rules are computed
+4. Run the rules
+5. Get the results in a collection
+
+```st
+criticBrowser := MiCriticBrowser on: MiCriticBrowser newModel.
+'C:/path/to/my/file.ston' asFileReference readStreamDo: [ :stream | criticBrowser importRulesFromStream: stream ].
+criticBrowser model setEntities: myModel.
+criticBrowser model run.
+violations := criticBrowser model getAllViolations.
+```
+
+It can be then used to export results using the [moose exporter browser](./moose-exporter).
+
+```st
+exportBrowserModel := MiExportModel new.
+exportBrowserModel entitiesList: violations.
+
+"Remove default column"
+exportBrowserModel removeColumnForQueryNamed: #Name.
+exportBrowserModel removeColumnForQueryNamed: #Type.
+
+"export"
+exportBrowserModel addColumnForQuery: [ :violation | violation violatedCondition name ] withName: #'Rule name'.
+exportBrowserModel addColumnForQuery: [ :violation | violation violatedCondition summary ] withName: #'Rule summary'.
+
+exportBrowserModel addColumnForQuery: [ :violation | violation violatingEntity mooseName ] withName: #'Violating Entity'.
+exportBrowserModel addColumnForQuery: [ :violation | violation violatingEntity startPos ] withName: #'Violating position'.
+
+'D:/export-table.md' asFileReference writeStreamDo: [ :stream | exportBrowserModel writeMarkdownTableOn: stream ].
+```
+
 ## Relative blog posts and documentation
 
 - [First Blog Post]({% post_url 2022-08-08-moosecritics %})
