@@ -31,7 +31,7 @@ ClassA<String> class2 = new ClassA<String>;
 `class1` and `class2` are variables of type ClassA, but this time `ClassA` doesn't have a generic type but `String` or `Integer`.
 So, how do we represent all that?
 
-![Modelisation_generic](/img/posts/2023-07-13-parametric/Modelisation_generic.png){: .img-fill }
+![Modelisation_generic](/moose-wiki/Users/famix-java/img/parametrics.drawio.svg){: .img-fill .img-center }
 
 We have 5 new traits in our meta-model :
 
@@ -59,7 +59,7 @@ public interface GenericThrower<T extends Throwable> {
 
 If we take the first class. We have a `ParametricClass` with one `ParameterType` name `T`.
 
-![{{ classA<T> | escape }}](/img/posts/2023-07-13-parametric/genParametric.png){: .img-fill }
+![{{ 'classA<T>' | escape }}](/img/posts/2023-07-13-parametric/genParametric.png){: .img-fill }
 
 For the second class, we have a class that extends a parametric class with one parameter named `String`.
 `String` here is a class.

@@ -3,34 +3,11 @@ layout: page
 background: '/img/bg-wiki.jpg'
 title: 'Moose IDE'
 subtitle: 'Explore your application'
+toc: true
 ---
 
 Moose IDE is a group of tools connected the one with the others that one can use to explore a model.
 On this page, we group the documentation for each tool.
-
-- [Moose Toolbar](#moose-toolbar)
-- [Moose IDE Overview](#moose-ide-overview)
-  - [Opening Browser](#opening-browser)
-  - [Creating a new bus](#creating-a-new-bus)
-- [Models Browser](#models-browser)
-- [Queries Browser](#queries-browser)
-- [Logger Browser](#logger-browser)
-- [Moose Inspector](#moose-inspector)
-- [Tree browsers](#tree-browsers)
-  - [Tree Browser](#tree-browser)
-  - [Tree visualization browser](#tree-visualization-browser)
-  - [Tree Map Browser](#tree-map-browser)
-- [Famix Browsers](#famix-browsers)
-  - [UML Browser](#uml-browser)
-  - [Source code Browser](#source-code-browser)
-  - [Files Browser](#files-browser)
-- [Meta Browsers](#meta-browsers)
-  - [Moose Model Browser](#moose-model-browser)
-  - [Properties Browser](#properties-browser)
-  - [Fame Browser](#fame-browser)
-  - [Meta Browser](#meta-browser)
-- [Developer tools](#developer-tools)
-  - [Moose Playground](#moose-playground)
 
 ## Moose Toolbar
 

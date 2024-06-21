@@ -2,6 +2,14 @@
     "cSpell.words": [
         "Benoit",
         "Famix",
+        "metamodel",
+        "moosetechnology",
         "Pharo"
+    ],
+    "grammarly.selectors": [
+        {
+            "language": "markdown",
+            "scheme": "file"
+        }
     ]
 }

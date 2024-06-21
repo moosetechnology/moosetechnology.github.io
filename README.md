@@ -4,7 +4,10 @@
 - [Moose Blog](#moose-blog)
   - [Create a draft](#create-a-draft)
     - [Add images and figures](#add-images-and-figures)
+      - [MermaidJS](#mermaidjs)
+      - [Drawio](#drawio)
     - [Add code block](#add-code-block)
+  - [Add a TOC](#add-a-toc)
     - [Add/edit an author](#addedit-an-author)
     - [Test your draft locally](#test-your-draft-locally)
   - [Review a draft](#review-a-draft)
@@ -96,6 +99,15 @@ Example:
 !["My hint"](/img/posts/2021-02-04-Coasters/coastersUML.png){: .no-lightense }
 ```
 
+##### MermaidJS
+
+If you use MermaidJS to draw diagram, they will automatically use dark/light theme
+
+##### Drawio
+
+Please to ensure that everybody can easily edit your schema made with drawio, use file extension `.drawio.png`.
+So you can integrate the image easily, and everybody can open your file using drawio
+
 #### Add code block
 
 To add a code block, use the mardown format with
@@ -105,6 +117,19 @@ To add a code block, use the mardown format with
 myCode := 23
 ````'
 ```
+
+### Add a TOC
+
+It is possible to add automatically a toc to the right part of any article (blog post still need update).
+To do so, you onyly have to add the toc option in the page header
+
+```yml
+---
+toc: true
+---
+```
+
+It is possible to omit a title by adding after the title the `{: .no_toc}` code
 
 #### Add/edit an author
 
@@ -130,10 +155,13 @@ If you want to add other fields, please ask to the website maintainer.
         "bio": "PhD Student at Berger-Levrault on GUI migration",
         "github": "https://github.com/badetitou",
         "twitter": "https://twitter.com/badetitou",
-        "image": "https://avatars.githubusercontent.com/u/6225039"
+        "image": "https://avatars.githubusercontent.com/u/6225039",
+        "gravatar-hash": "ab4070086241400a4a428bf8994f05e0"
     }
 }
 ```
+
+> As for Benoit, you can use your gravatar-hash instead of a image.
 
 #### Test your draft locally
 

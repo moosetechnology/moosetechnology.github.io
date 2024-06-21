@@ -2,14 +2,17 @@
 layout: page
 background: '/img/bg-wiki.jpg'
 title: "Moose Wiki"
+toc: true
 ---
 
-# Moose wiki  <!-- omit in toc -->
+# Moose wiki  <!-- omit in toc --> 
+{: .no_toc}
 
 A wiki gathering documentation related to Moose project.
 The main Moose source code repository on GitHub is: [https://github.com/moosetechnology](https://github.com/moosetechnology)
 
 ## Contents  <!-- omit in toc -->
+{: .no_toc}
 
 - For [Beginners](#for-beginners)
 - For [Users](#for-users)
@@ -39,6 +42,7 @@ You'll find here a first list of Famix model and generic tools ways to load Fami
 
 A popular meta-model is the Java meta-model:
 
+- [Famix Java](Users/famix-java/famix-java)
 - [Famix Maker](https://github.com/moosetechnology/Moose-Easy)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [Analyze Java Project](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html)
@@ -52,6 +56,10 @@ A popular meta-model is the Java meta-model:
 #### Famix SQL
 
 - [Getting started with FamixSQL](./Users/famix-sql/getting-started-with-famixsql)
+
+#### Analyze Git Projects and organizations
+
+- [Getting started with GitProject Health](./Users/gitproject-health/getting-started-with-gitproject-health)
 
 #### Other programming languages
 
@@ -80,6 +88,8 @@ Moose IDE is a group of tools that one can use to explore a model.
 In this section, we group the documentation for each tool.
 
 - [Moose IDE Browsers](Users/moose-ide/browsers)
+- [Moose Exporter](Users/moose-ide/moose-exporter)
+- [Moose Critics](Users/moose-ide/moose-critics)
 
 ### Visualizing a model
 

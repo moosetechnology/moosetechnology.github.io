@@ -34,7 +34,7 @@ To install it, execute the following script:
 ```st
 Metacello new
     baseline: 'FASTJava';
-    repository: 'github://moosetechnology/FAST-Java:v2/src';
+    repository: 'github://moosetechnology/FAST-Java:3/src';
     load: 'smacc'.
 ```
 

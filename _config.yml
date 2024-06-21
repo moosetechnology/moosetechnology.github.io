@@ -29,3 +29,12 @@ plugins:
   - jemoji
   - jekyll-spaceship
   - jekyll-seo-tag
+  - jekyll-toc
+
+# _config.yml
+toc:
+  list_id: my-toc-id # Default: "toc"
+  list_class: my-list-class # Default: "section-nav"
+  sublist_class: my-sublist-class # Default: no class for sublists
+  item_class: my-item-class # Default: "toc-entry"
+  item_prefix: item- # Default: "toc-":
