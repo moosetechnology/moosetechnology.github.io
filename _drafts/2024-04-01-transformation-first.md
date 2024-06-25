@@ -64,7 +64,7 @@ You will have to then load the `MoTion-Moose` package using Iceberg.
 Finally done with explainations and setup! :smile:  
 Let us start by creating a class with a `model` instance variable, accessors, and add a class side initializer method for ease of use:
 
-!["Creating our class"](/img/posts/2024-04-01-transformation-first/creating-class.png)
+!["Creating our class"](/img/posts/2024-04-01-transformation-first/creating-class.PNG)
 
 ```smalltalk
 onModel: aMooseModel
@@ -91,6 +91,9 @@ fetchLogErrorMethodInvocations
 		  m incomingInvocations ]
 ```
 
+Using [MooseQuery](https://moosequery.ferlicot.fr/userdocumentation.html), you should be able to find any Famix entities you are seeking.  
+From those Famix entities, we want to get the FAST nodes that we need to transform. We will look at two different methods to do so.
+
 # Using Carrefour
 
 In this context, Carrefour is the perfect tool to use to find the nodes we want to transform in the FAST of our methods.  
@@ -111,7 +114,7 @@ And finally, a method that returns a list with every node we have to transform :
 fetchAllFastNodesUsingCarrefour
 
 	^ self fetchLogErrorMethodInvocations collect: [ :mi | 
-		  self motionQueryForFastMethod: mi sender fast ]
+		  self fetchFastNodeForFamixInvocation: mi ]
 ```
 
 And just like that, we now have the complete list of FAST nodes to transform!
@@ -125,6 +128,8 @@ In those cases, a good way to make things easier is to divide the logic of this 
 Making queries on the Famix model remains a very reliable way to find the candidates methods, but then what about the nodes inside the AST of these methods?
 Methods can be quite complex (50 lines of code, 100, more...) and the resulting AST is huge. Finding the right node(s) in such AST is difficult.
 That's where MoTion comes in. In order to find the nodes we are looking for, we can define patterns that describe those nodes, and the path to follow through the FAST to be able to reach those nodes.  
+
+MoTion is a powerful tool, allowing us to find specific items within a graph through consice patterns describing the objects we are looking for and the path in the graph used to reach them. Hovewer, it does have a very specific syntax that must be looked through before starting making our own patterns. Thankfully, everything is well documented and with examples (one of those being another exemple for FAST Java) on the repository of [MoTion](https://github.com/alesshosry/MoTion) (look at the README!). 
 
 But enough description. Time to code! :smile:
 ```smalltalk
@@ -157,8 +162,7 @@ motionQueryForFastMethod: aFASTJavaMethodEntity
 		         for: aFASTJavaMethodEntity.
 
 	^ query first at: 'logErrorInvocation'
-```
-MoTion is a powerful tool, allowing us to find specific items within a graph through consice patterns describing the objects we are looking for and the path in the graph used to reach them. Hovewer, it does have a very specific syntax that must be looked through before starting making our own patterns. Thankfully, everything is well documented and with examples (one of those being another exemple for FAST Java) on the repository of [MoTion](https://github.com/alesshosry/MoTion) (look at the README!).  
+``` 
 
 Now, to complete the use of our pattern, let's make a final method that will fetch every node we need to transform :
 ```smalltalk
