@@ -109,7 +109,7 @@ First, import basic information.
 ]
 ```
 
-> This will only import the first 20 merge requests for each project. However, one can also use the method `` to import all merge request since a specific date
+> This will only import the first 20 merge requests for each project. However, one can also use the method `importMergeRequests:since:until:` to import all merge request since a specific date
 
 Then, you can import more data for each MergeRequest
 
