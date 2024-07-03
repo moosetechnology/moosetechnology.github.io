@@ -60,6 +60,15 @@ glhImporter := GLHModelImporter new
 glhImporter importGroup: 137.
 ```
 
+You can also import all available top-level groups and then iterate:
+
+```st
+groups := glhImporter importAllGroups.
+groups do: [:group | 
+  glhImporter importGroup: group id.
+]
+```
+
 ### Import a group from GitHub
 
 In a playground (`Ctrl+O`, `Ctrl+W`).
@@ -85,13 +94,41 @@ myProject := ((glhModel allWithType: GLHProject) select: [ :project | project na
 glhImporter importCommitsOf: myProject withStats: true until: '2023-01-01' asDate.
 ```
 
+### Import Merge Requests information
+
+![Badge Gitlab only](https://img.shields.io/badge/GitLab_Only-8A2BE2?logo=gitlab)
+
+It is possible to extract MergeRequests of a project.
+To avoid too many REST API requests, you should do it in multiple steps.
+
+First, import basic information.
+
+```st
+(glhModel allWithType: GLHProject) do: [:project | 
+  glhImporter importMergeRequests: project
+]
+```
+
+> This will only import the first 20 merge requests for each project. However, one can also use the method `importMergeRequests:since:until:` to import all merge request since a specific date
+
+Then, you can import more data for each MergeRequest
+
+```st
+(glphModel allWithType: GLPHEMergeRequest) do: [ :mr |
+  "Extract information about Merge Request approvals and review"
+  glhImporter importMergeResquestApprovals: mr.
+  "Extract information about Author, Mergers, etc."
+  glhImporter importMergeResquestAuthor: mr.
+].
+```
+
 ## Visualize
 
 To visualize the group's "health"
 
 ```st
 dritGroup := (glhModel allWithType: GLHGroup) detect: [ :group | group id = 137 ].
-canvas := (GLHGroupVisualization new forGroup: dritGroup).
+canvas := (GLHGroupVisualization new forGroup: { dritGroup } ).
 canvas open.
 ```
 
@@ -101,7 +138,7 @@ To export the visualization as an svg image
 
 ```st
 dritGroup := (glhModel allWithType: GLHGroup) detect: [ :group | group id = 137 ].
-canvas := (GLHGroupVisualization new forGroup: dritGroup).
+canvas := (GLHGroupVisualization new forGroup: {dritGroup}).
 canvas open.
 
 canvas svgExporter
