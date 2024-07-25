@@ -27,6 +27,7 @@ These are described in [another page](predefinedEntities) ![Unfinished](https://
   - [Generating default attribute value](#generating-default-attribute-value)
   - [Generating test method](#generating-test-method)
   - [Generating Famix Group](#generating-famix-group)
+  - [Generating Custom equality check](#generating-custom-equality-check)
 - [Introducing submetamodels](#introducing-submetamodels)
   - [Set up submetamodels](#set-up-submetamodels)
   - [Define remote entities and traits](#define-remote-entities-and-traits)
@@ -409,6 +410,19 @@ MooseSpecializedGroup subclass: #FamixJavaClassGroup
     package: 'Famix-Java-Entities-Entities'
 ```
 
+### Generating Custom equality check
+
+You might want (for instance, for optimization purpose) to change the equality check of two model entities.
+To do so, you can use the `withEqualityCheckOn:` method and a collection of **properties** to check on.
+
+```st
+person property: #firstName type: #String.
+person property: #lastName type: #String.
+person property: #age type: #Number.
+person withEqualityCheckOn: { #firstName. #lastName. #age }.
+```
+
+> If you need more deeper comparison, look at the FamixDiff project
 
 ## Introducing submetamodels
 
