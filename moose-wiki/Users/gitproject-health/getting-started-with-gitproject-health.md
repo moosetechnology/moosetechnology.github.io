@@ -76,23 +76,25 @@ In a playground (`Ctrl+O`, `Ctrl+W`).
 ```st
 glhModel := GLHModel new.
 
-githubImporter := GHModelImporter new glhModel: glhModel; privateToken: '<my private token>'; yourself.
+githubImporter := GHModelImporter new
+  glhModel: glhModel;
+  privateToken: '<my private token>';
+  yourself.
 
 githubImporter importGroup: 'moosetechnology'.
 ```
 
-### More commits extracted
+### Extract repository commits
 
-![Badge Gitlab only](https://img.shields.io/badge/GitLab_Only-8A2BE2?logo=gitlab)
 
-You might want to gather more commits for a specific repository.
-To do so in GitLab, we added the following API
+You might want to gather commits for repositories.
+Instead of loading all commits and for performance reason, we propose to load commits since a define date. To do so, you can use the API
 
 ```st
-myProject := ((glhModel allWithType: GLHProject) select: [ :project | project name = '<my projectName>' ]) anyOne.
-
-glhImporter importCommitsOf: myProject withStats: true until: '2023-01-01' asDate.
+myImporter withCommitsSince: (Date today - 100 days).
 ```
+
+Remember to set this option before the import of project.
 
 ### Import Merge Requests information
 
