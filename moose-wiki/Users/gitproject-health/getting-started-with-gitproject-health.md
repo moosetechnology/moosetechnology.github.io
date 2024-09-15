@@ -126,13 +126,29 @@ Then, you can import more data for each MergeRequest
 
 ## Visualize
 
-To visualize the group's "health"
+To help with your first analysis of repositories and organization, we included some basic visualization.
+
+### Organization visualization
+
+When using the Pharo inspector to inspect a group, you'll get a new tab called `Group quality`.
+It shows you the repositories and if they are pipelines working for them.
+
+You can also have a look at this visualization using the following script. 
 
 ```st
 dritGroup := (glhModel allWithType: GLHGroup) detect: [ :group | group id = 137 ].
 canvas := (GLHGroupVisualization new forGroup: { dritGroup } ).
 canvas open.
 ```
+
+### Commits distribution
+
+We integrated a visualization that shows the commits distribution on a project by date.
+Commits are also grouped by User who committed.
+
+The same visualization is available in a user centric way, grouped by contributed project.
+
+![Commits distribution for a user](img/commits-distribution.png){: .img-fill }
 
 ## Export
 
