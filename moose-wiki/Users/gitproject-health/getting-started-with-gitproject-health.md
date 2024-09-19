@@ -141,16 +141,7 @@ canvas := (GLHGroupVisualization new forGroup: { dritGroup } ).
 canvas open.
 ```
 
-### Commits distribution
-
-We integrated a visualization that shows the commits distribution on a project by date.
-Commits are also grouped by User who committed.
-
-The same visualization is available in a user centric way, grouped by contributed project.
-
-![Commits distribution for a user](img/commits-distribution.png){: .img-fill }
-
-## Export
+#### Export
 
 To export the visualization as an svg image
 
@@ -164,3 +155,87 @@ canvas svgExporter
   fileName: 'drit-group-health';
   export.
 ```
+
+### Commits distribution
+
+We integrated a visualization that shows the commits distribution on a project by date.
+Commits are also grouped by User who committed.
+
+The same visualization is available in a user centric way, grouped by contributed project.
+
+![Commits distribution for a user](img/commits-distribution.png){: .img-fill }
+
+## Meta-model
+
+The meta-model of GitProjectHealth is automatically update by the FamixUMLDocumentor.
+
+![Image of the metamodel](https://raw.githubusercontent.com/moosetechnology/GitProjectHealth/v1/doc/gitproject.png)
+
+It includes several entities.
+The main one is probably *Commit* with all its attributes as well as *User*.
+
+## Connect with others meta-model
+
+It is possible to connect with others meta-model.
+In here, we describe briefly how to do it.
+
+### Jira Connector
+
+
+The Jira connector connect this project to the [Pharo Jira API project](https://github.com/Evref-BL/Jira-Pharo-API).
+It basically looks for commit and merge request links to Jira Issue.
+
+To install the connector, please perform:
+
+```st
+Metacello new
+  repository: 'github://moosetechnology/GitProjectHealth:main/src';
+  baseline: 'GitLabHealth';
+  onConflict: [ :ex | ex useIncoming ];
+  onUpgrade: [ :ex | ex useIncoming ];
+  onDowngrade: [ :ex | ex useLoaded ];
+  load: #( 'default' 'Jira' )
+```
+
+> loading default is optional if you already loaded it.
+
+Then, it is possible to connect two models using
+
+```st
+GPJCConnector new
+  gpModel: aGpModel; "or glh model"
+  jiraModel: aJiraModel;
+  connect
+```
+
+### Famix Connector
+
+> You will probably have to learn what Famix is.
+> Lucky, you are in the website of the Famix documentation 😄.
+
+To connect with a Famix, first import a FamixModel using VerveineJ or any other tools.
+Then, load the Famix connector of GitProjectHealth with the following script:
+
+```st
+Metacello new
+  repository: 'github://moosetechnology/GitProjectHealth:main/src';
+  baseline: 'GitLabHealth';
+  onConflict: [ :ex | ex useIncoming ];
+  onUpgrade: [ :ex | ex useIncoming ];
+  onDowngrade: [ :ex | ex useLoaded ];
+  load: #( 'default' 'Famix' )
+```
+
+Then, it is possible to connect two models using
+
+```st
+GPCGitToFamixConnector new
+  famixModel: myFamixModel;
+  glhProject: myGitProject;
+  connect
+```
+
+By connecting a GitProject model with Famix, you will get access to the `appliedDiffs` method on `FamixTClass`.
+You will also be able to navigate from a Git diff to the current entity in the model (if it exists).
+
+
