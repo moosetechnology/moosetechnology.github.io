@@ -169,7 +169,7 @@ The same visualization is available in a user centric way, grouped by contribute
 
 The meta-model of GitProjectHealth is automatically update by the FamixUMLDocumentor.
 
-![Image of the metamodel](https://raw.githubusercontent.com/moosetechnology/GitProjectHealth/v1/doc/gitproject.png)
+![Image of the metamodel](https://raw.githubusercontent.com/moosetechnology/GitProjectHealth/v1/doc/gitproject.png){: .img-fill }
 
 It includes several entities.
 The main one is probably *Commit* with all its attributes as well as *User*.
