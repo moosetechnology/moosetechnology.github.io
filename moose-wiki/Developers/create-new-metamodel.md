@@ -513,6 +513,25 @@ However, it is not possible to modify the super-class of the remote entity or to
 
 ### Complementary information
 
+#### Set custom composed meta-model to a model
+
+You might need to assign to a model a meta-model built manually (because you created multiple meta-model generators but not comprising all the entities you wanna represent at once).
+It is thus possible to *manually* create a meta-model and then assign it.
+For, retrieve all the meta-model you want to merge.
+Then, build the full meta-model.
+Finally, assigned it to the model.
+
+Example:
+
+```st
+myMetamodel := FMMetaModelBuilder metamodelFromPackages:
+  CSNBModel packagesToProcessToCreateMetamodel,
+  CRFModel packagesToProcessToCreateMetamodel.
+model metamodel: myMetamodel.
+```
+
+#### Several primary containers
+
 In our example, an interface contains methods and a class contains methods, too.
 However, it is not possible to have *two* main containers for an entity (see [Define relations](#define-relations)).
 In this case, we can either declare the relation "interface <>-* method" without a primary container, or define
