@@ -238,4 +238,9 @@ GPCGitToFamixConnector new
 By connecting a GitProject model with Famix, you will get access to the `appliedDiffs` method on `FamixTClass`.
 You will also be able to navigate from a Git diff to the current entity in the model (if it exists).
 
+## Demo
+
+We made a demo video hosted on youtube.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BIoF_mj6dDk?si=AwHflEKdpekI9c_B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
