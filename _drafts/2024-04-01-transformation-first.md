@@ -10,7 +10,8 @@ comments: true
 tags: transformation
 ---
 
-Sometimes, in order to fix a reccuring bug, or to introduce a new design pattern or to change the architecture of a portion of a software, we as developers have to perform more or less similar edits on our source code to fulfill our objective.  
+Sometimes we have to perform several similar edits on our source code. 
+This can happen in order to fix a recurring bug, to introduce a new design pattern or to change the architecture of a portion of a software.  
 When many entities are concerned or when the edits to perform are complicated and take too much time, it can be interesting to consider building a transformation tool to help us and make that task easier.  
 Fortunately, Moose is here to help with several modeling levels and powerful tools enabling us to build what we need! 
 
@@ -38,13 +39,13 @@ In the ArgoUML system, three classes define and use a method named `logError`. I
 
 # Tools to import
 
-For this blogpost, we will have to import two tools :  
+For this blog post, we will have to import two tools :  
 
-The first one is [Carrefour](https://modularmoose.org/posts/2022-06-30-carrefour), allowing us to bind and access the (F)AST of an entity to its Famix counterpart. Loading it will also load the FAST Java model.
+The first one is [Carrefour](https://modularmoose.org/posts/2022-06-30-carrefour), allowing us to bind and access the (F)AST model of an entity to its Famix counterpart. Loading it will also load the FAST Java metamodel.
 To load the project, execute this command in a Playground :
 ```smalltalk
 Metacello new
-  githubUser: 'moosetechnology' project: 'Carrefour' commitish: 'v4' path: 'src';
+  githubUser: 'moosetechnology' project: 'Carrefour' commitish: 'v5' path: 'src';
   baseline: 'Carrefour';
   load
 ```
@@ -55,13 +56,12 @@ To load the project, execute this command in a Playground :
 Metacello new
     baseline: 'MoTion';
     repository: 'github://AlessHosry/MoTion:main';
-    load
+    load: 'MoTion-Moose'
 ```
-You will have to then load the `MoTion-Moose` package using Iceberg.
 
 # Querying the model
 
-Finally done with explainations and setup! :smile:  
+Finally done with explanations and setup! :smile:  
 Let us start by creating a class with a `model` instance variable, accessors, and add a class side initializer method for ease of use:
 
 !["Creating our class"](/img/posts/2024-04-01-transformation-first/creating-class.PNG)
@@ -121,15 +121,15 @@ And just like that, we now have the complete list of FAST nodes to transform!
 
 # Using MoTion
 
-But before celebrating, we should keep in mind that this transformation is a very simple use case. Here, it is easy to find the entities to transform using Famix, but in some other cases it might be much more complex to find the methods that are candidate to a transformation, not to mention every node that must be transformed.  
+But before celebrating, we should keep in mind that this transformation is a very simple use case. Here, it is easy to find the entities to transform using Famix, but in some other cases it might be much more complex to find the methods that are candidates to a transformation, not to mention every node that must be transformed.  
 
-In those cases, a good way to make things easier is to divide the logic of this process, and use seperate means to find the methods that are candidate to a transformation and to find the nodes that must be transformed.  
+In those cases, a good way to make things easier is to divide the logic of this process, and use separate means to find the methods that are candidates to a transformation and to find the nodes that must be transformed.  
 
 Making queries on the Famix model remains a very reliable way to find the candidates methods, but then what about the nodes inside the AST of these methods?
 Methods can be quite complex (50 lines of code, 100, more...) and the resulting AST is huge. Finding the right node(s) in such AST is difficult.
 That's where MoTion comes in. In order to find the nodes we are looking for, we can define patterns that describe those nodes, and the path to follow through the FAST to be able to reach those nodes.  
 
-MoTion is a powerful tool, allowing us to find specific items within a graph through consice patterns describing the objects we are looking for and the path in the graph used to reach them. Hovewer, it does have a very specific syntax that must be looked through before starting making our own patterns. Thankfully, everything is well documented and with examples (one of those being another exemple for FAST Java) on the repository of [MoTion](https://github.com/alesshosry/MoTion) (look at the README!). 
+MoTion is a powerful tool, allowing us to find specific items within a graph through concise patterns describing the objects we are looking for and the path in the graph used to reach them. However, it does have a very specific syntax that must be looked through before starting making our own patterns. Thankfully, everything is well documented and with examples (one of those being another example for FAST Java) on the repository of [MoTion](https://github.com/alesshosry/MoTion) (look at the README!). 
 
 But enough description. Time to code! :smile:
 ```smalltalk
@@ -181,7 +181,7 @@ You can use a Playground to test out our class and model and see for yourself th
 
 !["Testing our class"](/img/posts/2024-04-01-transformation-first/testing-class.png)
 
-The whole source code that was written in this blog post is also available on that [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
+The whole source code that was written on this blog post is also available on that [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
 
 ## Conclusion
 
