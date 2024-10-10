@@ -179,6 +179,11 @@ As you can see, we still use Carrefour even in this context, as it remains the e
 Now that our class is done, we are able to locate candidates methods for transformation and the specific nodes to transform using Famix, FAST, Carrefour and MoTion.  
 You can use a Playground to test out our class and model and see for yourself the results of each method :
 
+```smalltalk
+t := LoggerTransformationTool onModel: argoUML034.
+t fetchAllFastNodesUsingMotion
+```
+
 !["Testing our class"](/img/posts/2024-04-01-transformation-first/testing-class.png)
 
 The whole source code that was written on this blog post is also available on that [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
