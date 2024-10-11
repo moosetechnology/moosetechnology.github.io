@@ -10,16 +10,20 @@ comments: true
 tags: transformation
 ---
 
-Welcome back to the little series of blog posts surrounding code transformation! In the previous post, we started to build a transformation tool using a basic fictional transformation use case on the software ArgoUML.  
-In this post, we will build on top of the class we created previously and create the actual transformation, all while making sure that we do not modify the original model in the process.
+Welcome back to the little series of blog posts surrounding code transformation! In the previous post, we started to build a transformation tool using a basic fictional transformation use case on the software ArgoUML.
+In this post, we will add behavior the class we created previously, to create the actual transformation while making sure that we do not modify the original model in the process.
+As a reminder, this is the scenario: in the ArgoUML system, three classes define and use a method named `logError`. 
+A class `ArgoLogger` has been defined and contains a static method `logError`.
+The transformation task is to add a receiver node to each `logError` method invocation so that the method is called using the right class.
 
 # Preface
 
-As this blog post follows what was discussed and built in the first one of this series, a lot of information (how to build the image and model used for our use case, but also the use case itself) is provided in the previous post. If you haven't read it, or if you forgot the content of the post, it is recommended to go back to it, as it will not be repeated in this post.
+As this blog post follows what was discussed and built in the first one of this series, a lot of information (how to build the image and model used for our use case, but also the use case itself) is provided in the previous post. 
+If you haven't read it, or if you forgot the content of the post, it is recommended to go back to it, as it will not be repeated in this post.
 
 # Tools to import
 
-For this blog post, we will have to import a tool library, [FAST-Java-Tools](https://github.com/moosetechnology/FAST-Java-Tools), which contains several tools to use on FASTs for Java entities. It also contains practical tools to build transformation tools! 
+For this blog post, we will have to import a tool library, [FAST-Java-Tools](https://github.com/moosetechnology/FAST-Java-Tools), which contains several tools to use on FAST for Java entities. It also contains practical tools to build transformation tools! 
 To load the project, execute this command in a Playground :
 ```smalltalk
 Metacello new
@@ -30,13 +34,11 @@ Metacello new
 
 Loading it will automatically load the FAST-Java repository. Carrefour and MoTion (which were used in the previous post) are still necessary, so if you are starting from a clean image, you will need them as well.
 
-Note : The dependencies of those projects might not be imported in the same way, so you should make sure in Iceberg that all the packages are properly loaded, just in case.
-
 # Copying the (F)ASTs to transform
 
 With our import done, we are ready to get to work! :smile:  
-To create our transformation, we will modify the FAST of each candidate method for our transformation, and this modified FAST will then be generated into source code that we will be able to inject into the actual source files. Therefore, our next step is modifying the FASTs of our methods.  
-Hovewer, we will begin by making a copy of said FAST, to insure that our transformation will not modify the actual original model of our method. If that happens, we will still be able to run Carrefour on our method again (using the message `generateFastAndBind`) but it is better to avoid that scenario. If we have a bug on our tool and the FAST of many methods ends up being modified, then re-calculating and binding every FAST will be a big waste of time. Making a copy allows us to make the same actions, but ensures that our model remains untouched.  
+To create our transformation, we will modify the FAST of each candidate method for our transformation, and this modified FAST will then be generated into source code that we will be able to inject into the actual source files. Therefore, our next step is modifying the FAST of our methods.  
+However, we will begin by making a copy of said FAST, to ensure that our transformation will not modify the actual original model of our method. If that happens, we will still be able to run Carrefour on our method again (using the message `generateFastAndBind`) but it is better to avoid that scenario. If we have a bug on our tool and the FAST of many methods ends up being modified, then re-calculating and binding every FAST will be a big waste of time. Making a copy allows us to make the same actions, but ensures that our model remains untouched.  
 
 To create a copy, we have a visitor that fortunately does all the job for us! Using this simple command will give you a FAST copy :
 
@@ -51,7 +53,7 @@ However, to make things even easier, we will use an already made wrapper that wi
 
 This wrapper also has collections to store specific nodes, but patience, we will see how to use these in the next blog post! :wink:
 
-For now, let's add a method to create that wrapper on a collection of candidate methods :
+For now, let's add a method to create that wrapper on a collection of candidate methods, in the class created in the first post :
 
 ```smalltalk
 createWrappersForCandidateMethods: aCollectionOfFamixJavaMethods
@@ -66,7 +68,7 @@ createWrappersForCandidateMethods: aCollectionOfFamixJavaMethods
 ```
 
 With this, we created wrappers for each method to transform, and each of these wrappers contains a copy of the FAST ready to be transformed.  
-Before getting to the next step, we will define one more method, which will contain the "main behaviour" of our tool, so that calling this method is enough to follow each step in order to transform the code.
+Before getting to the next step, we will define one more method, which will contain the "main behavior" of our tool, so that calling this method is enough to follow each step in order to transform the code.
 
 ```smalltalk
 findAndTransformAllLogErrorInvocations
@@ -102,12 +104,12 @@ createNewReceiverNode
 		  yourself
 ```
 
-Hovewer, this option is not possible for every use case. Sometimes the node to create will be dependent on the context (the name of an identifier, method or variable might change), or we might have to create more complex nodes, composed of several nodes.  
+However, this option is not possible for every use case. Sometimes the node to create will be dependent on the context (the name of an identifier, method or variable might change), or we might have to create more complex nodes, composed of several nodes.  
 In order to create those more complex nodes, one option is to parse the code using the parsing tool from the [FAST-Java](https://github.com/moosetechnology/FAST-JAVA) repository, the `JavaSmaCCProgramNodeImporterVisitor`, before inspecting the parsed result using the `FASTDump` view.  
 
 !["Inspecting with FASTDump"](/img/posts/2024-04-15-transformation-second/inspecting-fast-dump.png)
 
-Using this view of the inspector then enable us to get the node or tree that we seek for our transformation and copy paste the code to create it in a method for our tool to use it when needed. 
+Using this view of the inspector then enable us to get the node or tree that we seek for our transformation and copy-paste the code to create it in a method for our tool to use it when needed. 
 
 # Adding the new receiver node to (F)ASTs 
 
@@ -124,8 +126,10 @@ transformMethod: aJavaMethodWrapper
 	methodInvocationNode receiver: self createNewReceiverNode
 ```
 
-There are two things worth saying after making this method. First of all, and hopefully without boring you by repeating this over and over... This is a very simple transformation use case!  
-As you can see, the only thing we do is using the `receiver:` setter on the appropriate node. Depending on the kind of edit that you want to apply on a method, you might need to experiment a bit and read the commentaries and method list of the classes of the nodes you are trying to edit.  
+There are two things worth saying after making this method. 
+First, and hopefully without boring you by repeating this over and over... This is a very simple transformation use case!  
+As you can see, the only thing we do is using the `receiver:` setter on the appropriate node.
+Depending on the kind of edit that you want to apply on a method, you might need to experiment a bit and read the comments and method list of the classes of the nodes you are trying to edit.  
 To experiment, one way is inspecting one of the FAST method that you wish to transform, to find the nodes you need to locate and transform, then go and read the class documentation and method list of the types of those nodes to find the appropriate setters you need to use.  
 Another fun way to do so involves the Playground and using once again the parsing tool used in the previous section to use the `FASTDump` view of the Moose Inspector.
 
@@ -133,8 +137,8 @@ Another fun way to do so involves the Playground and using once again the parsin
 
 Using this little code snippet, you can parse a Java method and inspect its FAST. So, copy the method you need to transform, inspect it, then transform the code of this method manually, then parse it and inspect it again! It's an easy way to start the work towards building a transformation tool. :smile:  
 
-The second thing to notice, is the use of MoTion and not Carrefour. As we now modify a copy of a FAST, it is easier to run the MoTion query on it to get the node we are looking for right away, rather then go through the original Famix invocation.  
-Hovewer, it is still doable, as the original and copied FAST nodes both store their counterpart in an attribute slot. We can see this by inspecting one of the fast methods in a wrapper resulting from our transformation (look at the inspected slots and `mooseID` of each object).  
+The second thing to notice, is the use of MoTion and not Carrefour. As we now modify a copy of a FAST, it is easier to run the MoTion query on it to get the node we are looking for right away, rather than go through the original Famix invocation.  
+However, it is still doable, as the original and copied FAST nodes both store their counterpart in an attribute slot. We can see this by inspecting one of the fast methods in a wrapper resulting from our transformation (look at the inspected slots and `mooseID` of each object).  
 
 !["Inspecting an original and copy"](/img/posts/2024-04-15-transformation-second/original-and-copy-inspect.png)
 
@@ -145,9 +149,14 @@ Our class is now able to create wrappers for each candidate method containing a 
 
 Just like with the first post, feel free to now try the tool and methods that we created here in a Playground and experiment with the results, or the methods themselves!
 
+```smalltalk
+t := LoggerTransformationTool onModel: MooseModel root first.
+t findAndTransformAllLogErrorInvocations 
+```
+
 !["Testing class"](/img/posts/2024-04-15-transformation-second/testing-class.png)
 
-The whole source code that was written in this blog post (and the previous one) is also available on that [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
+The whole source code that was written on this blog post (and the previous one) is also available on that [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
 
 ## Conclusion
 

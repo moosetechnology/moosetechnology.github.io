@@ -180,7 +180,7 @@ Now that our class is done, we are able to locate candidates methods for transfo
 You can use a Playground to test out our class and model and see for yourself the results of each method :
 
 ```smalltalk
-t := LoggerTransformationTool onModel: argoUML034.
+t := LoggerTransformationTool onModel: (MooseModel root at: 1).
 t fetchAllFastNodesUsingMotion
 ```
 
