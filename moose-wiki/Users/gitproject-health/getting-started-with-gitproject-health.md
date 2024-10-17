@@ -208,10 +208,9 @@ GPJCConnector new
   connect
 ```
 
-
 ### Jira connector in action: retrieving the ticket type associated with merge requests
 
-In this complete example, we retrieve the merge request (MR) inside a group of project and connect them to their associated Jira Ticket. 
+In this complete example, we retrieve the merge request (MR) inside a group of project and connect them to their associated Jira Ticket.
 To connect a issue with an MR, we look for MR that mention the issue key id in their title. For instance.
 `[WERH-918] feat: Add specific month to salary` match the issue `(WERH-918) month integration`.
 
@@ -221,26 +220,26 @@ model := GLPHEModel new name: 'myModel'.
 
 "set up the API, here for gitlab"
 glphApi := GLPHApi new
-    privateToken: '<YOUR-TOKEN>';
-    baseAPIUrl:'<YOUR-GITLAB-URL>';
-    yourself.
+  privateToken: '<YOUR-TOKEN>';
+  baseAPIUrl:'<YOUR-GITLAB-URL>';
+  yourself.
 
 "set up the gitlab importer"
 glhImporter := GLPHModelImporter new
-   repoApi: glphApi;
-   glhModel: model;
-	makeGlobal: 'myImporter';
-   withFiles: false;
-   withCommitDiffs: false;
-   yourself.
+  repoApi: glphApi;
+  glhModel: model;
+  makeGlobal: 'myImporter';
+  withFiles: false;
+  withCommitDiffs: false;
+  yourself.
 
 "setup the JiraAPI"
 jpAPI := JiraPharoAPI new endpoint: '<myCompany>.atlassian.net';
- basePath: 'rest/api/latest';
- beHttps; 
- user: '<USER-EMAIL-ACCOUNT>';
- apiToken: '<YOUR-JIRA-API-TOKEN>';
- yourself.
+  basePath: 'rest/api/latest';
+  beHttps; 
+  user: '<USER-EMAIL-ACCOUNT>';
+  apiToken: '<YOUR-JIRA-API-TOKEN>';
+  yourself.
 
 "setup the Jira Importer"
 jpImporter := JiraPharoImporter new
@@ -252,38 +251,39 @@ jpImporter := JiraPharoImporter new
 grp := glhImporter importGroup: 1234.
 "for each project"
 grp allProjectstoScope do: [ :project | 
-	"import the merge request"
-	glhImporter importMergeRequests: project 
-		since: (Date today - 30 day) asDateAndTime 
-		until: (Date today).
-		"import the latest commits"
-	(glhImporter importAndLoadLatestsCommitsOfProject: project ).
-	 ].
+  "import the merge request"
+  glhImporter importMergeRequests: project 
+    since: (Date today - 30 day) asDateAndTime 
+    until: (Date today).
+    "import the latest commits"
+  (glhImporter importAndLoadLatestsCommitsOfProject: project ).
+].
 
 "collect all issues related to these projects"
 issues := (((grp toScope: GLHCommit) 
-					collect: [ :commit | commit commitCreator]) 
-					reject: [:user | user id isNil]) asSet 
-					flatCollect: [ :user |
-							|email mergeRequests |
-						"import the jira issue from each user account"
-						email := user username , '@my-email-domain.com'.
-						jpImporter importAllCurrentAndPastIssuesOf: email.
-	 				].
+    collect: [ :commit | commit commitCreator]) 
+    reject: [:user | user id isNil]) asSet 
+    flatCollect: [ :user |
+      |email mergeRequests |
+      "import the jira issue from each user account"
+      email := user username , '@my-email-domain.com'.
+      jpImporter importAllCurrentAndPastIssuesOf: email.
+].
 
 "achieve the connection between the Git and the Jira model"
 "the connection is made for all MR that includes in their title the key of an issue. same for commit"
 GPJCConnector new
-	gpModel: glhImporter glhModel;
-	jiraModel: jpImporter model;
-	connect.
+  gpModel: glhImporter glhModel;
+  jiraModel: jpImporter model;
+  connect.
 
 "collect the merge request found previously"
 mergeRequests := (grp toScope: GLPHEMergeRequest). "70 founds"
 "select the MR with a matching jira issue"
 mrWithTicket := ( mergeRequests asOrderedCollection  select: [ :mr | 
-	mr jiraIssue isNotNil.
-	 ]). "66 of them associated with a Jira ticket"
+  mr jiraIssue isNotNil.
+]). "66 of them associated with a Jira ticket"
+
 "get the issue type and output their occurring rate"
 (mrWithTicket collect: [ :mr |  mr jiraIssue type name  ]) asBag
 ```
