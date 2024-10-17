@@ -231,14 +231,16 @@ glhImporter := GLPHModelImporter new
    glhModel: model;
 	makeGlobal: 'myImporter';
    withFiles: false;
-   withCommitDiffs: false.
+   withCommitDiffs: false;
+   yourself.
 
 "setup the JiraAPI"
 jpAPI := JiraPharoAPI new endpoint: '<myCompany>.atlassian.net';
  basePath: 'rest/api/latest';
  beHttps; 
  user: '<USER-EMAIL-ACCOUNT>';
- apiToken: '<YOUR-JIRA-API-TOKEN>'.
+ apiToken: '<YOUR-JIRA-API-TOKEN>';
+ yourself.
 
 "setup the Jira Importer"
 jpImporter := JiraPharoImporter new
