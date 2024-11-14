@@ -40,6 +40,7 @@ Once the GitProjectHealth project has been loaded, one has to _import_ the proje
 As of today, we import a _group of repositories_.
 
 ### Import a group from GitLab
+![Badge Gitlab only](https://img.shields.io/badge/GitLab_Only-8A2BE2?logo=gitlab)
 
 In a playground (`Ctrl+O`, `Ctrl+W`).
 
@@ -124,13 +125,13 @@ Then, you can import more data for each MergeRequest
 ].
 ```
 
-### Example: Counting Pull Request status of an Github Organization
-Here we are counting the Pull request status (closed or open) of the organization Eclipse. We need first to declare a new `GLHModel` model, and to set up an GitHub importer `GHModelImporter new`. We then import all the projet of the group `eclipse` and their latest merge requests. 
+### Example: Counting Pull Requests status of a Github Organization
+Here we are counting the Pull request status (_closed_ or _open_) of the organization _Eclipse_. We need first to declare a new `GLHModel` model, and to set up an GitHub importer `GHModelImporter new`. We then import all the projets of the organization `eclipse` and their latest merge requests (or pull requests in Github case). 
 This example runs in around **5 minutes**. 
 
-It requires you to generate a github access token, see the [setting github page](https://github.com/settings/tokens).
+It requires to generate a github access token, see the [setting github page](https://github.com/settings/tokens).
 
-```
+```st
 "init a new git model"
 model := GLHModel new name: 'myGitModel'.
 
