@@ -124,6 +124,40 @@ Then, you can import more data for each MergeRequest
 ].
 ```
 
+### Example: Counting Pull Request status of an Github Organization
+Here we are counting the Pull request status (closed or open) of the organization Eclipse. We need first to declare a new `GLHModel` model, and to set up an GitHub importer `GHModelImporter new`. We then import all the projet of the group `eclipse` and their latest merge requests. 
+This example runs in around **5 minutes**. 
+
+It requires you to generate a github access token, see the [setting github page](https://github.com/settings/tokens).
+
+```
+"init a new git model"
+model := GLHModel new name: 'myGitModel'.
+
+"creates an importer for Github projects, requires your specific token"
+githubImport := GHModelImporter new
+	glhModel: model;
+	privateToken: '<YOUR-GITHUB-TOKEN>';
+	withCommitsSince: (Date today - 10 days);
+ yourself.
+
+"importing a group of projects (may take a few minutes)"
+eclipse := githubImport importGroup: 'eclipse'.
+
+"for each project"
+eclipse allProjectstoScope do: [ :project | 
+  "import the merge request (may take a few minutes)"
+  githubImport importMergeRequests: project.
+].
+
+"collect the merge request found in the group"
+pullRequests := (eclipse toScope: GLHMergeRequest)  .
+
+" count the PR by their states"
+(pullRequests asOrderedCollection collect: [ :pr |  pr state ]) asBag
+```
+
+
 ## Visualize
 
 To help with your first analysis of repositories and organization, we included some basic visualization.
@@ -208,15 +242,17 @@ GPJCConnector new
   connect
 ```
 
+
+
 ### Jira connector in action: retrieving the ticket type associated with merge requests
 
-In this complete example, we retrieve the merge request (MR) inside a group of project and connect them to their associated Jira Ticket.
+In this complete example, we retrieve the merge request (MR) inside a group of GitLab projects and connect them to their associated Jira Ticket.
 To connect a issue with an MR, we look for MR that mention the issue key id in their title. For instance.
 `[WERH-918] feat: Add specific month to salary` match the issue `(WERH-918) month integration`.
 
 ```st
 "set up the git model"
-model := GLPHEModel new name: 'myModel'.
+model := GLHModel new name: 'myModel'.
 
 "set up the API, here for gitlab"
 glphApi := GLPHApi new
