@@ -1,19 +1,6 @@
 [
 	{
-		"id": "http://zotero.org/groups/2722717/items/NYJ8IJ2U",
-		"type": "paper-conference",
-		"abstract": "Advanced reverse engineering tools are required to cope with the complexity of software systems and the specific requirements of numerous different tasks (re-architecturing, migration, evolution). Consequently, reverse engineering tools should adapt to a wide range of situations. Yet, because they require a large infrastructure investment, being able to reuse these tools is key. Moose is a reverse engineering environment answering these requirements. While Moose started as a research project 20 years ago, it is also used in industrial projects, exposing itself to all these difficulties. In this paper we present ModMoose, the new version of Moose. ModMoose revolves around a new meta-model, modular and extensible; a new toolset of generic tools (query module, visualization engine, ...); and an open architecture supporting the synchronization and interaction of tools per task. With ModMoose, tool developers can develop specific meta-models by reusing existing elementary concepts, and dedicated reverse engineering tools that can interact with the existing ones.",
-		"collection-title": "Lecture Notes in Computer Science",
-		"container-title": "Reuse in Emerging Software Engineering Practices",
-		"DOI": "10.1007/978-3-030-64694-3_8",
 		"event": "ICSR: International Conference on Software and Software Reuse",
-		"event-place": "Cham",
-		"ISBN": "978-3-030-64694-3",
-		"language": "en",
-		"page": "119-134",
-		"publisher": "Springer International Publishing",
-		"publisher-place": "Cham",
-		"source": "Springer Link",
 		"title": "Modular Moose: A New Generation of Software Reverse Engineering Platform",
 		"title-short": "Modular Moose",
 		"PDF": "https://arxiv.org/pdf/2011.10975",
@@ -57,26 +44,5 @@
 				"given": "Moustapha"
 			}
 		],
-		"editor": [
-			{
-				"family": "Ben Sassi",
-				"given": "Sihem"
-			},
-			{
-				"family": "Ducasse",
-				"given": "Stéphane"
-			},
-			{
-				"family": "Mili",
-				"given": "Hafedh"
-			}
-		],
-		"issued": {
-			"date-parts": [
-				[
-					"2020"
-				]
-			]
-		}
 	}
 ]
