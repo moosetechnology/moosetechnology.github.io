@@ -122,5 +122,12 @@
         "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a> ",
         "github": "https://github.com/thomasWattebled",
         "image": "https://avatars.githubusercontent.com/u/124277643"
+    },
+    "Mohamed Oukas": {
+        "name": "Mohamed Oukas",
+        "role": "Working on Moose-Security for my internship",
+        "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a> ",
+        "github": "https://github.com/MohamedCooding",
+        "image": "https://avatars.githubusercontent.com/MohamedCooding"
     }
 }
