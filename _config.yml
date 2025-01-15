@@ -18,6 +18,7 @@ tag_page_dir: posts/tag
 tag_permalink_style: pretty
 
 # Build settings
+theme: minima
 markdown:           kramdown
 highlighter: rouge
 paginate:           5
