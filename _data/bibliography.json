@@ -1,5 +1,42 @@
 [
 	{
+	    "event": "IEEE Software (jrnl)",
+		"title": "From GWT to Angular: An Experiment Report on Migrating a Legacy Web Application",
+		"title-short": "Modular Moose",
+		"URL": "http://rmod-files.lille.inria.fr/Team/Texts/Papers/Verh21b-FromGWTToAngular-iEEESoftware.pdf",
+		"year": 2022,
+		"author": [
+			{
+				"family": "Verhaeghe",
+				"given": "Benoit"
+			},
+			{
+				"family": "Shatnawi",
+				"given": "Anas"
+			},
+			{
+				"family": "Seriai",
+				"given": "Abderrahmane"
+			},
+			{
+				"family": "Etien",
+				"given": "Anne"
+			},
+			{
+				"family": "Anquetil",
+				"given": "Nicolas"
+			},
+			{
+				"family": "Derras",
+				"given": "Mustapha"
+			},
+			{
+				"family": "Ducasse",
+				"given": "Stéphane"
+			},
+		],
+	},
+	{
 		"event": "ICSR: International Conference on Software and Software Reuse",
 		"title": "Modular Moose: A New Generation of Software Reverse Engineering Platform",
 		"title-short": "Modular Moose",
