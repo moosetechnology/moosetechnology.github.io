@@ -73,9 +73,11 @@ Backends have only one mandatory method:
 
 New backends can be created by subclassing `FamixUMLAbstractBackend`.
 
+There is a `FamixUMLRoassalBackend` to export the UML diagram in Roassal (visible inside Pharo itself), and a  `FamixUMLMermaidBackend` to export in Mermaid format (similar to PlantUML).
+
 There is a `FamixUMLTextBackend` that outputs the UML class diagram in a textual form. 
 By default it returns a string but this can be changed:
 - `toFile:` -- Instead of putting the result in a string, will write it to the file whose name is given in argument.
 - `outputStream:` -- specifies a stream on which to write the result of the backend.
 
-`FamixUMLPlantUMLBackend` is a subclass of this `FamixUMLTextBackend`.
+`FamixUMLPlantUMLBackend` and `FamixUMLMermaidBackend` are subclasses of this `FamixUMLTextBackend` (therefore they can also export to a file).
