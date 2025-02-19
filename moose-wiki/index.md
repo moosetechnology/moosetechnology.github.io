@@ -40,10 +40,14 @@ You'll find here a first list of Famix model and generic tools ways to load Fami
 
 #### Famix Java
 
-A popular meta-model is the Java meta-model:
+You'll first need to explore how to create a model from a Java Project.
+
+- [VerveineJ](Developers/Parsers/VerveineJ) - Generate a model from a Java project
+- [Famix Maker](https://github.com/moosetechnology/Moose-Easy)
+
+Then, you can use the Java meta-model:
 
 - [Famix Java](Users/famix-java/famix-java)
-- [Famix Maker](https://github.com/moosetechnology/Moose-Easy)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
 - [Analyze Java Project](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html)
   ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
@@ -114,18 +118,15 @@ There are also other possible actions.
 
 ### Parsers
 
+You'll discover here some other parsers made for Moose
+
 Parsing source code to analyze is an important part of Moose.
 There are different (so-called) parsers already created at various stages of progress that you can use and/or contribute to.
 
 > Note: they do more than parsing since they also resolve names in the parsed code and this is not a small task.
 
-- [Petit Parser](https://github.com/moosetechnology/PetitParser) - Write "easily" a Parser with Moose 
-  ![External documentation](https://img.shields.io/badge/-External%20Documentation-blue){: .no-lightense}
-- [VerveineJ](Developers/Parsers/VerveineJ) - Generate an mse/json from a Java project
 - [VerveineC-Cpp](Developers/Parsers/VerveineC-Cpp) - Generate an mse/json from a C/C++ project
 - [C#](https://github.com/feenkcom/roslyn2famix) - A parser for C# (using Roselyn) that should be able to export a Moose model
-- [PowerBuilderParser](Developers/Parsers/PowerBuilderParser) - Generate an mse from a Powerbuilder project
-  ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow){: .no-lightense}
 
 ### Advanced developers
 
