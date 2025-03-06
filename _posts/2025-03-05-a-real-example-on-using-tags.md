@@ -4,7 +4,7 @@ layout: post
 title: A real example on using tags
 header-img: img/posts/DSM.jpg
 subtitle: >-
-  In this post I show step by step how one can use tags to perform a real, concrete, analysis. 
+  In this post I show how one can use tags to perform a real, concrete, analysis. 
 date: 2025-03-05
 background: '/img/posts/bg-posts.jpg'
 author: Nicolas Anquetil
