@@ -11,6 +11,7 @@ tags: Famix-tools FAST
 The package `FAST-Core-Tools` in repository [https://github.com/moosetechnology/FAST](https://github.com/moosetechnology/FAST) offers some tools  or algorithms that are running on FAST models.
 
 These tools may be usable directly on a specific language FAST meta-model, or might require some adjustements by subtyping them.
+They are not out-of-the-shelf ready to use stuff, but they can provide good inspiration for whatever you need to do.
 
 ## Dumping AST
 
