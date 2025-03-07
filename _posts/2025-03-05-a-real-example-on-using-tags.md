@@ -222,4 +222,4 @@ Here Famix alone (the meta-model used in Moose by default) can no longer help us
 For a finer analysis, a complete AST model should be used.
 This could be done with the FAST meta-model (Famix-AST), but it is another story that falls outside the scope of this blog-post.
 
-See you latter.
+See you later.
