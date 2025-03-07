@@ -6,6 +6,7 @@ date: 2022-10-28 00:00:00 +200
 tags: CI
 background: '/img/posts/bg-posts.jpg'
 comment: true
+tags: CI infrastructure
 ---
 
 You have to test your code!

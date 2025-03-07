@@ -7,7 +7,7 @@ author: Ahmed Zaki BENNECER
 background: "/img/posts/2022-03-18-carrefour/bg-post.jpg"
 date: 2022-06-30 6:00:00
 comments: true
-tags: fast
+tags: FAST
 ---
 
 ## Introduction

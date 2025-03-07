@@ -6,6 +6,7 @@ date: 2021-03-02 16:38:00 -0400
 background: '/img/posts/bg-posts.jpg'
 author: Vincent Aranega
 comments: true
+tags: infrastructure
 ---
 
 [Building metamodels](https://modularmoose.org/moose-wiki/Developers/create-new-metamodel) for Fame and Famix is currently done through a generator.

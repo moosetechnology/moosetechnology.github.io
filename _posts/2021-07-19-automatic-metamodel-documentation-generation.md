@@ -6,7 +6,7 @@ subtitle: "How to use GitHub actions to update its meta-model UML?"
 background: '/img/posts/2021-07-19-automatic-metamodel-documentation-generation/bg.png'
 date:  2021-07-19 08:00:00 +200
 comments: true
-tags: documentor
+tags: Famix-tools
 ---
 
 When you are developing with Moose everyday, you know how to create an excellent visualization of your meta-model.

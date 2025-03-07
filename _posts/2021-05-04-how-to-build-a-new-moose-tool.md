@@ -8,7 +8,7 @@ background: '/img/posts/bg-posts.jpg'
 date: 2021-05-04 13:45:00
 author: Sebastian Jordan
 comments: true
-tags: browser
+tags: infrastructure browser
 ---
 ## How to build a new Moose tool: The MooseInspector
 

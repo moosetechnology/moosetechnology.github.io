@@ -5,6 +5,7 @@ subtitle: "In Java generic types allow you to write a general, generic class (or
 date: 2023-07-13 12:00:00 
 background: '/img/posts/bg-posts.jpg'
 author: Thomas Wattebled
+tags: meta-model
 ---
 
 ## Introduction

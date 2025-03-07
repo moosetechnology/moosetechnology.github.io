@@ -5,7 +5,7 @@ date: 2025-02-26 16:57:00
 background: '/img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg'
 author: Nicolas Anquetil
 comments: true
-tags: famix-tools
+tags: Famix-tools
 ---
 
 *This post is part of a serie dedicated to* Famix Tools
