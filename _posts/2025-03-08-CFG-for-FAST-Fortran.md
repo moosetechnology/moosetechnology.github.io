@@ -66,8 +66,7 @@ We will use the following Fortran-77 code:
           IB = MOD(ITEMP, IB)
           GOTO 1
         END IF
-        NGCD = IA
-        PRINT *, 'The GCD of', NA, ' and', NB, ' is', NGCD, '.'
+        PRINT *, 'The GCD of', NA, ' and', NB, ' is', IA, '.'
         STOP
         END
 ```
@@ -102,9 +101,9 @@ You may have noticed that our blocks are a bit different from the definition giv
 
 For the program above, the CFG has 10 blocks.
 - the first block is a common block and contains 2 statements, the PRINT and the READ;
-- then comes a conditional block for the IF.
+- its next bloc is a conditional block for the IF.
   It has 2 next blocs:
-  - `true` leads to a common block with 2 statements, the PRINT and the STOP. The next block of this one is the common block after the IF;
+  - `true` leads to a common block with 2 statements, the PRINT and the STOP. This is a final block (STOP ends the program);
   - `false` leads to the common block after the IF
 - ...
 
