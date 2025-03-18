@@ -31,8 +31,8 @@ Metacello new
 
 ## Example on Famix
 
-For this first blog post, we will experiment GPH (GitProjectHealth) on the [Famix](https://github.com/moosetechnology/Famix) project.
-Since this project is a GitHub project, we first create a [GitHub token](https://github.com/settings/tokens) that will give GPH the necessary authorization.
+For this first blog post, we will experiment GitProjectHealth on the [Famix](https://github.com/moosetechnology/Famix) project.
+Since this project is a GitHub project, we first create a [GitHub token](https://github.com/settings/tokens) that will give GitProjectHealth the necessary authorization.
 
 Then, we import the moosetechnology group (that hosts the Famix project).
 
@@ -73,7 +73,7 @@ It can correspond to the percentage of code introduced in *commit A* modified in
 The first step is thus to discover what commits modified my code.
 To do so, we implemented in GitProjectHealth information about diff in commit.
 
-To extract this information, we first ask GPH to extract more information for the commits of the famix project.
+To extract this information, we first ask GitProjectHealth to extract more information for the commits of the famix project.
 
 ```st
 famix := group projects detect: [ :project | project name = 'Famix' ].
@@ -104,5 +104,5 @@ This can represent linked work or at least actions on the same module of the app
 
 It is possible to go even deeper in the analysis by connecting GitProjectHealth with other analysis.
 This is possible by [connecting metamodels](/moose-wiki/Developers/create-new-metamodel.md#introducing-submetamodels).
-For instance, it is possible to link GPH with Jira system, of Famix models.
+For instance, it is possible to link GitProjectHealth with Jira system, of Famix models.
 You can look at the first general documentation, or stay tune for the next blog post about GitProjectHealth!
