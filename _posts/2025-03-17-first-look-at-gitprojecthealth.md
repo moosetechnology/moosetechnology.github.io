@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "First look at GitProjectHealth"
-date: 2025-03-17
+date: 2025-03-24
 background: '/img/posts/bg-posts.jpg'
 author: Benoit Verhaeghe
 tags: Famix-tools GitProjectHealth
@@ -51,24 +51,26 @@ group := githubImporter importGroup: 'moosetechnology'.
 This first step allows us to get first information on projects.
 For instance, by inspecting the group, we can select the "Group quality" view and see the group projects and the last status of their pipelines.
 
-![Group Quality view for moosetechnology](/img/posts/2025-03-17-first-look-at-gitprojecthealth/group-quality-moosetechnology.png)
+![Group Quality view for moosetechnology](/img/posts/2025-03-17-first-look-at-gitprojecthealth/group-quality-moosetechnology.png){: .img-fluid }
 
 Then, by navigating to the Famix project and *its repository*, you can view the Commits History.
 
-![alt text](/img/posts/2025-03-17-first-look-at-gitprojecthealth/famix-git-history.png).
+![alt text](/img/posts/2025-03-17-first-look-at-gitprojecthealth/famix-git-history.png){: .img-fluid }.
 
 It is also possible to explore the recent commit distribution by date and author
 
-![commit distribution](/img/posts/2025-03-17-first-look-at-gitprojecthealth/commit-distribution.png).
+![commit distribution](/img/posts/2025-03-17-first-look-at-gitprojecthealth/commit-distribution.png){: .img-fluid }.
 
 In this visualization, we discover that the most recent contributors are "Clotilde Toullec" and "CyrilFerlicot".
-The *"nil"* refers to a commit authors that did not fill GitHub with its email. It is *anquetil* (probably the same person as "Nicolas Anquetil").
+The *"nil"* refers to a commit authors that did not fill GitHub with their email. It is *anquetil* (probably the same person as "Nicolas Anquetil").
+The square without name is probably someone that did not fill correctly the local git config for username.
 
 ## Who modified my code? - code churn
 
-When popular metric when looking at git history is the code churn.
-Code churn refer to edit to code introduced in the past.
-It can correspond to the percentage of code introduced in *commit A* modified in the next week (however many definition exits).
+A popular metric when looking at git history is the code churn.
+Code churn refer to edit of code introduced in the past.
+It corresponds to the percentage of code introduced in a commit and then modified in other comments during a time period (e.g in the next week).
+However many code churn definitions exit.
 
 The first step is thus to discover what commits modified my code.
 To do so, we implemented in GitProjectHealth information about diff in commit.
@@ -85,11 +87,11 @@ famix repository commits do: [ :commit | githubImporter completeImportedCommit: 
 
 Then, when inspecting a commit, it is possible to switch to the "Commits tree" view.
 
-![Commit Tree](/img/posts/2025-03-17-first-look-at-gitprojecthealth/commit-tree.png)
+![Commit Tree](/img/posts/2025-03-17-first-look-at-gitprojecthealth/commit-tree.png){: .img-fluid }
 
 Here how to read to above example
 
-- The orange square "Remove TClasWithVisibility..." is the inspected commit.
+- The orange square "Remove TClassWithVisibility..." is the inspected commit.
 - The gray square is the parent commit of the selected ones.
 - The red squares are subsequent commits that modify at least one file in common with the inspected commit
 - The green squares are commits that modifies other part of the code
