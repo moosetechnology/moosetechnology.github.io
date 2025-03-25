@@ -120,13 +120,14 @@ If we inspect it, we see that it is a `TSNode`
 - we can get its type: `node type` returns the string `'comment'`
 - `node nextSibling` returns the next TSNode, the "expression-statement"
 - `node startPoint` and `node endPoint` tell you where in the source code this node is located.
-  It returns `TSPoint`-s:
+  It returns instances of `TSPoint`:
   - `node startPoint row` = 0 (0 indexed)
   - `node startPoint column` = 0
   - `node endPoint row` = 0
   - `node endPoint column` = 19
   
-  With these informations, one can get the text associated to the node.
+  That is to say the node is on the first row, extending from column 0 to 19. 
+  With this, one could get the text associated to the node from the original source code.
   
-  That's it for today.
-  In a following post we will start to look at how to create a real parser using on the Visitor design pattern.
+That's it for today.
+In a following post we will start to look at how to create a real parser using on the Visitor design pattern.
