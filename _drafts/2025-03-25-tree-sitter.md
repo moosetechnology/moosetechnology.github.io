@@ -108,7 +108,7 @@ tree rootNode
 ```
 This gives you the following window:
 
-!["A first Tree-Sitter AST for Perl"](./img/posts/2025-03-25-tree-sitter/first-AST.png)
+!["A first Tree-Sitter AST for Perl"](/img/posts/2025-03-25-tree-sitter/first-AST.png)
 
 That looks like a very good start!
 
