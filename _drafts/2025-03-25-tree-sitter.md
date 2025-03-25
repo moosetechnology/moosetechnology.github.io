@@ -129,4 +129,4 @@ If we inspect it, we see that it is a `TSNode`
   With these informations, one can get the text associated to the node.
   
   That's it for today.
-  In a following post we will start to look at how to create a real parser based on the Visitor design pattern.
+  In a following post we will start to look at how to create a real parser using on the Visitor design pattern.
