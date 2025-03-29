@@ -8,7 +8,9 @@ comments: true
 tags: infrastructure
 ---
 
-Moose is a huge consumer of programming language grammars.
+Moose is a huge consumer of programming language parsers.
+It is useful to rely on external tools to help us in this.
+
 We are always looking into integrating new programming languages into the platform.
 There are two main requirements for this:
 - create a parser of the language, to "understand" the source code
