@@ -2,7 +2,7 @@
 layout: post
 title: "Creating a Parser based on Tree-Sitter grammar"
 date: 2025-03-25
-background: '/img/posts/tree-sitter-banner.png'
+background: '/img/posts/treesitter-banner.png'
 author: Nicolas Anquetil
 comments: true
 tags: infrastructure
