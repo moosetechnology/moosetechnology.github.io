@@ -8,8 +8,10 @@ comments: true
 tags: infrastructure
 ---
 
-Moose is a huge consumer of programming language parsers.
-It is useful to rely on external tools to help us in this.
+Moose is a huge consumer of language parsers.
+Rely on external tools help us with this.
+
+>Note: banner image generated with DALL.E
 
 We are always looking into integrating new programming languages into the platform.
 There are two main requirements for this:
