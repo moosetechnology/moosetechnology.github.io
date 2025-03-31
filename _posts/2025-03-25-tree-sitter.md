@@ -2,13 +2,17 @@
 layout: post
 title: "Creating a Parser based on Tree-Sitter grammar"
 date: 2025-03-25
-background: '/img/posts/bg-posts.jpg'
+background: '/img/posts/treesitter-banner.png'
 author: Nicolas Anquetil
 comments: true
 tags: infrastructure
 ---
 
-Moose is a huge consumer of programming language grammars.
+Moose is a huge consumer of language parsers.
+Relying on external tools help us with this.
+
+>Note: banner image generated with DALL.E
+
 We are always looking into integrating new programming languages into the platform.
 There are two main requirements for this:
 
@@ -28,7 +32,8 @@ Tree-Sitter, or any other grammar tool, will help in that, but it remains a long
 We do not explain in detail here how to install tree-sitter or a new Tree-Sitter grammar.
 I found this page ([https://dcreager.net/2021/06/getting-started-with-tree-sitter/](https://dcreager.net/2021/06/getting-started-with-tree-sitter/)) useful in this sense.
 
-For this blog post, we use the grammar in [https://github.com/tree-sitter-perl/tree-sitter-perl](https://github.com/tree-sitter-perl/tree-sitter-perl).
+For this blog post, we will use the Perl grammar in [https://github.com/tree-sitter-perl/tree-sitter-perl](https://github.com/tree-sitter-perl/tree-sitter-perl).
+
 Do the following:
 - clone the repository on your disk
 - go in the directory
@@ -36,9 +41,10 @@ Do the following:
 - (on Linux) it creates a `libtree-sitter-perl.so` dynamic library file.
   This must be moved in some standard library path (I chose `/usr/lib/x86_64-linux-gnu/` because this is where the `libtree-sitter.so` file was).
   
-Pharo uses FFI to link to the grammar library, that's why it needs to be in a standard directory.
-The subclasses of `FFILibraryFinder` can tell you what are the standard directories on your installation.
+Pharo uses FFI to link to the grammar library, that's why it's a good idea to put it in a standard directory.
+You can also put this library file in the same directory as your Pharo image, or in the directory where the Pharo launcher puts the virtual machines.
 
+The subclasses of `FFILibraryFinder` can tell you what are the standard directories on your installation.
 For example on Linux, `FFIUnix64LibraryFinder new paths` returns a list of paths that includes `'/usr/lib/x86_64-linux-gnu/'` where we did put our grammar.so file.
 
 ## Binding tree-sitter in Pharo
@@ -117,7 +123,7 @@ tree rootNode
 
 This gives you the following window:
 
-!["A first Tree-Sitter AST for Perl"](/img/posts/2025-03-25-tree-sitter/first-tree.png)
+!["A first Tree-Sitter AST for Perl"](/img/posts/2025-03-25-tree-sitter/first-AST.png)
 
 That looks like a very good start!
 
@@ -129,13 +135,15 @@ If we inspect it, we see that it is a `TSNode`
 - we can get its type: `node type` returns the string `'comment'`
 - `node nextSibling` returns the next TSNode, the "expression-statement"
 - `node startPoint` and `node endPoint` tell you where in the source code this node is located.
-  It returns `TSPoint`-s:
+  It returns instances of `TSPoint`:
   - `node startPoint row` = 0 (0 indexed)
   - `node startPoint column` = 0
   - `node endPoint row` = 0
   - `node endPoint column` = 19
+  That is to say the node is on the first row, extending from column 0 to 19.
+  With this, one could get the text associated to the node from the original source code.
+
+That's it for today.
+In a following post we will look at doing something with this AST using the Visitor design pattern.
   
-  With these information, one can get the text associated to the node.
-  
-  That's it for today.
-  In a following post we will start to look at how to create a real parser based on the Visitor design pattern.
+See you latter
