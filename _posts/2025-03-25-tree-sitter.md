@@ -15,10 +15,11 @@ Relying on external tools help us with this.
 
 We are always looking into integrating new programming languages into the platform.
 There are two main requirements for this:
+
 - create a parser of the language, to "understand" the source code
 - create a meta-model for the language, to be able to represent and manipulate the source code
 
-Creating the meta-model has already been coverred in an other blogpost: [https://modularmoose.org/posts/2021-02-04-coasters](https://modularmoose.org/posts/2021-02-04-coasters)
+Creating the meta-model has already been covered in an other blogpost: [https://modularmoose.org/posts/2021-02-04-coasters](https://modularmoose.org/posts/2021-02-04-coasters)
 
 In this post, we will be looking at how to use a Tree-Sitter grammar to help build a parser for a language.
 We will use the Perl language example for this.
@@ -50,6 +51,7 @@ For example on Linux, `FFIUnix64LibraryFinder new paths` returns a list of paths
 
 We use the Pharo-Tree-Sitter project ([https://github.com/Evref-BL/Pharo-Tree-Sitter](https://github.com/Evref-BL/Pharo-Tree-Sitter)) of Berger-Levrault, created by Benoit Verhaeghe, a regular contributor to Moose and this blog.
 You can import this project in a Moose image following the README instructions.
+
 ```st
 Metacello new
   baseline: 'TreeSitter';
@@ -58,6 +60,7 @@ Metacello new
 ```
 
 The README file of Pharo-Tree-Sitter gives an example of how to use it for Python:
+
 ```st
 parser := TSParser new.
 tsLanguage := TSLanguage python.
@@ -66,38 +69,43 @@ parser language: tsLanguage.
 ```
 
 We want to have the same thing for Perl, so we will need to define a `TSLanguage class >> #perl` method.
-Let's have a look at how it's done in Python:
+Let's take a look at how it's done in Python:
+
 ```st
 TSLanguage class >> #python
 	^ TSPythonLibrary uniqueInstance tree_sitter_python
 ```
 
 It's easy to do something similar for perl:
+
 ```st
 TSLanguage class >> #perl
 	^ TSPerlLibrary uniqueInstance tree_sitter_perl
 ```
+
 But we need to define the `TSPerlLibrary` class.
 Again let's look at how it's done for Python and copy that:
+
 - create a `TreeSitter-Perl` package
 - create a `TSPerlLibrary` class in it inheriting from `FFILibrary`
 - define the class method:
-```st
-tree_sitter_perl
-	^ self ffiCall: 'TSLanguage * tree_sitter_perl ()'
-```
+  ```st
+  tree_sitter_perl
+    ^ self ffiCall: 'TSLanguage * tree_sitter_perl ()'
+  ```
 - and define the class methods for FFI (here for Linux):
-```st
-unix64LibraryName
-	^ FFIUnix64LibraryFinder findAnyLibrary: #( 'libtree-sitter-perl.so' )
-```
+  ```st
+  unix64LibraryName
+    ^ FFIUnix64LibraryFinder findAnyLibrary: #( 'libtree-sitter-perl.so' )
+  ```
+
 Notice that we gave the name of the dynamic library file created above (`libtree-sitter-perl.so`).
 If this file is in a standard library directory, FFI will find it.
-
 
 ## A first Pharo AST
 
 We can now experiment "our" parser on a small example:
+
 ```st
 parser := TSParser new.
 tsLanguage := TSLanguage perl.
@@ -112,6 +120,7 @@ tree := parser parseString: string.
 
 tree rootNode
 ```
+
 This gives you the following window:
 
 !["A first Tree-Sitter AST for Perl"](/img/posts/2025-03-25-tree-sitter/first-AST.png)
@@ -131,8 +140,7 @@ If we inspect it, we see that it is a `TSNode`
   - `node startPoint column` = 0
   - `node endPoint row` = 0
   - `node endPoint column` = 19
-  
-  That is to say the node is on the first row, extending from column 0 to 19. 
+  That is to say the node is on the first row, extending from column 0 to 19.
   With this, one could get the text associated to the node from the original source code.
 
 That's it for today.
