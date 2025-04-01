@@ -47,14 +47,15 @@ In a playground (`Ctrl+O`, `Ctrl+W`).
 ```st
 glhModel := GLHModel new.
 
-glhApi := GLHApi new
+glhApi := GitlabApi new
     privateToken: '<Your private token>';
-    baseAPIUrl:'https://gitlab.myPrivateHost.com/api/v4';
+    hostUrl: 'https://gitlab.myPrivateHost.com/api/v4';
     yourself.
 
-glhImporter := GLHModelImporter new
-    glhApi: glhApi;
-    glhModel: glhModel.
+glhImporter := GitlabModelImporter new
+    repoApi: glhApi;
+    glhModel: glhModel;
+    withFiles: false.
 
 
 "137 is the ID of the a Group, you can find the number in the webpage of every project and group"
