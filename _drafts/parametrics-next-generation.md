@@ -12,10 +12,11 @@ tags: meta-model
 How do we represent the relation between a generic entity, its type parameters and the entities that concretize it? The Famix metamodel has evolved over the years to improve the way we represent these relations. The last increment is described in a previous [blogpost]({% link _posts/2023-07-13-parametric.md %}).
 We present here a new implementation that eases the management of parametric entities in Moose.
 
-The major change between this previous version and the new implementation presented in this post is this: 
+The major change between this previous version and the new implementation presented in this post is this:
 **We do not represent the parameterized entities anymore**.
 
-> #### :paperclip: Generic? Parametric? Parameterized? Know the difference.
+> #### :paperclip: Generic? Parametric? Parameterized? Know the difference
+>
 > - A **parametric entity** is an entity that declares type parameters or arguments. It can be generic or parameterized, according to the following definitions.
 > - A **generic entity** is an entity that defines 1 or several type parameters. To be instantiated, inherited, implemented or invoked, their type parameters must be replaced by existing types (type arguments). `ArrayList<E>` is a generic class. In Famix Java, we represent generic classes, interfaces and methods.
 > - A **type parameter** is a parameter that must be replaced by an existing type in order to use the generic entity that defines it. In `ArrayList<E>`, `E`  is a type parameter.
@@ -31,9 +32,11 @@ The major change between this previous version and the new implementation presen
 
 The major issue with the previous implementation was the difference between parametric and non-parametric entities in practice, particularly when trying to trace the inheritance tree.
 Here is a concrete example: getting the superclass of the superclass of a class.
+
 - For a non-parametric class, the sequence is straightforward: ask the inheritance for the superclass, repeat.
 
 ![Getting super inheritances - Non-parametric entities.](/img/posts/2025-05-07-Parametrics-Next-Generation/sequence-inheritance-non-parametric.png)
+
 - For a parametric class (see the little code snippet below), there was an additional step, navigating through the concretization:
 
 {% highlight java %}
@@ -46,15 +49,19 @@ public MySpecializedList extends ArrayList<String> {}
 
 This has caused many headaches to developers who wanted to browse a hierarchy: how do we keep track of the full hierarchy when it includes parametric classes? How to manage both situations without knowing if the classes will be parametric or not?
 The same problem occurred to browse the implementations of parametric interfaces and the invocations of generic methods.
+
 ### Naming
+
 The previous implementation naming choices were a little complex to grasp and did not match the standard vocabulary, especially in Java:
+
 - A type parameter was named a `ParameterType`
 - A type argument was named a `ConcreteParameterType`
 
 ### Entities duplication
 
 Each time there was a concretization, a parametric entity was created. This created duplicates of virtually the same entity: one for the generic entity and **one for each parameterized entity**.
-Let's see an example: 
+Let's see an example:
+
 {% highlight java %}
 public MyClass implements List<Float> {
 	
@@ -66,6 +73,7 @@ public MyClass implements List<Float> {
 {% endhighlight %}
 
 For the interface `List<E>`, we had 6 parametric interfaces:
+
 - One was the generic one: `#isGeneric >>> true`
 - 3 were the parameterized interfaces implemented by `ArrayList<E>`, its superclass `AbstractList<E>` and `MyClass`. They were different because the *concrete types* were different: `E` from `ArrayList<E>`, `E` from `AbstractList<E>`and `Float`.
 - 2 were declared types: `List<Number>` and `List<Integer>`.
@@ -77,7 +85,7 @@ For the interface `List<E>`, we had 6 parametric interfaces:
 When deciding of a new implementation, our main goal was to create a situation in which the dependencies would work in the same way for all entities, parametric or not.
 That's where we introduce parametric associations. These associations only differ from standard associations by one property: they trigger a concretization.
 
-Here is the new Famix metamodel traits that represent concretizations: 
+Here is the new Famix metamodel traits that represent concretizations:
 
 ![Class diagram for Parametric Associations](/img/posts/2025-05-07-Parametrics-Next-Generation/uml-parametric-association.png)
 
@@ -107,7 +115,8 @@ we have an "entity typing" association between `myAttribute` and `ArrayList`. Th
 > ##### :recycle: Deprecation
 > The method `#declaredType` is still part of the API of `TTypedEntity`. However, it's not a getter for the `#declaredType` attribute anymore. It now returns the type that is target of the association.
 >
-> The setter `#declaredType:` is deprecated and cannot be automatically transformed. If you need to replace it, you should create an instance of the EntityTyping class in your metamodel and set the declared type as its target. You will have something like: 
+> The setter `#declaredType:` is deprecated and cannot be automatically transformed. If you need to replace it, you should create an instance of the EntityTyping class in your metamodel and set the declared type as its target. You will have something like:
+
 {% highlight smalltalk %}
 myVariable := myModel newLocalVariableNamed: #myVar.
 myType := myModel newTypeNamed: #MyType.
