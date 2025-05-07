@@ -7,3 +7,4 @@ Gemfile.lock
 .bundle
 vendor/
 .DS_Store
+.vscode/ltex.dictionary.en-US.txt
