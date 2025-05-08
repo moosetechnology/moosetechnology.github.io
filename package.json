@@ -7,11 +7,16 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "postinstall": "sed -i '' 's/validate: (input) => svgReg.test(toUTF8String(input, 0, 1e3))/validate: (input) => svgReg.test(toUTF8String(input))/' node_modules/astro/dist/assets/utils/vendor/image-size/types/svg.js"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.34.3",
+    "@tailwindcss/vite": "^4.1.5",
     "astro": "^5.6.1",
-    "sharp": "^0.32.5"
+    "sharp": "^0.32.5",
+    "starlight-blog": "^0.21.0",
+    "starlight-sidebar-topics": "^0.6.0",
+    "tailwindcss": "^4.1.5"
   }
 }

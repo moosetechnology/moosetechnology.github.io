@@ -1,0 +1,187 @@
+[
+
+    {
+	"event": "IEEE Working Conference on Software Visualization (VISSOFT)",
+	"title": "A Visualization for Client/Server Architecture Viewpoints and Architectural Violations",
+	"title-short": "Visualization for Client/Server Architecture",
+	"URL": "https://www.computer.org/csdl/proceedings-article/vissoft/2023/082900a001/1SYITucxA2Y",
+	"PDF": "https://hal.science/hal-04231797v1/file/main.pdf",
+	"year": 2023,
+	"author": [
+	    { "family": "Agouf", "given": "Nour Jihene" },
+	    { "family": "Ducasse", "given": "Stéphane" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Labsari", "given": "Soufyane" }
+	],
+    },
+
+    {
+	"event": "IEEE Software (jrnl)",
+	"title": "From GWT to Angular: An Experiment Report on Migrating a Legacy Web Application",
+	"title-short": "From GWT to Angular",
+	"URL": "https://doi.org/10.1109/MS.2021.3101249",
+	"PDF": "http://rmod-files.lille.inria.fr/Team/Texts/Papers/Verh21b-FromGWTToAngular-iEEESoftware.pdf",
+	"year": 2022,
+	"author": [
+	    { "family": "Verhaeghe", "given": "Benoit" },
+	    { "family": "Shatnawi", "given": "Anas" },
+	    { "family": "Seriai", "given": "Abderrahmane" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Derras", "given": "Mustapha" },
+	    { "family": "Ducasse", "given": "Stéphane" }
+	]
+    },
+
+    {
+	"event": "Automated Software Engineering, 28, 6",
+	"title": "GUI visual aspect migration: a framework agnostic solution",
+	"title-short": "GUI visual aspect migration",
+	"URL": "https://doi.org/10.1007/s10515-021-00284-z",
+	"PDF": "http://rmod-files.lille.inria.fr/Team/Texts/Papers/Verh21a-ASEJournal.pdf",
+	"year": 2021,
+	"author": [
+	    { "family": "Verhaeghe", "given": "Benoit" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Ducasse", "given": "Stéphane" },
+	    { "family": "Seriai", "given": "Abderrahmane" },
+	    { "family": "Derras", "given": "Mustapha" }
+	],
+    },
+
+    {
+	"event": "International Conference on Software Maintenance and Evolution (ICSME)",
+	"title": "Migrating GUI behavior: from GWT to Angular",
+	"title-short": "Migrating GUI behavior",
+	"URL": "https://ieeexplore.ieee.org/document/9609198",
+	"PDF": "https://hal.archives-ouvertes.fr/hal-03341866/file/conference_101719.pdf",
+	"year": 2021,
+	"author": [
+	    { "family": "Verhaeghe", "given": "Benoit" },
+	    { "family": "Shatnawi", "given": "Anas" },
+	    { "family": "Seriai", "given": "Abderrahmane" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Ducasse", "given": "Stéphane" },
+	    { "family": "Derras", "given": "Mustapha" }
+	],
+    },
+
+    {
+	"event": "ICSR: International Conference on Software and Software Reuse",
+	"title": "Modular Moose: A New Generation of Software Reverse Engineering Platform",
+	"title-short": "Modular Moose",
+	"PDF": "https://arxiv.org/pdf/2011.10975",
+	"URL": "https://hal.inria.fr/hal-02972159",
+	"year": 2020,
+	"author": [
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Houekpetodji", "given": "Mahugnon H." },
+	    { "family": "Verhaeghe", "given": "Benoit" },
+	    { "family": "Ducasse", "given": "Stéphane" },
+	    { "family": "Toullec", "given": "Clotilde" },
+	    { "family": "Djareddir", "given": "Fatiha" },
+	    { "family": "Sudich", "given": "Jerôme" },
+	    { "family": "Derras", "given": "Moustapha" }
+	]
+    },
+
+    {
+	"event": "International Conference on Advanced Information Systems Engineering (CAiSE'20)",
+	"title": "Recommendations for Evolving Relational Databases",
+	"title-short": "Recommendations for Evolving Relational Databases",
+	"URL": "https://doi.org/10.1007/978-3-030-49435-3_31",
+	"PDF": "https://inria.hal.science/hal-02504949/file/main.pdf",
+	"year": 2020,
+	"author": [
+	    { "family": "Delplanque", "given": "Julien" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Ducasse", "given": "Stéphane" },
+	],
+    },
+
+    {
+	"event": "IEEE 26th International Conference on Software Analysis, Evolution and Reengineering (SANER'19)",
+	"title": "GUI Migration using MDE from GWT to Angular 6: An Industrial Case",
+	"title-short": "GUI Migration",
+	"URL": "https://doi.org/10.1109/SANER.2019.8667989",
+	"PDF": "http://rmod-files.lille.inria.fr/Team/Texts/Papers/Verh19a-Saner-MDEMigration.pdf",
+	"year": 2019,
+	"author": [
+	    { "family": "Verhaeghe", "given": "Benoit" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Seriai", "given": "Abderrahmane" },
+	    { "family": "Deruelle", "given": "Laurent" },
+	    { "family": "Ducasse", "given": "Stéphane" },
+	    { "family": "Derras", "given": "Mustapha" }
+	],
+    },
+
+    {
+	"event": "IEEE International Conference on Software Maintenance and Evolution (ICSME'19)",
+	"title": "Decomposing God Classes at Siemens",
+	"title-short": "Decomposing God Classes",
+	"URL": "https://doi.org/10.1109/ICSME.2019.00027",
+	"PDF": "http://rmod-files.lille.inria.fr/Team/Texts/Papers/Anq19a-ICSME-GodClass.pdf",
+	"year": 2019,
+	"author": [
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Andreo", "given": "Gaelle" },
+	    { "family": "Ducasse", "given": "Stéphane" },
+	],
+    },
+
+    {
+	"event": "IEEE International Conference on Software Maintenance and Evolution (ICSME)",
+	"title": "Relational Database Schema Evolution: An Industrial Case Study",
+	"title-short": "Relational Database Schema Evolution",
+	"URL": "https://doi.org/10.1109/ICSME.2018.00073",
+	"PDF": "http://rmod-files.lille.inria.fr/Team/Texts/Papers/Delp18c-ICSME-DatabaseSchemaEvolution.pdf",
+	"year": 2018,
+	"author": [
+	    { "family": "Delplanque", "given": "Julien" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Auverlot", "given": "Olivier" },
+	],
+    },
+
+    {
+	"event": "3rd IEEE Working Conference on Software Visualization (VISSOFT 2015)",
+	"title": "OrionPlanning: Improving Modularization and Checking Consistency on Software Architecture",
+	"title-short": "OrionPlanning",
+	"URL": "https://ieeexplore.ieee.org/document/7332435",
+	"PDF": "http://rmod-files.lille.inria.fr/Team/Texts/Papers/Sant15c-VISSOFT-OrionPlanning.pdf",
+	"year": 2015,
+	"author": [
+	    { "family": "Santos", "given": "Gustavo" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Etien", "given": "Anne" },
+	    { "family": "Ducasse", "given": "Stéphane" },
+	    { "family": "Valente", "given": "Marco Túlio" },
+	],
+    },
+
+    {
+	"event": "Journal of Software Engineering Research and Development, 2, 1",
+	"title": "BugMaps-Granger: a tool for visualizing and predicting bugs using Granger causality tests",
+	"title-short": "Visualizing and predicting bugs",
+	"PDF": "http://rmod-files.lille.inria.fr/Team/Texts/Papers/Cout14b-BugMapsGranger-jserd.pdf",
+	"URL": "https://jserd.springeropen.com/articles/10.1186/2195-1721-2-1",
+	"year": 2014,
+	"author": [
+	    { "family": "Couto", "given": "Cesar" },
+	    { "family": "Valente", "given": "Marco Túlio" },
+	    { "family": "Pires", "given": "Pedro" },
+	    { "family": "Hora", "given": "André" },
+	    { "family": "Anquetil", "given": "Nicolas" },
+	    { "family": "Bigonha", "given": "Roberto S." }
+	]
+    }
+]

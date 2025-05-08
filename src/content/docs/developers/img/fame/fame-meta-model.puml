@@ -1,0 +1,50 @@
+@startuml
+Element <|-- Type
+Type <|-- Class
+Type <|-- Trait
+Element <|-- Package
+Element <|-- Property
+
+Class <|-- Boolean
+Class <|-- Number
+Class <|-- String
+Class <|-- Object
+
+class Element {
+    fullname : String
+    name : String
+}
+
+class Class {
+    abstract : Boolean
+    root : Boolean
+    primitive : Boolean
+}
+
+class Trait {
+    root: Boolean
+    primitive : Boolean
+}
+
+class Property {
+    multivalued : Boolean
+    composite : Boolean
+    container : Boolean
+    derived : Boolean
+}
+
+Element --> Element
+
+Type *--"0..*" Property
+Type --"0..*" Trait
+Type "0..*"--* Package
+
+
+Class --> Class : superclass
+Class --> Class : subclass
+
+Package --"0..*" Property : extensions
+
+Property --> Property : opposite
+Property --> Object : defaultValue
+@enduml
