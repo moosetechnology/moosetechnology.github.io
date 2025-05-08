@@ -1,0 +1,126 @@
+{
+    "Nicolas Anquetil": {
+        "name": "Nicolas Anquetil",
+        "role": "Moose expert",
+        "bio": "Software engineer researcher specialized in software evolution",
+        "github": "https://github.com/nicolasanquetil",
+        "linkedin": "https://www.linkedin.com/in/nicolas-anquetil-9b5a787/",
+        "orcid": "https://orcid.org/0000-0003-1486-8399",
+        "personnal-website": "http://researchers.lille.inria.fr/~nanqueti/",
+        "image": "https://avatars.githubusercontent.com/u/14889146"
+    },
+    "Benoit Verhaeghe": {
+        "name": "Benoit Verhaeghe",
+        "role": "Cookie Lover",
+        "bio": "R&D engineer at <a href='https://berger-levrault.com/'>Berger-Levrault</a>",
+        "github": "https://github.com/badetitou",
+        "twitter": "https://twitter.com/badetitou",
+        "linkedin": "https://www.linkedin.com/in/benoitverhaeghe/",
+        "personnal-website": "https://badetitou.github.io/",
+        "orcid": "https://orcid.org/0000-0002-4588-2698",
+        "image": "https://avatars.githubusercontent.com/u/6225039",
+        "gravatar-hash": "ab4070086241400a4a428bf8994f05e0"
+    },
+    "Anne Etien": {
+        "name": "Anne Etien",
+        "role": "Moose expert",
+        "bio": "Software engineer researcher specialized in software evolution",
+        "github": "https://github.com/anneetien",
+        "image": "https://avatars.githubusercontent.com/u/17824579",
+        "personnal-website": "https://www.cristal.univ-lille.fr/profil/etien/"
+    },
+    "Vincent Aranega": {
+        "name": "Vincent Aranega",
+        "role": "MDE and beers lover",
+        "bio": "Software engineer researcher focused on MDE and Language engineering",
+        "github": "https://github.com/aranega",
+        "twitter": "https://twitter.com/VincentAranega",
+        "linkedin": "https://www.linkedin.com/in/aranega/",
+        "personnal-website": "https://aranega.github.io/",
+        "orcid": "https://orcid.org/0000-0003-4465-1289",
+        "image": "https://avatars.githubusercontent.com/u/2317394"
+    },
+    "Pascal Zaragoza": {
+        "name": "Pascal Zaragoza",
+        "role": "MDE and AI",
+        "bio": "R&D engineer at <a href='https://berger-levrault.com/'>Berger-Levrault</a>",
+        "github": "https://github.com/greenpanther93",
+        "linkedin": "https://www.linkedin.com/in/pascal-zaragoza-406120a9/",
+        "orcid": "https://orcid.org/0000-0002-5033-6392",
+        "image": "https://avatars.githubusercontent.com/u/8062930"
+    },
+    "Clotilde Toullec": {
+        "name": "Clotilde Toullec",
+        "role": "Research engineer",
+        "bio": "Software engineer, maintains and develops Moose",
+        "github": "https://github.com/ClotildeToullec",
+        "linkedin": "https://www.linkedin.com/in/clotilde-toullec-3aa685105/",
+        "image": "https://avatars.githubusercontent.com/u/39184695"
+    },
+    "Christopher Fuhrman": {
+        "name": "Christopher Fuhrman",
+        "role": "Moose herder",
+        "bio": "Software engineering researcher specializing in software design",
+        "github": "https://github.com/fuhrmanator",
+        "twitter": "https://twitter.com/thefuhrmanator",
+        "personnal-website": "https://fuhrmanator.github.io/",
+        "orcid": "https://orcid.org/0000-0001-8010-1087",
+        "image": "https://avatars.githubusercontent.com/u/7606540"
+    },
+    "Sebastian Jordan": {
+        "name": "Sebastian Jordan",
+        "role": "Moose developer",
+        "bio": "Software engineer",
+        "github": "https://github.com/jordanmontt",
+        "image": "https://avatars.githubusercontent.com/u/33934979",
+        "linkedin": "https://linkedin.com/in/jordanmontt",
+        "twitter": "https://twitter.com/jordanmontt"
+    },
+    "Théo Lanord": {
+        "name": "Théo Lanord",
+        "role": "Trainee / Apprentice engineer",
+        "bio": "Student at <a href='http://www.polytech-lille.fr/'>Polytech Lille</a> in IS (Computer Science and Statistics)",
+        "github": "https://github.com/enwiro",
+        "linkedin": "https://www.linkedin.com/in/théo-lanord/",
+        "image": "https://avatars.githubusercontent.com/u/58632394?v=4"
+    },
+    "Réda Id-taleb": {
+        "name": "Réda Id-taleb",
+        "role": "Working on LabelContractor and color palette project for my internship",
+        "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a>",
+        "github": "https://github.com/reda-idtaleb",
+        "linkedin": "https://www.linkedin.com/in/r%C3%A9daid-taleb/",
+        "image": "https://avatars.githubusercontent.com/u/82438570"
+    },
+    "Ahmed Zaki BENNECER": {
+        "name": "Ahmed Zaki BENNECER",
+        "role": "Working on data flow analysis project for my internship",
+        "bio": "Computer science student at <a href='https://www.esi.dz/'>ESI</a> Algiers",
+        "github": "https://github.com/BennecerZaki",
+        "linkedin": "https://www.linkedin.com/in/bennecer-zaki/",
+        "personnal-website": "https://ahmed-zaki-bennecer.web.app/",
+        "image": "https://avatars.githubusercontent.com/u/45533819"
+    },
+    "Romain Degrave": {
+        "name": "Romain Degrave",
+        "role": "Master degree intern in software analysis",
+        "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a>",
+        "github": "https://github.com/RomainDeg",
+        "image": "https://avatars.githubusercontent.com/u/98580879"
+    },
+    "Patricia TOTOUM": {
+        "name": "Patricia TOTOUM",
+        "role": "Intern working on Famix-Aggregator",
+        "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a>",
+        "github": "https://github.com/PatriciaTot",
+        "linkedin": "https://www.linkedin.com/in/patricia-totoum-988179255/",
+        "image": "https://zupimages.net/up/23/31/lxci.jpeg"
+    },
+    "Thomas Wattebled": {
+        "name": "Thomas Wattebled",
+        "role": "working on parametric types for my intership",
+        "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a> ",
+        "github": "https://github.com/thomasWattebled",
+        "image": "https://avatars.githubusercontent.com/u/124277643"
+    }
+}

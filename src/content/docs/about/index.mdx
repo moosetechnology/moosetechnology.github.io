@@ -3,4 +3,132 @@ title: About us
 description: Analyse and model your software system
 ---
 
-# About us
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import authors from './authors.json';
+
+## Community
+
+### Moose is a community. <span class="text-blue-500">Get involved.</span>
+
+The Moose project started in 1996 at the University of Bern.  
+Its original goal was to build a language-independent meta-model for software analysis.  
+Since then, it grew to become an open platform for various types of software and data analyses.  
+Its development is currently supported by several research groups, startups, and contributors.
+
+- <span class="text-blue-500">Join</span> the [mailing list](https://sympa.inria.fr/sympa/subscribe/moose).
+- <span class="text-blue-500">Follow</span> [@moosetechnology](https://twitter.com/moosetechnology).
+- <span class="text-blue-500">Check</span> the code from [GitHub](https://github.com/moosetechnology/Moose).
+- <span class="text-blue-500">Raise</span> an [issue](https://github.com/moosetechnology/Moose/issues).
+- <span class="text-blue-500">Write</span> your story in the [blog](https://modularmoose.org/posts/).
+- <span class="text-blue-500">Code & Learn</span> during the [Moose Dojo](https://github.com/moosetechnology/Famix/projects/1#column-11845458).
+
+## Team
+
+<CardGrid>
+  {Object.values(authors).map((author) => (
+    <Card key={author.name} title={author.name} class="center">
+      <div class="flex flex-col items-center">
+        <img
+          src={author.image}
+          alt={author.name}
+          class="w-24 h-24 rounded-full mb-4"
+        />
+        <p class="text-sm font-semibold">{author.role}</p>
+        <div class="flex space-x-3 mt-3">
+          {author.github && (
+            <a href={author.github} target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/github.svg"
+                alt="GitHub"
+                class="w-5 h-5"
+              />
+            </a>
+          )}
+          {author.linkedin && (
+            <a href={author.linkedin} target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/linkedin.svg"
+                alt="LinkedIn"
+                class="w-5 h-5"
+              />
+            </a>
+          )}
+          {author.twitter && (
+            <a href={author.twitter} target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/twitter.svg"
+                alt="Twitter"
+                class="w-5 h-5"
+              />
+            </a>
+          )}
+          {author.orcid && (
+            <a href={author.orcid} target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/orcid.svg"
+                alt="ORCID"
+                class="w-5 h-5"
+              />
+            </a>
+          )}
+          {author['personnal-website'] && (
+            <a
+              href={author['personnal-website']}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/web.svg"
+                alt="Website"
+                class="w-5 h-5"
+              />
+            </a>
+          )}
+        </div>
+      </div>
+    </Card>
+  ))}
+</CardGrid>
+
+**And also:**
+
+- [Prof. Alexandre Bergel](http://bergel.eu/)
+- [Dr. Andrei Chis](http://andreichis.com/)
+- [Dr. Stéphane Ducasse](http://stephane.ducasse.free.fr/)
+- [Dr. Tudor Girba](http://tudorgirba.com/)
+- Pavel Krivanek
+- [Cyril Ferlicot-Delbecque](https://ferlicot.fr/)
+- [And more...](https://github.com/orgs/moosetechnology/people)
+
+
+## Partners
+
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<div>
+    [![Berger Levrault](./img/contributor-berger-levrault.png)](https://www.berger-levrault.com/)
+</div>
+<div>
+    [![University of Bern](./img/contributor-unibe.jpg)](http://scg.unibe.ch)
+</div>
+<div>
+    [![RMoD](./img/contributor-rmod.png)](http://rmod.inria.fr)
+</div>
+<div>
+    [![Pleiad Lab](./img/contributor-pleiad.png)](http://pleiad.dcc.uchile.cl)
+</div>
+<div>
+    [![USI](./img/contributor-usi.png)](http://www.inf.usi.ch/faculty/lanza/reveal.html)
+</div>
+<div>
+    [![UMMISCO](./img/contributor-ummisco.jpg)](http://www.ummisco.ird.fr/)
+</div>
+<div>
+    [![Feenk](./img/contributor-feenk.png)](http://feenk.com)
+</div>
+<div>
+    [![Object Profile](./img/contributor-objectprofile.png)](http://objectprofile.com)
+</div>
+<div>
+    [![Sensus](./img/contributor-sensus.png)](http://legacycode.nl)
+</div>
+</div>
