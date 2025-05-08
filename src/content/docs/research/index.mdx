@@ -7,34 +7,43 @@ import bibliography from './bibliography.json';
 
 ## Our publications
 
-<ul class="list-disc pl-5">
+<div class="grid grid-cols-1 gap-4">
   {bibliography.map((reference) => (
-    <li key={reference.title}>
-      <strong>{reference.title}</strong>, <i>{reference.event}</i>, {reference.year}.{" "}
-      {reference.author.map((author, index) => (
-        <span key={index}>
-          {author.family} {author.given}
-          {index < reference.author.length - 1 && ", "}
-        </span>
-      ))}
-      {reference.URL && (
-        <>
-          {" "}
-          <a href={reference.URL} class="text-blue-500 underline">
+    <div key={reference.title} class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 flex flex-col justify-between">
+      <div>
+        <h3 class="text-lg font-semibold">{reference.title}</h3>
+        <p class="italic text-base">
+          {reference.event} - <span class="text-gray-600">{reference.year}</span>
+        </p>
+        <p class="mt-2 text-sm">
+          {reference.author.map((author, index) => (
+            <span key={index}>
+              {author.family} {author.given}
+              {index < reference.author.length - 1 && ", "}
+            </span>
+          ))}
+        </p>
+      </div>
+      <div class="mt-4 flex justify-end space-x-3">
+        {reference.URL && (
+          <a
+            href={reference.URL}
+            class="bg-blue-500 text-white text-sm px-3 py-1 rounded hover:bg-blue-600 no-underline"
+          >
             URL
           </a>
-        </>
-      )}
-      {reference.PDF && (
-        <>
-          {" "}
-          <a href={reference.PDF} class="text-blue-500 underline">
+        )}
+        {reference.PDF && (
+          <a
+            href={reference.PDF}
+            class="bg-blue-500 text-white text-sm px-3 py-1 rounded hover:bg-blue-600 no-underline"
+          >
             PDF
           </a>
-        </>
-      )}
-    </li>
+        )}
+      </div>
+    </div>
   ))}
-</ul>
+</div>
 
 

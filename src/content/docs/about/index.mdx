@@ -3,12 +3,10 @@ title: About us
 description: Analyse and model your software system
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
 import authors from './authors.json';
+import 'remixicon/fonts/remixicon.css';
 
-## Community
-
-### Moose is a community. <span class="text-blue-500">Get involved.</span>
+## Moose is a community. <span class="text-blue-500">Get involved.</span>
 
 The Moose project started in 1996 at the University of Bern.  
 Its original goal was to build a language-independent meta-model for software analysis.  
@@ -24,71 +22,51 @@ Its development is currently supported by several research groups, startups, and
 
 ## Team
 
-<CardGrid>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   {Object.values(authors).map((author) => (
-    <Card key={author.name} title={author.name} class="center">
-      <div class="flex flex-col items-center">
-        <img
-          src={author.image}
-          alt={author.name}
-          class="w-24 h-24 rounded-full mb-4"
-        />
-        <p class="text-sm font-semibold">{author.role}</p>
-        <div class="flex space-x-3 mt-3">
-          {author.github && (
-            <a href={author.github} target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/github.svg"
-                alt="GitHub"
-                class="w-5 h-5"
-              />
-            </a>
-          )}
-          {author.linkedin && (
-            <a href={author.linkedin} target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/linkedin.svg"
-                alt="LinkedIn"
-                class="w-5 h-5"
-              />
-            </a>
-          )}
-          {author.twitter && (
-            <a href={author.twitter} target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/twitter.svg"
-                alt="Twitter"
-                class="w-5 h-5"
-              />
-            </a>
-          )}
-          {author.orcid && (
-            <a href={author.orcid} target="_blank" rel="noopener noreferrer">
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/orcid.svg"
-                alt="ORCID"
-                class="w-5 h-5"
-              />
-            </a>
-          )}
-          {author['personnal-website'] && (
-            <a
-              href={author['personnal-website']}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/web.svg"
-                alt="Website"
-                class="w-5 h-5"
-              />
-            </a>
-          )}
-        </div>
+    <div key={author.name} class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 flex flex-col items-center mt-0">
+      <img
+        src={author.image}
+        alt={author.name}
+        class="w-24 h-24 rounded-full mb-4"
+      />
+      <h3 class="text-lg text-center font-semibold text-gray-900 dark:text-white">{author.name}</h3>
+      <p class="text-sm text-gray-600 dark:text-gray-300">{author.role}</p>
+      <div class="flex space-x-3 mt-4">
+        {author.github && (
+          <a href={author.github} target="_blank" rel="noopener noreferrer" class="no-underline">
+            <i class="ri-github-fill w-5 h-5 text-gray-700 dark:text-white"></i>
+          </a>
+        )}
+        {author.linkedin && (
+          <a href={author.linkedin} target="_blank" rel="noopener noreferrer" class="no-underline">
+            <i class="ri-linkedin-box-fill w-5 h-5 text-blue-700 dark:text-white"></i>
+          </a>
+        )}
+        {author.twitter && (
+          <a href={author.twitter} target="_blank" rel="noopener noreferrer" class="no-underline">
+            <i class="ri-twitter-x-line w-5 h-5 text-blue-500 dark:text-white"></i>
+          </a>
+        )}
+        {author.orcid && (
+          <a href={author.orcid} target="_blank" rel="noopener noreferrer" class="no-underline">
+            <i class="ri-graduation-cap-fill w-5 h-5 text-green-500 dark:text-white"></i>
+          </a>
+        )}
+        {author['personnal-website'] && (
+          <a
+            href={author['personnal-website']}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="no-underline"
+          >
+            <i class="ri-global-fill w-5 h-5 text-gray-700 dark:text-white"></i>
+          </a>
+        )}
       </div>
-    </Card>
+    </div>
   ))}
-</CardGrid>
+</div>
 
 **And also:**
 
