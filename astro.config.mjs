@@ -120,8 +120,21 @@ export default defineConfig({
 							items: [
 								{
 									label: 'Beginners',
-									// Autogenerate a group of links for the 'constellations' directory.
-									autogenerate: { directory: 'beginners' },
+									items: [
+										{
+											label: 'Install Moose',
+											link: '/beginners/install-moose/',
+										},
+										{
+											label: 'Moose in Action',
+											link: '/beginners/moose-in-action/',
+										},
+										{
+											label: 'Demo video',
+											link: 'https://www.youtube.com/watch?v=2ILbR5ZrSm8',
+											badge: { text: 'Outside', variant: 'tip' }
+										}
+									],
 								},
 								{
 									label: 'Users',
