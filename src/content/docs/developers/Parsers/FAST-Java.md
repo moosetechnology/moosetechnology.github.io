@@ -4,17 +4,8 @@ background: '/img/bg-wiki.jpg'
 title: FAST-Java
 ---
 
-# FAST-Java <!-- omit in toc -->
-
 FAST-Java is a [FAST](FAST) meta-model used to represent AST of a Java class or method.
 It comes with a meta-model, an importer, and tools to manipulate and explore models.
-
-- [FAST-Java meta-model](#fast-java-meta-model)
-- [Usage](#usage)
-  - [Installation](#installation)
-  - [Import](#import)
-  - [Export to Java code](#export-to-java-code)
-- [Tools](#tools)
 
 ## FAST-Java meta-model
 
@@ -88,4 +79,4 @@ Then, select a method entity.
 On the right-hand pane of the inspector, select the *Tree* tab, on the left-hand pane, select the source code extension.
 The source code is highlighted and the area selected corresponds to the entity selected in the right-hand panel.
 
-![Example navigation in FAST](img/navigate-fast.gif)
+![Example navigation in FAST](./img/navigate-fast.gif)

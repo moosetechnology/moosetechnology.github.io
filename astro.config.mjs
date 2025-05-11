@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, sharpImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightBlog from 'starlight-blog'
 import starlightSidebarTopics from 'starlight-sidebar-topics';
@@ -11,10 +11,15 @@ import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 export default defineConfig({
 	markdown: {
 		// Applied to .md and .mdx files
-		remarkPlugins: [remarkMermaid, 
+		remarkPlugins: [remarkMermaid,
 			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
 		],
-	  },
+	},
+	image: {
+		service: sharpImageService({ limitInputPixels: false }),
+	},
+	site: 'https://modularmoose.org',
+	base: '',
 	integrations: [
 		starlight({
 			title: 'Modular Moose',
@@ -244,6 +249,10 @@ export default defineConfig({
 												{
 													label: 'Moose Critics',
 													link: '/users/moose-ide/moose-critics',
+												},
+												{
+													label: 'Inspector',
+													link: '/users/moose-ide/inspector',
 												}
 
 											]
