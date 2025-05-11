@@ -24,6 +24,7 @@ We finish by presenting the traits for [modelling genericity](#genericity) which
 ## Categories of traits
 
 First, one can divide the set of traits into four categories:
+
 - [Categories of traits](#categories-of-traits)
   - [Association Traits](#association-traits)
   - [Technical Traits](#technical-traits)
@@ -58,7 +59,7 @@ There are five full-fledged associations in FamixNG:
 
 <details>
 
-```plantuml!
+```plantuml
 @startuml
 hide empty members
 
@@ -98,7 +99,7 @@ TAccessible -- " *accessors" TWithAccesses
 
 <details>
 
-```plantuml!
+```plantuml
 @startuml
 hide empty members
 
@@ -132,7 +133,7 @@ TInheritance " *superInheritances" -- "subclass" TWithInheritances
 
 <details>
 
-```plantuml!
+```plantuml
 @startuml
 hide empty members
 
@@ -166,7 +167,7 @@ TInvocation " *incomingInvocations" -- " *candidates" TInvocable
 
 <details>
 
-```plantuml!
+```plantuml
 @startuml
 hide empty members
 
@@ -197,7 +198,7 @@ TReference " *outgoingReferences" -- "referencer" TWithReferences
 
 <details>
 
-```plantuml!
+```plantuml
 @startuml
 hide empty members
 
@@ -233,7 +234,7 @@ For now there are only two traits to put at each end of the relationship:
 
 <details>
 
-```plantuml!
+```plantuml
 @startuml
 hide empty members
 
@@ -261,7 +262,7 @@ TDereferencedInvocation " *dereferencedInvocations" -- "referencer" TWithDerefer
 
 <details>
 
-```plantuml!
+```plantuml
 @startuml
 hide empty members
 
@@ -324,7 +325,7 @@ For the first example we show how we model inheritance in the FamixJava meta-mod
 - `FamixJavaClass` uses `TClass`, ie. a Java class has all properties of the generic class defined in Famix. Note that a Java class also has other properties not shown here.
 - `FamixJavaInheritance` uses the trait `TInheritance` to represent an inheritance relationship.
 
-```plantuml!
+```plantuml
 hide empty members
 skinparam class {
   BackgroundColor white
@@ -365,7 +366,7 @@ For simplification we did not put the FamixJava entities, but there is a `FamixJ
 - `TMethod` uses `TInvocable` and thus can receive invocations
 - `TClass` uses `TInvocationsReceiver` because classes may receive (static) messages
 
-```plantuml!
+```plantuml
 hide empty members
 skinparam class {
   BackgroundColor white
@@ -414,7 +415,7 @@ References are relationship between methods (`TWithStatements`) and types (`TTyp
 Additionally, the diagram shows how variables (`TStructuralEntity`) and methods (`TMethods` using `TWithStatements`) are `TTypedEntity` which have a property `declaredType` pointing to a `TType` also.
 This property does not use the `TReference` association because it is a 1-to-n relationship.
 
-```plantuml!
+```plantuml
 hide empty members
 skinparam class {
   BackgroundColor white
@@ -490,7 +491,7 @@ TWithReferences "referencer" -- "outgoingReferences*" TReference
 Finally, we look at the access relationship and how it is used.
 Accesses are made from methods (`TMethods` using `TWithStatements`, itself using `TWithAccesses`) to variables (`TStructuralEntity` uses `TAccessible`).
 
-```plantuml!
+```plantuml
 hide empty members
 skinparam class {
   BackgroundColor white

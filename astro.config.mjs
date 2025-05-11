@@ -5,12 +5,15 @@ import starlightBlog from 'starlight-blog'
 import starlightSidebarTopics from 'starlight-sidebar-topics';
 import remarkMermaid from 'remark-mermaidjs'
 import tailwindcss from "@tailwindcss/vite";
+import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 
 // https://astro.build/config
 export default defineConfig({
 	markdown: {
 		// Applied to .md and .mdx files
-		remarkPlugins: [remarkMermaid],
+		remarkPlugins: [remarkMermaid, 
+			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
+		],
 	  },
 	integrations: [
 		starlight({
