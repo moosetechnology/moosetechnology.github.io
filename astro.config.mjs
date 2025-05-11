@@ -138,8 +138,112 @@ export default defineConfig({
 								},
 								{
 									label: 'Users',
-									// Autogenerate a group of links for the 'constellations' directory.
-									autogenerate: { directory: 'users' },
+									items: [
+										{
+											label: 'Famix Java',
+											items: [
+												{
+													label: 'Famix Java',
+													link: '/users/famix-java/famix-java',
+												},
+												{
+													label: 'Generate Java Code',
+													link: '/users/famix-java/generate-java-code',
+												},
+												{
+													label: 'Demo Analyse Java Project',
+													link: 'https://fuhrmanator.github.io/posts/analyzing-java-with-moose/index.html',
+													badge: { text: 'Outside', variant: 'tip' }
+												},
+											]
+										},
+										{
+
+											label: 'Famix TypeScript',
+											link: 'https://fuhrmanator.github.io/posts/typescript-in-moose/index.html',
+											badge: { text: 'Outside', variant: 'tip' }
+
+										},
+										{
+											label: 'Famix SQL',
+											link: '/users/famix-sql/getting-started-with-famixsql',
+
+										},
+										{
+											label: 'Mining Software Repository with GitProjectHealth',
+											link: '/users/git-project-health/getting-started-with-gitproject-health',
+										},
+										{
+											label: 'Moose Generic',
+											items: [
+												{
+													label: 'Importing and exporting models',
+													link: '/users/importing-and-exporting-models',
+												},
+												{
+													label: 'Moose supported file format',
+													link: '/users/file-format',
+												}
+
+											]
+										},
+										{
+											label: 'AST',
+											items: [
+												{
+													label: 'FAST',
+													link: '/users/importing-and-exporting-models',
+												},
+												{
+													label: 'FAST Java',
+													link: '/users/file-format',
+												},
+												{
+													label: 'FAST Pharo',
+													link: '/users/file-format',
+												}
+
+											]
+										},
+										{
+											label: 'Performing queries',
+											items: [
+												{
+													label: 'Typical Queries',
+													link: '/users/typical-queries',
+												},
+												{
+													label: 'Moose Query',
+													link: 'https://moosequery.ferlicot.fr',
+													badge: { text: 'Outside', variant: 'tip' }
+												},
+												{
+													label: 'Tree Query',
+													link: 'https://github.com/juliendelplanque/TreeQuery',
+													badge: { text: 'Outside', variant: 'tip' }
+												}
+
+											]
+										},
+										{
+											label: 'Moose IDE',
+											items: [
+												{
+													label: 'Moose IDE Browsers',
+													link: '/users/moose-ide/browsers',
+												},
+												{
+													label: 'Moose Exporter',
+													link: '/users/moose-ide/moose-exporter',
+												},
+												{
+													label: 'Moose Critics',
+													link: '/users/moose-ide/moose-critics',
+												}
+
+											]
+										},
+									]
 								}, {
 									label: 'Developers',
 									// Autogenerate a group of links for the 'constellations' directory.
