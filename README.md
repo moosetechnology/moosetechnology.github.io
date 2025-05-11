@@ -49,6 +49,11 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## Authoring
+
+We are using the [Starlight](https://starlight.astro.build/components/steps/) with many components that can be used directly in markdown!
+Do not hesitate to use them.
+
 ## Authoring a blog post
 
 1. Create a new file under `src/content/blog`
@@ -66,6 +71,17 @@ tags:
 ---
 
 For authors, use the key identified in `astro.config.mjs`
+
+### Draft
+
+If you want to be sure the blogpost in not directly published, do not forget to add the frontmatter
+
+```yaml
+---
+# Exclude this page from production builds
+draft: true
+---
+```
 
 ## Add authors
 
