@@ -3,13 +3,15 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightBlog from 'starlight-blog'
 import starlightSidebarTopics from 'starlight-sidebar-topics';
-
-
+import remarkMermaid from 'remark-mermaidjs'
 import tailwindcss from "@tailwindcss/vite";
-
 
 // https://astro.build/config
 export default defineConfig({
+	markdown: {
+		// Applied to .md and .mdx files
+		remarkPlugins: [remarkMermaid],
+	  },
 	integrations: [
 		starlight({
 			title: 'Modular Moose',

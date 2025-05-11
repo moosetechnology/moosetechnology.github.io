@@ -48,13 +48,16 @@ Associations should be thought of as n-to-m relationships between entities.
 For that reason, they are reified into their own traits.
 Associations define two roles (`from` and `to`) to identify both ends of the association.
 Using an association involves:
+
 - defining a class representing the association (for example, Access, using the trait FamixTAccess)
 - defining two classes at each end of the association (for example, Function using the trait FamixTWithAccess, and Variable using the trait FamixTAccessible).
 
 There are five full-fledged associations in FamixNG:
 
 - `FamixTAccess`, from: `FamixTWithAccess`, to: `FamixTAccessible`
+
 <details>
+
 ```plantuml!
 @startuml
 hide empty members
@@ -88,10 +91,13 @@ TAccessible -- " *accessors" TWithAccesses
 
 @enduml
 ```
+
 </details>
 
 - `FamixTInheritance`, from: `FamixTWithInheritance`, to: `FamixTWithInheritance`
+
 <details>
+
 ```plantuml!
 @startuml
 hide empty members
@@ -119,9 +125,13 @@ TInheritance " *superInheritances" -- "subclass" TWithInheritances
 
 @enduml
 ```
+
 </details>
+
 - `FamixTInvocation`, from: `FamixTWithInvocation`, to: `FamixTInvocable`, for OO programs, there is an extra receiver: `FamixTInvocationReceiver`
+
 <details>
+
 ```plantuml!
 @startuml
 hide empty members
@@ -149,9 +159,13 @@ TInvocation " *incomingInvocations" -- " *candidates" TInvocable
 
 @enduml
 ```
+
 </details>
+
 - `FamixTReference`, from: `FamixTWithReferences`, to: `FamixTReferenceable`
+
 <details>
+
 ```plantuml!
 @startuml
 hide empty members
@@ -176,9 +190,13 @@ TReference " *outgoingReferences" -- "referencer" TWithReferences
 
 @enduml
 ```
+
 </details>
+
 - `FamixTTraitUsage`, from: `FamixTWithTrait`, to: `FamixTTrait`
+
 <details>
+
 ```plantuml!
 @startuml
 hide empty members
@@ -203,6 +221,7 @@ TTrait " *traits" -- "traitOwner" TWithTraits
 
 @enduml
 ```
+
 </details>
 
 To these five we added two more specialized "associations":
@@ -211,7 +230,9 @@ These do not reify the association as a separate entity, but they might do so in
 For now there are only two traits to put at each end of the relationship:
 
 - `FamixTDereferencedInvocation` and `FamixTWithDereferencedInvocations`
+
 <details>
+
 ```plantuml!
 @startuml
 hide empty members
@@ -233,9 +254,13 @@ TDereferencedInvocation " *dereferencedInvocations" -- "referencer" TWithDerefer
 
 @enduml
 ```
+
 </details>
+
 - `FamixTFileInclude` and `FamixTWithFileInclude`
+
 <details>
+
 ```plantuml!
 @startuml
 hide empty members
@@ -258,6 +283,7 @@ TFileInclude " *incomingIncludeRelations" -- "target" TWithFileIncludes
 
 @enduml
 ```
+
 </details>
 
 ### Technical Traits
