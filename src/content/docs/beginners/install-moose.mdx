@@ -1,0 +1,64 @@
+---
+background: '/img/bg-wiki.jpg'
+title: 'Install Moose'
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+In this article, we describe how to install Moose.
+
+## Installation
+
+
+<Steps>
+
+
+1. The easiest way to install Moose is to use the Pharo Launcher.
+You can download it from the [Pharo website.](https://pharo.org/web/download)
+
+2. From the Pharo Launcher, you can download a Moose image.
+It corresponds to a Pharo image (see the [pharo open documentation](https://github.com/pharo-open-documentation)) with the Moose tools installed.
+
+    The [Readme](https://github.com/moosetechnology/Moose#readme) of the Moose project describes how to get the latest Moose image.
+    It is usually safe to take the highest version available even if marked 'developement'.
+
+3. Once the image downloaded, you just need to run it with from the Pharo Launcher.
+
+</Steps>
+
+
+## Add all GitHub releases in the launcher
+
+If you want to access all versions of Moose, instead of the most recent ones, you can use the GitHub releases. To do so, add this project into the pharo launcher:
+
+<Steps>
+
+1. Download the PharoLauncher (see Step 1 of the previous section)
+2. Open PharoLauncher
+3. Open a playground (<kbd>Ctrl</kbd> + <kbd>O</kbd>, <kbd>Ctrl</kbd> + <kbd>W</kbd>)
+4. Execute the following piece of code
+
+    ```smalltalk
+    | sources |
+
+    sources := {
+        "Add Moose"
+        PhLTemplateSource new
+            type: #HttpListing;
+            name: 'Moose';
+            url: 'https://github.com/moosetechnology/Moose/releases';
+            filterPattern: 'href="([^"]*/(Pharo|Moose)[0-9][^"]*.zip)"';
+            templateNameFormat: '{6} ({5})' }.
+    PhLUserTemplateSources sourcesFile writeStreamDo: [ :s |
+        (STON writer on: s)
+            newLine: String lf;
+            prettyPrint: true;
+            nextPut: sources ]
+    ```
+
+5. Close the playground
+6. `New >> Moose >> Your version`
+
+    ![Download Moose image](res/downloadMooseGitHubReleases.gif)
+
+</Steps>
