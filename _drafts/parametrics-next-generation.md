@@ -39,11 +39,11 @@ Here is a concrete example: getting the superclass of the superclass of a class.
 
 - For a parametric class (see the little code snippet below), there was an additional step, navigating through the concretization:
 
-{% highlight java %}
+```java
 import java.util.ArrayList; "public class ArrayList<E> { /* ... */ }"
 
 public MySpecializedList extends ArrayList<String> {}
-{% endhighlight %}
+```
 
 ![Getting super inheritances - Parametric entities.](/img/posts/2025-05-07-Parametrics-Next-Generation/sequence-inheritance-parametric.png)
 
@@ -62,15 +62,15 @@ The previous implementation naming choices were a little complex to grasp and di
 Each time there was a concretization, a parametric entity was created. This created duplicates of virtually the same entity: one for the generic entity and **one for each parameterized entity**.
 Let's see an example:
 
-{% highlight java %}
+```java
 public MyClass implements List<Float> {
-	
-	public List<Integer> getANumber() {
-		List<Number> listA;
-		List<Integer> listB;
-		}
+
+ public List<Integer> getANumber() {
+  List<Number> listA;
+  List<Integer> listB;
+  }
 }
-{% endhighlight %}
+```
 
 For the interface `List<E>`, we had 6 parametric interfaces:
 
@@ -107,30 +107,35 @@ The choice to replace the existing relation by a reified association is made to 
 With this new association, we can now add parametric entity typings.
 
 In a case like this:
-{% highlight java %}
+
+```java
 public ArrayList<String> myAttribute;
-{% endhighlight %}
+```
+
 we have an "entity typing" association between `myAttribute` and `ArrayList`. This association is parametric: it triggers the concretization of `E` in `ArrayList<E>` by `String`.
 
 > ##### :recycle: Deprecation
+>
 > The method `#declaredType` is still part of the API of `TTypedEntity`. However, it's not a getter for the `#declaredType` attribute anymore. It now returns the type that is target of the association.
 >
 > The setter `#declaredType:` is deprecated and cannot be automatically transformed. If you need to replace it, you should create an instance of the EntityTyping class in your metamodel and set the declared type as its target. You will have something like:
 
-{% highlight smalltalk %}
+```smalltalk
 myVariable := myModel newLocalVariableNamed: #myVar.
 myType := myModel newTypeNamed: #MyType.
 myVariable typing: (myModel newEntityTyping 
-	declaredType: myType; 
-	yourself).
-{% endhighlight %}
+ declaredType: myType; 
+ yourself).
+```
 
 ### Type parameters bounds
 
 Type parameters can be bounded:
-{% highlight java %}
+
+```java
 public class MyParametricClass<T extends Number> {}
-{% endhighlight %}
+```
+
 In the previous implementation, the bounds of type parameters were implemented as inheritances: in the example above, `Number` would be the superclass of `T`.
 Since this change, bounds were introduced for wildcards.
 We have now the occasion to also apply them to type parameters.
@@ -150,9 +155,11 @@ The representation of parametric entities is a challenge that will most likely c
 An association is the reification of a dependency. Yet, there is no dependency between a type argument and the type parameter it replaces. Each can exist without the other. The dependency is in fact between the source of the parametric association and the type parameter.
 
 With one of our previous examples:
-{% highlight java %}
+
+```java
 public MySpecializedList extends ArrayList<String> {}
-{% endhighlight %}
-`MySpecializedList` has a superclass (`ArrayList<E>`) and also depends on `String`, as a type argument. However, `String` does not depend on `E` neither `E`on `String`.
+````
+
+`MySpecializedList` has a superclass (`ArrayList<E>`) and also depends on `String`, as a type argument. However, `String` does not depend on `E` neither `E` on `String`.
 
 The next iteration of the representation of parametric entities will probably cover this issue. Stay tuned!
