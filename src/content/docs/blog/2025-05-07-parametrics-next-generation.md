@@ -34,7 +34,7 @@ Here is a concrete example: getting the superclass of the superclass of a class.
 
 - For a non-parametric class, the sequence is straightforward: ask the inheritance for the superclass, repeat.
 
-![Getting super inheritances - Non-parametric entities.](/img/posts/2025-05-07-Parametrics-Next-Generation/sequence-inheritance-non-parametric.png)
+![Getting super inheritances - Non-parametric entities.](./img/posts/2025-05-07-Parametrics-Next-Generation/sequence-inheritance-non-parametric.png)
 
 - For a parametric class (see the little code snippet below), there was an additional step, navigating through the concretization:
 
@@ -44,7 +44,7 @@ import java.util.ArrayList; "public class ArrayList<E> { /* ... */ }"
 public MySpecializedList extends ArrayList<String> {}
 ```
 
-![Getting super inheritances - Parametric entities.](/img/posts/2025-05-07-Parametrics-Next-Generation/sequence-inheritance-parametric.png)
+![Getting super inheritances - Parametric entities.](./img/posts/2025-05-07-Parametrics-Next-Generation/sequence-inheritance-parametric.png)
 
 This has caused many headaches to developers who wanted to browse a hierarchy: how do we keep track of the full hierarchy when it includes parametric classes? How to manage both situations without knowing if the classes will be parametric or not?
 The same problem occurred to browse the implementations of parametric interfaces and the invocations of generic methods.
@@ -86,7 +86,7 @@ That's where we introduce parametric associations. These associations only diffe
 
 Here is the new Famix metamodel traits that represent concretizations:
 
-![Class diagram for Parametric Associations](/img/posts/2025-05-07-Parametrics-Next-Generation/uml-parametric-association.png)
+![Class diagram for Parametric Associations](./img/posts/2025-05-07-Parametrics-Next-Generation/uml-parametric-association.png)
 
 There is a direct relation between a parametric entity and its type parameters.
 A concretization is the association between a type parameter and the type argument that replaces it.
@@ -144,7 +144,7 @@ In the new implementation, `Number` is the upper bound of `T`.
 
 This diagram sums up the new parametrics implementation in Famix traits and Java metamodel.
 
-![Class diagram for all changes](/img/posts/2025-05-07-Parametrics-Next-Generation/uml-new-parametrics-mm.png)
+![Class diagram for all changes](./img/posts/2025-05-07-Parametrics-Next-Generation/uml-new-parametrics-mm.png)
 
 ## What's next?
 
