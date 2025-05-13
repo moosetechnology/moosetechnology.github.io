@@ -167,14 +167,14 @@ For example: Sindarin defines `#arguments`, which is also defined in `Context`.
 
 Sindarin defines:
 
-``` st
+```smalltalk
 arguments
   ^ self context arguments
   ```
 
 that should be used as follows:
 
-``` st
+```smalltalk
 sindarin := SindarinDebugger new.
 "some steps"
 (sindarin arguments at: 1) doSomething.
@@ -182,7 +182,7 @@ sindarin := SindarinDebugger new.
 
 We wanted to detect cases where the users did not use Sindarin, like in the following:
 
-``` st
+```smalltalk
 sindarin := SindarinDebugger new.
 "some steps"
 (sindarin context arguments at: 1) doSomething.
