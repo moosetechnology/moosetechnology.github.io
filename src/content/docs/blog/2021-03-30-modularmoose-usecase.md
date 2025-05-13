@@ -25,7 +25,7 @@ Sindarin is made of two layers:
 - The "technical" API is the minimal API needed to interact with a debugging kernel (the Pharo kernel here).
 - The "scripting" API is here to ease the writing of debugging scripts without having to manipulate low-level concepts.
 
-!["Sindarin API"](./img/posts/2021-03-30-ModularMoose-Usecase/Sindarin.png)
+!["Sindarin API"](./img/posts/2021-03-30-modularmoose-usecase/Sindarin.png)
 
 Now, that's the theory.
 In reality, the debugging team realized that these two layers are not really respected: users bypass the scripting API to use technical methods and the debugging kernel methods directly.
@@ -55,7 +55,7 @@ We imported the model directly from Pharo, using the Model Root browser.
 This browser is the entry point to modular Moose.
 It shows the list of installed models and allows to import new ones from MSE files or from Pharo.
 
-!["Model Root Browser"](./img/posts/2021-03-30-ModularMoose-Usecase/MRB.png)
+!["Model Root Browser"](./img/posts/2021-03-30-modularmoose-usecase/MRB.png)
 
 Once the model was imported, it was automatically propagated in modular Moose, to other browsers.
 
@@ -69,7 +69,7 @@ The purpose of this browser is to query a model or a group of entities.
 It can filter entities according to their type or the value of their properties.
 It can also use [MooseQuery](https://moosequery.ferlicot.fr/) to navigate associations (inheritances, invocations, accesses, and references) and scopes (containment).
 
-!["Queriest Browser"](./img/posts/2021-03-30-ModularMoose-Usecase/QB-No-Query.png)
+!["Queriest Browser"](./img/posts/2021-03-30-modularmoose-usecase/QB-No-Query.png)
 
 The left pane of the browser is a visualization of the queries that were made.
 On the image above, no queries were made yet. The left pane only shows the model on which queries will apply.
@@ -86,9 +86,9 @@ We obtained the 3 elements relevant to our analysis (users scripts, Sindarin, an
 
 The two images below show how this last query was constructed:
 
-!["Query Scripts - Step 1"](./img/posts/2021-03-30-ModularMoose-Usecase/building-queries-scripts-1.png)
+!["Query Scripts - Step 1"](./img/posts/2021-03-30-modularmoose-usecase/building-queries-scripts-1.png)
 
-!["Query Scripts - Step 2"](./img/posts/2021-03-30-ModularMoose-Usecase/building-queries-scripts-2.png)
+!["Query Scripts - Step 2"](./img/posts/2021-03-30-modularmoose-usecase/building-queries-scripts-2.png)
 
 ##### Queries to get Sindarin API, i.e. methods of the class SindarinDebugger:
 
@@ -105,7 +105,7 @@ The image below shows the sequence of queries created to obtain methods from the
 - we made the `union` (pink) of the class and package, and finally
 - a scope query (`scope down to methods`, turquoise, bottom right query) gave us the methods they contain.
 
-!["Kernel methods"](./img/posts/2021-03-30-ModularMoose-Usecase/kernel-methods.png)
+!["Kernel methods"](./img/posts/2021-03-30-modularmoose-usecase/kernel-methods.png)
 
 #### Saving queries combinations as custom queries
 
@@ -115,7 +115,7 @@ We saved these combinations of simple queries as custom queries, as shown in the
 - **SindarinDebugger methods** are the Sindarin API, *i.e.* methods from SindarinDebugger class
 - **Debugger Kernel methods** are methods from the debugging kernel, that should not be called directly from the scripts.
 
-!["Saved queries"](./img/posts/2021-03-30-ModularMoose-Usecase/Saved-Queries.png)
+!["Saved queries"](./img/posts/2021-03-30-modularmoose-usecase/Saved-Queries.png)
 
 ## How do scripts interact with Sindarin and the debugging kernel?
 
@@ -126,7 +126,7 @@ We added a navigation query to obtain methods that were called in the script. We
 To find which methods are called in the users scripts, we queried **outgoing invocations** from the scripts classes.
 We obtained a group of 331 candidate methods whose signatures match messages sent in the scripts:
 
-!["Script outgoing"](./img/posts/2021-03-30-ModularMoose-Usecase/Script-Outgoing.png)
+!["Script outgoing"](./img/posts/2021-03-30-modularmoose-usecase/Script-Outgoing.png)
 
 #### Sindarin methods called from the scripts
 
@@ -139,14 +139,14 @@ This gave us 26 methods that are called from the scripts, out of 45 in the Sinda
 
 These 26 mehtods, result of the last query performed, are listed in the top right pane of the Query browser.
 
-!["API called in scripts"](./img/posts/2021-03-30-ModularMoose-Usecase/API-called-in-scripts.png)
+!["API called in scripts"](./img/posts/2021-03-30-modularmoose-usecase/API-called-in-scripts.png)
 
 #### Sindarin methods that are not used in the scripts
 
 It was important for the debugging team to know the other 19 scripting API methods that are **not** called from the scripts.
 We obtained them by querying the **difference** between Sindarin methods and the group of candidates (purple query at the bottom left in the figure below):
 
-!["API not called in scripts"](./img/posts/2021-03-30-ModularMoose-Usecase/API-not-called-in-scripts.png)
+!["API not called in scripts"](./img/posts/2021-03-30-modularmoose-usecase/API-not-called-in-scripts.png)
 
 Again the 19 resulting methods are listed in the "Result" pane.
 
@@ -156,7 +156,7 @@ The debugging team now knows which methods from their scripting API have been us
 
 We also compared the group of candidates invoked from the users scripts with the methods of the debugging kernel and obtained 15 methods. These methods are  used directly in the users scripts without using Sindarin:
 
-!["Kernel in scripts"](./img/posts/2021-03-30-ModularMoose-Usecase/Kernel-in-scripts.png)
+!["Kernel in scripts"](./img/posts/2021-03-30-modularmoose-usecase/Kernel-in-scripts.png)
 
 ## Identifying the scripts that use the debugging kernel:
 
@@ -207,7 +207,7 @@ self select: [ :method |
 
 We narrowed it down to 11 methods of the debugging kernel that are called from the scripts:
 
-!["Kernel called in scripts"](./img/posts/2021-03-30-ModularMoose-Usecase/Kernel-called-in-scripts.png)
+!["Kernel called in scripts"](./img/posts/2021-03-30-modularmoose-usecase/Kernel-called-in-scripts.png)
 
 We then collected the scripts where these methods are called:
 
@@ -229,7 +229,7 @@ Exploring these 15 scripts will help the debugging team to understand whether:
 - Sindarin API is incomplete: users had no choice but to interact with the debugging kernel because Sindarin does not provide the necessary methods,
 - There are other reasons why the API is not used correctly?
 
-!["Scripts calling kernel"](./img/posts/2021-03-30-ModularMoose-Usecase/Scripts-calling-kernel.png)
+!["Scripts calling kernel"](./img/posts/2021-03-30-modularmoose-usecase/Scripts-calling-kernel.png)
 
 # Query browser improvements
 
