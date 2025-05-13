@@ -12,8 +12,6 @@ tags:
 Moose is a huge consumer of language parsers.
 Relying on external tools help us with this.
 
->Note: banner image generated with DALL.E
-
 We are always looking into integrating new programming languages into the platform.
 There are two main requirements for this:
 
