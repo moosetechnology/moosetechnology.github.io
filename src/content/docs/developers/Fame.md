@@ -7,7 +7,7 @@ In the following, we mainly present the Pharo implementation and usage of Fame.
 
 ## Meta-model
 
-![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/img/fame/fame-meta-model.puml&fmt=svg)
+![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/developers/img/fame/fame-meta-model.puml&fmt=svg)
 
 ### Main concepts
 
@@ -56,7 +56,7 @@ Metacello new
 
 ### Export
 
-Fame supports [two file formats](/moose-wiki/Users/file-format) to export meta-models: MSE, and JSON.
+Fame supports [two file formats](/users/file-format) to export meta-models: MSE, and JSON.
 
 The new JSON file format should be chosen preferably.
 It can use with the following script:

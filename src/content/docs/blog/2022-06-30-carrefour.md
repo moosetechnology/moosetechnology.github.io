@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Carrefour: The bridge between FAMIX and FAST"
 subtitle: Here we will present how to bind FAST with FAMIX
 header-img: img/posts/2022-03-18-carrefour/bg-post.jpg

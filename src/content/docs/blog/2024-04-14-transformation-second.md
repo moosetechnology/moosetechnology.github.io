@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Transformation journey (2/2) : Copying FASTs and creating nodes"
 subtitle: >-
   How to copy and create FAST nodes to create code transformations

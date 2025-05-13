@@ -1,7 +1,6 @@
 ---
 authors:
 - BenoitVerhaeghe
-layout: post
 title:  "Test your Moose code using CIs"
 date: 2022-10-28
 background: './img/posts/bg-posts.jpg'

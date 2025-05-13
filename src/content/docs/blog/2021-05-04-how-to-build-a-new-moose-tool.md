@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "How to build a new Moose tool: The MooseInspector"
 header-img: img/posts/DSM.jpg
 subtitle: >-

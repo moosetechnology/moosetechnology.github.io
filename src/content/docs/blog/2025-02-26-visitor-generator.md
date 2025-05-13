@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Generating a visitor infrastructure for a given meta-model"
 date: 2025-02-26
 background: './img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg'

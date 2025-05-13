@@ -1,5 +1,4 @@
 ---
-layout: post
 # published: true
 title: A real example on using tags
 header-img: img/posts/DSM.jpg

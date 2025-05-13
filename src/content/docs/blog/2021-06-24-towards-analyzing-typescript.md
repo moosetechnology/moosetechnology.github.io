@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Towards analyzing TypeScript with Moose"
 subtitle: "I discuss an imperfect but useful approach to analyze TypeScript projects using existing elements."
 date: 2021-06-23

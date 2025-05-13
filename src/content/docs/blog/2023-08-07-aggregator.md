@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Enhancing software analysis with Moose's aggregation"
 subtitle: Simplify model import
 date: 2023-08-07

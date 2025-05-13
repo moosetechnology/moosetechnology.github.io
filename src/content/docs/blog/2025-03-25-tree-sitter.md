@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Creating a Parser based on Tree-Sitter grammar"
 date: 2025-03-25
 background: './img/posts/treesitter-banner.png'
@@ -21,7 +20,7 @@ There are two main requirements for this:
 - create a parser of the language, to "understand" the source code
 - create a meta-model for the language, to be able to represent and manipulate the source code
 
-Creating the meta-model has already been covered in an other blogpost: [https://modularmoose.org/posts/2021-02-04-coasters](https://modularmoose.org/posts/2021-02-04-coasters)
+Creating the meta-model has already been covered in an other blogpost: [/blog/2021-02-04-coasters](/blog/2021-02-04-coasters)
 
 In this post, we will be looking at how to use a Tree-Sitter grammar to help build a parser for a language.
 We will use the Perl language example for this.

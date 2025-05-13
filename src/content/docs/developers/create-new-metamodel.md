@@ -8,7 +8,7 @@ The meta-model describes the entities that compose a program in the given langua
 
 In the following, we describe how to create a new meta-model or extend an existing one.
 Moose being more specifically dedicated to source code analysis, there are a number of pre-set entities/traits that should help one define new meta-models for a given programming language.
-These are described in [another page](predefinedEntities) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow.svg?style=flat).
+These are described in [another page](./predefinedEntities) ![Unfinished](https://img.shields.io/badge/Progress-Unfinished-yellow.svg?style=flat).
 
 ## Set up
 
@@ -253,7 +253,7 @@ It is also possible to use traits that are already defined in another meta-model
 When a class inherits from two different traits that both defined a method with the same name, there is a conflict between the trait.
 This is a classic problem when allowing multiple inheritances.
 
-![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/moose-wiki/Developers/img/create-new-metamodel/multi-inheritance.puml&fmt=svg)
+![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/developers/img/create-new-metamodel/multi-inheritance.puml&fmt=svg)
 
 In this example, the class `MyClass` uses the traits `TraitA` and `TraitB`.
 Both traits define the method `methodXY`.

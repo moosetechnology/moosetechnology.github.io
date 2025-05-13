@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Generate a plantUML visualization for a meta-model"
 date: 2021-06-04
 background: './img/posts/2021-06-04-plantUML-for-metamodel/bg-post.jpg'

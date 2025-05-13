@@ -18,19 +18,22 @@ Fortunately, Moose is here to help with several modeling levels and powerful too
 
 # Preface
 
-This little transformation journey will be divided into two blog posts. We will see how to build a simple transformation tool, with each post focusing on a different aspect :
+This little transformation journey will be divided into two blog posts. We will see how to build a simple transformation tool, with each post focusing on a different aspect:
+
 - First post : Locating entities and nodes to transform
 - Second post : Creating AST copies and AST nodes to make a transformation
 {::comment}
 - Final post : Viewing and editing our transformation, and applying it to the source files
 {:/comment}
 
-Throughout those two posts, we will follow a simple transformation scenario, based on the software ArgoUML, an open-source Java project used in this [wiki](/moose-wiki/Beginners/moose-in-action).
+Throughout those two posts, we will follow a simple transformation scenario, based on the software ArgoUML, an open-source Java project used in this [wiki](/beginners/moose-in-action).
 The first step is to create the model for the software, using the [sources](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-src.zip) and [libraries](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-libs.zip) available on that wiki post, but creating the model on the latest stable version of [VerveineJ](moose-wiki/Developers/Parsers/VerveineJ).
+
 Using the available Docker image, this command (on Windows) will create the model and store it in the sources repository : 
 ```sh
 docker run -v .\src:/src -v .\libs:/dependency badetitou/verveinej -format json -o argouml.json -anchor assoc .
 ```
+
 All that remains to do is to create a fresh image, and import this model (with the sources repository used to build the model as root folder) to start making our tool.
 
 Note : As the creation of that tool is divided in three blog posts, keeping that image for all three blog posts is recommended.
@@ -44,7 +47,7 @@ In the ArgoUML system, three classes define and use a method named `logError`. I
 
 For this blog post, we will have to import two tools :
 
-The first one is [Carrefour](https://modularmoose.org/posts/2022-06-30-carrefour), allowing us to bind and access the (F)AST model of an entity to its Famix counterpart. Loading it will also load the FAST Java metamodel.
+The first one is [Carrefour](/blog/2022-06-30-carrefour), allowing us to bind and access the (F)AST model of an entity to its Famix counterpart. Loading it will also load the FAST Java metamodel.
 To load the project, execute this command in a Playground :
 ```smalltalk
 Metacello new

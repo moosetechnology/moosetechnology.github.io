@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "First look at GitProjectHealth"
 date: 2025-03-24
 background: './img/posts/bg-posts.jpg'
@@ -15,7 +14,7 @@ What are the classes? How they are connected with each other?
 
 In addition to this analysis of the system, it can be interesting to explore how the system evolves through time.
 To do so, we can exploit its git history.
-In Moose, we developed the project [GitProjectHealth](/moose-wiki/Users/gitproject-health/getting-started-with-gitproject-health.md) that enables the analysis of git history for projects hosted by GitHub, GitLab, or BitBucket.
+In Moose, we developed the project [GitProjectHealth](/users/gitproject-health/getting-started-with-gitproject-health.md) that enables the analysis of git history for projects hosted by GitHub, GitLab, or BitBucket.
 The project also comes with a set of metrics one could use directly.
 
 ## First use of GitProjectHealth
@@ -108,6 +107,6 @@ This can represent linked work or at least actions on the same module of the app
 ## Connect GitProjectHealth
 
 It is possible to go even deeper in the analysis by connecting GitProjectHealth with other analysis.
-This is possible by [connecting metamodels](/moose-wiki/Developers/create-new-metamodel.md#introducing-submetamodels).
+This is possible by [connecting metamodels](/developers/create-new-metamodel.md#introducing-submetamodels).
 For instance, it is possible to link GitProjectHealth with Jira system, of Famix models.
 You can look at the first general documentation, or stay tune for the next blog post about GitProjectHealth!

@@ -14,7 +14,7 @@ A typical question is which of these classes we can remove.
 Essentially, this boils down to finding the classes annotated with `@Deprecated` and then selecting those that are not used anywhere (we ignore reflection for this exercise).
 This is an analysis.
 
-We first need to build a model of our system, and for this we will use [VerveineJ](../Developers/Parsers/VerveineJ):
+We first need to build a model of our system, and for this we will use [VerveineJ](/developers/Parsers/VerveineJ):
 
 You can do this using the [docker](https://github.com/Evref-BL/VerveineJ-Docker) image.
 
@@ -30,7 +30,7 @@ Or you can download VerveineJ on your computer:
 You can also [download the json file](res/moose-in-action/ArgoUML-0-34.json).
 
 The result is that you will get an ArgoUML-0-34/ArgoUML-0-34.json file with the serialized model that can be loaded in Moose.
-Make sure you have [Moose 9.0 or later](InstallMoose).
+Make sure you have [Moose 9.0 or later](./install-moose).
 
 
 Starting Moose you see a menu with various tools.

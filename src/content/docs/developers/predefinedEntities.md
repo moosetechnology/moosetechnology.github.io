@@ -565,7 +565,7 @@ TAccessible "variable" -- "incomingAccesses*" TAccess
 
 ## Genericity
 
-(note: the same meta-model is also described in this [blog post](https://modularmoose.org/posts/2023-07-13-parametric)).
+(note: the same meta-model is also described in this [blog post](/blog/2023-07-13-parametric)).
 
 Genericity in OO languages allows to define a class, an interface, or a method which will apply to several not specified types.
 For example in Java a Map associates keys of an unspecified type to values of another unspecified type.

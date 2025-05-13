@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Analysis of Sindarin API: a modular Moose use case"
 subtitle: New modular Moose browsers are put to the test
 date: 2021-03-30

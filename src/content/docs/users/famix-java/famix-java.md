@@ -4,7 +4,7 @@ title: 'Famix Java'
 
 Famix Java is the metamodel included in Moose used to represent any Java application.
 As you can imagine, the metamodel is rather than complicated.
-For instance, Famix Java uses a lot the [traits concept](/Developers/predefinedEntities).
+For instance, Famix Java uses a lot the [traits concept](/developers/predefinedEntities).
 
 We will present here some incorrect, but simple and useful views to enable beginners to use Famix Java.
 

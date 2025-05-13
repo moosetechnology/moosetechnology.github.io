@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Control Flow Graph for FAST Fortran"
 date: 2025-03-08
 background: './img/posts/bg-posts.jpg'

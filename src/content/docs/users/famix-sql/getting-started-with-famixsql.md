@@ -16,7 +16,7 @@ To do so, it relies *critics* analysis using a first set of rules that one can e
 
 ### Load FamixSQL
 
-To install FamixSQL, you'll need a Moose10 or Moose11 image (see the [install Moose page](/moose-wiki/Beginners/InstallMoose)).
+To install FamixSQL, you'll need a Moose10 or Moose11 image (see the [install Moose page](/beginners/install-moose)).
 
 In the Moose image, in a playground (`Ctrl+O`, `Ctrl+W`), perform:
 
@@ -69,7 +69,7 @@ model installWithCache: false.
 Once you have loaded the model, it is possible to analyze the database.
 We describe here how to use the preconfigured analysis made using [Moose Critics](/blog/2022-08-08-moosecritics).
 
-First, open the [Models Browser](/moose-wiki/Users/moose-ide/browsers#models-browser).
+First, open the [Models Browser](/users/moose-ide/browsers#models-browser).
 It shows a list of all the model loading in your Moose environment.
 You should see the model `myDatabase` loaded in the previous step.
 
@@ -83,7 +83,7 @@ In the Critics Browser, you should see your model entities in the left panel.
 
 Finally, click on the `Run` button of the Critics Browser browser.
 It will compute the rules and present the list of entities that raised an issue.
-By *double-cliking* on an entity, you will be able to browse the violation using the [Moose Inspector](/moose-wiki/Users/moose-ide/browsers#moose-inspector)
+By *double-cliking* on an entity, you will be able to browse the violation using the [Moose Inspector](/users/moose-ide/browsers#moose-inspector)
 
 ## Additional analysis
 

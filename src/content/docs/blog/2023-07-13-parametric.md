@@ -32,7 +32,7 @@ ClassA<String> class2 = new ClassA<String>;
 `class1` and `class2` are variables of type ClassA, but this time `ClassA` doesn't have a generic type but `String` or `Integer`.
 So, how do we represent all that?
 
-![Modelisation_generic](/moose-wiki/Users/famix-java/img/parametrics.drawio.svg)
+![Modelisation_generic](/users/famix-java/img/parametrics.drawio.svg)
 
 We have 5 new traits in our meta-model :
 

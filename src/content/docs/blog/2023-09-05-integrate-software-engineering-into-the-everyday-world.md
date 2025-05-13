@@ -1,7 +1,6 @@
 ---
 authors:
 - BenoitVerhaeghe
-layout: post
 title: "Integrate Software Engineering into the everyday world"
 subtitle: "How Berger-Levrault build Moose visualisation and tools daily using CI"
 date:  2023-09-05

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Introducing the new Queries Browser"
 header-img: img/posts/DSM.jpg
 subtitle: >-

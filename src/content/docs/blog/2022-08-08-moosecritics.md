@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Manage rules using MooseCritics"
 header-img: img/posts/DSM.jpg
 subtitle: >-
@@ -19,7 +18,7 @@ But MooseCritics is now here to make such things easy!
 ## Setting up for rule making
 
 The first step to use this tool is of course to open its browser, findable in the Moose menu under the name *Moose Critic Browser*.
-As with every other tool of MooseIDE, we also need to propagate a model to give our tool entities to analyze. For this analysis, we will use a model of ArgoUML, an open-source Java project used in this [wiki](/moose-wiki/Beginners/moose-in-action).  
+As with every other tool of MooseIDE, we also need to propagate a model to give our tool entities to analyze. For this analysis, we will use a model of ArgoUML, an open-source Java project used in this [wiki](/beginners/moose-in-action).  
 
 !["MooseCritics browser"](./img/posts/2022-08-08-moosecritics/browser-ready.png)
 

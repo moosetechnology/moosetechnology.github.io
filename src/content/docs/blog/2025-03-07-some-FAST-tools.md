@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Some tools on FAST models"
 date: 2025-03-07
 background: './img/posts/bg-posts.jpg'
@@ -72,7 +71,7 @@ The resolution process creates:
 - In accessing nodes, (eg. `FASTJavaVariableExpression`), a property `#localDeclarations` will lists the declaration node corresponding this variable.
 - If the declaration node was not found a `FASTNonLocalDeclaration` is used as the declaration node.
 
-Note: That this looks a bit like what Carrefour does (see [https://modularmoose.org/posts/2022-06-30-carrefour](https://modularmoose.org/posts/2022-06-30-carrefour)), because both will bind several FAST nodes to the same entity.
+Note: That this looks a bit like what Carrefour does (see [/blog/2022-06-30-carrefour](/blog/2022-06-30-carrefour)), because both will bind several FAST nodes to the same entity.
 But the process is very different:
 - Carrefour will bind a FAST node to a corresponding Famix node;
 - The local resolver binds FAST nodes together.

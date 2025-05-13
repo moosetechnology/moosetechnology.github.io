@@ -1,7 +1,6 @@
 ---
 authors:
 - BenoitVerhaeghe
-layout: post
 title: "Migrating internationalization files"
 subtitle: "A nice MDE example"
 background: './img/posts/bg-posts.jpg'

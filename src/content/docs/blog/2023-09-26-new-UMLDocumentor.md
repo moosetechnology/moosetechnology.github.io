@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Generate a class diagram visualization for a meta-model"
 date: 2023-09-26
 background: './img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg'

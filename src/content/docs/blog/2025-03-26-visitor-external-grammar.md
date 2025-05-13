@@ -11,7 +11,7 @@ tags:
 In this blog-post, we see some tricks to create a visitor for an alien AST.
 This visitor can allow, for example, to generate a Famix model from an external AST.
 
-In a previous blog-post, we saw how to create a parser from a tree-sitter grammar: [https://modularmoose.org/posts/2025-03-25-tree-sitter.md](https://modularmoose.org/posts/2025-03-25-tree-sitter.md).
+In a previous blog-post, we saw how to [create a parser from a tree-sitter grammar](/blog/2025-03-25-tree-sitter).
 This parser gives us an AST (Abstract Syntax Tree) which is a tree of nodes representing any given program that the parser can understand.
 But the structure is decided by the external tool and might not be what we want.
 For example it will not be a Famix model.
@@ -36,6 +36,7 @@ For Famix, the objects would be entities from a Famix meta-model.
 In the Visitor pattern, all the classes have an `#accept:` method.
 Each `#accept:` in each class will call a visiting method of the visitor that is specific to it.
 For example the classes `NodeA` and `NodeB` will respectively define:
+
 ```smalltalk
 NodeA >> accept: aVisitor
   aVisitor visitNodeA: self.
@@ -64,11 +65,11 @@ To visit the entire structure one simply calls `accept:` on the root of the tree
 
 Visitors are very useful with ASTs or graphs because once all the `accept: ` methods are implemented, we can define very different visitors that will `"do some stuff"` (see above) on all the object in the tree/graph.
 
-Several of the ["Famix-tools"](https://modularmoose.org/posts/tag/famix-tools/) blog-posts are based on visitors.
+Several of the ["Famix-tools"](/blog/tag/famix-tools/) blog-posts are based on visitors.
 
 ## An external AST
 
-In a [preceding blog-post](https://modularmoose.org/posts/2025-03-25-tree-sitter.md) we saw how to create an AST from a Perl program using the Tree-Sitter Perl grammar.
+In a [preceding blog-post](/blog/2025-03-25-tree-sitter.md) we saw how to create an AST from a Perl program using the Tree-Sitter Perl grammar.
 
 We will use this as an example to see how to create a visitor on this external AST.
 Here "external" means it was created by an external tool and we don't have control on the structure of the AST.
