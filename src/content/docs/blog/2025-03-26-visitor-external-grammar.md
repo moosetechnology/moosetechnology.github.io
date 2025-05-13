@@ -18,9 +18,6 @@ For example it will not be a Famix model.
 
 Let see some tricks to help convert this alien grammar into something that better fits our needs.
 
->Note: banner image generated with DALL.E
-
-
 ## The Visitor design pattern
 
 Let's first look at what a "Visitor" is.
