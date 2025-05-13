@@ -42,7 +42,7 @@ class MyClass {
 }
 ```
 
-Let's prepare the ground for using Carrefour by generating the Famix model of the MyClass class using [VerveineJ](https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ).
+Let's prepare the ground for using Carrefour by generating the Famix model of the MyClass class using [VerveineJ](/developers/Parsers/VerveineJ).
 Open a code editor and create a new `MyClass.java` file.
 Inside the Java file, we add the code above.
 

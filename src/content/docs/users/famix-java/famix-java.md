@@ -52,6 +52,6 @@ Primitive type are made to represent `int`, `double`, `long`, *etc.* in Java, as
 ### Focus on Parametric Type
 
 Parametric types are probably the most hard to understand.
-We made a [full blog post about this subject]({% post_url 2023-07-13-parametric %}).
+We made a [full blog post about this subject](/blog/2023-07-13-parametric).
 
 ![Parametric schema](./img/parametrics.drawio.svg)

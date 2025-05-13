@@ -140,4 +140,4 @@ FamixJavaInheritance new subclass: classB ; superclass: classAcon .
 
 ## Conclusion
 
-In this post, we have seen how generics types are modeled with [VerveineJ](https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ) and Moose for code analysis.
+In this post, we have seen how generics types are modeled with [VerveineJ](/developers/Parsers/VerveineJ) and Moose for code analysis.

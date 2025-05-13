@@ -13,7 +13,7 @@ tags:
 ## Note
 
 This post describes a tool that has been replaced by a new `FamixUMLDocumentor`.
-The new tool is described [in another post]({% post_url 2023-09-26-new-UMLDocumentor %}).
+The new tool is described [in another post](/blog/2023-09-26-new-UMLDocumentor).
 
 ## Old post content
 
@@ -24,8 +24,8 @@ What better way to go back to a very efficient meta-model visualization tool: UM
 In this blog, I will show you how to generate [plantUML](https://plantuml.com/) code from a generated meta-model.
 For that, I will take the example of the evolution of the meta-model on coasters:
 
-- [Coasters collection]({% post_url 2021-02-04-coasters %})
-- [Connecting/Extending meta-models]({% post_url 2021-05-15-connecting-meta-models %})
+- [Coasters collection](/blog/2021-02-04-coasters)
+- [Connecting/Extending meta-models](/blog/2021-05-15-connecting-meta-models)
 
 There is no need to do these posts to understand this one.
 I would even say that this is precisely the subject: to study an unknown meta-model.
@@ -33,7 +33,7 @@ I would even say that this is precisely the subject: to study an unknown meta-mo
 ## Prerequisite and details
 
 First of all, and if it has not already been done, do not forget to download and generate the meta-models using its generator.
-For example, for the basic [Coasters collection]({% post_url 2021-02-04-coasters %}), the code is available on [Coaster GitHub repository](https://github.com/badetitou/CoastersCollector) and it can be generate with:
+For example, for the basic [Coasters collection](/blog/2021-02-04-coasters), the code is available on [Coaster GitHub repository](https://github.com/badetitou/CoastersCollector) and it can be generate with:
 
 ```smalltalk
 CoasterCollectorMetamodelGenerator generate
@@ -66,7 +66,7 @@ The generation is done by instantiating a `FamixMMUMLDocumentor` for which we pr
 
 ![UML representation of Coaster meta-model](./img/posts/2021-06-04-plantUML-for-metamodel/CCModel-plantUML.svg)
 
-We can now compare the generated UML representation to the basic one that helped create the generator or that has been used to generate the generator :smile: (*Cf.* [Model your Fame/Famix meta-model using Graphical Editors]({% post_url 2021-03-01-diagram-and-codegen %})).
+We can now compare the generated UML representation to the basic one that helped create the generator or that has been used to generate the generator :smile: (*Cf.* [Model your Fame/Famix meta-model using Graphical Editors](/blog/2021-03-01-diagram-and-codegen)).
 
 !["coasters UML"](./img/posts/2021-02-04-Coasters/coaster-model.drawio.svg)
 
@@ -110,7 +110,7 @@ This can be useful if you are interested in certain entities.
 ### beWithStub
 
 Finally, there is one last exciting possibility.
-If we take the case of the evolution of the coasters meta-model extended in terms of creators [Connecting/Extending meta-models]({% post_url 2021-05-15-connecting-meta-models %}).
+If we take the case of the evolution of the coasters meta-model extended in terms of creators [Connecting/Extending meta-models](/blog/2021-05-15-connecting-meta-models).
 
 ![Extended Coaster meta-model](./img/posts/2021-05-15-connecting-meta-models/extended-coaster-model.drawio.svg)
 

@@ -123,5 +123,5 @@ exportBrowserModel addColumnForQuery: [ :violation | violation violatingEntity s
 
 ## Relative blog posts and documentation
 
-- [First Blog Post]({% post_url 2022-08-08-moosecritics %})
+- [First Blog Post](/blog/2022-08-08-moosecritics)
 - [Integration in a CI](https://www.research-bl.com/2023/09/05/integrate-software-engineering-into-the-everyday-world/)

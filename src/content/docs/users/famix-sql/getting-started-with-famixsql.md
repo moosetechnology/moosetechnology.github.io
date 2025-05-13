@@ -67,7 +67,7 @@ model installWithCache: false.
 ### Analyse the database
 
 Once you have loaded the model, it is possible to analyze the database.
-We describe here how to use the preconfigured analysis made using [Moose Critics]({% post_url 2022-08-08-moosecritics %}).
+We describe here how to use the preconfigured analysis made using [Moose Critics](/blog/2022-08-08-moosecritics).
 
 First, open the [Models Browser](/moose-wiki/Users/moose-ide/browsers#models-browser).
 It shows a list of all the model loading in your Moose environment.

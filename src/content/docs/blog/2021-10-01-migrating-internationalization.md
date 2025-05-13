@@ -116,7 +116,7 @@ Then, by iterating on this collection, I build an I18N model.
 To implement the parser, I used the [PetitParser2 project](https://github.com/kursjan/petitparser2).
 This project aims to ease the creation of new parsers.
 
-First, I downloaded the last version of [Moose](https://modularmoose.org/moose-wiki/Beginners/InstallMoose), and I installed PetitParser using the command provided in the repository Readme:
+First, I downloaded the last version of [Moose](/beginners/InstallMoose), and I installed PetitParser using the command provided in the repository Readme:
 
 ```smalltalk
 Metacello new

@@ -10,10 +10,10 @@ tags:
 - infrastructure
 ---
 
-[Building metamodels](https://modularmoose.org/moose-wiki/Developers/create-new-metamodel) for Fame and Famix is currently done through a generator.
+[Building metamodels](/developers/create-new-metamodel) for Fame and Famix is currently done through a generator.
 The generator consists in various special methods that need to be implemented, _eg_, one that will create all metaclasses, another that will create all attributes for each metaclass,...
 The metamodel's artifact are created programmatically using pure Smalltalk syntax extended with specific operators to easily express relationships and cardinalities (`<>-`, `*-*`, `<>-*`, ...).
-For more details, please refer to the [article about "Coaster"]({% post_url 2021-02-04-coasters %}), written by Benoit Verhaeghe.
+For more details, please refer to the [article about "Coaster"](/blog/2021-02-04-coasters), written by Benoit Verhaeghe.
 
 In this blogpost, I will show you how to use existing metamodeling diagraming tools to design your metamodel, and then to use the designed meta-model to generate your meta-model code for Fame in Moose.
 In another blogpost, I will show you how to use this same generator to use graphical modeling tools to generate code for Famix.
@@ -108,7 +108,7 @@ They all work well and have their pros and cons.
 As example/illustration of this section I used GenMyModel (I worked there for some years, I know well the tool), but the design process is the same whatever the used tool.
 
 When you design your meta-model for Fame using a graphical Ecore editor, you just focus on the concepts you want to represent.
-The meta-model we are going to design is the one presented by Benoit in his [article about "Coaster"]({% post_url 2021-02-04-coasters %}).
+The meta-model we are going to design is the one presented by Benoit in his [article about "Coaster"](/blog/2021-02-04-coasters).
 
 The designed Ecore meta-model can be found [at this address](https://app.genmymodel.com/api/repository/aranega/Coaster) and it looks like this:
 

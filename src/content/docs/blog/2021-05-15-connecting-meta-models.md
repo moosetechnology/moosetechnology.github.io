@@ -15,7 +15,7 @@ Or, you want to connect it with another one.
 A classic example is linking a meta-model at an abstract level to a more concrete meta-model.
 
 In this blog post, I will show you how to extend and connect a meta-model with another (or reuse a pre-existing meta-model into your own meta-model).
-We will use the [Coaster example]({% post_url 2021-02-04-coasters %}).
+We will use the [Coaster example](/blog/2021-02-04-coasters).
 
 ## Extending the Coaster meta-model
 

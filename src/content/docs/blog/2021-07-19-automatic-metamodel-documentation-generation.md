@@ -91,7 +91,7 @@ jobs:
 ## Create the UML file
 
 Once the main files are created, we can configure the CI also to create the UML file.
-To do so, we will use the [plantUML visualization tool]({% post_url 2021-06-04-plantUML-for-metamodel %}).
+To do so, we will use the [plantUML visualization tool](/blog/2021-06-04-plantUML-for-metamodel).
 
 We add a new step in the *.github/workflows/ci.yml* file as a first step.
 It consists of executing the `FamixMMUMLDocumentor` on the meta-model we want to document.

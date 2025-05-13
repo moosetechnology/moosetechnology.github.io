@@ -83,7 +83,7 @@ The properties are almost identical to a context, but we now use a query to know
 This query will have as a parameter every entity of our context, one by one, and will add a violation to it if the query returns *true*.  
 
 Now, the most perceptive readers (all of my readers, no doubts :smile:) will have noticed the two radio buttons; Pharo Code and Queries Browser.  
-We can indeed use a query built in the [Queries Browser]({% post_url 2021-10-10-the-new-queries-browser %}), and we will do so for the next one, to find God Classes.
+We can indeed use a query built in the [Queries Browser](/blog/2021-10-10-the-new-queries-browser), and we will do so for the next one, to find God Classes.
 
 !["Condition with Queries Browser : God Classes"](./img/posts/2022-08-08-moosecritics/condition-queries-browser.png)
 

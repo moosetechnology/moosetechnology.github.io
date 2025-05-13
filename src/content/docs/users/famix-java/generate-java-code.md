@@ -118,4 +118,4 @@ You might want to modify the code inside method and export it.
 This is not part of the FamixJava exporter project, however, the Moose platform includes two other projects that can help you.
 
 First, you should check [FAST-Java](../../Developers/Parsers/FAST-Java) which allows one to represent the code of a method, modify it, and regenerate it.
-Second, if you want to use both FAST-Java, and Famix, you can have a look at [Carrefour]({% post_url 2022-06-30-carrefour %}) which brings together the two world.
+Second, if you want to use both FAST-Java, and Famix, you can have a look at [Carrefour](/blog/2022-06-30-carrefour) which brings together the two world.
