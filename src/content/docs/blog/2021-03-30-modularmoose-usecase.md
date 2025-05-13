@@ -86,9 +86,9 @@ We obtained the 3 elements relevant to our analysis (users scripts, Sindarin, an
 
 The two images below show how this last query was constructed:
 
-!["Query Scripts - Step 1"](./img/posts/2021-03-30-ModularMoose-Usecase/Building-queries-Scripts-1.png)
+!["Query Scripts - Step 1"](./img/posts/2021-03-30-ModularMoose-Usecase/building-queries-scripts-1.png)
 
-!["Query Scripts - Step 2"](./img/posts/2021-03-30-ModularMoose-Usecase/Building-queries-Scripts-2.png)
+!["Query Scripts - Step 2"](./img/posts/2021-03-30-ModularMoose-Usecase/building-queries-scripts-2.png)
 
 ##### Queries to get Sindarin API, i.e. methods of the class SindarinDebugger:
 
