@@ -3,17 +3,20 @@ import { defineConfig, sharpImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightBlog from 'starlight-blog'
 import starlightSidebarTopics from 'starlight-sidebar-topics';
-import remarkMermaid from 'remark-mermaidjs'
 import tailwindcss from "@tailwindcss/vite";
 import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
+import rehypeMermaid from 'rehype-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
 	markdown: {
 		// Applied to .md and .mdx files
-		remarkPlugins: [remarkMermaid,
+		remarkPlugins: [
 			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
 		],
+		rehypePlugins: [
+			rehypeMermaid
+		]
 	},
 	image: {
 		service: sharpImageService({ limitInputPixels: false }),
