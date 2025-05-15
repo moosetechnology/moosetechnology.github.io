@@ -8,7 +8,7 @@ tags:
 - meta-model
 ---
 
-How do we represent the relation between a generic entity, its type parameters and the entities that concretize it? The Famix metamodel has evolved over the years to improve the way we represent these relations. The last increment is described in a previous [blogpost]({% link _posts/2023-07-13-parametric.md %}).
+How do we represent the relation between a generic entity, its type parameters and the entities that concretize it? The Famix metamodel has evolved over the years to improve the way we represent these relations. The last increment is described in a previous [blogpost](/blog/2023-07-13-parametric).
 We present here a new implementation that eases the management of parametric entities in Moose.
 
 The major change between this previous version and the new implementation presented in this post is this:
