@@ -54,11 +54,19 @@ All commands are run from the root of the project, from a terminal:
 We are using the [Starlight](https://starlight.astro.build/components/steps/) with many components that can be used directly in markdown!
 Do not hesitate to use them.
 
+### Adding a new docs page
+
+When adding a new wiki page, you must link the page in the [astro.config.mjs](astro.config.mjs) under the `starlightSidebarTopics` item.
+It allows one to organize the page.
+
+> There are automatic way to import all pages, but they sort files by name, and sometimes we do not want that.
+
 ## Authoring a blog post
 
 1. Create a new file under `src/content/blog`
 2. add the yaml
 
+```yaml
 ---
 authors:
 - BenoitVerhaeghe
@@ -69,6 +77,7 @@ lastUpdated:  2021-03-04
 tags:
 - meta-model
 ---
+```
 
 For authors, use the key identified in `astro.config.mjs`
 
