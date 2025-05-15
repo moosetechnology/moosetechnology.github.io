@@ -289,7 +289,7 @@ The result is different, because the substrings were removed before applying rem
 
 The priority system is defined as follows (the color green means that the strategy has the highest priority):
 
-<img src="./img/posts/2021-07-29-label-contractor/strategies_priorities.png" width="350"/>
+![Contractor's strategies](./img/posts/2021-07-29-label-contractor/strategies_priorities.png)
 
 ## Conclusion
 
