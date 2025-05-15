@@ -14,16 +14,18 @@ We present here a new implementation that eases the management of parametric ent
 The major change between this previous version and the new implementation presented in this post is this:
 **We do not represent the parameterized entities anymore**.
 
-> #### :paperclip: Generic? Parametric? Parameterized? Know the difference
->
-> - A **parametric entity** is an entity that declares type parameters or arguments. It can be generic or parameterized, according to the following definitions.
-> - A **generic entity** is an entity that defines 1 or several type parameters. To be instantiated, inherited, implemented or invoked, their type parameters must be replaced by existing types (type arguments). `ArrayList<E>` is a generic class. In Famix Java, we represent generic classes, interfaces and methods.
-> - A **type parameter** is a parameter that must be replaced by an existing type in order to use the generic entity that defines it. In `ArrayList<E>`, `E`  is a type parameter.
-> - A **parameterized entity** is a parametric entity for which the type parameters have been replaced by existing types. `ArrayList<String>` is a parameterized class. Parameterized entities are not represented as entities in the new Famix implementation.
-> - A **type argument** is the type used to replace a type parameter. It can be any type, except primitive types. `String` is a type argument of `ArrayList<String>`.
-> - A **concretization** is a Famix association that represents the fact that a type parameter has been replaced by a type argument.
->
->> :information_source: In Famix, because parameterized entities are not represented anymore, "parametric" and "generic" can be used interchangeably to refer to generic entities.
+:::note[Generic? Parametric? Parameterized? Know the difference]
+
+- A **parametric entity** is an entity that declares type parameters or arguments. It can be generic or parameterized, according to the following definitions.
+- A **generic entity** is an entity that defines 1 or several type parameters. To be instantiated, inherited, implemented or invoked, their type parameters must be replaced by existing types (type arguments). `ArrayList<E>` is a generic class. In Famix Java, we represent generic classes, interfaces and methods.
+- A **type parameter** is a parameter that must be replaced by an existing type in order to use the generic entity that defines it. In `ArrayList<E>`, `E`  is a type parameter.
+- A **parameterized entity** is a parametric entity for which the type parameters have been replaced by existing types. `ArrayList<String>` is a parameterized class. Parameterized entities are not represented as entities in the new Famix implementation.
+- A **type argument** is the type used to replace a type parameter. It can be any type, except primitive types. `String` is a type argument of `ArrayList<String>`.
+- A **concretization** is a Famix association that represents the fact that a type parameter has been replaced by a type argument.
+
+:::tip[Please note]
+In Famix, because parameterized entities are not represented anymore, "parametric" and "generic" can be used interchangeably to refer to generic entities.
+:::
 
 ## What's wrong with the previous parametrics implementation?
 
@@ -92,8 +94,14 @@ There is a direct relation between a parametric entity and its type parameters.
 A concretization is the association between a type parameter and the type argument that replaces it.
 A parametric association triggers one or several concretizations, according to the number of type parameters the parametric entity has. Example: a parametric association that targets `Map<K,V>` will trigger 2 concretizations.
 
-The parametric entity is the target of the parametric association. It is always generic. As announced, we do not represent parameterized entities anymore. 
+The parametric entity is the target of the parametric association. It is always generic. As announced, we do not represent parameterized entities anymore.
 Coming back to the entities' duplication example above, we now represent only 1 parametric interface for `List<E>`and it is the target of the 5 parametric associations.
+
+:::note[Deprecation]
+The previous testing API to check if an entity is parametric, generic or *concrete* is now deprecated.
+Please use the generated testing method `#isParametricEntity`.
+You can also test if an association is parametric, using `#isParametricAssociation`.
+:::
 
 ### Entity typing
 
@@ -113,11 +121,11 @@ public ArrayList<String> myAttribute;
 
 we have an "entity typing" association between `myAttribute` and `ArrayList`. This association is parametric: it triggers the concretization of `E` in `ArrayList<E>` by `String`.
 
-> ##### :recycle: Deprecation
->
-> The method `#declaredType` is still part of the API of `TTypedEntity`. However, it's not a getter for the `#declaredType` attribute anymore. It now returns the type that is target of the association.
->
-> The setter `#declaredType:` is deprecated and cannot be automatically transformed. If you need to replace it, you should create an instance of the EntityTyping class in your metamodel and set the declared type as its target. You will have something like:
+:::note[Deprecation]
+
+The method `#declaredType` is still part of the API of `TTypedEntity`. However, it's not a getter for the `#declaredType` attribute anymore. It now returns the type that is target of the association.
+
+The setter `#declaredType:` is deprecated and cannot be automatically transformed. If you need to replace it, you should create an instance of the EntityTyping class in your metamodel and set the declared type as its target. You will have something like:
 
 ```smalltalk
 myVariable := myModel newLocalVariableNamed: #myVar.
@@ -126,6 +134,8 @@ myVariable typing: (myModel newEntityTyping
  declaredType: myType; 
  yourself).
 ```
+
+:::
 
 ### Type parameters bounds
 
@@ -143,6 +153,7 @@ In the new implementation, `Number` is the upper bound of `T`.
 ## Summary
 
 This diagram sums up the new parametrics implementation in Famix traits and Java metamodel.
+Please note that this is not the full Java metamodel but only a relevant part.
 
 ![Class diagram for all changes](./img/posts/2025-05-07-Parametrics-Next-Generation/uml-new-parametrics-mm.png)
 
