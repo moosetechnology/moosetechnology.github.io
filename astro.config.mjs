@@ -8,6 +8,7 @@ import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 import rehypeMermaid from 'rehype-mermaid';
 import remarkGemoji from 'remark-gemoji';
 
+
 // https://astro.build/config
 export default defineConfig({
 	markdown: {
@@ -32,6 +33,9 @@ export default defineConfig({
 				// Path to your Tailwind base styles:
 				'./src/styles/global.css',
 			],
+			editLink: {
+				baseUrl: 'https://github.com/moosetechnology/moosetechnology.github.io/tree/main/'
+			},
 			logo: {
 				src: './src/assets/moose-logo.svg',
 			},
