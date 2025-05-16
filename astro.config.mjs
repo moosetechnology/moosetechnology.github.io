@@ -36,6 +36,7 @@ export default defineConfig({
 			editLink: {
 				baseUrl: 'https://github.com/moosetechnology/moosetechnology.github.io/tree/main/'
 			},
+
 			logo: {
 				src: './src/assets/moose-logo.svg',
 			},
@@ -211,15 +212,15 @@ export default defineConfig({
 											items: [
 												{
 													label: 'FAST',
-													link: '/users/importing-and-exporting-models',
+													link: '/users/ast/fast',
 												},
 												{
 													label: 'FAST Java',
-													link: '/users/file-format',
+													link: '/users/ast/fast-java',
 												},
 												{
 													label: 'FAST Pharo',
-													link: '/users/file-format',
+													link: '/users/ast/fast-pharo',
 												}
 
 											]
@@ -273,6 +274,11 @@ export default defineConfig({
 									autogenerate: { directory: 'developers' },
 								},
 							],
+						},
+						{
+							label: 'Blog',
+							link: '/blog/',
+							items: []
 						},
 						{
 							label: 'Research',

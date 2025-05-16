@@ -4,16 +4,10 @@ background: '/img/bg-wiki.jpg'
 title: FAST-Pharo
 ---
 
-# FAST-Pharo <!-- omit in toc -->
 
 FAST-Pharo is a [FAST](FAST) meta-model used to represent AST of a Pharo class, trait or method.
 It comes with a meta-model, an importer, and tools to manipulate and explore models.
 
-- [FAST-Pharo meta-model](#fast-pharo-meta-model)
-- [Importer](#importer)
-  - [Installation](#installation)
-  - [Import](#import)
-- [Tools](#tools)
 
 ## FAST-Pharo meta-model
 
@@ -48,10 +42,9 @@ For example, the following script import the method `testVisitInheritance` of `F
 
 ```smalltalk
 FASTSmalltalkImporterVisitor
-
-	new runWithSource:
-		(FamixMMUMLDocumentorVisitorTest >> #testVisitInheritance)
-			sourceCode
+  new runWithSource:
+    (FamixMMUMLDocumentorVisitorTest >> #testVisitInheritance)
+    sourceCode
 ```
 
 ## Tools
