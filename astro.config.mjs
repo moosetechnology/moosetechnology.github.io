@@ -6,6 +6,7 @@ import starlightSidebarTopics from 'starlight-sidebar-topics';
 import tailwindcss from "@tailwindcss/vite";
 import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 import rehypeMermaid from 'rehype-mermaid';
+import remarkGemoji from 'remark-gemoji';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,6 +14,7 @@ export default defineConfig({
 		// Applied to .md and .mdx files
 		remarkPlugins: [
 			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
+			remarkGemoji
 		],
 		rehypePlugins: [
 			rehypeMermaid
