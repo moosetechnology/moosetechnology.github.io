@@ -7,3 +7,7 @@
 .hero:where(.astro-jbfsktt5) {
     grid-template-columns: 5fr 5fr;
 }
+
+#_top {
+    white-space: nowrap;
+}
