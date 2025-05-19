@@ -8,6 +8,8 @@ tags:
 - meta-model
 ---
 
+Note that this blog post is rendered obsolete by the new [Parametrics next generation](/blog/2025-05-07-parametrics-next-generation/) blog post.
+
 ## Introduction
 
 In Java generic types allow you to write a general, generic class (or method) that works with different types, allowing code reuse.
