@@ -254,7 +254,7 @@ It is also possible to use traits that are already defined in another meta-model
 When a class inherits from two different traits that both defined a method with the same name, there is a conflict between the trait.
 This is a classic problem when allowing multiple inheritances.
 
-![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/developers/img/create-new-metamodel/multi-inheritance.puml&fmt=svg)
+![PlantUML Image](./img/create-new-metamodel/multi-inheritance.svg)
 
 In this example, the class `MyClass` uses the traits `TraitA` and `TraitB`.
 Both traits define the method `methodXY`.
@@ -400,6 +400,7 @@ person withEqualityCheckOn: { #firstName. #lastName. #age }.
 
 One powerful feature of Famix is the possibility to use submetamodels.
 It allows one to extend or compose several meta-models.
+(This is also described in the blog post [Connecting/Extending meta-models](/blog/2021-05-15-connecting-meta-models/).
 
 There are two ways of extending of meta-model:
 
