@@ -45,6 +45,7 @@ DemoMetamodelGenerator class >> #prefix
 ## Basic meta-model
 
 In this section, we will see how to create a simple meta-model.
+You may also want to look at the blog post [Coasters collection](/blog/2021-02-04-coasters/).
 
 To design a meta-model, we need to specify its entities, their relations, and their properties.
 
