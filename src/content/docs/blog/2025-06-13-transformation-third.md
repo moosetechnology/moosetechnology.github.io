@@ -9,6 +9,7 @@ authors:
 comments: true
 tags:
 - transformation
+draft: true
 ---
 
 Once again, let me welcome you to the final blog post in those three blog posts about code transformations! During the first blog post, we used queries and tools to locate the entities we seek to transform, before implementing the actual transformation logic in the second blog post. 
