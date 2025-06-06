@@ -20,17 +20,17 @@ A class `ArgoLogger` has been defined that contains a static method `logError`.
 
 The transformation task is to add a receiver node to each `logError` method invocation so that the method called is now `ArgoLogger.logError`.
 
-# Preface
+## Preface
 
 As this blog post follows what was discussed and built in the first one of this series, a lot of information (how to build the image and model used for our use case, but also the use case itself) is provided in the previous post. 
 
 If you haven't read it, or if you forgot the content of the post, it is recommended to go back to it, as it will not be repeated in this post.
 
-# Tools to import
+## Tools to import
 
 In this final blog post of this series, we do not have any new tools to import. As long as you still have `FAST-Java-Tools`, `Carrefour` and `Motion` from the two previous posts, you should have no problem following this blogpost!
 
-# A first look on our transformation
+## A first look on our transformation
 
 At this point, we now have in our tool modified FAST trees of the methods we need to transform, all encapsulated in wrapper objects to save all the necessary information to complete the transformation, and apply it where needed.  
 Hovewer, before that, you may feel the need to check the transformation produced by your tool. 
@@ -87,7 +87,7 @@ The first thing we can notice, is how radically different the two methods look f
 
 The source code after transformation (on the right pane) is also editable, meaning that you can manually add code to the entity if it is necessary for any reason. Do be careful that the code is syntaxically correct however, as there is nothing warning you if it isn't the case.
 
-# Adding highlights
+## Adding highlights
 
 We now have a way to view our transformation, but as it is, it is still tough to view properly where and what exactly every change is. And in this example, the transformation is very basic! If the transformation was spread throughout a class rather than a method, or if the transformation was simply more complex, then the tool would lack as a means to review the changes.  
 
@@ -129,7 +129,7 @@ To use this feature in the editing window, simply do as done in the edit, giving
 
 !["Transformation display with highlighting"](./img/posts/2025-06-13-transformation-third/editor_with_highlights.PNG)
 
-# Applying our changes on the source files 
+## Applying our changes on the source files 
 
 Now that we reviewed and accepted the transformation on our entities, only one step remains. To apply those code changes on the actual source code of the modeled software, thereby completing the transformation task.
 
@@ -170,7 +170,7 @@ Hovewer, the model is slightly updated by the tool after each transformation app
 
 For example, if your transformation tool relies mostly on the FAST models, this allows you to apply some transformations on several entities even if those are located in the same file without having to worry too much about the order in which you make those transformations.
 
-# Try it yourself!
+## Try it yourself!
 
 This concludes our blog post series about code transformation! 
 
