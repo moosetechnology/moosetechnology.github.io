@@ -11,28 +11,28 @@ tags:
 - transformation
 ---
 
-Once again, let me welcome you to the final blog post in those three blog posts about code transformations! During the first blog post, we used queries and tools to locate the entities we seek to transform, before implementing the actual transformation logic in the second blog post. 
+Once again, let me welcome you to the final blog post in those three blog posts about code transformations! During the [first blog](https://modularmoose.org/blog/2024-04-01-transformation-first/) post, we used queries and tools to locate the entities we seek to transform, before implementing the actual transformation logic in the [second blog](https://modularmoose.org/blog/2024-04-14-transformation-second/) post.
 
 In this third post, we will use a visualisation window allowing us to check the source code of our entity before and after a transformation, and finally apply those transformation on the actual source files, therefore transposing this transformation from Moose to your actual software!
 
-We are still following the scenario followed in the previous blog posts, on our use case, ArgoUML. In this system three classes define and use a method named `logError`. 
+We are still following the scenario presented in the previous blog posts, on our use case, ArgoUML. In this system three classes define and use a method named `logError`. 
 A class `ArgoLogger` has been defined that contains a static method `logError`.
 
-The transformation task is to add a receiver node to each `logError` method invocation so that the method called is now `ArgoLogger.logError`.
+The transformation task is to add a receiver node to each `logError` method invocation so that the method called is now `ArgoLogger.logError`().
 
 ## Preface
 
-As this blog post follows what was discussed and built in the first one of this series, a lot of information (how to build the image and model used for our use case, but also the use case itself) is provided in the previous post. 
+As this blog post follows what was discussed and built in the first one of the series, a lot of information (how to build the image and model used for our use case, but also the use case itself) is provided in the previous posts. 
 
 If you haven't read it, or if you forgot the content of the post, it is recommended to go back to it, as it will not be repeated in this post.
 
 ## Tools to import
 
-In this final blog post of this series, we do not have any new tools to import. As long as you still have `FAST-Java-Tools`, `Carrefour` and `Motion` from the two previous posts, you should have no problem following this blogpost!
+In this final blog post, we do not have any new tools to import. As long as you still have `FAST-Java-Tools`, `Carrefour` and `Motion` from the two previous posts, you should have no problem following this blogpost!
 
 ## A first look on our transformation
 
-At this point, we now have in our tool modified FAST trees of the methods we need to transform, all encapsulated in wrapper objects to save all the necessary information to complete the transformation, and apply it where needed.  
+At this point, we now have in our tool modified FAST trees of the methods we need to transform, all encapsulated in wrapper objects to save all the necessary information to complete the transformation, and apply it where needed.
 Hovewer, before that, you may feel the need to check the transformation produced by your tool. 
 
 To do so, we can use the `TransformationEditor` tool, a dialog window able to display the code before and after our code transformation, along with some nice and practical features to fulfill this task.
@@ -75,7 +75,7 @@ displayTransformationOfMethod: aMethodWrapper
 	^ codeEditor
 ```
 
-As you can notice in this new method, we also call another tool, the `FASTJavaExportVisitor`. This visitor will allow us to convert a FAST Java tree to a string, therefore in our case giving us the source code of our method after transformation. 
+As you can notice in this new method, we also call another tool, the `FASTJavaExportVisitor`. This visitor will allow us to convert a FAST Java tree to a string giving us the source code of our method after transformation. 
 
 Coupling the result of using this tool to this class method of the `TransformationEditor` class will display such results : 
 
@@ -83,13 +83,13 @@ Coupling the result of using this tool to this class method of the `Transformati
 
 In this new window, you can find on the left the original source code of the entity, before any transformation. And on the right, you can find the source code of the same entity, after applying the transformation. 
 
-The first thing we can notice, is how radically different the two methods look from a glance. Hovewer, everything is the same (to the exception of the new ArgoLogger class added with our transformation). They look different because the transformed code is generated from the transformed FAST tree, and the export visitor exports that code with its own formating.  
+The first thing we can notice, is how radically different the two methods look at a glance. Hovewer, everything is the same (to the exception of the new ArgoLogger class added with our transformation). They look different because the transformed code is generated from the transformed FAST tree, and the export visitor exports that code with its own formating.
 
-The source code after transformation (on the right pane) is also editable, meaning that you can manually add code to the entity if it is necessary for any reason. Do be careful that the code is syntaxically correct however, as there is nothing warning you if it isn't the case.
+The source code after transformation (on the right pane) is also editable, meaning that you can manually add code to the entity if it is necessary for any reason. Do be careful that the code is syntaxically correct however, as there is no checks (syntax, compilation) on this code in Moose.
 
 ## Adding highlights
 
-We now have a way to view our transformation, but as it is, it is still tough to view properly where and what exactly every change is. And in this example, the transformation is very basic! If the transformation was spread throughout a class rather than a method, or if the transformation was simply more complex, then the tool would lack as a means to review the changes.  
+We now have a way to view our transformation, but as it is, it is still tough to view properly where are the changes and what they are. And in this example, the transformation is very basic! If the transformation was spread throughout a class rather than a method, or if the transformation was simply more complex, then the tool would fail as a means to review the changes.
 
 But of course, we can fix that. :wink:
 
@@ -117,7 +117,7 @@ displayTransformationOfMethod: aMethodWrapper
 	^ codeEditor
 ```
 
-Our first edit simply calls the method wrapper to add a "transformed node", a FAST node added during the transformation. In a similar fashion, you can add an "original node", a FAST node removed during the transformation (no such node exists in our example, so we don't use that feature).  
+Our first edit simply calls the method wrapper to add a "transformed node", a FAST node added during the transformation. In a similar fashion, you can add an "original node", a FAST node removed during the transformation (no such node exists in our example, so we don't use that feature).
 
 This new transformed node is used in our second edit, where we give the transformed nodes collection to the new visitor tool that we are going to use. 
 
@@ -183,15 +183,15 @@ t := LoggerTransformationTool onModel: MooseModel root first.
 t findAndTransformAllLogErrorInvocations 
 ```
 
-!["Testing class"](./img/posts/2024-04-15-transformation-second/testing-class.PNG)
+!["Testing class"](./img/posts/2025-06-13-transformation-third/testing-class.PNG)
 
-The whole source code that was written on the three blog posts are still available on that [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
+The whole source code that was written on the three blog posts is still available on that [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
 
 ## Conclusion
 
 Through the use of tools to query and search through FAST models, transform said models, before generating, reviewing and applying the new code on the source files, we managed to build a fully functionnal and semi-automatic transformation tool for our use case!
 
-This use case was a rather small example, not necessarily representive of a real need for transformation in a software, which would need more queries and FAST edits, but the only real change would be the scale. 
-
-Using the methodology and tools in the same way that they were used in this blog post would be enough to apply to many use cases out there. :smile:
+This use case was a rather small example.
+A real transformation in a software would need more queries and FAST edits.
+But the only real difference would be the scale. Using the methodology and tools in the same way that they were used in this blog post would be enough to apply to many use cases out there. :smile:
 
