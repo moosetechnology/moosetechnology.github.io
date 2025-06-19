@@ -1,5 +1,5 @@
 ---
-title: "Transformation journey (1/2) : Locating entities and nodes"
+title: "Transformation journey (1/3) : Locating entities and nodes"
 subtitle: >-
   How to use queries and tools to find entities and their specific nodes to transform
 date: 2024-04-01
@@ -18,15 +18,13 @@ Fortunately, Moose is here to help with several modeling levels and powerful too
 
 ## Preface
 
-This little transformation journey will be divided into two blog posts. We will see how to build a simple transformation tool, with each post focusing on a different aspect:
+This little transformation journey will be divided into three blog posts. We will see how to build a simple transformation tool, with each post focusing on a different aspect:
 
 - First post : Locating entities and nodes to transform
 - Second post : Creating AST copies and AST nodes to make a transformation
-{::comment}
 - Final post : Viewing and editing our transformation, and applying it to the source files
-{:/comment}
 
-Throughout those two posts, we will follow a simple transformation scenario, based on the software ArgoUML, an open-source Java project used in this [wiki](/beginners/moose-in-action).
+Throughout those three posts, we will follow a simple transformation scenario, based on the software ArgoUML, an open-source Java project used in this [wiki](/beginners/moose-in-action).
 The first step is to create the model for the software, using the [sources](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-src.zip) and [libraries](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-libs.zip) available on that wiki post, but creating the model on the latest stable version of [VerveineJ](moose-wiki/Developers/Parsers/VerveineJ).
 
 Using the available Docker image, this command (on Windows) will create the model and store it in the sources repository : 
