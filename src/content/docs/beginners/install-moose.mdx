@@ -44,11 +44,21 @@ If you want to access all versions of Moose, instead of the most recent ones, yo
     sources := {
         "Add Moose"
         PhLTemplateSource new
-            type: #HttpListing;
-            name: 'Moose';
-            url: 'https://github.com/moosetechnology/Moose/releases';
-            filterPattern: 'href="([^"]*/(Pharo|Moose)[0-9][^"]*.zip)"';
-            templateNameFormat: '{6} ({5})' }.
+            type: #URLGroup;
+            name: 'Moose 12';
+            templates: {
+            PhLTemplateSource new
+                type: #URL;
+                name: 'Moose12-Pharo12';
+                url: 'https://github.com/moosetechnology/Moose/releases/download/v12.0.0/Moose12-stable-Pharo64-12.zip';
+                yourself.
+            PhLTemplateSource new
+                type: #URL;
+                name: 'Moose12-Pharo13';
+                url: 'https://github.com/moosetechnology/Moose/releases/download/v12.0.0/Moose12-stable-Pharo64-13.zip';
+                yourself.
+    } }.
+
     PhLUserTemplateSources sourcesFile writeStreamDo: [ :s |
         (STON writer on: s)
             newLine: String lf;
