@@ -385,5 +385,27 @@
 				"given": "Roberto S."
 			}
 		]
+	},
+	{
+		"event": "Proceedings of the 10th European software engineering conference held jointly with 13th ACM SIGSOFT international symposium on Foundations of software engineering",
+		"title": "The story of moose: an agile reengineering environment",
+		"title-short": "The story of moose",
+		"PDF": "https://rmod-files.lille.inria.fr/Team/Texts/Papers/Nier05cStoryOfMoose.pdf",
+		"URL": "https://dl.acm.org/doi/abs/10.1145/1081706.1081707",
+		"year": 2005,
+		"author": [
+			{
+				"family": "Nierstrasz",
+				"given": "Oscar"
+			},
+			{
+				"family": "Ducasse",
+				"given": "Stéphane"
+			},
+			{
+				"family": "Gǐrba",
+				"given": "Tudor"
+			}
+		]
 	}
 ]
