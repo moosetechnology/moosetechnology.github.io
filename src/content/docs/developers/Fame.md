@@ -7,7 +7,61 @@ In the following, we mainly present the Pharo implementation and usage of Fame.
 
 ## Meta-model
 
-![PlantUML Image](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/moosetechnology/moosetechnology.github.io/master/developers/img/fame/fame-meta-model.puml&fmt=svg)
+```mermaid
+classDiagram
+    class Element {
+        +String fullname
+        +String name
+    }
+
+    class Type {
+        <<abstract>>
+    }
+
+    class Class {
+        +Boolean abstract
+        +Boolean root
+        +Boolean primitive
+    }
+
+    class Trait {
+        +Boolean root
+        +Boolean primitive
+    }
+
+    class Property {
+        +Boolean multivalued
+        +Boolean composite
+        +Boolean container
+        +Boolean derived
+    }
+
+    class Boolean
+    class Number
+    class String
+    class Object
+    class Package
+
+    Element <|-- Type
+    Type <|-- Class
+    Type <|-- Trait
+    Element <|-- Package
+    Element <|-- Property
+    Class <|-- Boolean
+    Class <|-- Number
+    Class <|-- String
+    Class <|-- Object
+
+    Element --> Element
+    Type "1" *-- "0..*" Property
+    Type "1" -- "0..*" Trait
+    Type "0..*" --* "1" Package
+    Class --> Class : superclass
+    Class --> Class : subclass
+    Package -- "0..*" Property : extensions
+    Property --> Property : opposite
+    Property --> Object : defaultValue
+```
 
 ### Main concepts
 
