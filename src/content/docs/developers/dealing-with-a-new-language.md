@@ -45,8 +45,9 @@ For instance, in Java we use `JDT`, for the C programming language `CDT` of ecli
 Also, the more challenging part is the `symbolic resolution` of the code.
 You should look for AST parser that have this feature enabled.
 
-If you have no AST Parser existing, you can use a parser generator inside Pharo. We advice you two options:
+If you have no AST Parser existing, you can use a parser generator inside Pharo. We advice you three options:
 
+- [Pharo-Tree-Sitter](https://github.com/Evref-BL/Pharo-Tree-Sitter) if a tree sitter parser already exist (outside Pharo but easy to integrate)
 - [SmaCC](https://books.pharo.org/booklet-Smacc/) if you have an existing grammar
 - [PetitParser2](https://kursjan.github.io/petitparser2/) in other cases
 
