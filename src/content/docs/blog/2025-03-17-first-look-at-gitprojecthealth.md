@@ -107,6 +107,6 @@ This can represent linked work or at least actions on the same module of the app
 ## Connect GitProjectHealth
 
 It is possible to go even deeper in the analysis by connecting GitProjectHealth with other analysis.
-This is possible by [connecting metamodels](/developers/create-new-metamodel.md#introducing-submetamodels).
+This is possible by [connecting metamodels](/developers/create-new-metamodel#introducing-submetamodels).
 For instance, it is possible to link GitProjectHealth with Jira system, of Famix models.
 You can look at the first general documentation, or stay tune for the next blog post about GitProjectHealth!
