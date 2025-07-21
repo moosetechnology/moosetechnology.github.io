@@ -14,7 +14,7 @@ What are the classes? How they are connected with each other?
 
 In addition to this analysis of the system, it can be interesting to explore how the system evolves through time.
 To do so, we can exploit its git history.
-In Moose, we developed the project [GitProjectHealth](/users/gitproject-health/getting-started-with-gitproject-health.md) that enables the analysis of git history for projects hosted by GitHub, GitLab, or BitBucket.
+In Moose, we developed the project [GitProjectHealth](/users/git-project-health/getting-started-with-gitproject-health/) that enables the analysis of git history for projects hosted by GitHub, GitLab, or BitBucket.
 The project also comes with a set of metrics one could use directly.
 
 ## First use of GitProjectHealth
