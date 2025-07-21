@@ -9,7 +9,7 @@ tags:
 - story
 ---
 
-During my Ph.D. [migration project](https://badetitou.fr/projects/Casino/), I considered the migration of several GUI aspects: 
+During my Ph.D. [migration project](https://badetitou.fr/projects/casino/), I considered the migration of several GUI aspects: 
 
 - visual
 - behavioral
@@ -115,7 +115,7 @@ Then, by iterating on this collection, I build an I18N model.
 To implement the parser, I used the [PetitParser2 project](https://github.com/kursjan/petitparser2).
 This project aims to ease the creation of new parsers.
 
-First, I downloaded the last version of [Moose](/beginners/InstallMoose), and I installed PetitParser using the command provided in the repository Readme:
+First, I downloaded the last version of [Moose](/beginners/install-moose/), and I installed PetitParser using the command provided in the repository Readme:
 
 ```smalltalk
 Metacello new
