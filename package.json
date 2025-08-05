@@ -15,7 +15,7 @@
     "@astrojs/starlight": "^0.34.4",
     "@astrojs/starlight-tailwind": "^4.0.1",
     "@tailwindcss/vite": "^4.1.5",
-    "astro": "^5.10.1",
+    "astro": "^5.12.8",
     "playright": "^0.0.22",
     "rehype-mermaid": "^3.0.0",
     "remark-gemoji": "^8.0.0",
