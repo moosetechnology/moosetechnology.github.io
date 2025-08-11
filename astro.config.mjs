@@ -130,6 +130,12 @@ export default defineConfig({
 							url: "https://github.com/thomasWattebled",
 							picture: "https://avatars.githubusercontent.com/u/124277643"
 						},
+                        LeoDefossez: {
+                            name: "Leo Defossez",
+                    		title: "Working on deserialization attacks for my internship",
+                    		url: "https://github.com/LeoDefossez",
+                    		picture: "https://avatars.githubusercontent.com/u/45714659?v=4"
+                    		},
 					},
 				}),
 				starlightSidebarTopics(
