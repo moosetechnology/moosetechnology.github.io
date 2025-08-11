@@ -6,6 +6,7 @@ date: 2025-05-11
 lastUpdated: 2025-05-11
 tags:
   - infrastructure
+draft: true
 ---
 
 Analyzing source code starts with parsing but to go further, you need _semantic understanding_ of how symbols relate to each other. In this post, we’ll walk through how to build a **C code importer** using the **[TreeSitterFamixIntegration](https://github.com/moosetechnology/TreeSitterFamixIntegration)** framework.
