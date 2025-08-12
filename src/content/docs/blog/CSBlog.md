@@ -28,7 +28,7 @@ Here’s a summary of the complete process, broken down into clear steps:
 
 ## How to extract a java call stack ?
 
-To get started, clone [JavaCallStackExtractor](https://github.com/moosetechnology/JavaCallStackExtractor), the current tool for generating Moose-compatible call stack files. 
+To get started, clone [JavaCallStackExtractor](https://github.com/moosetechnology/JavaCallStackExtractor), the current tool for generating Moose-compatible call stack files.  
 Refer to its README for up-to-date usage instructions and detailed guidance—it is your main reference.  
 
 
@@ -62,13 +62,13 @@ Open a Moose image, then import the  [FamixCallStack](https://github.com/moosete
 - Or by directly cloning and loading it with Iceberg
 
 ### So how to import your callstack?
-**Option A**
+**Option A : Programmatically**
 ```smalltalk
 file := '/Path/To/.../JDIOutput.cs' asFileReference.
 
 model := CallStackJsonReader import: file.
 ```
-**Option B**  
+**Option B : Drag and drop**  
 Just drag the file "JDIOutput.cs" and drop it on your Moose image (here the extension .cs is really important, without it the importation will fail)
   
 <img src="./img/posts/CSBlog/process_fourth.png" alt="Process of the importation fourth step" width="800">  
