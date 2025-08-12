@@ -20,7 +20,7 @@ By integrating this dynamic runtime data into Moose's metamodeling infrastructur
 
 Here’s a summary of the complete process, broken down into clear steps:
 
-<img src="./img/posts/CSBlog/process.png" alt="Process overview" width="800">
+<img src="img/posts/2025-08-12-a-Famix-metamodel-for-Java-callstack/process.png" alt="Process overview" width="800">
 
 > The final grayed-out step (Moose-Security analysis) is just one example of how this metamodel can be applied.
 
@@ -46,13 +46,13 @@ It could be a method that’s causing performance issues, triggering an error, o
 Check the [configuration tutorial](https://github.com/moosetechnology/JavaCallStackExtractor/blob/main/utils/tutorials/config.md) all up-to-date information should be detailed here.
 
 After configuration, run your application manually. (Note: In the future, JavaCallStackExtractor may handle this step automatically.)
-<img src="./img/posts/CSBlog/process_first.png" alt="Process first step" width="800"> 
+<img src="./img/posts/2025-08-12-a-Famix-metamodel-for-Java-callstack/process_first.png" alt="Process first step" width="800"> 
 
 Launch the main method of JavaCallStackExtractor as explained in the repository’s README. 
-<img src="./img/posts/CSBlog/process_second.png" alt="Process  second step" width="800">  
+<img src="./img/posts/2025-08-12-a-Famix-metamodel-for-Java-callstack/process_second.png" alt="Process  second step" width="800">  
 
 Upon execution, a call stack trace file (default: JDIOutput.cs) will be created in the project’s root directory. 
-<img src="./img/posts/CSBlog/process_third.png" alt="Process third step" width="800">  
+<img src="./img/posts/2025-08-12-a-Famix-metamodel-for-Java-callstack/process_third.png" alt="Process third step" width="800">  
 
 
 ## How to import this call stack in Moose ?
@@ -71,7 +71,7 @@ model := CallStackJsonReader import: file.
 **Option B : Drag and drop**  
 Just drag the file "JDIOutput.cs" and drop it on your Moose image (here the extension .cs is really important, without it the importation will fail)
   
-<img src="./img/posts/CSBlog/process_fourth.png" alt="Process of the importation fourth step" width="800">  
+<img src="img/posts/2025-08-12-a-Famix-metamodel-for-Java-callstack/process_fourth.png" alt="Process of the importation fourth step" width="800">  
 
 ## What are the possible uses to this metamodel?
 One of the possible uses, is as already said, the use for security analysis.
