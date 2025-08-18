@@ -16,6 +16,41 @@ To enable this capability, we rely on the **Java Debug Interface (JDI)** to obse
 
 By integrating this dynamic runtime data into Moose's metamodeling infrastructure, we unlock a new class of analyses. From profiling to debugging and security, the ability to work with live execution data enriches possible analyses.
 
+
+# How are Java call stack represented ?
+
+<img src="img/posts/2025-08-12-a-Famix-metamodel-for-Java-callstack/FamixCallstackModel.png" alt="Process overview" width="800">
+
+### What is a call stack?  
+A **call stack** is an ordered collection of **stack lines**, each representing a single method call during program execution.  
+
+
+### What is a stack line?
+A **stack line** is defined by three elements:
+
+1. **Java method** – The method being invoked.
+    - This is statically known and can be linked to the *FamixJava* metamodel.
+
+2. **Arguments** – The values passed to the method.
+    - They are determined dynamically at runtime.
+    - The number of arguments usually matches the method’s parameters, but sometimes certain arguments may not be accessible, so the numbers may not match exactly.
+    - Each argument carries a **value**.
+
+3. **Receiver** – The object on which the method is invoked (if any).
+    - **No receiver**: when the method is defined on the class side.
+    - **A receiver**: when the method is defined at the instance side.
+
+### What is a value?
+A **value** represents the core of dynamic execution, carrying runtime information. Values can be:
+
+- **Primitive values** (e.g., `int 3`)
+- **Object references**, each identified by a unique ID.
+    - Changes to an object affect all references pointing to it (Can be tracked with the unique ID).
+    - Object references can represent:
+        - **Strings**
+        - **Arrays**, which in turn contain other values
+        - **Classes**, which also contain other values
+
 # How to Get a Java Call Stack into Moose?
 
 Here’s a summary of the complete process, broken down into clear steps:
@@ -23,7 +58,6 @@ Here’s a summary of the complete process, broken down into clear steps:
 <img src="img/posts/2025-08-12-a-Famix-metamodel-for-Java-callstack/process.png" alt="Process overview" width="800">
 
 > The final grayed-out step (Moose-Security analysis) is just one example of how this metamodel can be applied.
-
 
 
 ## How to extract a java call stack ?
