@@ -9,7 +9,8 @@ tags:
 draft: true
 ---
 
-Analyzing source code starts with parsing but to go further, you need _semantic understanding_ of how symbols relate to each other. In this post, we’ll walk through how to build a **C code importer** using the **[TreeSitterFamixIntegration](https://github.com/moosetechnology/TreeSitterFamixIntegration)** framework.
+Analyzing source code starts with parsing and for this you need _semantic understanding_ of how symbols in the code relate to each other.
+In this post, we’ll walk through how to build a **C code importer** using the **[TreeSitterFamixIntegration](https://github.com/moosetechnology/TreeSitterFamixIntegration)** framework.
 
 :::note[Important]
 The goal of this blog post is to provide a starting point on how to use the TreeSitterFamixIntegration framework to build a Famix importer.
@@ -21,7 +22,7 @@ The goal of this blog post is to provide a starting point on how to use the Tree
 - Familiarity with the Visitor design pattern. You can check [this blog post](https://modularmoose.org/blog/2025-03-26-visitor-external-grammar/) which explains the Visitor pattern in the context of tree-sitter ASTs.
 ## Overview of TreeSitterFamixIntegration
 
-The TreeSitterFamixIntegration stack lets us to ease the development of Famix importers using tree-sitter. 
+The TreeSitterFamixIntegration stack provides tools to ease the development of Famix importers using tree-sitter. 
 This package offers some great features for parsing such as (but not limited to):
 
 - Useful methods for source management (getting source text, positions, setting sourceAnchor of a famix entity).
@@ -30,7 +31,7 @@ This package offers some great features for parsing such as (but not limited to)
 - Utility to efficiently import and attach single-line and multi-line comments to their corresponding entities.
 - Context tracking for symbol scope (no more context push and pop 😁)
 
-There is a very detailed [documentation](https://github.com/moosetechnology/TreeSitterFamixIntegration/blob/main/resources/docs/UserDocumentation.md) you can check that explain every features.
+There is a detailed [documentation](https://github.com/moosetechnology/TreeSitterFamixIntegration/blob/main/resources/docs/UserDocumentation.md) you can check that explain every features.
 
 ## Step 1: Setting up our environment
 After creating a new Moose image, let's start by loading the necessary packages. 
@@ -50,8 +51,9 @@ Metacello new
 You can directly load the C metamodel from the Moose toolbar by going to the **Library** menu: *Library Famix > Load additional modules > Load Famix-Cpp*
 :::
 
-### The TreeSitterFamixIntegration package
-Next, we need to load the TreeSitterFamixIntegration package. This package provides both pharo-tree-sitter and SRSymbolResolver.
+### The TreeSitterFamixIntegration project
+Next, we need to load the TreeSitterFamixIntegration project. 
+It provides both pharo-tree-sitter and SRSymbolResolver.
 
 ```smalltalk
  Metacello new
@@ -69,19 +71,19 @@ The minimum classes we will have to create inside are:
 - `FamixCVisitor`: This class will walk through the parsed C syntax tree and create Famix entities.
 - `FamixCCommentVisitor`: This class will handle comments and attach them to the corresponding Famix entities.
 
-### The FamixCimporter class
+### The `FamixCimporter` class
 The `FamixCimporter` class is the entry point for our importer. It will handle the parsing of C files into Abstract Syntax Trees (AST).
 
-This class will inherit from `FamixTSAbstractImporter`, which provides the necessary methods for importing and parsing C files using Tree-sitter.
+This class will inherit from `FamixTSAbstractImporter` (defined in the TreeSitterFamixIntegration project), which provides the necessary methods for importing and parsing C files using Tree-sitter.
 
 ```smalltalk
 FamixTSAbstractImporter << #FamixCImporter
-    slots: {};
+	slots: {};
 	package: 'Famix-C-Importer'
 ```
 
 Now, let's override some methods to set up our importer:
-#### 1. treeSitterLanguage method
+#### 1. `treeSitterLanguage` method
 
 ```smalltalk
 FamixCImporter >> treeSitterLanguage
@@ -91,7 +93,7 @@ FamixCImporter >> treeSitterLanguage
 ```
 This method returns the Tree-sitter language we want to use for parsing. In this case, we are using the C language. You can find the available languages in the `Pharo-Tree-Sitter` package.
 
-#### 2. visitorClass method
+#### 2. `visitorClass` method
 
 ```smalltalk
 FamixCImporter >> visitorClass
@@ -100,43 +102,38 @@ FamixCImporter >> visitorClass
 ```
 It returns the visitor class that will walk through the parsed syntax tree and create Famix entities. We will define this class later.
 
-#### 3. importFileReference: method
+#### 3. `importFileReference:` method
 
 ```smalltalk
 FamixCImporter >> importFileReference: aFileReference
 
-aFileReference isFile
+	aFileReference isFile
 		ifTrue: [
-				(self isCFile: aFileReference) ifFalse: [ ^ self ].
-                
-				self importFile: aFileReference 
-                
-                ]
+			(self isCFile: aFileReference) ifFalse: [ ^ self ].
+			self importFile: aFileReference
+		]
 		ifFalse: [
-				aFileReference children do: [ :each | 
-                    self importFileReference: each 
-                    ].
-
-				]
-
+			aFileReference children do: [ :each | 
+			self importFileReference: each 
+		].
+	]
 ```
 
-This method is responsible for importing a file reference. It checks if the file is a C file and then calls the `importFile:` method, to parse it. If the file reference is a directory, it recursively imports all files in that directory.
-
+This method calls `importFile:` on all C files recursively found in a directory.
 We will add more logic to this method later but for now, it serves as a starting point for our importer.
 
-The `isCFile:` method checks if the file has a `.c` or `.h` extension, indicating that it is a C source file.
+The `isCFile:` method checks if the file has a `.c` or `.h` extension.
 
 ```smalltalk
-FamixCImporter >> isCFile: aFileReference
-
+FamixCImporter >> isCFile: aFileReferencemon
     ^ #( 'c' 'h' ) includes: aFileReference extension
 ```
 
-The `importFile:` method is an existing method defined in the `FamixTSAbstractImporter` class. It parses the file content to create an AST and then passes the visitor (the `FamixCVisitor` that we previously defined) to walk through the AST.
+The `importFile:` method is defined in the `FamixTSAbstractImporter` class (provided by the TreeSitter-Famix-Integration project).
+It parses the file content to create an AST and then passes the visitor (the `FamixCVisitor` that we previously defined) to walk through the AST.
 
-### The FamixCVisitor class
-The `FamixCVisitor` class is responsible for walking through the parsed C syntax tree and creating Famix entities. It will inherit from `FamixTSAbstractVisitor`, which provides the necessary methods for visiting Tree-sitter nodes.
+### The `FamixCVisitor` class
+The `FamixCVisitor` class is responsible for walking through the parsed AST and creating Famix entities. It will inherit from `FamixTSAbstractVisitor`, which provides the necessary methods for visiting Tree-sitter nodes.
 
 ```smalltalk
 FamixTSAbstractVisitor << #FamixCVisitor
@@ -146,7 +143,7 @@ FamixTSAbstractVisitor << #FamixCVisitor
 
 For this class, we will just need to override one method:
 
-#### modelClass method
+#### `modelClass` method
 
 ```smalltalk
 FamixCVisitor >> modelClass
@@ -183,31 +180,22 @@ Then select all the code and run it by inspecting it (cmd + I or click the "Insp
 ![Model inspector](./img/posts/2025-08-11-famix-importer-with-treesitterfamixintegration/model-inspector.png)
 
 The above screenshot shows what is inside our model. We can see that there is pretty much nothing there yet apart from the SourceLanguages which is added by default by TreeSitterFamixIntegration. 
-### The transcript and the node inspector for a better debugging 
 
-![transcript log](./img/posts/2025-08-11-famix-importer-with-treesitterfamixintegration/transcript-log.png)
 
 Now if we look at the Transcript, we can see that the importer has imported the file but we didn't implement the visitor methods yet for every node in the AST, so no Famix entities were created.
+
+![transcript log](./img/posts/2025-08-11-famix-importer-with-treesitterfamixintegration/transcript-log.png)
 
 
 :::note[Note]
 The way those methods are named is `visitNodeType: aNode` where `NodeType` is the type of the node in the AST. For example, for a function declaration, it would be `visitFunctionDeclaration: aNode`.
+This [blog post](https://modularmoose.org/blog/2025-03-26-visitor-external-grammar/) explains one way to create automatically these methods.
 :::
 
-If you want to inspect the corresponding AST of our test file, you can create the `visitTranslationUnit:` method and put a `halt` there, as shown below
-```smalltalk
-FamixCVisitor >> visitTranslationUnit: aNode
-	1halt.
-	self visitChildren: aNode "already implemented in FamixTSAbstractVisitor"
-```
-
-Now run the code again and it will stop as soon as we the visit the translation unit node
-![translation unit halt](./img/posts/2025-08-11-famix-importer-with-treesitterfamixintegration/translationunit-halt.png)
-
-Then you can get the AST by inspecting the `aNode` which correspond to the translation unit node. 
+If you want to inspect the corresponding AST of our test file, you can do something similar to what is in [this other blog post](http://localhost:4321/blog/2025-03-25-tree-sitter/#a-first-pharo-ast) on tree-sitter.
 
 ![translation unit AST](./img/posts/2025-08-11-famix-importer-with-treesitterfamixintegration/translationunit-ast.png)
-Apart from the AST, the inspector provides many usefull informations that you can check in the other tabs.
+
 
 ## Step 2: Our first Famix entities
 In this section we are going to see some examples of visiting methods for creating compilation unit and function entities.
