@@ -192,7 +192,7 @@ The way those methods are named is `visitNodeType: aNode` where `NodeType` is th
 This [blog post](https://modularmoose.org/blog/2025-03-26-visitor-external-grammar/) explains one way to create automatically these methods.
 :::
 
-If you want to inspect the corresponding AST of our test file, you can do something similar to what is in [this other blog post](http://localhost:4321/blog/2025-03-25-tree-sitter/#a-first-pharo-ast) on tree-sitter.
+If you want to inspect the corresponding AST of our test file, you can do something similar to what is in [this other blog post](https://modularmoose.org/blog/2025-03-25-tree-sitter/#a-first-pharo-ast) on tree-sitter.
 
 ![translation unit AST](./img/posts/2025-08-11-famix-importer-with-treesitterfamixintegration/translationunit-ast.png)
 
@@ -200,39 +200,9 @@ If you want to inspect the corresponding AST of our test file, you can do someth
 ## Step 2: Our first Famix entities
 In this section we are going to see some examples of visiting methods for creating compilation unit and function entities.
 
-### Test setup
-But with every entities that we will handle, we have to write tests before. 
-So let's set up our tests class.
-1. Create a package called `Famix-C-Importer-Tests`.
-2. Inside it, create a class named `FamixCImporterTest`.
-3. Add an instance variable named `model` — this will be shared by all our tests.
-
-The setUp method: 
-
-```smalltalk
-FamixCIImporterTest >> setUp
-
-	| testFile |
-	super setUp.
-	testFile := '/Users/toky/code-examples-to-parse/test.c'
-		            asFileReference. "this can be improved in a production mode"
-		
-	model := FamixCImporter new import: testFile
-```
 
 ### CompilationUnit entities
-#### Test:
-```smalltalk
-FamixCImporterTest >> testCompilationUnit
 
-	| compilationUnits |
-	
-	compilationUnits := model allWithType: FamixCCompilationUnit.
-	
-	self assert: compilationUnits size equals: 1.
-	self assert: compilationUnits first name equals: 'test.c'
-```
-#### Implementation
 Let's go back to our `FamixCImporter` class and from there we will create a CompilationUnit and HeaderFile entities. We need to do that there because we have to check if the file is a header file or a source file.
 
 ```diff lang="smalltalk"
@@ -261,26 +231,16 @@ FamixCImporter >> importFileReference: aFileReference
 				^ self ]
 ```
 
-Let's break down the code above:
-- We check if the file is a C file using the `isCFile:` method.
-- If it is a C file, we create a `fileEntity` which will be either a `FamixCCompilationUnit` or a `FamixCHeaderFile` depending on the file extension.
-- We then use the `useCurrentEntity:during:` to provide a context for the the visitor. This is same as pushing the `fileEntity` to a context, visit children and then popping it from the context. And it will set the current entity to the `fileEntity`.
+We use the <mark>useCurrentEntity:during:</mark> to provide a context for the visitor. This is same as pushing the `fileEntity` to a context, visit children and then popping it from the context. And it will set the current entity to the `fileEntity`.
 
-Now if we run our test it should **pass** 🟢
 
-Now try importing a whole directory containing C files. You should see that the importer creates a `FamixCHeaderFile` for each header file and a `FamixCCompilationUnit` for each source file. You can extend the test to check that.
+Now try importing a whole directory containing C files. You should see that the importer creates a `FamixCHeaderFile` for each header file and a `FamixCCompilationUnit` for each source file. 
 
 ### Source Anchors
-#### Test
-Add this assertion at the end of the previous test
-```diff lang="smalltalk"
-+ self assert: compilationUnits first sourceAnchor isNotNil
-```
 
-#### Implementation
-To set the source anchor for any Famix entity, we can use the `setSourceAnchor: aFamixEntity from: aTSNode` method provided by the `FamixTSAbstractVisitor` class. This method takes a Famix entity and a Tree-sitter node.
+To set the source anchor for any Famix entity, we can use the <mark>setSourceAnchor: aFamixEntity from: aTSNode</mark> method provided by the `FamixTSAbstractVisitor` class. This method takes a Famix entity and a Tree-sitter node.
 
-We can use it to set the source anchor for our `fileEntity` to its corresponding node. Go to `visitTranslationUnit:` method in the `FamixCVisitor` class and add the following code:
+We can use it to set the source anchor for our `fileEntity` . Go to `visitTranslationUnit:` in the `FamixCVisitor` class and add the following code:
 
 ```diff lang="smalltalk"
 FamixCVisitor >> visitTranslationUnit: aNode
@@ -292,24 +252,10 @@ FamixCVisitor >> visitTranslationUnit: aNode
 The `self currentEntity` returns the entity that is currently being visited by the visitor (i.e at the top of the stack). In this case, it will return the `fileEntity` that we pushed to the context in the `importFileReference:` method by using the `useCurrentEntity:during:` method. 
 :::
 
-Now if we import our `test.c` file again, we will see that the `CompilationUnit` entity has a source anchor and the test should **pass** 🟢
+Now if we import our `test.c` file again, we will see that the `CompilationUnit` entity has a source anchor.
 
 ### Function entities
 
-#### Tests
-```smalltalk
-FamixCImporterTest >> testFunction
-
-	| functions |
-	
-	functions := model allFunctions.
-
-	self assert: functions size equals: 1.
-	self assert: functions first name equals: 'main'.
-	self assert: functions first functionOwner name equals: 'test.c'
-```
-
-#### Implementation
 Next, we will create `FamixCFunction` entities for each function declaration in the C file. We will do this in the `visitFunctionDefinition:` method of the `FamixCVisitor` class.
 
 But first we need to know where the function name is located to create the `FamixCFunction` entity. Create the method and put a `halt` there to inspect the node.
@@ -339,18 +285,6 @@ So if we do `aNode _declarator` it will return the function declarator node
 
 ![function declarator](./img/posts/2025-08-11-famix-importer-with-treesitterfamixintegration/function-declarator.png)
  And if we do `aNode _declarator` from the function_declarator it will give us the identifier that we want.
-
-So our method becomes:
-```smalltalk
-FamixCVisitor >> visitFunctionDefinition: aNode
-	| declaratorNode identifierNode functionName entity |
-
-	declaratorNode := aNode _declarator.
-	identifierNode := declaratorNode _declarator.
-	functionName := identifierNode sourceText.
-	
-	
-	self visitChildren: aNode
 ```
 
 :::note[Note]
@@ -361,7 +295,7 @@ the `sourceText` will return the text of the node, which is the function name in
 
 Now we can create the function entity and set its name and source anchor.
 
-```diff lang="smalltalk"
+```smalltalk
 visitFunctionDefinition: aNode
 
 	| declaratorNode identifierNode functionName entity |
@@ -370,13 +304,12 @@ visitFunctionDefinition: aNode
 	identifierNode := declaratorNode _declarator.
 	functionName := identifierNode sourceText.
 
--	self visitChildren: aNode
 
-+	entity := (model newFunctionNamed: functionName) functionOwner: self currentEntity.
-+
-+	self setSourceAnchor: entity from: aNode.
-+	
-+	self useCurrentEntity: entity during: [ self visitChildren: aNode ]
+	entity := (model newFunctionNamed: functionName) functionOwner: self currentEntity.
+
+	self setSourceAnchor: entity from: aNode.
+
+	self useCurrentEntity: entity during: [ self visitChildren: aNode ]
 ```
 
 The `self currentEntity` returns the compilation unit entity which is the parent of the function entity.
@@ -384,50 +317,10 @@ The `self currentEntity` returns the compilation unit entity which is the parent
 And before visiting the children, we set the current entity to the newly created function entity using `useCurrentEntity:during:`. This will allow us to create other entities that are related to this function, such as parameters and local variables.
 
 :::tip[Important]
-When you get a child by field name using the `_fieldName` method, the editor will show an error message saying that the method is not implemented. This is because the `_fieldName` method is a dynamic method that will be caught by a `#doesNotUnderstand:` method in the tree sitter node class and it will return the child node with the given field name.
+When you get a child by field name using the `_fieldName` method, the editor will show an error message saying that the method is not implemented. This is because the `_fieldName` method is a dynamic method that will be caught by a `#doesNotUnderstand:` method in the tree sitter node class (see previous blog post) and it will return the child node with the given field name.
 :::
 
 ### Local and Global Variables
-Next, we will create the variable entities for each variable declaration in our C file.
-
-```c
-// test.c
-#include <stdio.h>
-
-int aGlobalVar = 1;
-int main() {
-    int aLocalVar;
-    aLocalVar = aGlobalVar + 2;
-}
-```
-
-#### Tests
-Let's write two tests for testing local and global variables. Of course, you should write more tests in your projects but for the sake of this post let's stay with these two tests.
-
-```smalltalk
-FamixCImporterTest >> testGlobalVariable
-
-	| compilationUnits globalVars |
-	
-	compilationUnits := model allWithType: FamixCCompilationUnit.
-	globalVars := model allGlobalVariables.
-
-	self assert: globalVars size equals: 1.
-	self assert: globalVars first name equals: 'aGlobalVar'.
-	self assert: globalVars first parentScope name equals: 'test.c'.
-```
-
-```smalltalk
-FamixCImporterTest >> testLocalVariable
-
-	| localVars |
-	
-	localVars := model allFunctions first localVariables.
-
-	self assert: localVars size equals: 1.
-	self assert: localVars first name equals: 'aLocalVar'.
-	self assert: localVars first parentBehaviouralEntity isFunction.
-```
 
 The difference between local and global variables is that local variables are declared inside a function, while global variables are declared outside any function.
 
@@ -435,8 +328,6 @@ The difference between local and global variables is that local variables are de
 
 :::tip[Tip]  
 Before visiting a node, check its fields by inspecting the node to know how to extract the needed information.
- 
-*You can do this by adding a `halt` in the visit method.*  
 :::
 
 
@@ -485,7 +376,6 @@ FamixCVisitor >> visitIdentifier: aNode
 3. Creates a variable entity, either a local variable or a global variable, depending on whether the current entity is a function or not.
 4. Sets the source anchor for the variable entity using the `setSourceAnchor:from:` method.
 
-Now if we run our tests, they should **pass** 🟢
 
 
 ## Step 3: Symbol resolution  
@@ -494,38 +384,11 @@ In this section, we will implement the symbol resolution for our C importer. Thi
 
 As an example, we will resolve the reference to the local variable `aLocalVar` in the `main` function, which will be represented as a famix write access entity.
 
-```c
-// test.c
-#include <stdio.h>
 
-int aGlobalVar = 1;
-int main() {
-	int aLocalVar;
-	aLocalVar = aGlobalVar + 2;
-}
-
-```
-#### Test
-```smalltalk
-
-FamixCImporterTest >> testLocalVariableWriteAccess
-
-	| writeAccesses localVars |
-
-	writeAccesses := model allAccesses select: [:each | each isWrite].
-	localVars := model allFunctions first localVariables.
-
-	self assert: writeAccesses size equals: 1.
-	self assert: writeAccesses first variable name equals: 'aLocalVar'.
-	self assert: localVars first incomingAccesses size equals: 1.
-
-```
-  We are testing that:
-- There is one write access to the local variable `aLocalVar`.
-- The local variable `aLocalVar` has one incoming access, which is the write access
 #### Implementation
 
-**Create the write access entity**
+##### **Create the write access entity**
+
 To create the write access entity, we will implement the `visitAssignmentExpression:` method in the `FamixCVisitor` class. This method is called for each assignment expression.
 
 ```smalltalk
@@ -544,11 +407,10 @@ visitAssignmentExpression: aNode
 
 ```
 
-Basically we are creating a new access entity with the current entity (which is the function in this case) as the accessor and setting it as a write access.
 
-### Resolve the variable using SRIdentifierResolvable
+### Resolve the variable access using SRIdentifierResolvable
 
->The goal of this resolvable is to provide a name and the kind of entity it can be, and the resovable will look if the element at the top of the stack has a child of this kind and name. Else, it will go to the next scope.
+>The goal of this class is to provide a name and the kind of entity it can be, and it will look if the element at the top of the stack has a child of this kind and name. Else, it will go to the next scope.
 > -- <cite> [SRSymbolResolver documentation](https://github.com/jecisc/SymbolResolver/blob/main/resources/docs/UserDocumentation.md#sridentifierresovable) </cite>
 
 
@@ -583,7 +445,6 @@ It takes two arguments:
 1. `aResolvable`: an instance of `SRIdentifierResolvable`. This resolvable is created with the identifier (the variable name) and the expected kinds of entities (in this case, either a local variable or a global variable). The `identifier:` method sets the identifier to resolve, and the `expectedKind:` method sets the expected kinds of entities that can be resolved.
 2. `aBlockClosure`: a block that will be executed when the resolvable is resolved (we found the variable). In this case we set the variable of the access entity to the resolved variable.
 
-Now our tests should be green 🟢
    
 ### Custom resolver
 The `SRIdentifierResolvable` is a generic resolvable that can be used to resolve identifiers. However, in some cases, we may need to create a custom resolver to handle specific cases. In that case, we can create a class that inherits from `SRResolvable` and override the `resolveInScope:currentEntity:` method to implement our custom resolution logic.
@@ -609,22 +470,6 @@ int main() {
     aLocalVar = aGlobalVar + 2;
 }
 ```
-#### Test
-```smalltalk
-FamixCImporterTest >> testComments
-
-	| comments |
-	
-	comments := model allComments.
-
-	self assert: comments size equals: 2.
-	self assert: comments first commentedEntity name equals: 'aLocalVar'.
-	self assert: comments second commentedEntity name equals: 'main'.
-```
-
-We are testing that:
-- There are two comments in the model.
-- All comments are attached to the corresponding entities.
 
 #### Implementation
 To parse comments, we will create the `FamixCCommentVisitor` class that will inherit from `FamixTSAbstractCommentVisitor`. And we just need to override the `visitNode:` method.
@@ -639,7 +484,7 @@ FamixCCommentVisitor >> visitNode: aNode
 			
 	super visitNode: aNode
 ```
-The role of this method is just to check if the node is a comment and then call the appropriate method to add the comment to the model.
+
 We use the `addMultilineCommentNode:` and `addSingleLineCommentNode:` methods provided by the `FamixTSAbstractCommentVisitor` class to add the comment to the model.
 
 For a detailed explanation of how to use the comment visitor, you can check the [documentation](https://github.com/moosetechnology/TreeSitterFamixIntegration/blob/main/resources/docs/UserDocumentation.md#comment-importer-helper).
@@ -656,7 +501,6 @@ FamixCImporter >>visitTranslationUnit: aNode
 ```
 We use the `visitor: aFamixVisitor importCommentsOf: aNode` method to import the comments of the translation unit node. 
 
-Now if we run our test, it should pass 🟢
 
 ## Summary
 In this blog post, we have seen how to build a Famix importer for C code using the TreeSitterFamixIntegration framework. We have covered the following topics:
