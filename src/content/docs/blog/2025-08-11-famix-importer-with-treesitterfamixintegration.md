@@ -62,7 +62,7 @@ It provides both pharo-tree-sitter and SRSymbolResolver.
     load
 ```
 
-## The project structure
+### The project structure
 Now that we have the necessary packages loaded, we can create our C importer. 
 
 Create a new package named `Famix-C-Importer`. 
@@ -153,7 +153,7 @@ FamixCVisitor >> modelClass
 
 It returns the Famix metamodel class that will be used to create Famix entities. In this case, we are using `FamixCModel` which is in the `Famix-Cpp` package. 
 
-## Let's test our importer so far
+### Let's test our importer so far
 
 Now that we have our importer and visitor classes set up, we can already test it.
 To test our importer, we can create a simple C file and import it using the `FamixCImporter` class.
@@ -273,7 +273,7 @@ If we look at the function definition node, we can see that the function name is
 
 To get that name, there are two ways:
 - visit the function_declarator until the identifier returns its name using `self visit: aNode`
-- get it by child field name using `aNode _fieldName` that returns the child node with the given field name.
+- get it by child field name using `aNode _fieldName` that returns the child node with the given field name. And you don't need to implement the `_fieldName` method because it is already handled by the framework.
 
 For simplicity, and to show other available features in the framework, we will use the second way. 
 
@@ -316,9 +316,6 @@ The `self currentEntity` returns the compilation unit entity which is the parent
 
 And before visiting the children, we set the current entity to the newly created function entity using `useCurrentEntity:during:`. This will allow us to create other entities that are related to this function, such as parameters and local variables.
 
-:::tip[Important]
-When you get a child by field name using the `_fieldName` method, the editor will show an error message saying that the method is not implemented. This is because the `_fieldName` method is a dynamic method that will be caught by a `#doesNotUnderstand:` method in the tree sitter node class (see previous blog post) and it will return the child node with the given field name.
-:::
 
 ### Local and Global Variables
 
@@ -358,7 +355,7 @@ FamixCVisitor >> visitDeclaration: aNode
 
 The `visitDeclaration:` method does the following:
 
-1. Visits the variable’s type. This ensures that all children of the declaration node are processed, allowing us to parse its type information.  
+1. Visits the variable’s type. This will allow us to parse its type information.  
 2. Retrieves the variable name by visiting the `declarator` field. If the variable is initialized, this will be an `init_declarator` node; otherwise, it will be an `identifier`. We should implement visit methods for both cases to extract the name correctly.  
 ```smalltalk
 FamixCVisitor >> visitInitDeclarator: aNode
@@ -408,11 +405,7 @@ visitAssignmentExpression: aNode
 ```
 
 
-### Resolve the variable access using SRIdentifierResolvable
-
->The goal of this class is to provide a name and the kind of entity it can be, and it will look if the element at the top of the stack has a child of this kind and name. Else, it will go to the next scope.
-> -- <cite> [SRSymbolResolver documentation](https://github.com/jecisc/SymbolResolver/blob/main/resources/docs/UserDocumentation.md#sridentifierresovable) </cite>
-
+### Using SRIdentifierResolvable
 
 Add the following code to the `visitAssignmentExpression:` method to resolve the variable:
 ```diff lang="smalltalk"
@@ -439,15 +432,16 @@ visitAssignmentExpression: aNode
 
 ```
 
-The `resolve: aResolvable foundAction: aBlockClosure` method is provided by the `FamixTSAbstractVisitor` class. 
+The <mark>resolve: aResolvable foundAction: aBlockClosure</mark> method is provided by the `FamixTSAbstractVisitor` class. 
 
 It takes two arguments:
 1. `aResolvable`: an instance of `SRIdentifierResolvable`. This resolvable is created with the identifier (the variable name) and the expected kinds of entities (in this case, either a local variable or a global variable). The `identifier:` method sets the identifier to resolve, and the `expectedKind:` method sets the expected kinds of entities that can be resolved.
 2. `aBlockClosure`: a block that will be executed when the resolvable is resolved (we found the variable). In this case we set the variable of the access entity to the resolved variable.
 
-   
+See the [SRIdentifierResolvable documentation](https://github.com/jecisc/SymbolResolver/blob/main/resources/docs/UserDocumentation.md#sridentifierresovable)
+
 ### Custom resolver
-The `SRIdentifierResolvable` is a generic resolvable that can be used to resolve identifiers. However, in some cases, we may need to create a custom resolver to handle specific cases. In that case, we can create a class that inherits from `SRResolvable` and override the `resolveInScope:currentEntity:` method to implement our custom resolution logic.
+The `SRIdentifierResolvable` is a generic resolver that can be used to resolve identifiers. However, in some cases, we may need to create a custom resolver to handle specific cases. In that case, we can create a class that inherits from `SRResolvable` and override the `resolveInScope:currentEntity:` method to implement our custom resolution logic.
 
 For more information about the symbol resolver, you can check the [documentation](https://github.com/jecisc/SymbolResolver/blob/main/resources/docs/UserDocumentation.md#add-you-own-solver).
   
