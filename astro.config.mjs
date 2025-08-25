@@ -130,6 +130,12 @@ export default defineConfig({
 							url: "https://github.com/thomasWattebled",
 							picture: "https://avatars.githubusercontent.com/u/124277643"
 						},
+						tokyRT: {
+							name: "Toky RATOLOJANHARY",
+							title: "Software engineer intern",
+							url: "https://github.com/tokyRT",
+							picture: "https://avatars.githubusercontent.com/u/57077076"
+						},
 						AlessHosry: {
 							name: "Aless Hosry",
 							title: "Research engineer at Berger-Levrault",
