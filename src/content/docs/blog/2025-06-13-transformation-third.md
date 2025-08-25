@@ -9,14 +9,13 @@ authors:
 comments: true
 tags:
 - transformation
-draft: true
 ---
 
 Once again, let me welcome you to the final blog post in those three blog posts about code transformations! During the [first blog](https://modularmoose.org/blog/2024-04-01-transformation-first/) post, we used queries and tools to locate the entities we seek to transform, before implementing the actual transformation logic in the [second blog](https://modularmoose.org/blog/2024-04-14-transformation-second/) post.
 
 In this third post, we will use a visualisation window allowing us to check the source code of our entity before and after a transformation, and finally apply those transformation on the actual source files, therefore transposing this transformation from Moose to your actual software!
 
-We are still following the scenario presented in the previous blog posts, on our use case, ArgoUML. In this system three classes define and use a method named `logError`. 
+We are still following the scenario presented in the previous blog posts, on our use case, ArgoUML. In this system three classes define and use a method named `logError`.
 A class `ArgoLogger` has been defined that contains a static method `logError`.
 
 The transformation task is to add a receiver node to each `logError` method invocation so that the method called is now `ArgoLogger.logError`().
@@ -43,40 +42,37 @@ First, let's add a new method to our transformation tool; `displayTransformation
 ```smalltalk
 transformMethod: aJavaMethodWrapper
 
-	| methodInvocationNode codeEditor |
-	methodInvocationNode := self motionQueryForFastMethod:
-		                        aJavaMethodWrapper transformedFastMethod.
+    | methodInvocationNode codeEditor |
+    methodInvocationNode := self motionQueryForFastMethod:
+        aJavaMethodWrapper transformedFastMethod.
 
-	methodInvocationNode receiver: self createNewReceiverNode.
+    methodInvocationNode receiver: self createNewReceiverNode.
 
-	aJavaMethodWrapper addTransformedFastNode:
-		methodInvocationNode receiver.
+    aJavaMethodWrapper addTransformedFastNode:
+        methodInvocationNode receiver.
 
-	codeEditor := self displayTransformationOfMethod:
-		                     aJavaMethodWrapper.
+    codeEditor := self displayTransformationOfMethod: aJavaMethodWrapper.
 ```
-
-
 
 ```smalltalk
 displayTransformationOfMethod: aMethodWrapper
 
-	| exportVisitor transformedCode codeEditor |
-	exportVisitor := FASTJavaExporttVisitor new.
+    | exportVisitor transformedCode codeEditor |
+    exportVisitor := FASTJavaExporttVisitor new.
 
-	transformedCode := exportVisitor export:
-		                   aMethodWrapper transformedFastMethod.
+    transformedCode := exportVisitor export:
+        aMethodWrapper transformedFastMethod.
 
-	codeEditor := TransformationEditor
-		              openForOriginalText:
-		              aMethodWrapper originalFastMethod sourceText
-		              transformed: transformedCode
-		              originalEntity: aMethodWrapper famixMethod.
+    codeEditor := TransformationEditor
+        openForOriginalText:
+        aMethodWrapper originalFastMethod sourceText
+        transformed: transformedCode
+        originalEntity: aMethodWrapper famixMethod.
 
-	^ codeEditor
+    ^ codeEditor
 ```
 
-As you can notice in this new method, we also call another tool, the `FASTJavaExportVisitor`. This visitor will allow us to convert a FAST Java tree to a string giving us the source code of our method after transformation. 
+As you can notice in this new method, we also call another tool, the `FASTJavaExportVisitor`. This visitor will allow us to convert a FAST Java tree to a string giving us the source code of our method after transformation.
 
 Coupling the result of using this tool to this class method of the `TransformationEditor` class will display such results : 
 
@@ -99,28 +95,28 @@ To do so, we will modify the new method `displayTransformationOfMethod:` and use
 ```smalltalk
 displayTransformationOfMethod: aMethodWrapper
 
-	| exportVisitor transformedCode codeEditor |
-	exportVisitor := FASTJavaExportAndHighlightVisitor new.
-	exportVisitor entitiesToHighlight:
-		aMethodWrapper transformedFastNodes.
+    | exportVisitor transformedCode codeEditor |
+    exportVisitor := FASTJavaExportAndHighlightVisitor new.
+    exportVisitor entitiesToHighlight:
+        aMethodWrapper transformedFastNodes.
 
-	transformedCode := exportVisitor export:
-		                   aMethodWrapper transformedFastMethod.
+    transformedCode := exportVisitor export:
+        aMethodWrapper transformedFastMethod.
 
-	codeEditor := TransformationEditor
-		              openForOriginalText:
-		              aMethodWrapper originalFastMethod sourceText
-		              transformed: transformedCode
-		              removedHighlights: OrderedCollection new
-		              addedHighlights: exportVisitor highlights
-		              originalEntity: aMethodWrapper famixMethod.
+    codeEditor := TransformationEditor
+        openForOriginalText:
+        aMethodWrapper originalFastMethod sourceText
+        transformed: transformedCode
+        removedHighlights: OrderedCollection new
+        addedHighlights: exportVisitor highlights
+        originalEntity: aMethodWrapper famixMethod.
 
-	^ codeEditor
+    ^ codeEditor
 ```
 
 Our first edit simply calls the method wrapper to add a "transformed node", a FAST node added during the transformation. In a similar fashion, you can add an "original node", a FAST node removed during the transformation (no such node exists in our example, so we don't use that feature).
 
-This new transformed node is used in our second edit, where we give the transformed nodes collection to the new visitor tool that we are going to use. 
+This new transformed node is used in our second edit, where we give the transformed nodes collection to the new visitor tool that we are going to use.
 
 This tool behaves just like the original exporter tool, except when it encounters a node present in the transformed nodes list. In this case, the tool save an interval corresponding to the `startPos` and `endPos` of the node, to know precisely its position in the generated string.
 
@@ -130,7 +126,7 @@ To use this feature in the editing window, simply do as done in the edit, giving
 
 !["Transformation display with highlighting"](./img/posts/2025-06-13-transformation-third/editor_with_highlights.PNG)
 
-## Applying our changes on the source files 
+## Applying our changes on the source files
 
 Now that we reviewed and accepted the transformation on our entities, only one step remains. To apply those code changes on the actual source code of the modeled software, thereby completing the transformation task.
 
@@ -139,28 +135,28 @@ Once again, we have a tool ready for this need, in the form of the `Transformati
 ```smalltalk
 transformSourceCodeOfMethod: aMethodWrapper
 
-	| exportVisitor transformedCode codeEditor |
-	exportVisitor := FASTJavaExportAndHighlightVisitor new.
-	exportVisitor entitiesToHighlight:
-		aMethodWrapper transformedFastNodes.
+    | exportVisitor transformedCode codeEditor |
+    exportVisitor := FASTJavaExportAndHighlightVisitor new.
+    exportVisitor entitiesToHighlight:
+        aMethodWrapper transformedFastNodes.
 
-	transformedCode := exportVisitor export:
-		                   aMethodWrapper transformedFastMethod.
+    transformedCode := exportVisitor export:
+        aMethodWrapper transformedFastMethod.
 
-	codeEditor := TransformationEditor
-		              openForOriginalText:
-		              aMethodWrapper originalFastMethod sourceText
-		              transformed: transformedCode
-		              removedHighlights: OrderedCollection new
-		              addedHighlights: exportVisitor highlights
-		              originalEntity: aMethodWrapper famixMethod.
+    codeEditor := TransformationEditor
+        openForOriginalText:
+        aMethodWrapper originalFastMethod sourceText
+        transformed: transformedCode
+        removedHighlights: OrderedCollection new
+        addedHighlights: exportVisitor highlights
+        originalEntity: aMethodWrapper famixMethod.
 
-	codeEditor isOk ifTrue: [
-		| tool |
-		tool := TransformationApplyerOnSourceAnchor new.
-		tool
-			transformMethod: aMethodWrapper famixMethod
-			withNewSource: codeEditor fetchEditedCode ]
+    codeEditor isOk ifTrue: [
+    | tool |
+    tool := TransformationApplyerOnSourceAnchor new.
+    tool
+        transformMethod: aMethodWrapper famixMethod
+        withNewSource: codeEditor fetchEditedCode ]
 ```
 
 As you can see, all this tool needs in our context is a method and the new source code as a String to complete the operation. You can also see that we called the method `fetchEditedCode` on our code editor window, which returns the String present in the right window of said editor. Using this method ensures that you get the right data, even if the code was manually edited during its review.
@@ -173,7 +169,7 @@ For example, if your transformation tool relies mostly on the FAST models, this 
 
 ## Try it yourself!
 
-This concludes our blog post series about code transformation! 
+This concludes our blog post series about code transformation!
 
 We now have a tool managing every step of the way to complete a specific transformation case, from finding the necessary informations needed for the transformation, transforming a FAST model and using those transformed FAST models to view, edit and apply the transformations to the source code.
 
@@ -195,4 +191,3 @@ Through the use of tools to query and search through FAST models, transform said
 This use case was a rather small example.
 A real transformation in a software would need more queries and FAST edits.
 But the only real difference would be the scale. Using the methodology and tools in the same way that they were used in this blog post would be enough to apply to many use cases out there. :smile:
-
