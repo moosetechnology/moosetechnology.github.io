@@ -1,5 +1,5 @@
 ---
-title: "Transformation journey (2/2) : Copying FASTs and creating nodes"
+title: "Transformation journey (2/3) : Copying FASTs and creating nodes"
 subtitle: >-
   How to copy and create FAST nodes to create code transformations
 date: 2024-04-15
@@ -17,12 +17,12 @@ As a reminder, this is the scenario: in the ArgoUML system, three classes define
 A class `ArgoLogger` has been defined that contains a static method `logError`.
 The transformation task is to add a receiver node to each `logError` method invocation so that the method called is now `ArgoLogger.logError`.
 
-# Preface
+## Preface
 
 As this blog post follows what was discussed and built in the first one of this series, a lot of information (how to build the image and model used for our use case, but also the use case itself) is provided in the previous post. 
 If you haven't read it, or if you forgot the content of the post, it is recommended to go back to it, as it will not be repeated in this post.
 
-# Tools to import
+## Tools to import
 
 For this blog post, we will have to import a tool library, [FAST-Java-Tools](https://github.com/moosetechnology/FAST-Java-Tools), which contains several tools to use on FAST for Java entities. It also contains practical tools to build transformation tools! 
 To load the project, execute this command in a Playground :
@@ -35,7 +35,7 @@ Metacello new
 
 Loading it will automatically load the FAST-Java repository. Carrefour and MoTion (which were used in the previous post) are still necessary, so if you are starting from a clean image, you will need them as well.
 
-# Copying the (F)ASTs to transform
+## Copying the (F)ASTs to transform
 
 With our import done, we are ready to get to work! :smile:
 To create our transformation, we will modify the FAST of each candidate method for our transformation, and this modified FAST will then be generated into source code that we will be able to inject into the actual source files. Therefore, our next step is modifying the FAST of our methods.
@@ -94,7 +94,7 @@ fetchLogErrorMethodInvocationsSenders
 
 The other one, `transformMethod:`, is the next step in this transformation journey, creating a new receiver node for our `logError` invocations and applying it on said invocations.
 
-# Create a new node
+## Create a new node
 
 Therefore, the first thing to do is pretty obvious. We need to build a receiver node, for the `ArgoLogger` class. This transformation use case is pretty easy, so the node to create is always the same and is a pretty basic node.
 
@@ -115,7 +115,7 @@ In order to create those more complex nodes, one option is to parse the code usi
 
 Using this view of the inspector then enable us to get the node or tree that we seek for our transformation and copy-paste the code to create it in a method for our tool to use it when needed. 
 
-# Adding the new receiver node to (F)ASTs 
+## Adding the new receiver node to (F)ASTs 
 
 Now that we have created our node and saw different means to do so, all that remains to do is setting it as the receiver of every copied FAST method to complete our transformation!
 Let us do so right away, by finally implementing our `transformMethod:` from before:
@@ -146,7 +146,7 @@ However, it is still doable, as the original and copied FAST nodes both store th
 
 !["Inspecting an original and copy"](./img/posts/2024-04-15-transformation-second/original-and-copy-inspect.PNG)
 
-# Try it yourself!
+## Try it yourself!
 
 We are now done with the second part of our three blog post journey into code transformation!
 Our class is now able to create wrappers for each candidate method containing a copy of the FAST to transform, creating the new nodes to insert and finally make the edit on the copied FAST.
