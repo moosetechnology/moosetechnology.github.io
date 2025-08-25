@@ -130,6 +130,12 @@ export default defineConfig({
 							url: "https://github.com/thomasWattebled",
 							picture: "https://avatars.githubusercontent.com/u/124277643"
 						},
+						AlessHosry: {
+							name: "Aless Hosry",
+							title: "Research engineer at Berger-Levrault",
+							url: "https://alesshosry.github.io",
+							picture: "https://alesshosry.github.io/assets/myImage2.jpeg"
+						},
 					},
 				}),
 				starlightSidebarTopics(
