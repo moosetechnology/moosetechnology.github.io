@@ -13,7 +13,7 @@ We present how to perform the queries in a playground or with the visual tool pr
 
 #### Class with a specific name
 
-Using the [*Queries Browser*]({{ site.baseurl }}/users/moose-ide/browsers#queries-browser): first, we request all the classes of a model.
+Using the [*Queries Browser*](/users/moose-ide/browsers#queries-browser): first, we request all the classes of a model.
 
 ![Query All Classes](./img/class-with-name-getClasses.png)
 
@@ -122,12 +122,11 @@ model allModelMethods
 The class hierarchy presents the classes of a model with their hierarchy links (*e.g.* superclass, subclasses, ...).
 It also includes the methods and attributes of each class.
 
-![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense }
+![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg)
 
 The easiest way to visualize a class hierarchy is to use the [*UML browser*]({{ site.baseurl }}/users/moose-ide/browsers#uml-browser).
 
 It is also possible to script one UML visualisation of Roassal.
-
 
 ```smalltalk
 builder := RSUMLClassBuilder new.
@@ -146,7 +145,7 @@ builder canvas
 
 ### Packages cycles
 
-![Moose 8 version](https://img.shields.io/badge/Moose-8-%23aac9ff.svg){: .no-lightense }
+![Moose 8 version](https://img.shields.io/badge/Moose-8-%23aac9ff.svg)
 
 ```smalltalk
 tarjan := MalTarjan new.
@@ -162,7 +161,7 @@ tarjan inspect
 
 It is possible to visualize the meta-model with a class hierarchy.
 
-![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg){: .no-lightense }
+![Moose 9 version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg)
 
 ```smalltalk
 builder := RSUMLClassBuilder new.
