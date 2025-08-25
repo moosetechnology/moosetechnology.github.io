@@ -135,7 +135,13 @@ export default defineConfig({
 							title: "Software engineer intern",
 							url: "https://github.com/tokyRT",
 							picture: "https://avatars.githubusercontent.com/u/57077076"
-						}
+						},
+						AlessHosry: {
+							name: "Aless Hosry",
+							title: "Research engineer at Berger-Levrault",
+							url: "https://alesshosry.github.io",
+							picture: "https://alesshosry.github.io/assets/myImage2.jpeg"
+						},
 					},
 				}),
 				starlightSidebarTopics(

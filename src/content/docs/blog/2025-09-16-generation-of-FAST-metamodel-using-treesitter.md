@@ -1,0 +1,120 @@
+---
+title: "Generation of new FAST-Language metamodel using Pharo-Tree-Sitter project"
+date: 2025-09-16
+authors:
+- AlessHosry
+tags:
+- meta-model
+---
+
+If you’re here, you’re probably interested in creating a new FAST metamodel and expanding Moose to represent the AST (Abstract Syntax Tree) of an additional language.
+In this post, we explain to you how to generate a "First version" of a new FAST-Language metamodel using the project Pharo-Tree-Sitter.
+To be able to understand that, we assume you are already familiar with:
+
+- Tree-Sitter
+- Pharo-Tree-Sitter
+- FAST
+- Metamodel generators
+
+:::note[If you are not, the following provides a general introduction to these tools/libraries along with references for further details:]
+:::
+
+- **[Tree-Sitter](https://tree-sitter.github.io/tree-sitter/)** is a parser generator tool and an incremental parsing library. It can build a concrete syntax tree for a source file and efficiently update the syntax tree as the source file is edited. It is able to parse a large variety of programming languages such as Java, C++, C#, Python and many others.
+- **[Pharo-Tree-Sitter](https://github.com/Evref-BL/Pharo-Tree-Sitter/)** is a project developed in Pharo that integrates the original Tree-Sitter parsers and allows visualizing their results (such as ASTs) directly in Pharo. It relies on the FFI protocol, which requires the corresponding libraries depending on the OS (.dll, .so, or .pylib) to be present in Pharo’s VM folders.
+The project supports parsing several languages, and for some of them (like Python, TypeScript, and C), the library generation is automated. You can find more details in the repository’s README.
+This is the project that we will use to generate a new FAST-Language metamodel, so you need to download it into your Pharo image.
+
+- **[FAST](https://github.com/moosetechnology/fast)** means Famix AST. Contrary to Famix that represent application at a high abstraction level, FAST uses a low-level representation: the AST.
+FAST defines a set of traits that can be used to create new meta-models compatible with Moose tools.
+When developing a new FAST-Language metamodel, you will rely on these FAST traits to structure your metamodel. However, this does not apply to the "First version" described in this post, but rather to the upgraded versions when you evolve and refine it.
+
+- **[Metamodel generator](https://modularmoose.org/developers/create-new-metamodel/)** is a Pharo library used to create new metamodels such as FAST-Java, Famix-Java, or FAST-Fortran.
+The generation of any new version of a FAST-Language metamodel can only be achieved through the metamodel generator.
+As you will see in this post, Pharo-Tree-Sitter enables you to define a new metamodel generator. Once executed, it produces the corresponding FAST-Language metamodel. We will explain this process in more detail in the following sections.
+
+## Download Pharo-Tree-Sitter and get the correspondent libraries
+
+First you need to create a Moose image and download [Pharo-Tree-Sitter](https://github.com/Evref-BL/Pharo-Tree-Sitter/):
+
+```smalltalk
+Metacello new
+  baseline: 'TreeSitter';
+  repository: 'github://Evref-BL/Pharo-Tree-Sitter:main/src';
+  load.
+```
+
+Once downloaded, you need to make sure that Pharo-Tree-Sitter is able to parse the language that you intend to create the metamodel for.
+If it is not included, you need to follow the instructions in the readme file of this repository and add the new language.
+For this blog post we will assume that the language is already supported and we will continue with "Python" 🐍🐍🐍.
+
+To be able to continue, and if this is the first time you're using this project (Pharo-Tree-Sitter), you need to launch the tests of python in package "TreeSitter-Tests" class "TSParserPythonTest".
+This is needed to launch the process of downloading the original **[tree-sitter](https://github.com/tree-sitter/tree-sitter)** and **[tree-sitter-python](github.com/tree-sitter/tree-sitter-python)** projects from GitHub, generating the correspondent libraries and moving them to the correspondent VM folder based on the image version you create: for example Moose 12. 
+If you create another image of another version, you need to launch the tests again to make sure the libraries are again moved to the correspondent folder.
+Now that you have the libraries, you can parse python code and get an AST, but not FAST-Python model.
+So in the next step we explain how this can be possible.
+
+## Create the first version of the metamodel (FAST-Python in our example)
+
+Don't worry, not too much to be done, but a snippet of code needs to be written and executed.
+But we have to explain to you first how it is working.
+
+### Explaining package TreeSitter-FAST-Utils
+
+This package contains two main classes: "TSFASTBuilder" and "TSFASTImporter". 
+For our task we will rely on the first one.
+The second is used to make the transition between an AST generated by TreeSitter and a FAST-Language model.
+
+"TSFASTBuilder" contains a set of methods responsible for generating a new metamodel generator:
+
+- `#tsLanguage:` is used to set an instance of TSLanguage, which is `TSLanguage python` in our case.
+- `#createMetamodelGeneratorClass` is responsible for creating a new package and a class inside. By default, the class name will be "FASTLanguageNameMetamodelGenerator" which is "FASTPythonMetamodelGenerator" and the package name is "FAST-LanguageName-Model-Generator".
+This method also calls another one "typesToReify", which gets all the symbols from the initial TreeSitter project (using an FFI call), and add them as slots in the class definition. These symbols represent the nodes of the language in question like "class" for Python.
+- `#addPrefixMethodIn:` adds `#prefix` method on the class side of the metamodel generator class. By default it is FASTLanguage.
+- `#addPackageNameMethodIn:` adds `#packageName` method on the class side of the metamodel generator class. By default it's 'FAST-Language-Model'.
+- `#addSubmetamodelsMethodIn:` adds `#submetamodels` method on the class side of the metamodel generator class, and by default it contains FASTMetamodelGenerator.
+- `#addDefineClassIn:` adds `#defineClasses` method. In this method slots are defined, starting by #entity then all the symbols imported from TreeSitter.
+- `#addDefineTraitsIn:` adds `#defineTraits` method. By default FASTTEntity trait is created.
+- `#addDefineHierarchyIn:` adds `#defineHierarchy` method. By default only #entity relation is defined with FASTTEntity.
+- `#addDefineRelationsIn:` adds `#defineRelations` method. By default only #entity relations are defined with genericChildren and genericParent.
+
+Voilà, now that you understand how it works, we will show you how to generate one for Python:
+
+```smalltalk
+tsb := TSFASTBuilder new.
+tsb languageName: 'Python'.
+tsb tsLanguage: TSLanguage python.
+tsb build.
+```
+
+This will generate the metamodel generator. Now that the generator is created you can use it to generate the metamodel:
+
+```smalltalk
+FASTPythonMetamodelGenerator new generate.
+```
+
+Now you can access the packages and classes created: 'FAST-Python-Model' and 'FAST-Python-Model-Generator'.
+
+From now on you have to handle the metamodel manually. You have to add missing traits (including FAST Traits), properties that should be imported from TreeSitter...  You benefit from the importer to handle the parsing on the metamodel side. You can create a package for tools having a #parse method doing this for example:
+
+```smalltalk
+| parser tsLanguage importer | 
+
+Smalltalk image garbageCollect.
+
+parser := TSParser new.
+tsLanguage := TSLanguage python.
+parser language: tsLanguage.
+
+importer := TSFASTImporter new.
+importer tsLanguage: tsLanguage.
+importer languageName: 'Python'.
+importer originString: string.
+
+^ importer import: (parser parseString: string) rootNode "pay attention to #source: "
+```
+
+You can check FASTTypeScript for more details.
+
+> N.B: We recommend you to parse many python examples (you can find a lot in the main project of TreeSitter-Python), using Pharo-Tree-Sitter project. Once parsed you can inspect in Pharo the properties for each node using `#collectFieldNameOfNamedChild` and find the properties for each one. Then you can add them in #defineRelations of the metamodel.
+
+That's it for now!
