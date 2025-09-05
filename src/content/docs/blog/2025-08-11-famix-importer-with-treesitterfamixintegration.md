@@ -6,7 +6,6 @@ date: 2025-05-11
 lastUpdated: 2025-05-11
 tags:
   - infrastructure
-draft: true
 ---
 
 Analyzing source code starts with parsing and for this you need _semantic understanding_ of how symbols in the code relate to each other.
