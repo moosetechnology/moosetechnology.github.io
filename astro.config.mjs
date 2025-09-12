@@ -142,6 +142,12 @@ export default defineConfig({
 							url: "https://alesshosry.github.io",
 							picture: "https://alesshosry.github.io/assets/myImage2.jpeg"
 						},
+						CyrilFerlicot: {
+							name: "Cyril Ferlicot-Delbecque",
+							title: "Research engineer at Inria",
+							url: "https://ferlicot.fr",
+							picture: "https://avatars.githubusercontent.com/u/9519971"
+						},
 					},
 				}),
 				starlightSidebarTopics(
