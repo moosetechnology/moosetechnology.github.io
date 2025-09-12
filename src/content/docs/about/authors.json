@@ -137,5 +137,12 @@
         "github": "https://github.com/alesshosry",
         "image": "https://alesshosry.github.io/assets/myImage2.jpeg",
         "linkedin": "https://www.linkedin.com/in/aless-hosry-697791186"
+    },
+     "Cyril Ferlicot-Delbecque": {
+        "name": "Cyril Ferlicot-Delbecque",
+        "role": "Moose Expert",
+        "github": "https://github.com/jecisc",
+        "personnal-website": "https://ferlicot.fr/",
+        "image": "https://ferlicot.fr/assets/img/photos/Avatar.jpg"
     }
 }
