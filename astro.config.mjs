@@ -3,10 +3,9 @@ import { defineConfig, sharpImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightBlog from 'starlight-blog'
 import starlightSidebarTopics from 'starlight-sidebar-topics';
-import tailwindcss from "@tailwindcss/vite";
 import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
-import rehypeMermaid from 'rehype-mermaid';
 import remarkGemoji from 'remark-gemoji';
+import mermaid from 'astro-mermaid';
 
 
 // https://astro.build/config
@@ -16,9 +15,6 @@ export default defineConfig({
 		remarkPlugins: [
 			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
 			remarkGemoji
-		],
-		rehypePlugins: [
-			rehypeMermaid
 		]
 	},
 	image: {
@@ -27,6 +23,10 @@ export default defineConfig({
 	site: 'https://modularmoose.org',
 	base: '',
 	integrations: [
+		mermaid({
+			theme: 'forest',
+			autoTheme: true
+		}),
 		starlight({
 			title: 'Modular Moose',
 			customCss: [
@@ -314,9 +314,5 @@ export default defineConfig({
 					},
 				)]
 		}),
-	],
-
-	vite: {
-		plugins: [tailwindcss()],
-	},
+	]
 });
