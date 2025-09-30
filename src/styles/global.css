@@ -15,3 +15,11 @@
 .astro-eboeziq4 {
     display: none;
 }
+
+html[data-theme="dark"] .sl-markdown-content img {
+    background-color: lightgrey;
+}
+
+img {
+    margin: auto;
+}

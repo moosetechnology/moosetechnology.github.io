@@ -252,8 +252,7 @@ export default defineConfig({
 												},
 												{
 													label: 'Moose Query',
-													link: 'https://moosequery.ferlicot.fr',
-													badge: { text: 'Outside', variant: 'tip' }
+													link: '/users/moosequery',
 												},
 												{
 													label: 'Tree Query',
