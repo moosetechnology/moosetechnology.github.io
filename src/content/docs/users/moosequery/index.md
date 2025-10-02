@@ -204,26 +204,26 @@ For the most common usecases we added some syntactic suggar on `TEntityMetalevel
 | `#allContainedEntitiesOfType:` | Equivalent of `x query containedEntities recursively ofType:` |
 | `#allContainersOfType:` | Equivalent of `x query containers recursively ofType:` |
 
+Example of a containment tree:
 ![A schema of a containement tree/DAG.](img/containmentTreeUser.png)
-Example of a containment tree.
 
 For example, the model in the example figure can be requested as follows:
 
 **Examples of Containment Tree Navigation**
 
 ```smalltalk
-package1 children. "=> { package2 . class1 }"
-class3 children. "=> { attribute1 . attribute2 }"
+package1 containedEntities. "=> { package2 . class1 }"
+class3 containedEntities. "=> { attribute1 . attribute2 }"
 
-package1 allChildren. "=> { package2 . class1 . class2 . class3 . attribute1 . attribute2 }"
-class3 allChildren. "=> { attribute1 . attribute2 }"
+package1 allContainedEntities. "=> { package2 . class1 . class2 . class3 . attribute1 . attribute2 }"
+class3 allContainedEntities. "=> { attribute1 . attribute2 }"
 
-package1 parents. "=> { }"
-class3 parents. "=> { package2 }"
-class4 parents. "=> { package3 . namespace1 }"
+package1 containers. "=> { }"
+class3 containers. "=> { package2 }"
+class4 containers. "=> { package3 . namespace1 }"
 
-class3 allParents. "=> { package2 . package1 }"
-attribute1 allParents. "=> { class3 . package2 . package1 }"
+class3 allContainers. "=> { package2 . package1 }"
+attribute1 allContainers. "=> { class3 . package2 . package1 }"
 ```
 
 ## Navigating Dependencies (Associations)
