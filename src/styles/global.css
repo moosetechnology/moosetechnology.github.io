@@ -4,6 +4,15 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
 
+/* Support SVG dark theme */
+.svg-theme {
+    fill: #222;
+    transition: fill 0.3s;
+}
+[data-theme="dark"] .svg-theme {
+    fill: #eee;
+}
+
 .hero:where(.astro-jbfsktt5) {
     grid-template-columns: 5fr 5fr;
 }
