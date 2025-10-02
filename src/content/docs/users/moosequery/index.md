@@ -92,8 +92,8 @@ Then they are composed of 3 parts:
 Containment queries have 2 different messages to initialize them.
 
 ```smalltalk
-	method query containers.
-	method query containedEntities.
+method query containers.
+method query containedEntities.
 ```
 
 In case you wish to explore the containers of your entity, you can initialize the query with `#container`. But if you wish to explore the children of your entity, you can use `#containedEntities`.
@@ -103,8 +103,8 @@ In case you wish to explore the containers of your entity, you can initialize th
 Then the query has different parameters (optional):
 
 ```smalltalk
-	method query containers recursively. 
-	method query containers until: #isClass.
+method query containers recursively. 
+method query containers until: #isClass.
 ```
 
 The method `#recursively` indicates that query will not stop at the first result found but proceed in checking for more results higher and lower in the containment. Withtout the option, we stop at the first containers/containedEntities we find."
@@ -112,7 +112,7 @@ The method `#recursively` indicates that query will not stop at the first result
 For example, in a java application you can do:
 
 ```smalltalk
-    method query containers ofType: FamixTPackage
+method query containers ofType: FamixTPackage
 ```
 
 This will give you first entity using `FamixTPackage` containing the class containing the receiver method.
@@ -120,7 +120,7 @@ This will give you first entity using `FamixTPackage` containing the class conta
 But it is possible that we want to collect also the packages containing this package recursively. In that case we can do:
 
 ```smalltalk
-    method query containers recursively ofType: FamixTPackage
+method query containers recursively ofType: FamixTPackage
 ```
 
 The method `#until:` allows you to add extra conditions to finish a query. This can be used in different ways like speeding up the query by cutting lookup branches or to add some behavior.
@@ -128,7 +128,7 @@ The method `#until:` allows you to add extra conditions to finish a query. This 
 For example we could want to stop the query if we find entities we already visited:
 
 ```smalltalk
-    (entity query containers recursively until: [ :e | (potentialDependencies includes: e) or: [ dependencies includes: e ] ]) ofAnyType
+(entity query containers recursively until: [ :e | (potentialDependencies includes: e) or: [ dependencies includes: e ] ]) ofAnyType
 ```
 
 #### Execute the containment query
@@ -136,10 +136,10 @@ For example we could want to stop the query if we find entities we already visit
 Last, you can have a parameter that will finish to configure and execute the query:
 
 ```smalltalk
-	method query containers ofType: FamixTClass. "ofType: will select the containers/containedEntities matching the kind in parameter."
-	method query containers ofAnyType: { FamixTClass . FamixTNamespace }. "ofAnyTypes: will select the containers/containedEntities matching any kind in parameter."
-	method query containers ofAnyType. "Select all containers independently of the type."
-    method query containers withProperty: #hasSourceAnchor.
+method query containers ofType: FamixTClass. 
+method query containers ofAnyType: { FamixTClass . FamixTNamespace }. 
+method query containers ofAnyType. 
+method query containers withProperty: #hasSourceAnchor.
 ```
 
 Wihle sending one of those, the query will be directly executed. 
@@ -149,10 +149,13 @@ Wihle sending one of those, the query will be directly executed.
 - `#ofAnyType` will select everything independently of its type. This option is only useful if the option `#recursively` is active.
 - `#withProperty:` will not stop the query depending on the type of the entities but depending on the result of the block provided as parameter.
 
-For example if you want to find the first package in your hierarchy you can do:
+For the following examples, let's use this model as an example:
+![A schema of a containement tree/DAG.](img/containmentTreeUser.png)
+
+For example if you want to find the first package containing Class2:
 
 ```smalltalk
-    method containers ofType: FamixTPackage
+class2 containers ofType: FamixTPackage "=> { package2 }
 ```
 
 Now let's imagine we are in Python and we want all the functions and methods of a module:
