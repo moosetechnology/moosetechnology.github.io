@@ -32,3 +32,7 @@ html[data-theme="dark"] .sl-markdown-content img {
 img {
     margin: auto;
 }
+
+:root {
+    --sl-content-width: 100rem;
+  }
