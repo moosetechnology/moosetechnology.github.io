@@ -2,6 +2,9 @@
 title: 'Famix Java'
 ---
 
+import ClassNeighborhoodSVG from './img/class-neighborhood.drawio.svg';
+import ParametricsSVG from './img/parametrics.drawio.svg';
+
 Famix Java is the metamodel included in Moose used to represent any Java application.
 As you can imagine, the metamodel is rather than complicated.
 For instance, Famix Java uses a lot the [traits concept](/developers/predefinedEntities).
@@ -10,7 +13,7 @@ We will present here some incorrect, but simple and useful views to enable begin
 
 ## Class neighborhood
 
-![Parametric schema](./img/class-neighborhood.drawio.svg)
+<ClassNeighborhoodSVG className="svg-theme" />
 
 Most of the time, you only need to understand these core entities to start analyzing your application.
 You can retrieve the main concepts: Packages, Classes, Methods and Attributes.
@@ -54,4 +57,4 @@ Primitive type are made to represent `int`, `double`, `long`, *etc.* in Java, as
 Parametric types are probably the most hard to understand.
 We made a [full blog post about this subject](/blog/2023-07-13-parametric).
 
-![Parametric schema](./img/parametrics.drawio.svg)
+<ParametricsSVG className="svg-theme" />
