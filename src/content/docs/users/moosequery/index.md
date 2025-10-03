@@ -9,12 +9,16 @@ subtitle: "Documentation about Moose Query, the query feature of Metamodels desc
 
 - [Introduction](#introduction)
 - [Exploring a Containment Tree](#exploring-a-containment-tree)
-  - [Moose Query containment DSL](#moose-query-containment-dsl)
-    - [Select the direction of the query](#select-the-direction-of-the-query)
-    - [Containment query options](#containment-query-options)
-    - [Execute the containment query](#execute-the-containment-query)
-  - [Containment syntactic sugar](#containment-syntactic-sugar)
-- [Navigating Dependencies (Associations)](#navigating-dependencies-associations)
+    - [Moose Query containment DSL](#moose-query-containment-dsl)
+        - [Select the direction of the query](#select-the-direction-of-the-query)
+        - [Containment query options](#containment-query-options)
+        - [Execute the containment query](#execute-the-containment-query)
+    - [Containment syntactic sugar](#containment-syntactic-sugar)
+- [Navigating Dependencies Associations](#navigating-dependencies-associations)
+    - [Moose Query navigation DSL](#moose-query-navigation-dsl)
+        - [Initialize the navigation query](#initialize-the-navigation-query)
+        - [Add options to the navigation query](#add-options-to-the-navigation-query)
+        - [Execute the navigation query](#execute-the-navigation-query)
 
 <!-- /TOC -->
 
@@ -56,17 +60,19 @@ MooseQuery allows exploring a model via those two concepts. Then, you can:
 * Manipulate the gathered associations
 * Change the scope of entities (move from classes to the parent package or the children methods)
 
-In this documentation, we detail the use of the DSL. With this tool, you will be able to query your Moose model, for example, to:
-* Get the children of an entity (Exploring a containment tree)
+In this documentation, we detail the use of the DSL (Domain Specific Language). With this tool, you will be able to query your Moose model, for example, to:
+* Get the contained entities/containers of an entity (Exploring a containment tree)
 * Get all the associations contained in a class (Navigating associations)
 * Get all the entities who depend on a specific entity (Manipulating the gathered associations)
 * Get all the methods contained in a package in a Java model, including those in inner/anonymous classes (Changing scope)
 
-In order for the query system to work, we need to have a model with a meta description (that we cann acces via the method #`mooseDescription`) that has the right `container`, `source` and `target` properties. In order to set those properties, you can check the documentation on 
+In order for the query system to work, we need to have a model with a meta description (that we cann acces via the method `#mooseDescription`) that has the right `container`, `source` and `target` properties. In order to set those properties, you can check the documentation on 
 
 ## Exploring a Containment Tree
 
-It is possible to navigate the containment DAG of a model easily with Moose Query. 
+> Note: In reality we have a containment DAG, but for the simplicity of the documentation we will refer to it as a containment tree because most entities can only have one parent.
+
+It is possible to navigate the containment tree of a model easily with Moose Query. 
 
 This documentation will be divided into two parts:
 - An explanation of the MooseQuery DSL to create queries
@@ -79,11 +85,11 @@ The class `MooseQuery` is the entry point of the query system of Moose. We are a
 Queries should start my sending `query` to an entity. For example: 
 
 ```smalltalk
-method query
+entity query
 ```
 
 Then they are composed of 3 parts:
-- A message to initialize a scope or navigation query
+- A message to initialize a containement query
 - A list of options
 - A final message to execute the query
 
@@ -92,8 +98,8 @@ Then they are composed of 3 parts:
 Containment queries have 2 different messages to initialize them.
 
 ```smalltalk
-method query containers.
-method query containedEntities.
+entity query containers.
+entity query containedEntities.
 ```
 
 In case you wish to explore the containers of your entity, you can initialize the query with `#container`. But if you wish to explore the children of your entity, you can use `#containedEntities`.
@@ -103,8 +109,8 @@ In case you wish to explore the containers of your entity, you can initialize th
 Then the query has different parameters (optional):
 
 ```smalltalk
-method query containers recursively. 
-method query containers until: #isClass.
+entity query containers recursively. 
+entity query containers until: #isClass.
 ```
 
 The method `#recursively` indicates that query will not stop at the first result found but proceed in checking for more results higher and lower in the containment. Withtout the option, we stop at the first containers/containedEntities we find."
@@ -112,7 +118,7 @@ The method `#recursively` indicates that query will not stop at the first result
 For example, in a java application you can do:
 
 ```smalltalk
-method query containers ofType: FamixTPackage
+entity query containers ofType: FamixTPackage
 ```
 
 This will give you first entity using `FamixTPackage` containing the class containing the receiver method.
@@ -120,7 +126,7 @@ This will give you first entity using `FamixTPackage` containing the class conta
 But it is possible that we want to collect also the packages containing this package recursively. In that case we can do:
 
 ```smalltalk
-method query containers recursively ofType: FamixTPackage
+entity query containers recursively ofType: FamixTPackage
 ```
 
 The method `#until:` allows you to add extra conditions to finish a query. This can be used in different ways like speeding up the query by cutting lookup branches or to add some behavior.
@@ -136,10 +142,10 @@ For example we could want to stop the query if we find entities we already visit
 Last, you can have a parameter that will finish to configure and execute the query:
 
 ```smalltalk
-method query containers ofType: FamixTClass. 
-method query containers ofAnyType: { FamixTClass . FamixTNamespace }. 
-method query containers ofAnyType. 
-method query containers withProperty: #hasSourceAnchor.
+entity query containers ofType: FamixTClass. 
+entity query containers ofAnyType: { FamixTClass . FamixTNamespace }. 
+entity query containers ofAnyType. 
+entity query containers withProperty: #hasSourceAnchor.
 ```
 
 Wihle sending one of those, the query will be directly executed. 
@@ -149,47 +155,51 @@ Wihle sending one of those, the query will be directly executed.
 - `#ofAnyType` will select everything independently of its type. This option is only useful if the option `#recursively` is active.
 - `#withProperty:` will not stop the query depending on the type of the entities but depending on the result of the block provided as parameter.
 
-For the following examples, let's use this model as an example:
-![A schema of a containement tree/DAG.](img/containmentTreeUser.png)
+For the following examples, let's use the same model as the previous section:
+![A schema of a containement tree.](img/containmentTreeUser.png)
 
 For example if you want to find the first package containing Class2:
 
 ```smalltalk
-class2 containers ofType: FamixTPackage "=> { package2 }
+class2 query containers ofType: FamixTPackage "=> { package2 }"
 ```
 
-Now let's imagine we are in Python and we want all the functions and methods of a module:
+Now let's imagine we have the package1 and we want to find all its children packages and Enum (even if in this particular case we have no enum inside):
 
 ```smalltalk
-    module containedEntities ofAnyType: { FamixTMethod . FamixTFunction }
+package1 query containedEntities ofAnyType: { FamixTPackage . FamixJavaEnum } "=> { package2 }"
 ```
+
+We use `FamixJavaEnum` because we do not have a trait `FamixTEnum`, but MooseQuery is able to work with Traits and concrete entities. 
 
 Now let's collect all the containers recursively of a method:
 
 ```smalltalk
-    method containers recursively ofAnyType
+attribute2 query containers recursively ofAnyType "=> { class3 . package2 . package1 }"
 ```
 
 Finaly let's imagine we want to stop on a condition that is not the type of the collected entity, we can do it with `#withProperty:`:
 
 ```smalltalk
-    method containers withProperty: #isInterface.
+attribute2 query containers withProperty: #isPackage. "=> { package2 }"
     
-    method containers withProperty: [ :object | object isType and: [ object typeContainer isPackage ] ].
+attribute2 query containers withProperty: [ :object | object isType and: [ object typeContainer isPackage ] ]. "=> { class3 }"
 ```
+
+The last example is able to exclude inner classes for example since we are looking for a class in a package.
 
 More random examples:
 
 ```smalltalk
-	method := model allModelMethods anyOne.
+method := model allModelMethods anyOne.
 
-	method query containers ofType: FamixTNamespace.
-	method query containers recursively ofType: FamixTNamespace.
-	method query containers recursively ofAnyType: {FamixTNamespace . FamixTClass}.
-	(method query containers recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
+entity query containers ofType: FamixTNamespace.
+entity query containers recursively ofType: FamixTNamespace.
+entity query containers recursively ofAnyType: {FamixTNamespace . FamixTClass}.
+(entity query containers recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
 
-	method query containedEntities recursively ofType: FamixTNamespace.
-	(method query containedEntities recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
+entity query containedEntities recursively ofType: FamixTNamespace.
+(entity query containedEntities recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
 ```
 
 ### Containment syntactic sugar
@@ -208,7 +218,7 @@ For the most common usecases we added some syntactic suggar on `TEntityMetalevel
 | `#allContainersOfType:` | Equivalent of `x query containers recursively ofType:` |
 
 Example of a containment tree:
-![A schema of a containement tree/DAG.](img/containmentTreeUser.png)
+![A schema of a containement tree.](img/containmentTreeUser.png)
 
 For example, the model in the example figure can be requested as follows:
 
@@ -231,8 +241,115 @@ attribute1 allContainers. "=> { class3 . package2 . package1 }"
 
 ## Navigating Dependencies (Associations)
 
+It is possible to navigate the dependencies of a model easily with Moose Query. 
+
+This documentation will be divided into two parts on the same schema than the containment queries:
+- An explanation of the MooseQuery DSL to create queries
+- An explanation of the syntactic suggar we have to cover the most common usecases of navigations queries
+
+### Moose Query navigation DSL
+
+The `MooseQuery` DSL for navigation queries works the same way than the containement queries DSL. The class `MooseQuery` is the entry point of the query system of Moose and we are able to query any object using the trait `TEntityMetalevelDependency`.
+
+Queries should start my sending `query` to an entity. For example: 
+
+```smalltalk
+entity query
+```
+
+Then they are composed of 3 parts:
+- A message to initialize a navigation query
+- A list of options
+- A final message to execute the query
+
+#### Initialize the navigation query
+
+Navigation queries have 3 different messages to initialize them:
+
+```smalltalk
+entity query has.
+entity query incoming.
+entity query outgoing.
+```
+
+- `#incoming` allows one to query the incomming dependencies of an entity. This means that it will query entities who depend on the receiver. For example, if the receiver is a method, it will query the entities using this method.
+- `#outgoing` allows one to query the outgoing dependencies of an entity. This means that it will query entities used by the receiver. For example, if the receiver is a method, it will query the entities used in the definition of the method.
+- `#has` is a special starter that will check if dependencies to an entity exists or if there are none. It should have a direction as a complement and exists only for performance reasons (as it can stop as soon as it found 1 result). It is useful for example to find statically dead entities.
+
+If you are using `#has` you should use it this way:
+
+```smalltalk
+entity query has incoming. 	"Define that the query will check the existance of incoming dependencies."
+entity query has outgoing. 	"Define that the query will check the existance of outgoing dependencies."
+```
+
+#### Add options to the navigation query
+
+TODO
+
+Then the query has different parameters.
 
 
+You can also choose if you want to check dependencies only locally or also in children.
+
+```smalltalk
+entity query incoming local. "Without the parameter #local, the query will check the children. With #local, the query will only check the dependencies of a specific entity and not its children."
+```
+
+By default the queries will return a collection of associations (if the parameters #has is not passed). You can change this to collect the entities at the opposite of the association instead:
+
+```smalltalk
+entity query incoming objects.
+```
+
+#### Execute the navigation query
+
+TODO
+
+Last, you can have a parameter that will finish to configure and execute the query:
+
+```smalltalk
+entity query incoming dependencies. "Will select all kinds of dependencies."
+entity query incoming dependenciesOfType: FamixTReference. "Will select the dependencies of the type passed has parameter."
+entity query incoming dependenciesOfAnyType: { FamixTReference . FamixTInvocation }. "Will select the dependencies whose types are present in the collection of types in parameter."
+```
+
+More examples:
+
+```smalltalk
+method := model allModelMethods anyOne.
+
+entity query incoming dependencies.
+entity query incoming dependenciesOfType: FamixTReference.
+entity query incoming local dependenciesOfType: FamixTReference.
+entity query incoming local object dependenciesOfType: FamixTReference.
+entity query incoming local object dependenciesOfAnyType: { FamixTReference . FamixTInvocation }.
+
+entity query outgoing local object dependenciesOfType: FamixTReference.
+	
+entity query has incoming local object dependenciesOfAnyType: { FamixTReference . FamixTInvocation }.
+
+### Navigation syntactic suggar
+
+TODO
+
+### Manipulating the gathered results of a navigation query
+
+TODO
+
+## Miscellaneous Examples
+
+TODO
+
+
+
+
+
+
+
+
+	
+```
 
 
 
