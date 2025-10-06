@@ -12,13 +12,20 @@ subtitle: "Documentation about Moose Query, the query feature of Metamodels desc
     - [Moose Query containment DSL](#moose-query-containment-dsl)
         - [Select the direction of the query](#select-the-direction-of-the-query)
         - [Containment query options](#containment-query-options)
+            - [Recursive queries](#recursive-queries)
+            - [Stop condition](#stop-condition)
         - [Execute the containment query](#execute-the-containment-query)
     - [Containment syntactic sugar](#containment-syntactic-sugar)
 - [Navigating Dependencies Associations](#navigating-dependencies-associations)
     - [Moose Query navigation DSL](#moose-query-navigation-dsl)
         - [Initialize the navigation query](#initialize-the-navigation-query)
         - [Add options to the navigation query](#add-options-to-the-navigation-query)
+            - [Get only local dependencies](#get-only-local-dependencies)
+            - [Receive entities instead of associations](#receive-entities-instead-of-associations)
         - [Execute the navigation query](#execute-the-navigation-query)
+    - [](#)
+    - [](#)
+- [](#)
 
 <!-- /TOC -->
 
@@ -32,7 +39,7 @@ subtitle: "Documentation about Moose Query, the query feature of Metamodels desc
 
 Moose-Query is a domain-specific language to build navigations and scopes queries for entities in Moose. Its authors are Anne Etien, Jean-Christophe Bach, Vincent Blondeau and Cyril Ferlicot-Delbecque.
 
-This documentation is up to date with Moose 13 alpha version of the 29th September 2025.
+This documentation is up to date with Moose 13 alpha version of the 6th October 2025.
 
 > Note: A documentation for Moose 6.1 is available at: [https://moosequery.ferlicot.fr](https://moosequery.ferlicot.fr).
 
@@ -104,6 +111,8 @@ entity query containedEntities.
 
 In case you wish to explore the containers of your entity, you can initialize the query with `#container`. But if you wish to explore the children of your entity, you can use `#containedEntities`.
 
+> Note: In Moose < 13 the equivalent of `#containers` was `#ancestors` and the equivalent of `#containedEntities` was `#descendants`.
+
 #### Containment query options
 
 Then the query has different parameters (optional):
@@ -112,6 +121,8 @@ Then the query has different parameters (optional):
 entity query containers recursively. 
 entity query containers until: #isClass.
 ```
+
+##### Recursive queries
 
 The method `#recursively` indicates that query will not stop at the first result found but proceed in checking for more results higher and lower in the containment. Withtout the option, we stop at the first containers/containedEntities we find."
 
@@ -128,6 +139,8 @@ But it is possible that we want to collect also the packages containing this pac
 ```smalltalk
 entity query containers recursively ofType: FamixTPackage
 ```
+
+##### Stop condition
 
 The method `#until:` allows you to add extra conditions to finish a query. This can be used in different ways like speeding up the query by cutting lookup branches or to add some behavior.
 
@@ -155,7 +168,7 @@ Wihle sending one of those, the query will be directly executed.
 - `#ofAnyType` will select everything independently of its type. This option is only useful if the option `#recursively` is active.
 - `#withProperty:` will not stop the query depending on the type of the entities but depending on the result of the block provided as parameter.
 
-For the following examples, let's use the same model as the previous section:
+Example of a containment tree to use for the next examples:
 ![A schema of a containement tree.](img/containmentTreeUser.png)
 
 For example if you want to find the first package containing Class2:
@@ -217,7 +230,20 @@ For the most common usecases we added some syntactic suggar on `TEntityMetalevel
 | `#allContainedEntitiesOfType:` | Equivalent of `x query containedEntities recursively ofType:` |
 | `#allContainersOfType:` | Equivalent of `x query containers recursively ofType:` |
 
-Example of a containment tree:
+This API is the one from Moose 13. In the previous version of Moose the API was different:
+
+| Selector in Moose 13    | Selector in Moose < 13                                           |
+|--------------|-------------------------------------------------------|
+| `#containedEntities`    | `#children` |
+| `#containers`     | `#parents` |
+| `#allContainedEntities` | `#allChildren` |
+| `#allContainers`  | `allParents` |
+| `#containedEntitiesOfType:` | `#toScope:` |
+| `#containersOfType:` | `#atScope:` |
+| `#allContainedEntitiesOfType:` | `#allToScope:` |
+| `#allContainersOfType:` | `#allAtScope:` |
+
+For the following examples, let's use the same model as the previous section:
 ![A schema of a containement tree.](img/containmentTreeUser.png)
 
 For example, the model in the example figure can be requested as follows:
@@ -285,36 +311,88 @@ entity query has outgoing. 	"Define that the query will check the existance of o
 
 #### Add options to the navigation query
 
-TODO
-
-Then the query has different parameters.
-
-
-You can also choose if you want to check dependencies only locally or also in children.
+As the containement queries, the navigations queries can have options:
 
 ```smalltalk
-entity query incoming local. "Without the parameter #local, the query will check the children. With #local, the query will only check the dependencies of a specific entity and not its children."
+entity query incoming local.
+entity query incoming objects.
 ```
 
-By default the queries will return a collection of associations (if the parameters #has is not passed). You can change this to collect the entities at the opposite of the association instead:
+##### Get only local dependencies
+
+By default if you ask the dependencies of an entity, you will get the dependencies of the entity and its children. For example, if you ask for the dependencies of a class, you will also get the dependencies of its methods. 
+
+In some rare cases, we might want the local dependencies of the entity without looking in the children. In that case we can use the `#local` option:
 
 ```smalltalk
-entity query incoming objects.
+entity query incoming local dependenciesOfType: FamixTAccess
+```
+
+##### Receive entities instead of associations
+
+By default the queries will return a collection of associations (if the parameters #has is not passed, in that case it will be a boolean). You can change this to collect the entities at the opposite of the association instead:
+
+```smalltalk
+entity query incoming objects dependenciesOfType: FamixTAccess
 ```
 
 #### Execute the navigation query
 
-TODO
-
 Last, you can have a parameter that will finish to configure and execute the query:
 
 ```smalltalk
-entity query incoming dependencies. "Will select all kinds of dependencies."
-entity query incoming dependenciesOfType: FamixTReference. "Will select the dependencies of the type passed has parameter."
-entity query incoming dependenciesOfAnyType: { FamixTReference . FamixTInvocation }. "Will select the dependencies whose types are present in the collection of types in parameter."
+entity query incoming dependencies.
+entity query incoming dependenciesOfType: FamixTReference.
+entity query incoming dependenciesOfAnyType: { FamixTReference . FamixTInvocation }.
 ```
 
-More examples:
+Wihle sending one of those, the query will be directly executed. 
+
+- `#dependenciesOfType:` will select the dependencies corresponding to the the kind in parameter. It can be a class (`FamixJavaAccess`) or a trait used by the concerned entity (`FamixTAccess`).
+- `#dependenciesOfAnyType:` will work in the same way, but takes a colletion of types instead of a single type.
+- `#dependencies` will select all dependencies independently of its type.
+
+Example of a navigation model to use for the next examples:
+![A schema of a navigation model.](img/navigationUser.png)
+
+For example, let's find all incoming inheritances of Class1:
+
+```smalltalk
+class1 query incoming dependenciesOfType: FamixTInheritance. "=> { inheritance1 }"
+class1 query incoming object dependenciesOfType: FamixTInheritance. "=> { class2 }"
+```
+
+Now let's find the incoming inheritances and references of class1:
+
+```smalltalk
+class1 query incoming dependenciesOfAnyType: { FamixTInheritance . FamixTReference }. "=> { inheritance1 . reference1 }"
+class1 query incoming object dependenciesOfType: FamixTInheritance. "=> { class2 . method2 }"
+```
+
+In the next example we will ask for all dependencies of class 1 independently of their kind.
+
+```smalltalk
+class1 query incoming dependencies. "=> { inheritance1 . reference1 }"
+class1 query incoming object dependencies. "=> { class2 . method2 }"
+class1 query outgoing dependencies. "=> { access1 } This is here because Class1 contains Method1 that access Attribute1 and queries are recursive by default"
+class1 query outgoing object dependencies. "=> { attribute1 }"
+```
+
+As we have seen, asking the outgoing dependencies of `Class1` gives `Attribute1` because it is accessed in `Method1` that is contained in `Class1`. But it is possible to restrain this:
+
+```smalltalk
+class1 query outgoing local dependenciesOfType: FamixTAccess. "=> { }"
+method1 query outgoing local dependenciesOfType: FamixTAccess. "=> {access1 }"
+```
+
+Other examples of local queries:
+
+```smalltalk
+class1 query incoming local dependencies. "=> { inheritance1 . reference1 }"
+class1 query outgoing local dependencies. "=> { }"
+```
+
+More random examples:
 
 ```smalltalk
 method := model allModelMethods anyOne.
@@ -328,6 +406,7 @@ entity query incoming local object dependenciesOfAnyType: { FamixTReference . Fa
 entity query outgoing local object dependenciesOfType: FamixTReference.
 	
 entity query has incoming local object dependenciesOfAnyType: { FamixTReference . FamixTInvocation }.
+```
 
 ### Navigation syntactic suggar
 
