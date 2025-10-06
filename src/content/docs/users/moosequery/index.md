@@ -409,7 +409,37 @@ entity query has incoming local object dependenciesOfAnyType: { FamixTReference 
 
 ### Navigation syntactic suggar
 
-TODO
+For the most common usecases we added some syntactic suggar on `TEntityMetalevelDependency` like for containment queries:
+
+| Selector        | Description |
+|-----------------|-------------|
+| `#query:with:`      | The first parameter is a symbol (`#out`or `#in`) and return all the instances of the association class defined by the second parameter  |
+| `#queryAll:`        | The first parameter is a symbol (`#out`or `#in`)and return all the dependencies of this direction |
+| `#queryAllIncoming` | Return all the incoming dependencies of this direction |
+| `#queryAllOutgoing` | Return all the outgoing dependencies of this direction |
+| `#queryIncoming:` | Return all the incoming dependencies if the kind provided as parameter |
+| `#queryOuutgoing:` | Return all the outgoing dependencies if the kind provided as parameter |
+
+For the following examples, let's use the same model as the previous section:
+![A schema of a navigation model.](img/navigationUser.png)
+
+```smalltalk
+
+class1 query: #in with: FamixTInheritance. "=> { inheritance1 }"
+class1 query: #out with: FamixTInheritance. "=> { }"
+class1 query: #out with: FamixTAccess. "=> { access1 }. Method1 contained in Class1 access to Attribute1 via Access1, result of the query. The access is not directly done via Class1, but via its children."
+
+class1 queryAll: #in. "=> { inheritance1 . reference1 }"
+class1 queryAll: #out. "=> { access1 }"
+
+class1 queryAllIncoming. "=> { inheritance1 . reference1 }"
+class1 queryAllOutgoing. "=> { access1 } This is here because Class1 contains Method1 that access Attribute1 and queries are recursive by default"
+
+class1 queryIncoming: FamixTInheritance. "=> { inheritance1 }"
+class1 queryOutgoing: FamixTInheritance. "=> { }"
+class1 queryOutgoing: FamixTAccess. "=> { access1 }. Method1 contained in Class1 access to Attribute1 via Access1, result of the query. The access is not directly done via Class1, but via its children."
+
+```
 
 ### Manipulating the gathered results of a navigation query
 
