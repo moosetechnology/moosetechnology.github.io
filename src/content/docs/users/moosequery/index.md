@@ -25,16 +25,9 @@ subtitle: "Documentation about Moose Query, the query feature of Metamodels desc
         - [Execute the navigation query](#execute-the-navigation-query)
     - [Navigation syntactic suggar](#navigation-syntactic-suggar)
     - [Manipulating the gathered results of a navigation query](#manipulating-the-gathered-results-of-a-navigation-query)
+- [Future plans for MooseQuery](#future-plans-for-moosequery)
 
 <!-- /TOC -->
-
-
-<!---
-- Add comment about the future of Moose Query
-- Add doc on the DSL
-- Add doc on the objects
-- Add doc on query result
--->
 
 Moose-Query is a domain-specific language to build navigations and scopes queries for entities in Moose. Its authors are Anne Etien, Jean-Christophe Bach, Vincent Blondeau and Cyril Ferlicot-Delbecque.
 
@@ -480,3 +473,9 @@ class1 query outgoing dependencies containersOfType: FamixTClass "=> { class1 }"
 This will be the result because the query will target `Attribute1` that is contained in `Class1`.
 
 
+## Future plans for MooseQuery
+
+Currently Moose query is tight to Famix models. But in fact, it should only be coupled to Fame because all meta informations are coming from Fame and we should not depend on Famix.
+Over the years we are reducing those dependencies little by little. The end goal is to have a `FameQuery` project that could work on any metamodel meta-described by Fame.
+
+For this documentation, we could also add a section on the methods we can use to know the possible kind of containers, contained entities, sources and targets. 
