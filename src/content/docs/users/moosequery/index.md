@@ -23,9 +23,8 @@ subtitle: "Documentation about Moose Query, the query feature of Metamodels desc
             - [Get only local dependencies](#get-only-local-dependencies)
             - [Receive entities instead of associations](#receive-entities-instead-of-associations)
         - [Execute the navigation query](#execute-the-navigation-query)
-    - [](#)
-    - [](#)
-- [](#)
+    - [Navigation syntactic suggar](#navigation-syntactic-suggar)
+    - [Manipulating the gathered results of a navigation query](#manipulating-the-gathered-results-of-a-navigation-query)
 
 <!-- /TOC -->
 
@@ -414,21 +413,40 @@ TODO
 
 ### Manipulating the gathered results of a navigation query
 
-TODO
+A navigation query returns a result as a `MooseQueryResult`. There are three types of query results:
+- `MooseIncomingQueryResult` manages the result of a query on incoming associations.
+- `MooseOutgoingQueryResult` manages the result of a query on outgoing associations.
+- `MooseObjectQueryResult` is special kind of query result that can be obtained via the two others and includes the opposites of the receiver associations. For example, if you query the outgoing accesses of a class, the opposites of the class associations will be the accessed attributes. It can also be obtained by using the `object` parameter of the navigation DSL.
 
-## Miscellaneous Examples
+These query result classes are special collections with some new features.
 
-TODO
+One of the most useful ones is the #opposites method present on `MooseIncomingQueryResult` and `MooseOutgoingQueryResult`. It returns a `MooseObjectQueryResult` containing all the opposite entities of the query result relative to the receiver of the query.
 
+Indeed, when we query a model, it is often not the associations that we want as result but the source/target entities of these associations. For example, if we want the instance variables accessed by a given method, #query:with: will return the accesses, whereas sending the message #opposites on the result returns the variables themselves.
 
+Taking the previous model as an example we can do:
 
+**Opposite query example**
 
+```smalltalk
+class1 queryAll: #in. "=> { inheritance1 . reference1 }"
+(class1 queryAll: #in) opposites. "=> { class2 . method2 }"
+```                        
 
+Another possibility is to exclude all the results where the opposite is included in the receiver of the original query. This can be done via the method `#withoutSelfLoop`. It is handy when we want to query a model to find external dependencies without internal ones.
 
+For the next examples let's imagine that `Attribute1` in our example is contained by `Class1`.
 
-
-	
+```smalltalk
+class1 query outgoing dependencies withoutSelfLoop "=> { } We don't have access1 anymore because it is in `Class1`." 
 ```
 
+Another feature is to be able to change the scope of the result:
+
+```smalltalk
+class1 query outgoing dependencies containersOfType: FamixTClass "=> { class1 }" 
+```
+
+This will be the result because the query will target `Attribute1` that is contained in `Class1`.
 
 
