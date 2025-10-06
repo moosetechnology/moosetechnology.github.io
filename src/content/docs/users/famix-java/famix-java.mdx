@@ -4,6 +4,7 @@ title: 'Famix Java'
 
 import ClassNeighborhoodSVG from './img/class-neighborhood.drawio.svg';
 import ParametricsSVG from './img/parametrics.drawio.svg';
+import TypesSVG from './img/types.drawio.svg';
 
 Famix Java is the metamodel included in Moose used to represent any Java application.
 As you can imagine, the metamodel is rather than complicated.
@@ -27,22 +28,7 @@ For instance, it also includes LocalVariable, Parameters, ParametricClasses and 
 
 ## Type neighborhood
 
-```mermaid
-classDiagram
-    FamixJavaMethod "*" <--* FamixJavaType : methods
-    FamixJavaAttribute "*" <--*  FamixJavaClass: attributes
-    FamixJavaAttribute "*" <--*  FamixJavaInterface: attributes
-
-    FamixJavaType <|--  FamixJavaClass
-    FamixJavaType <|--  FamixJavaEnum
-    FamixJavaType <|--  FamixJavaInterface
-    FamixJavaType <|--  FamixJavaPrimitiveType
-    FamixJavaType <|--  FamixJavaParameterType
-    FamixJavaType <|--  FamixJavaWildcard
-    FamixJavaClass <|-- FamixJavaException
-    FamixJavaClass <|-- FamixJavaParametricClass
-    FamixJavaInterface <|-- FamixJavaParametricInterface
-```
+<TypesSVG className="svg-theme" />
 
 Types are the central pieces of Object-Oriented programming languages.
 In the FamixJava meta-model, all types are subclass of the FamixJavaType concept.
