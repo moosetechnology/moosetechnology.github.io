@@ -23,142 +23,159 @@ subtitle: "Documentation about Moose Query, the query feature of Metamodels desc
             - [Get only local dependencies](#get-only-local-dependencies)
             - [Receive entities instead of associations](#receive-entities-instead-of-associations)
         - [Execute the navigation query](#execute-the-navigation-query)
-    - [Navigation syntactic suggar](#navigation-syntactic-suggar)
+    - [Navigation syntactic sugar](#navigation-syntactic-suggar)
     - [Manipulating the gathered results of a navigation query](#manipulating-the-gathered-results-of-a-navigation-query)
 - [Future plans for MooseQuery](#future-plans-for-moosequery)
 
 <!-- /TOC -->
 
-Moose-Query is a domain-specific language to build navigations and scopes queries for entities in Moose. Its authors are Anne Etien, Jean-Christophe Bach, Vincent Blondeau and Cyril Ferlicot-Delbecque.
+Moose-Query is a domain-specific language to build navigation and scope queries for entities in Moose.
+Its authors are Anne Etien, Jean-Christophe Bach, Vincent Blondeau and Cyril Ferlicot-Delbecque.
 
-This documentation is up to date with Moose 13 alpha version of the 6th October 2025.
+This documentation is up-to-date with Moose 13 alpha version of the 6th October 2025.
 
-> Note: A documentation for Moose 6.1 is available at: [https://moosequery.ferlicot.fr](https://moosequery.ferlicot.fr).
+:::note[A documentation for Moose 6.1 is available at: [https://moosequery.ferlicot.fr](https://moosequery.ferlicot.fr)]
+:::
 
 ## Introduction
 
-Moose-Query is an internal domain-specific language (DSL) to build queries for entities in Moose. It replaces Moose-Chef, and is designed to simplify and standardize the way to query Moose models.
+Moose-Query is an internal domain-specific language (DSL) for creating queries on the relations between entities in Moose. 
+It replaces Moose-Chef, and is designed to simplify and standardize the way to query Moose models.
 
 In order to visualize the concepts, let's take an example of a simple application model:
 ![Image representing a small model with containment and associations examples.](img/moose-graph.png)
 
+### Relations between entities in Moose
 
-An application model in Moose is composed of two concepts:
+An application model in Moose represents two types of relations:
 
-**Nesting of entities**
-    
-It defines which entity contains which entities. For example, it defines the classes contained in a package and the methods contained in a class. In the example image, it is the relations `parentPackage`, `container`, and `parentType`. This concept allows one to build the containment tree of a model. 
+#### Containment
 
-**Associations between entities**
+It defines which entity contains or are contained in which entities.
+For example, for a class, it defines the package it is contained in, and the methods and attributes it contains.
+In the example image, it is the relations `parentPackage`, `container`, and `parentType`.
+This concept allows one to build the containment tree of a model.
 
-It specifies how the entities interact with each other. For example, an inheritance is an association between a `subclass` and its `superclass`. Another example is that a reference is an association between a `behavioral entity` and a `type`. In the example image, it can be the `:Inheritance` with the `superclass` and `subclass` relations. In the case of software analysis, we can see the association as the reification of dependencies in an application.
+#### Associations between entities
 
-MooseQuery allows exploring a model via those two concepts. Then, you can:
-* Explore the containment tree (or DAG to be more precise)
-* Gather associations
-* Manipulate the gathered associations
-* Change the scope of entities (move from classes to the parent package or the children methods)
+It represents the dependencies between entities.
+In an application model in Moose, associations are the reification of a dependency.
+For example, an inheritance is an association between a `subclass` and its `superclass`.
+In the example image, it can be the `:Inheritance` with the `superclass` and `subclass` relations.
+Another example is that a reference is an association between a `behavioral entity` and a `type`.
 
-In this documentation, we detail the use of the DSL (Domain Specific Language). With this tool, you will be able to query your Moose model, for example, to:
-* Get the contained entities/containers of an entity (Exploring a containment tree)
-* Get all the associations contained in a class (Navigating associations)
-* Get all the entities who depend on a specific entity (Manipulating the gathered associations)
-* Get all the methods contained in a package in a Java model, including those in inner/anonymous classes (Changing scope)
+### Navigating relations
 
-In order for the query system to work, we need to have a model with a meta description (that we cann acces via the method `#mooseDescription`) that has the right `container`, `source` and `target` properties. In order to set those properties, you can check the documentation on 
+MooseQuery allows exploring a model via those two concepts.
+With this tool, it is possible to:
+
+- Explore the containment tree (the containment DAG, to be more precise): get the entities containing/contained in an entity.
+- Gather associations: get the dependencies of an entity.
+- Manipulate the gathered associations: get the entities that an entity depends or is dependent on
+- Change the scope of entities (move from container to contained entities and vice versa)
+
+Moose Query relies on the model meta-description (that we can access via the method `#mooseDescription`).
+The properties of the entities must be meta-described as `container`, `source` and `target`.
+In order to set those properties, you can check the documentation on.
 
 ## Exploring a Containment Tree
 
-> Note: In reality we have a containment DAG, but for the simplicity of the documentation we will refer to it as a containment tree because most entities can only have one parent.
+:::caution[In reality we have a containment directed acyclic graph (DAG).]
+An entity may be contained in several entities, for example in a package and in a file.
+However, most entities have only one parent.
+For simplicity, we will refer to it as a containment tree.
+:::
 
-It is possible to navigate the containment tree of a model easily with Moose Query. 
+It is possible to navigate the containment tree of a model easily with Moose Query.
 
 This documentation will be divided into two parts:
+
 - An explanation of the MooseQuery DSL to create queries
-- An explanation of the syntactic suggar we have to cover the most common usecases of scoping queries
+- An explanation of the syntactic sugar we have to cover the most common use cases of scoping queries
 
 ### Moose Query containment DSL
 
-The class `MooseQuery` is the entry point of the query system of Moose. We are able to query any object using the trait `TEntityMetalevelDependency`.
+The `MooseQuery` class is the entry point of the query system of Moose.
+We are able to query any object using the trait `TEntityMetalevelDependency`.
 
-Queries should start my sending `query` to an entity. For example: 
+Queries should start my sending `query` to an entity.
 
 ```smalltalk
 entity query
 ```
 
 Then they are composed of 3 parts:
-- A message to initialize a containement query
+
+- A message to initialize a containment query
 - A list of options
 - A final message to execute the query
 
-#### Select the direction of the query
+#### Initialize a containment query by choosing a direction
 
-Containment queries have 2 different messages to initialize them.
+To initialize a containment query, two directions are available: `container` and `containedEntities`.
+The direction choice is made by sending either of these messages:
 
 ```smalltalk
 entity query containers.
 entity query containedEntities.
 ```
 
-In case you wish to explore the containers of your entity, you can initialize the query with `#container`. But if you wish to explore the children of your entity, you can use `#containedEntities`.
-
-> Note: In Moose < 13 the equivalent of `#containers` was `#ancestors` and the equivalent of `#containedEntities` was `#descendants`.
+:::note[Deprecation]
+In Moose 12 and previous versions, the equivalent of `#containers` was `#ancestors` and the equivalent of `#containedEntities` was `#descendants`.
+:::
 
 #### Containment query options
 
-Then the query has different parameters (optional):
+A containment query can be parameterized to:
+
+- Gather all containers recursively
+- Gather containers recursively until a condition is matched.
 
 ```smalltalk
 entity query containers recursively. 
-entity query containers until: #isClass.
+entity query containers recusrively until: #isClass.
 ```
 
 ##### Recursive queries
 
-The method `#recursively` indicates that query will not stop at the first result found but proceed in checking for more results higher and lower in the containment. Withtout the option, we stop at the first containers/containedEntities we find."
-
-For example, in a java application you can do:
-
-```smalltalk
-entity query containers ofType: FamixTPackage
-```
-
-This will give you first entity using `FamixTPackage` containing the class containing the receiver method.
-
-But it is possible that we want to collect also the packages containing this package recursively. In that case we can do:
+By default, a containment query stops at the first level, i.e. with the first found entities.
+With the `#recursively` option, the query gathers the entities contained in the contained entities or the containers of the containers.
 
 ```smalltalk
-entity query containers recursively ofType: FamixTPackage
+entity query containers recursively
 ```
 
 ##### Stop condition
 
-The method `#until:` allows you to add extra conditions to finish a query. This can be used in different ways like speeding up the query by cutting lookup branches or to add some behavior.
+When using the `recursively` option, a stopping condition can be added.
+The method `#until:` adds a condition that ends the query when met.
+This can be used in different ways like speeding up the query by cutting lookup branches or to add some behavior.
 
-For example we could want to stop the query if we find entities we already visited:
+For example, to stop the query if the entity were already visited:
 
 ```smalltalk
-(entity query containers recursively until: [ :e | (potentialDependencies includes: e) or: [ dependencies includes: e ] ]) ofAnyType
+entity query containers recursively until: [ :e | self knownDependencies includes: e ]
 ```
 
 #### Execute the containment query
 
-Last, you can have a parameter that will finish to configure and execute the query:
+To execute the query, several triggers exist:
+
+- `#ofAnyType` - Any containers.
+Will select containers regardless of their type.
+- `#ofType:` - Containers of a specific type.
+Will select the entities typed according to the type (class or trait) provided as parameter.
+- `#ofAnyTpe:` - Containers of specific types.
+Will select the entities typed according to any type (class or trait) in the collection provided as parameter.
+- `#withProperty:` - Containers matching a property.
+Will select the entities matching the condition provided as parameter.
 
 ```smalltalk
+entity query containers ofAnyType.
 entity query containers ofType: FamixTClass. 
 entity query containers ofAnyType: { FamixTClass . FamixTNamespace }. 
-entity query containers ofAnyType. 
 entity query containers withProperty: #hasSourceAnchor.
 ```
-
-Wihle sending one of those, the query will be directly executed. 
-
-- `#ofType:` will select the containers/containedEntities matching the kind in parameter. It can be a class (`FamixJavaMethod`) or a trait used by the concerned entity (`FamixTMethod`).
-- `#ofAnyTpe:` will work in the same way, but takes a colletion of types instead of a single type.
-- `#ofAnyType` will select everything independently of its type. This option is only useful if the option `#recursively` is active.
-- `#withProperty:` will not stop the query depending on the type of the entities but depending on the result of the block provided as parameter.
 
 Example of a containment tree to use for the next examples:
 ![A schema of a containement tree.](img/containmentTreeUser.png)
