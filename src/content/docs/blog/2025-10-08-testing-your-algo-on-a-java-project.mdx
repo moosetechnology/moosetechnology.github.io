@@ -152,10 +152,189 @@ We can parse and receive a model doing:
 model := (FamixJavaFoldersImporter importFolders: { FamixCallGraphBridge sources / 'example1' }) anyOne.
 ```
 
+### Tests implementation
+
+Now that we can access the model it is possible to implement our tests.
+
+I'm starting by an abstract class:
+
+```smalltalk
+TestCase << #FamixAbstractJavaCallGraphBuilderTestCase
+	slots: { #model . #graph };
+	package: 'Famix-CallGraph-Tests'
+```
+
+Now I will create a TestCase that needs my java model
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase << #FamixJavaCHAExample1Test
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+And now I will create a setup importing the model and creating a call graph:
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase >> #setUp
+
+	super setUp.
+	model := (FamixJavaFoldersImporter importFolders: { self javaSourcesFolder }) anyOne.
+	graph := (FamixJavaCHABuilder entryPoints: self entryPoints) build
+```
+
+```smalltalk
+FamixJavaCHAExample1Test >> #javaSourcesFolder
+	"Return the java folder containing the sources to parse for those tests"
+
+	| folder |
+	folder := FamixCallGraphBridge sources / 'example1'.
+
+	folder ifAbsent: [ self error: 'Folder does not exists ' , folder pathString ].
+
+	^ folder
+```
+
+And now you have your model available for the testing!
 
 ## Optimization
 
+I am using this technic to tests multiple projects such as parsers or call graph builders. In those projects I do touch my model and the setup can take time. So I optimize this setup in order to build a model only once for all the test case using a `TestResource`.
+
+In order to do this we can remove the slots we added to `FamixAbstractJavaCallGraphBuilderTestCase` and create a test resource that will hold them
+
+```smalltalk
+TestResource << #FamixAbstractJavaCallGraphBuilderTestResource
+	slots: { #model . #graph };
+	package: 'Famix-CallGraph-Tests'
+```
+
+Then we can move the setup to this class
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource >> #setUp
+
+	super setUp.
+	model := (FamixJavaFoldersImporter importFolders: { self javaSourcesFolder }) anyOne.
+	graph := (FamixJavaCHABuilder entryPoints: self entryPoints) build
+```
+
+Personally I'm also adding a tearDown cleaning the vars because TestResources are singletons and I do not want to hold a model in memory all the time.
+
+Then I'm creating my test resource for the `example1` project.
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource << #FamixJavaCHAExample1Resource
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+```smalltalk
+FamixJavaCHAExample1Resource >> #javaSourcesFolder
+	"Return the java folder containing the sources to parse for those tests"
+
+	| folder |
+	folder := FamixCallGraphBridge sources / 'example1'.
+
+	folder ifAbsent: [ self error: 'Folder does not exists ' , folder pathString ].
+
+	^ folder
+```
+
+And now we can declare that the TestCase will use this resource:
+
+```smalltalk
+FamixJavaCHAExample1Test class >> #resources
+    ^ { FamixJavaCHAExample1Resource }
+```
+
+The model then become accessible like this:
+
+```smalltalk
+FamixJavaCHAExample1Resource >> #model
+
+	^ self resources anyOne current model
+```
 
 ## Simplify your life
 
+Here is a few tricks I use to simplify even better the setting of my tests casses
 
+The first one is to make automatic the detection of the java source folder by using the name of the test cases:
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource >> #javaSourcesFolder
+	^ self class javaSourcesFolder
+```
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource class >> #javaSourcesFolder
+	"Return the java folder containing the sources to parse for those tests"
+
+	| folder |
+	folder := FamixCallGraphBridge sources / ((self name withoutPrefix: 'FamixJavaCHA') withoutSuffix: 'Resource') uncapitalized.
+
+	folder ifAbsent: [ self error: 'Folder does not exists ' , folder pathString ].
+
+	^ folder
+```
+
+We can now remove this method from all subclasses! But makes sure the name of your source folder matches the name of the tests ressource ;)
+
+We can do the same with the detection of the test resource in the test case.
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase class >> #resources
+
+	^ self environment
+		  at: ((self name withoutSuffix: 'Test') , 'Resource') asSymbol
+		  ifPresent: [ :class | { class } ]
+		  ifAbsent: [ {  } ]
+```
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase class >> #sourceResource
+
+	^ self resources anyOne current
+```
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase >> #sourceResource
+	"I return the instance of the test resource I'm using to build the sources of a java project"
+
+	^ self class sourceResource
+```
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase >> #model
+
+	^ self sourceResource model
+```
+
+Et voila ! Now adding a test case ready to use on a new java project is equivalent to create a test case:
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase << #FamixJavaCHAExample2Test
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+And the resource associated!
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource << #FamixJavaCHAExample2Resource
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+Nothing much.
+
+A last thing I am doing to simplify thing is to implement a method to access easily the sources.
+
+```smalltalk
+FamixJavaCHAExample1Test >> #openSources
+
+	<script: 'self new openSources'>
+	self resources anyOne javaSourcesFolder openInOSFileBrowser
+```
+
+I hope this helps improve the robustness of our projects :)
