@@ -257,7 +257,9 @@ FamixJavaCHAExample1Resource >> #model
 
 ## Simplify your life
 
-Here is a few tricks I use to simplify even better the setting of my tests casses
+Here is a few tricks I use to simplify even better the setting of my tests cases
+
+### Automatic java source folder detection
 
 The first one is to make automatic the detection of the java source folder by using the name of the test cases:
 
@@ -279,6 +281,8 @@ FamixAbstractJavaCallGraphBuilderTestResource class >> #javaSourcesFolder
 ```
 
 We can now remove this method from all subclasses! But makes sure the name of your source folder matches the name of the tests ressource ;)
+
+### Automatic test resource detection and access
 
 We can do the same with the detection of the test resource in the test case.
 
@@ -327,6 +331,8 @@ FamixAbstractJavaCallGraphBuilderTestResource << #FamixJavaCHAExample2Resource
 ```
 
 Nothing much.
+
+### Easily find the sources of the tested project
 
 A last thing I am doing to simplify thing is to implement a method to access easily the sources.
 
