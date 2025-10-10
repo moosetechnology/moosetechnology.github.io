@@ -1,0 +1,353 @@
+---
+authors:
+- CyrilFerlicot
+title: "Testing your algo on a java project"
+date:  2025-10-08
+lastUpdated:  2025-10-08
+tags:
+- CI
+- infrastructure
+---
+
+import ProcessSVG from './img/posts/2025-10-08-testing-your-algo-on-a-java-project/process.drawio.svg';
+
+When developping algorithm on top of the Moose platform, we can easily hurt a wall during testing.
+
+To do functional (and sometimes unit) testing, we need to work on a Moose model. Most of the time we are getting this model in two ways:
+
+- We produce a model and save the `.json` to recreate this model in the tests
+- We create a model by hand
+
+But those 2 solutions have drawbacks:
+
+- Keeping a JSON will not follow the evolutions of Famix and the model produce will not be representative of the last version of Famix
+- Creating a model by hand has the drawback of taking the risk that this model will not be representative of what we could manipulate in reality. For example, we might not think about setting the stubs or the source anchors
+
+In order to avoid those drawbacks I will describe my way of managing such testing cases in this article. In order to do this, I will explain how I set up the tests of a project to build CallGraph of Java projects.
+
+## The idea
+
+The idea I had for testing callgraphs is to implement real java projects in a `resources` folder in the git of the project. Then, we can parse them when launching the tests and manipulate the produced model. This would ensure that we always have a model up to date with the latest version of Famix. If tests breaks, this means that our famix model evolved and that our project does not work anymore for this language.
+
+<ProcessSVG className="svg-theme" />
+
+## Basic setup 
+
+### Create your java code
+
+The first step to build tests is to write some example java code.
+
+I will start with a minimal example:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+
+        System.out.println("Hello World!");
+    }
+}
+```
+
+I'll save this file in the git repository of my project under `Famix-CallGraph/resources/sources/example1/Main.java`.
+
+Now that we have the source code, we need a way to access it in our project.
+
+### Use GitBridge
+
+In order to access our resources, we will use [GitBrigde](https://github.com/jecisc/GitBridge).
+
+You can install it by executing:
+
+```smalltalk
+Metacello new
+	githubUser: 'jecisc' project: 'GitBridge' commitish: 'v1.x.x' path: 'src';
+	baseline: 'GitBridge';
+	load
+```
+
+But we should add it to our baseline:
+
+```smalltalk
+BaselineOfFamixCallGraph >> #gitBridge: spec
+
+	spec baseline: 'GitBridge' with: [ spec repository: 'github://jecisc/GitBridge:v1.x.x/src' ]
+```
+
+```smalltalk
+BaselineOfFamixCallGraph >> #baseline: spec
+
+	<baseline>
+	spec for: #common do: [
+		"Dependencies"
+		self gitBridge: spec.
+
+		"Packages"
+		spec
+			package: 'Famix-CallGraph';
+			package: 'Famix-CallGraph-Tests' with: [ spec requires: #( 'Famix-CallGraph' 'GitBridge' ) ]. "<== WE ADD GITBRIDGE HERE!"
+		 ].
+
+	spec for: #NeedsFamix do: [
+		self famix: spec.
+
+		spec package: 'Famix-CallGraph' with: [ spec requires: #( Famix ) ] ]
+```
+
+Now that we have the dependency running, we can use this project. We will explain the minimal steps here but you can find the [full documantation here](https://github.com/jecisc/GitBridge/blob/master/resources/documentation/UserGuide.md).
+
+The usage of GitBridge begins with the definition of our `FamixCallGraphBridge`:
+
+```smalltalk
+GitBridge << #FamixCallGraphBridge
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+Now that this class exists we can access our git folder using `FamixCallGraphBridge current root`.
+
+Let's add some syntactic suggar:
+
+```smalltalk
+FamixCallGraphBridge class >> #resources
+
+	^ self root / 'resources'
+```
+```smalltalk
+FamixCallGraphBridge class >> #sources
+
+	^ self resources / 'sources'
+```
+
+We can now access our java projects doing `FamixCallGraphBridge current sources`.
+
+This step is almost done, but in order for our tests to work in a github action (for example), we need two little tweaks.
+
+In our `smalltalk.ston` file, we need to register our project in Iceberg (because GitBridge uses Iceberg to access the root folder).
+
+```diff lang="smalltalk"
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'FamixCallGraph',
+      #directory : 'src',
++     #registerInIceberg : true   "<== This line"
+    }
+  ]
+}
+```
+
+Also, in our github action we need to be sure that the checkout action will get enough info for git bridge to run and not the minimal ammount (which is the default) adding a `fetch-depth:` option.
+
+```
+steps:
+  - uses: actions/checkout@v4
+    with:
+      fetch-depth: '0'
+```
+
+### Parse and import your model
+
+Now we need to be able to parse our project. For this, we will use a Java utility thaht is directly in Moose: `FamixJavaFoldersImporter`.
+
+We can parse and receive a model doing:
+
+```smalltalk
+model := (FamixJavaFoldersImporter importFolders: { FamixCallGraphBridge sources / 'example1' }) anyOne.
+```
+
+### Tests implementation
+
+Now that we can access the model it is possible to implement our tests.
+
+I'm starting by an abstract class:
+
+```smalltalk
+TestCase << #FamixAbstractJavaCallGraphBuilderTestCase
+	slots: { #model . #graph };
+	package: 'Famix-CallGraph-Tests'
+```
+
+Now I will create a TestCase that needs my java model
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase << #FamixJavaCHAExample1Test
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+And now I will create a setup importing the model and creating a call graph:
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase >> #setUp
+
+	super setUp.
+	model := (FamixJavaFoldersImporter importFolders: { self javaSourcesFolder }) anyOne.
+	graph := (FamixJavaCHABuilder entryPoints: self entryPoints) build
+```
+
+```smalltalk
+FamixJavaCHAExample1Test >> #javaSourcesFolder
+	"Return the java folder containing the sources to parse for those tests"
+
+	| folder |
+	folder := FamixCallGraphBridge sources / 'example1'.
+
+	folder ifAbsent: [ self error: 'Folder does not exists ' , folder pathString ].
+
+	^ folder
+```
+
+And now you have your model available for the testing!
+
+## Optimization
+
+I am using this technic to tests multiple projects such as parsers or call graph builders. In those projects I do touch my model and the setup can take time. So I optimize this setup in order to build a model only once for all the test case using a `TestResource`.
+
+In order to do this we can remove the slots we added to `FamixAbstractJavaCallGraphBuilderTestCase` and create a test resource that will hold them
+
+```smalltalk
+TestResource << #FamixAbstractJavaCallGraphBuilderTestResource
+	slots: { #model . #graph };
+	package: 'Famix-CallGraph-Tests'
+```
+
+Then we can move the setup to this class
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource >> #setUp
+
+	super setUp.
+	model := (FamixJavaFoldersImporter importFolders: { self javaSourcesFolder }) anyOne.
+	graph := (FamixJavaCHABuilder entryPoints: self entryPoints) build
+```
+
+Personally I'm also adding a tearDown cleaning the vars because TestResources are singletons and I do not want to hold a model in memory all the time.
+
+Then I'm creating my test resource for the `example1` project.
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource << #FamixJavaCHAExample1Resource
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+```smalltalk
+FamixJavaCHAExample1Resource >> #javaSourcesFolder
+	"Return the java folder containing the sources to parse for those tests"
+
+	| folder |
+	folder := FamixCallGraphBridge sources / 'example1'.
+
+	folder ifAbsent: [ self error: 'Folder does not exists ' , folder pathString ].
+
+	^ folder
+```
+
+And now we can declare that the TestCase will use this resource:
+
+```smalltalk
+FamixJavaCHAExample1Test class >> #resources
+    ^ { FamixJavaCHAExample1Resource }
+```
+
+The model then become accessible like this:
+
+```smalltalk
+FamixJavaCHAExample1Resource >> #model
+
+	^ self resources anyOne current model
+```
+
+## Simplify your life
+
+Here is a few tricks I use to simplify even better the setting of my tests cases
+
+### Automatic java source folder detection
+
+The first one is to make automatic the detection of the java source folder by using the name of the test cases:
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource >> #javaSourcesFolder
+	^ self class javaSourcesFolder
+```
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource class >> #javaSourcesFolder
+	"Return the java folder containing the sources to parse for those tests"
+
+	| folder |
+	folder := FamixCallGraphBridge sources / ((self name withoutPrefix: 'FamixJavaCHA') withoutSuffix: 'Resource') uncapitalized.
+
+	folder ifAbsent: [ self error: 'Folder does not exists ' , folder pathString ].
+
+	^ folder
+```
+
+We can now remove this method from all subclasses! But makes sure the name of your source folder matches the name of the tests ressource ;)
+
+### Automatic test resource detection and access
+
+We can do the same with the detection of the test resource in the test case.
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase class >> #resources
+
+	^ self environment
+		  at: ((self name withoutSuffix: 'Test') , 'Resource') asSymbol
+		  ifPresent: [ :class | { class } ]
+		  ifAbsent: [ {  } ]
+```
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase class >> #sourceResource
+
+	^ self resources anyOne current
+```
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase >> #sourceResource
+	"I return the instance of the test resource I'm using to build the sources of a java project"
+
+	^ self class sourceResource
+```
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase >> #model
+
+	^ self sourceResource model
+```
+
+Et voila ! Now adding a test case ready to use on a new java project is equivalent to create a test case:
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestCase << #FamixJavaCHAExample2Test
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+And the resource associated!
+
+```smalltalk
+FamixAbstractJavaCallGraphBuilderTestResource << #FamixJavaCHAExample2Resource
+	slots: {};
+	package: 'Famix-CallGraph-Tests'
+```
+
+Nothing much.
+
+### Easily find the sources of the tested project
+
+A last thing I am doing to simplify thing is to implement a method to access easily the sources.
+
+```smalltalk
+FamixJavaCHAExample1Test >> #openSources
+
+	<script: 'self new openSources'>
+	self resources anyOne javaSourcesFolder openInOSFileBrowser
+```
+
+### Other languages than Java
+
+It is possible to do the same thing for other languages than java but maybe not exactly in the same way than in this blogpost for the section "Parse and import your model". But this article is meant to be an inspiration!
+
+I hope this helps improve the robustness of our projects :)
