@@ -133,7 +133,7 @@ A containment query can be parameterized to:
 
 ```smalltalk
 entity query containers recursively. 
-entity query containers recusrively until: #isClass.
+entity query containers recursively until: #isClass.
 ```
 
 ##### Recursive queries
