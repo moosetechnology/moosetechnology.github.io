@@ -12,10 +12,12 @@ tags:
 When developping algorithm on top of the Moose platform, we can easily hurt a wall during testing.
 
 To do functional (and sometimes unit) testing, we need to work on a Moose model. Most of the time we are getting this model in two ways:
+
 - We produce a model and save the `.json` to recreate this model in the tests
 - We create a model by hand
 
 But those 2 solutions have drawbacks:
+
 - Keeping a JSON will not follow the evolutions of Famix and the model produce will not be representative of the last version of Famix
 - Creating a model by hand has the drawback of taking the risk that this model will not be representative of what we could manipulate in reality. For example, we might not think about setting the stubs or the source anchors
 
@@ -50,15 +52,15 @@ Now that we have the source code, we need a way to access it in our project.
 
 ### Use GitBridge
 
-In order to access our resources, we will use `GitBrigde` ([https://github.com/jecisc/GitBridge](https://github.com/jecisc/GitBridge)). 
+In order to access our resources, we will use [GitBrigde](https://github.com/jecisc/GitBridge).
 
 You can install it by executing:
 
 ```smalltalk
-    Metacello new
-    	githubUser: 'jecisc' project: 'GitBridge' commitish: 'v1.x.x' path: 'src';
-    	baseline: 'GitBridge';
-    	load
+Metacello new
+	githubUser: 'jecisc' project: 'GitBridge' commitish: 'v1.x.x' path: 'src';
+	baseline: 'GitBridge';
+	load
 ```
 
 But we should add it to our baseline:
@@ -89,7 +91,7 @@ BaselineOfFamixCallGraph >> #baseline: spec
 		spec package: 'Famix-CallGraph' with: [ spec requires: #( Famix ) ] ]
 ```
 
-Now that we have the dependency running, we can use this project. (We will explain the minimal steps here but you can find the [full documantation here](https://github.com/jecisc/GitBridge/blob/master/resources/documentation/UserGuide.md))
+Now that we have the dependency running, we can use this project. We will explain the minimal steps here but you can find the [full documantation here](https://github.com/jecisc/GitBridge/blob/master/resources/documentation/UserGuide.md).
 
 The usage of GitBridge begins with the definition of our `FamixCallGraphBridge`:
 
@@ -114,19 +116,19 @@ FamixCallGraphBridge class >> #sources
 	^ self resources / 'sources'
 ```
 
-We can now check our java projects doing `FamixCallGraphBridge current sources`.
+We can now access our java projects doing `FamixCallGraphBridge current sources`.
 
 This step is almost done, but in order for our tests to work in a github action (for example), we need two little tweaks.
 
 In our `smalltalk.ston` file, we need to register our project in Iceberg (because GitBridge uses Iceberg to access the root folder).
 
-```smalltalk
+```diff lang="smalltalk"
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'FamixCallGraph',
       #directory : 'src',
-      #registerInIceberg : true   "<== This line"
++     #registerInIceberg : true   "<== This line"
     }
   ]
 }
