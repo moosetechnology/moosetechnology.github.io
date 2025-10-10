@@ -9,6 +9,8 @@ tags:
 - infrastructure
 ---
 
+import ProcessSVG from './img/posts/2025-10-08-testing-your-algo-on-a-java-project/process.drawio.svg';
+
 When developping algorithm on top of the Moose platform, we can easily hurt a wall during testing.
 
 To do functional (and sometimes unit) testing, we need to work on a Moose model. Most of the time we are getting this model in two ways:
@@ -27,7 +29,7 @@ In order to avoid those drawbacks I will describe my way of managing such testin
 
 The idea I had for testing callgraphs is to implement real java projects in a `resources` folder in the git of the project. Then, we can parse them when launching the tests and manipulate the produced model. This would ensure that we always have a model up to date with the latest version of Famix. If tests breaks, this means that our famix model evolved and that our project does not work anymore for this language.
 
-![Process](./img/posts/2025-10-08-testing-your-algo-on-a-java-project/process.drawio.svg)
+<ProcessSVG className="svg-theme" />
 
 ## Basic setup 
 
