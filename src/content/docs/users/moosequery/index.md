@@ -80,7 +80,7 @@ In order to set those properties, you can check the documentation on.
 
 ## Exploring a Containment Tree
 
-:::caution[In reality we have a containment directed acyclic graph (DAG).]
+:::note[In reality we have a containment directed acyclic graph (DAG).]
 An entity may be contained in several entities, for example in a package and in a file.
 However, most entities have only one parent.
 For simplicity, we will refer to it as a containment tree.
@@ -101,7 +101,7 @@ We are able to query any object using the trait `TEntityMetalevelDependency`.
 Queries should start my sending `query` to an entity.
 
 ```smalltalk
-entity query
+entity query "+ containmentQuery + options + execution".
 ```
 
 Then they are composed of 3 parts:
@@ -116,11 +116,11 @@ To initialize a containment query, two directions are available: `container` and
 The direction choice is made by sending either of these messages:
 
 ```smalltalk
-entity query containers.
-entity query containedEntities.
+entity query containers "+ options + execution".
+entity query containedEntities "+ options + execution".
 ```
 
-:::note[Deprecation]
+:::caution[Deprecation]
 In Moose 12 and previous versions, the equivalent of `#containers` was `#ancestors` and the equivalent of `#containedEntities` was `#descendants`.
 :::
 
@@ -132,8 +132,8 @@ A containment query can be parameterized to:
 - Gather containers recursively until a condition is matched.
 
 ```smalltalk
-entity query containers recursively. 
-entity query containers recursively until: #isClass.
+entity query containers recursively "+ execution". 
+entity query containers recursively until: #isClass "+ execution".
 ```
 
 ##### Recursive queries
@@ -142,7 +142,7 @@ By default, a containment query stops at the first level, i.e. with the first fo
 With the `#recursively` option, the query gathers the entities contained in the contained entities or the containers of the containers.
 
 ```smalltalk
-entity query containers recursively
+entity query containers recursively "+ execution".
 ```
 
 ##### Stop condition
@@ -154,7 +154,7 @@ This can be used in different ways like speeding up the query by cutting lookup 
 For example, to stop the query if the entity were already visited:
 
 ```smalltalk
-entity query containers recursively until: [ :e | self knownDependencies includes: e ]
+entity query containers recursively until: [ :e | self knownDependencies includes: e ] "+ execution".
 ```
 
 #### Execute the containment query
@@ -172,43 +172,52 @@ Will select the entities matching the condition provided as parameter.
 
 ```smalltalk
 entity query containers ofAnyType.
-entity query containers ofType: FamixTClass. 
-entity query containers ofAnyType: { FamixTClass . FamixTNamespace }. 
+entity query containers ofType: FamixTClass.
+entity query containers ofAnyType: { FamixTClass . FamixTNamespace }.
 entity query containers withProperty: #hasSourceAnchor.
 ```
 
+### Containment queries examples
+
 Example of a containment tree to use for the next examples:
-![A schema of a containement tree.](img/containmentTreeUser.png)
 
-For example if you want to find the first package containing Class2:
+![A schema of a containment tree.](img/containmentTreeUser.png)
 
-```smalltalk
-class2 query containers ofType: FamixTPackage "=> { package2 }"
-```
+Let's query:
 
-Now let's imagine we have the package1 and we want to find all its children packages and Enum (even if in this particular case we have no enum inside):
+- the first package containing Class2:
 
-```smalltalk
-package1 query containedEntities ofAnyType: { FamixTPackage . FamixJavaEnum } "=> { package2 }"
-```
+    ```smalltalk
+    class2 query containers ofType: FamixTPackage "=> { package2 }"
+    ```
 
-We use `FamixJavaEnum` because we do not have a trait `FamixTEnum`, but MooseQuery is able to work with Traits and concrete entities. 
+- all children packages and enums in Package1: (even if in this particular case we have no enum inside)
 
-Now let's collect all the containers recursively of a method:
+    ```smalltalk
+    package1 query containedEntities ofAnyType: { FamixTPackage . FamixJavaEnum } "=> { package2 }"
+    ```
 
-```smalltalk
-attribute2 query containers recursively ofAnyType "=> { class3 . package2 . package1 }"
-```
+    In this example, we can see that both a trait (`FamixTPackage`) and a class(`FamixJavaEnum`) can be used as types.
 
-Finaly let's imagine we want to stop on a condition that is not the type of the collected entity, we can do it with `#withProperty:`:
+- all the containers recursively of a method:
 
-```smalltalk
-attribute2 query containers withProperty: #isPackage. "=> { package2 }"
-    
-attribute2 query containers withProperty: [ :object | object isType and: [ object typeContainer isPackage ] ]. "=> { class3 }"
-```
+    ```smalltalk
+    attribute2 query containers recursively ofAnyType "=> { class3 . package2 . package1 }"
+    ```
 
-The last example is able to exclude inner classes for example since we are looking for a class in a package.
+- all containers until a condition other than the type of the collected entity is met:
+
+  - containers until a boolean property is true:
+
+    ```smalltalk
+    attribute2 query containers withProperty: #isPackage. "=> { package2 }"
+    ```
+
+  - a class which direct container is a package, so not an inner class:
+
+    ```smalltalk
+    attribute2 query containers withProperty: [ :object | object isType and: [ object typeContainer isPackage ] ]. "=> { class3 }"
+    ```
 
 More random examples:
 
@@ -226,38 +235,43 @@ entity query containedEntities recursively ofType: FamixTNamespace.
 
 ### Containment syntactic sugar
 
-For the most common usecases we added some syntactic suggar on `TEntityMetalevelDependency`:
+For the most common use-cases we added some shortcut methods on `TEntityMetalevelDependency`:
 
-| Selector     | Description                                           |
-|--------------|-------------------------------------------------------|
-| `#containedEntities`    | Direct contained entities of the receiver                         |
-| `#containers`     | Direct containers of the receiver                          |
-| `#allContainedEntities` | Contained entities of the receiver and their contained entities recursively |
-| `#allContainers`  | Containers of the receiver and their containers recursively   |
-| `#containedEntitiesOfType:` | Equivalent of `x query containedEntities ofType:` |
-| `#containersOfType:` | Equivalent of `x query containers ofType:` |
-| `#allContainedEntitiesOfType:` | Equivalent of `x query containedEntities recursively ofType:` |
-| `#allContainersOfType:` | Equivalent of `x query containers recursively ofType:` |
+| Selector                       | Description                                                                                                    | Shortcut for                                   |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------|------------------------------------------------|
+| `#containedEntities`           | Entities directly contained in the receiver                                                                    | `query containedEntities ofAnyType`*           |
+| `#containers`                  | Direct containers of the receiver                                                                              | `query containers ofAnyType`*                  |
+| `#allContainedEntities`        | Entities contained in the receiver and entities contained therein, recursively                                 | `query containedEntities recursively ofAnyType`|
+| `#allContainers`               | Containers of the receiver and their containers, recursively                                                   | `query containers recursively ofAnyType`       |
+| `#containedEntitiesOfType:`    | Entities of a specific type directly contained in the receiver                                                 | `query containedEntities ofType:`              |
+| `#containersOfType:`           | Direct containers of the receiver of a specific type                                                           | `query containers ofType:`                     |
+| `#allContainedEntitiesOfType:` | Entities of a specific type contained in the receiver and entities of this type contained therein, recursively | `query containedEntities recursively ofType:`  |
+| `#allContainersOfType:`        | Containers of the receiver of a specific type and their containers of this type, recursively                   | `query containers recursively ofType:`         |
 
-This API is the one from Moose 13. In the previous version of Moose the API was different:
+\* The actual implementation is different for optimization reasons.
 
-| Selector in Moose 13    | Selector in Moose < 13                                           |
-|--------------|-------------------------------------------------------|
-| `#containedEntities`    | `#children` |
-| `#containers`     | `#parents` |
-| `#allContainedEntities` | `#allChildren` |
-| `#allContainers`  | `allParents` |
-| `#containedEntitiesOfType:` | `#toScope:` |
-| `#containersOfType:` | `#atScope:` |
-| `#allContainedEntitiesOfType:` | `#allToScope:` |
-| `#allContainersOfType:` | `#allAtScope:` |
+:::caution[Deprecation]
+This API was updated in Moose 13.
+In the previous versions of Moose, the API was less homogeneous:
 
-For the following examples, let's use the same model as the previous section:
-![A schema of a containement tree.](img/containmentTreeUser.png)
+| Selector in Moose 13           | Selector in Moose 12 and before |
+|--------------------------------|---------------------------------|
+| `#containedEntities`           | `#children`                     |
+| `#containers`                  | `#parents`                      |
+| `#allContainedEntities`        | `#allChildren`                  |
+| `#allContainers`               | `allParents`                    |
+| `#containedEntitiesOfType:`    | `#toScope:`                     |
+| `#containersOfType:`           | `#atScope:`                     |
+| `#allContainedEntitiesOfType:` | `#allToScope:`                  |
+| `#allContainersOfType:`        | `#allAtScope:`                  |
 
-For example, the model in the example figure can be requested as follows:
+:::
 
-**Examples of Containment Tree Navigation**
+### Examples of Containment Tree Navigation
+
+For the following examples, let's use the same model as the previous example section:
+
+![A schema of a containment tree.](img/containmentTreeUser.png)
 
 ```smalltalk
 package1 containedEntities. "=> { package2 . class1 }"
