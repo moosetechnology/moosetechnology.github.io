@@ -4,6 +4,9 @@ background: '/img/bg-wiki.jpg'
 title: 'File Format'
 ---
 
+import MooseGraphSVG from './moose-graph.drawio.svg';
+
+
 Moose is compatible with two file formats: JSON and MSE.
 In the following, we describe how each file must be written when **exporting a model**.
 When exporting a meta-model, additional types are automatically added (known my the meta-meta model).
@@ -115,7 +118,7 @@ In general, properties can be either primitive, like (name 'aNamespace'), or the
 
 The overall object graph can be seen graphically below.
 
-![MSE example](./mse-graph.png)
+<MooseGraphSVG className="svg-theme" />
 
 ## Existing types
 
