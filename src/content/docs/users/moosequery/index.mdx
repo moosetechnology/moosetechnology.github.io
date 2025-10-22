@@ -5,9 +5,9 @@ title: "Moose Query user documentation"
 subtitle: "Documentation about Moose Query, the query feature of Metamodels described by Fame."
 ---
 
-import MooseGraphSVG from './moose-graph.drawio.svg';
-import containmentTreeUserSVG from './containmentTreeUser.drawio.svg';
-import navigationUserSVG from './navigationUser.drawio.svg';
+import MooseGraphSVG from './img/moose-graph.drawio.svg';
+import ContainmentTreeUserSVG from './img/containmentTreeUser.drawio.svg';
+import NavigationUserSVG from './img/navigationUser.drawio.svg';
 
 
 - [Introduction](#introduction)
@@ -195,7 +195,7 @@ entity query containers withProperty: #hasSourceAnchor.
 
 Example of a containment tree to use for the next examples:
 
-<containmentTreeUserSVG className="svg-theme" />
+<ContainmentTreeUserSVG className="svg-theme" />
 
 Let's query:
 
@@ -285,7 +285,7 @@ In the previous versions of Moose, the API was less homogeneous:
 
 For the following examples, let's use the same model as the previous example section:
 
-<containmentTreeUserSVG className="svg-theme" />
+<ContainmentTreeUserSVG className="svg-theme" />
 
 ```smalltalk
 package1 containedEntities. "=> { package2 . class1 }"
@@ -411,7 +411,7 @@ entity query incoming dependenciesOfAnyType: { FamixTReference . FamixTInvocatio
 
 Example of a navigation model to use for the next examples:
 
-<navigationUserSVG className="svg-theme" />
+<NavigationUserSVG className="svg-theme" />
 
 Let's query:
 
@@ -478,7 +478,7 @@ For the most common use-cases, we added some shortcut methods on `TEntityMetalev
 
 | Selector            | Description                                              | Parameters                                                | Shortcut for                                                                 |
 |---------------------|----------------------------------------------------------|-----------------------------------------------------------|------------------------------------------------------------------------------|
-| `#query:with:`      | All the dependencies in a direction, of a specific type. | `#out`or `#in`. <br> Expected association type.           | `query incoming dependenciesOfType:` or `query outgoing dependenciesOfType:` |
+| `#query:with:`      | All the dependencies in a direction, of a specific type. | `#out`or `#in`. <br></br> Expected association type.           | `query incoming dependenciesOfType:` or `query outgoing dependenciesOfType:` |
 | `#queryAll:`        | All the dependencies in a direction.                     | `#out`or `#in`.                                           | `query incoming depenencies` or `query outgoing dependencies`                |
 | `#queryAllIncoming` | All incoming dependencies.                               | -                                                         | `query incoming dependencies`                                                |
 | `#queryAllOutgoing` | All outgoing dependencies.                               | -                                                         | `query outgoing dependencies`                                                |
@@ -488,7 +488,8 @@ For the most common use-cases, we added some shortcut methods on `TEntityMetalev
 ### Examples of dependencies navigation syntactic sugar
 
 For the following examples, let's use the same model as the previous section:
-![A schema of a navigation model.](img/navigationUser.png)
+
+<NavigationUserSVG className="svg-theme" />
 
 ```smalltalk
 
