@@ -5,7 +5,11 @@ title: "Moose Query user documentation"
 subtitle: "Documentation about Moose Query, the query feature of Metamodels described by Fame."
 ---
 
-<!-- TOC -->
+import MooseGraphSVG from './moose-graph.drawio.svg';
+import containmentTreeUserSVG from './containmentTreeUser.drawio.svg';
+import navigationUserSVG from './navigationUser.drawio.svg';
+
+
 - [Introduction](#introduction)
   - [Relations between entities in Moose](#relations-between-entities-in-moose)
     - [Containment](#containment)
@@ -18,19 +22,25 @@ subtitle: "Documentation about Moose Query, the query feature of Metamodels desc
       - [Recursive queries](#recursive-queries)
       - [Stop condition](#stop-condition)
     - [Execute the containment query](#execute-the-containment-query)
+  - [Containment queries examples](#containment-queries-examples)
   - [Containment syntactic sugar](#containment-syntactic-sugar)
+  - [Examples of containment tree syntactic sugar](#examples-of-containment-tree-syntactic-sugar)
 - [Navigating Dependencies (Associations)](#navigating-dependencies-associations)
   - [Moose Query navigation DSL](#moose-query-navigation-dsl)
-    - [Initialize the navigation query](#initialize-the-navigation-query)
-    - [Add options to the navigation query](#add-options-to-the-navigation-query)
+    - [Initialize a navigation query](#initialize-a-navigation-query)
+    - [Navigation query options](#navigation-query-options)
       - [Get only local dependencies](#get-only-local-dependencies)
-      - [Receive entities instead of associations](#receive-entities-instead-of-associations)
+      - [Get entities instead of associations](#get-entities-instead-of-associations)
     - [Execute the navigation query](#execute-the-navigation-query)
-  - [Navigation syntactic suggar](#navigation-syntactic-suggar)
+  - [Navigation queries examples](#navigation-queries-examples)
+  - [Navigation syntactic sugar](#navigation-syntactic-sugar)
+  - [Examples of dependencies navigation syntactic sugar](#examples-of-dependencies-navigation-syntactic-sugar)
   - [Manipulating the gathered results of a navigation query](#manipulating-the-gathered-results-of-a-navigation-query)
+    - [Accessing the opposite entities](#accessing-the-opposite-entities)
+    - [Excluding internal dependencies](#excluding-internal-dependencies)
+    - [Navigate the containment tree of the dependencies](#navigate-the-containment-tree-of-the-dependencies)
 - [Future plans for MooseQuery](#future-plans-for-moosequery)
 
-<!-- /TOC -->
 
 Moose-Query is a domain-specific language to build navigation and scope queries for entities in Moose.
 Its authors are Anne Etien, Jean-Christophe Bach, Vincent Blondeau and Cyril Ferlicot-Delbecque.
@@ -46,7 +56,8 @@ Moose-Query is an internal domain-specific language (DSL) for creating queries o
 It replaces Moose-Chef, and is designed to simplify and standardize the way to query Moose models.
 
 In order to visualize the concepts, let's take an example of a simple application model:
-![Image representing a small model with containment and associations examples.](img/moose-graph.png)
+
+<MooseGraphSVG className="svg-theme" />
 
 ### Relations between entities in Moose
 
@@ -184,7 +195,7 @@ entity query containers withProperty: #hasSourceAnchor.
 
 Example of a containment tree to use for the next examples:
 
-![A schema of a containment tree.](img/containmentTreeUser.png)
+<containmentTreeUserSVG className="svg-theme" />
 
 Let's query:
 
@@ -274,7 +285,7 @@ In the previous versions of Moose, the API was less homogeneous:
 
 For the following examples, let's use the same model as the previous example section:
 
-![A schema of a containment tree.](img/containmentTreeUser.png)
+<containmentTreeUserSVG className="svg-theme" />
 
 ```smalltalk
 package1 containedEntities. "=> { package2 . class1 }"
@@ -399,7 +410,8 @@ entity query incoming dependenciesOfAnyType: { FamixTReference . FamixTInvocatio
 ### Navigation queries examples
 
 Example of a navigation model to use for the next examples:
-![A schema of a navigation model.](img/navigationUser.png)
+
+<navigationUserSVG className="svg-theme" />
 
 Let's query:
 
