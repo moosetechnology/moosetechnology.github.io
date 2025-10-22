@@ -34,7 +34,7 @@ Another motivation was the creation of a simpler API to describe transformation 
 
 In order to only showcase the transformation operations here and not go over what is shown in the three blog posts on code transformation, the only repository to import in your Moose image is `FAST-Java-Tools` :
 
-```st
+```smalltalk
 Metacello new
   baseline: 'FASTJavaTools';
   repository: 'github://moosetechnology/FAST-Java-Tools:main/src';
@@ -72,7 +72,7 @@ public int methodToTransform(String strParam) {
 
 Our first step is going to be creating a class, `TransformationOperationsShowcaseTool`, with a `sourceCode` method returning this method above, and a `generateFAST` method parsing it and returning the `FASTJavaMethodEntity` created :
 
-```st
+```smalltalk
 generateFAST
 
 	| tool |
@@ -92,14 +92,14 @@ If I call that a "simple" operation, it is because in the case of a removal oper
 
 Here's how it looks in our code :
 
-```St
+```smalltalk
 nodeToDeleteIn: fast
 
 	"System.out.println(""I'm testing something here!!!"");"
 	^ fast statements at: 4
 ```
 
-```St
+```smalltalk
 createDeleteOperationFor: fast
 
 	| deleteOp |
@@ -113,7 +113,7 @@ As you can see, fetching the information is pretty straightforward, thanks to ou
 Now that we've warmed up with this first try, let's go once step above, and add a parameter to our mock method. For example, if in the fourth line we'd like to use any identifier we'd like!  
 One way to implement that is :
 
-```St
+```smalltalk
 nodeToInsert
 
 	| newNode variable |
@@ -127,7 +127,7 @@ nodeToInsert
 	^ newNode
 ```
 
-```St
+```smalltalk
 createSignatureInsertionOperationFor: fast
 
 	| signInserOp |
@@ -145,7 +145,7 @@ Defining the operation remains simple once we have fetched and created the neces
 Finally, let's add one more transformation, so that our parameter is actually used in the code of the method!  
 It will replace the parameter given in the call to `getConstant`, in the fourth line :
 
-```St
+```smalltalk
 nodeToReplaceIn: fast
 
 	| originalNode |
@@ -155,7 +155,7 @@ nodeToReplaceIn: fast
 	^ originalNode
 ```
 
-```St
+```smalltalk
 replacingNode
 
 	| newNode |
@@ -164,7 +164,7 @@ replacingNode
 	^ newNode
 ```
 
-```St
+```smalltalk
 createReplacingOperationFor: fast
 
 	| replaceOp |
@@ -183,7 +183,7 @@ This step is actually as simple as using a constructor and calling a method! :sm
 
 We will now use a new tool, the class `FASTJavaCodeGeneratorKeepingFormatting`. This class contains all the behaviour necessary to take those operations and apply all necessary transformations so that the source code is modified exactly as defined in your operations. 
 
-```St
+```smalltalk
 setupCompleteTransformation
 
 	| fast operations |
@@ -203,7 +203,7 @@ setupCompleteTransformation
 As you can see, this tool doesn't need a Famix or FAST entity on which to apply the operations, only the source code. Since the `anchorNode` attributes of each operations hold `startPos` and `endPos` attributes that are consistent with the source code given by the FAST entity, no more information is needed.  
 Setting up the tool is the first step, now all that remains is using it!
 
-```St
+```smalltalk
 applyAndViewTransformation
 
 	| tool transformedCode |
