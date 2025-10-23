@@ -39,9 +39,9 @@ Overall, leaving the code identical except for the changes needed to complete th
 Another motivation was the creation of a simpler API to describe transformation logic.
 As you will see in the rest of this post, the transformation operations do not involve making changes to the FAST on which you want to apply transformations, contrary to the tools described in the series of blog post on code transformation.
 
-## Tools to import
+## Transformation tools repository
 
-In order to only showcase the transformation operations here and not go over what is shown in the three blog posts on code transformation, the only repository to import in your Moose image is `FAST-Java-Tools` :
+The transformation operations presented in this blog post are located on the same repository that contains the other tools implemented to be used in code transformation. To import them, use this baseline:
 
 ```smalltalk
 Metacello new
@@ -76,7 +76,12 @@ Overall, that's all you need to know!
 
 ## Transformation scenario
 
-Our case study is going to be very simple, as we are simply going to create transformation operations on a small mock method created for the occasion, so no model creation or import would be needed. 
+:::note[Following along]
+From this point forward, we will code a tool to showcase the use of transformation operations.   
+If you want to be able to test what is presented in this post, you may start by creating a new image and import the repository given previously. From there, either implement the tool step by step using the provided code snippets or browse the complete tool available on this [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
+:::
+
+Our case study is going to be very simple, as we are simply going to create transformation operations on a small mock method created for the occasion, so no model creation or import would be needed.
 
 Here is the code of this mock method :
 
@@ -276,8 +281,8 @@ tool := TransformationOperationShowcaseTool new.
 tool applyAndViewTransformation 
 ```
 
-The source code detailed in this blog post is available on this [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
-If you followed the previous blog post series on code transformation, you may have recognized the repository!
+If you haven't used it earlier, quick reminder that the source code detailed in this blog post is available on this [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).  
+If you followed the previous blog post series on code transformation, you may have recognized the repository! 
 Indeed, additionally to the code shown within this blog post, you will find on this branch the version of the tool shown in the previous blog post series, but replacing the previous transformation logic with transformation operations.
 
 ## Conclusion
