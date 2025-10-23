@@ -14,21 +14,30 @@ tags:
 
 import OperationsSVG from './img/posts/2025-10-15-transformation-operations/uml_blogpost.drawio.svg';
 
-Automated code transformation can be a tricky thing. Not only we must, of course, ensure that our edits do not break the code and are applied on every code entity which need such an edit, but we must also think about their integration in the codebase. 
-The code you manipulate is going to be the code that you and your collaborators have to understand, maintain and update on a daily basis, so it is mandatory that the results of our tooling solutions can be seamlessly integrated to the input codebase.
+Automated code transformation can be a tricky thing.
+Not only must we ensure, of course, that our edits do not break the code and are applied to every code entity which needs such an edit, but we must also think about their integration in the codebase.
+The code we manipulate is going to be the code that we and our collaborators have to understand, maintain and update on a daily basis.
+It is thus mandatory that the results of our tooling solutions can be seamlessly integrated to the input codebase.
 
 This blog post will present a framework to build code transformations tools which can do just that, using transformation operations.
 
 ## Another solution for code transformation? Why?
 
-If you have an interest in (semi-)automated code transformation, then you might have already read the series of three blog posts discussing this very subject. The third one shows an issue in the presented tooling system, present due to the use of the FAST visitor generating source code matching the visited FAST.  
+If you have an interest in (semi-)automated code transformation, then you might have already read the series of three blog posts discussing this very subject.
+The third one shows an issue in the presented tooling system, due to the use of the FAST visitor generating source code matching the visited FAST.
 
-This visitor introduces two unnecessary changes to the source code when generating a FAST. First, as the comments are not represented in FAST, they are not re-generated and are lost after applying a transformation. Second, the formating of the code is made by the visitor, and therefore might not be similar to the formating used in the rest of the source code.  
+This visitor introduces two unnecessary changes to the source code when generating a FAST:
 
-The loss of comments is an obvious problem which does not need explaining, but the changes in formatting are also quite problematic. Especially in long methods (which is not the greatest practice originally, but anyway :smile:), this means removing every carriage return included for readability. For invoked methods with many parameters which could have been written on several lines, they will be rewritten on one line only, etc.  
-Overall, leaving the code identical with the exception of the changes needed to complete the transformation task is a much more safe outcome, and it was the motivation behind the implementation of the tools presented in this blog post.  
+- **Missing comments:** because the comments are not represented in FAST, they are not re-generated and are lost after applying a transformation.
+- **Formatting heterogeneity:** because the formatting of the code is made by the visitor, it might not be similar to the formatting used in the rest of the source code.  
 
-Another motivation was the creation of a simpler API to describe transformation logic. As you will see in the rest of this post, the transformation operations does not involve making changes to the FAST on which you want to apply transformations, contrary to the tools described in the series of blog post on code transformation.
+The loss of comments is an obvious problem which does not need explaining, but the changes in formatting are also quite problematic.
+Especially in long methods (which is not the greatest practice originally, but anyway :smile:), this means removing every carriage return included for readability.
+For invoked methods with many parameters which could have been written on several lines, they will be rewritten on one line only, etc.
+Overall, leaving the code identical except for the changes needed to complete the transformation task is a much safer outcome, and it was the motivation behind the implementation of the tools presented in this blog post.
+
+Another motivation was the creation of a simpler API to describe transformation logic.
+As you will see in the rest of this post, the transformation operations do not involve making changes to the FAST on which you want to apply transformations, contrary to the tools described in the series of blog post on code transformation.
 
 ## Tools to import
 
@@ -49,9 +58,20 @@ Before going through a small case study to see this system in action, let's have
 
 This might look like a lot of information at first glance, but the system is rather simple and straightforward.  
 You can see a certain number of classes, each defining one type of operation to apply on a FAST tree, like deletion, replacement and insertion with different subclasses for each specific case of insertion.  
-Each operation can take two FASTJavaEntity as variables: first, a node on which to apply the transformation, called the `anchorNode`, and another node this time created by the user to be inserted in some way in the entity, called the `transformedNode`. These two are defined in the parent entity of every operation, the `AbstractTransformationOperation` class. To use the operations, the setters for those two variables are going to be your best friends.  
-You can see similar setters in the subclasses, but with different names adapted to the operation context. Those are just syntaxic sugar, also setters for the `anchorNode` or the `transformedNode`.  
-Additional variables are needed for insertion operations, like `selector`, taking a symbol representing the setter to use to insert your `transformedNode` into the `anchorNode`, or `insertBefore`, a boolean to decide if the inserted statement or declaration will be inserted before or after the `anchorNode` selected.  
+Each operation can take two FASTJavaEntity as variables defined in the parent entity of every operation, the `AbstractTransformationOperation` class:
+
+- a node on which to apply the transformation, called the `anchorNode`
+- another node this time created by the user to be inserted in some way in the entity, called the `transformedNode`.
+
+To use the operations, the setters for those two variables are going to be your best friends.
+You can see similar setters in the subclasses, but with different names adapted to the operation context.
+Those are just syntactic sugar, also setters for the `anchorNode` or the `transformedNode`.
+
+Additional variables are needed for insertion operations, like:
+
+- `selector`, taking a symbol representing the setter to use to insert your `transformedNode` into the `anchorNode`, or
+- `insertBefore`, a boolean to decide if the inserted statement or declaration will be inserted before or after the `anchorNode` selected.
+
 Overall, that's all you need to know!
 
 ## Transformation scenario
@@ -62,11 +82,11 @@ Here is the code of this mock method :
 
 ```java
 public int methodToTransform(String strParam) {
-		HelperClass receiver = new HelperClass();
-		int callResult = receiver.doSomething(strParam);
-		int secondCallResult = receiver.getConstant(CONSTANT_ID);
-		System.out.println("I''m testing something here!!!");
-		return callResult + secondCallResult;
+ HelperClass receiver = new HelperClass();
+	int callResult = receiver.doSomething(strParam);
+	int secondCallResult = receiver.getConstant(CONSTANT_ID);
+	System.out.println("I''m testing something here!!!");
+	return callResult + secondCallResult;
 }
 ```
 
@@ -81,13 +101,17 @@ generateFAST
 		  allFASTJavaMethodEntity first
 ```
 
-This is all we need to get started! Let's now get into the heart of the subject : defining our operations of code transformation.
+This is all we need to get started!
+Let's now get into the heart of the subject: defining our operations of code transformation.
 
 ## Defining operations
 
-As the UML diagram showed us previously, defining a transformation operation is as simple as finding the suitable `anchorNode`, and creating the necessary `transformedNode`. We will see this in the following examples.  
+As the UML diagram showed us previously, defining a transformation operation is as simple as finding the suitable `anchorNode` and creating the necessary `transformedNode`.
+We will see this in the following examples.  
 
-First thing on the agenda is a simple statement deletion, as it seems an airheaded developer forgot to remove a debug print in our method (couldn't be me!).  
+### Statement deletion
+
+First thing on the agenda is a simple statement deletion, as it seems an air-headed developer forgot to remove a debug print in our method (couldn't be me!).  
 If I call that a "simple" operation, it is because in the case of a removal operation we only need to find the `anchorNode` which will be the FAST node to delete.
 
 Here's how it looks in our code :
@@ -108,9 +132,14 @@ createDeleteOperationFor: fast
 	^ deleteOp
 ```
 
-As you can see, fetching the information is pretty straightforward, thanks to our limited scenario in this mock method. Defining our operation once we have the necessary information is just as easy however, simply setting this node as the `anchorNode`.
+As you can see, fetching the information is pretty straightforward, thanks to our limited scenario in this mock method.
+Defining our operation once we have the necessary information is just as easy however, simply setting this node as the `anchorNode`.
 
-Now that we've warmed up with this first try, let's go once step above, and add a parameter to our mock method. For example, if in the fourth line we'd like to use any identifier we'd like!  
+### Parameter insertion
+
+Now that we've warmed up with this first try, let's go once step above, and add a parameter to our mock method.
+For example, if in the fourth line (`int secondCallResult = receiver.getConstant(CONSTANT_ID);`) we'd like to use any identifier we'd like!
+
 One way to implement that is :
 
 ```smalltalk
@@ -139,8 +168,11 @@ createSignatureInsertionOperationFor: fast
 	^ signInserOp
 ```
 
-This time, the `anchorNode` couldn't be easier to fetch, as it is the FAST node representing our method, the root of our FAST tree. Creating the parameter node takes a few steps, but remember that you can use the `FASTDump` view of any existing node in an inspector to see how to create similar nodes if you have doubts on how the structure goes! :smile:  
-Defining the operation remains simple once we have fetched and created the necessary nodes, the only new step to think about in the case of an insertion is the `selector`. As we have seen in the UML, this message takes a symbol representing the setter to use to insert your `transformedNode` into the `anchorNode`. In our case, we add a parameter here. 
+This time, the `anchorNode` couldn't be easier to fetch, as it is the FAST node representing our method, i.e. the root of our FAST tree.
+Creating the parameter node takes a few steps, but remember that you can use the `FASTDump` view of any existing node in an inspector to see how to create similar nodes if you have doubts on how the structure goes! :smile:  
+Defining the operation remains simple once we have fetched and created the necessary nodes, the only new step to think about in the case of an insertion is the `selector`.
+As we have seen in the UML, this message takes a symbol representing the setter to use to insert your `transformedNode` into the `anchorNode`.
+In our case, we add a parameter here.
 
 Finally, let's add one more transformation, so that our parameter is actually used in the code of the method!  
 It will replace the parameter given in the call to `getConstant`, in the fourth line :
@@ -181,7 +213,8 @@ This concludes the part about operations definition. We will now see how to use 
 
 This step is actually as simple as using a constructor and calling a method! :smile:  
 
-We will now use a new tool, the class `FASTJavaCodeGeneratorKeepingFormatting`. This class contains all the behaviour necessary to take those operations and apply all necessary transformations so that the source code is modified exactly as defined in your operations. 
+We will now use a new tool, the class `FASTJavaCodeGeneratorKeepingFormatting`.
+This class contains all the behavior necessary to take those operations and apply all necessary transformations so that the source code is modified exactly as defined in your operations.
 
 ```smalltalk
 setupCompleteTransformation
@@ -200,7 +233,8 @@ setupCompleteTransformation
 		  forOperations: operations
 ```
 
-As you can see, this tool doesn't need a Famix or FAST entity on which to apply the operations, only the source code. Since the `anchorNode` attributes of each operations hold `startPos` and `endPos` attributes that are consistent with the source code given by the FAST entity, no more information is needed.  
+As you can see, this tool doesn't need a Famix or FAST entity on which to apply the operations, only the source code.
+Since the `anchorNode` attributes of each operation hold `startPos` and `endPos` attributes that are consistent with the source code given by the FAST entity, no more information is needed.  
 Setting up the tool is the first step, now all that remains is using it!
 
 ```smalltalk
@@ -220,14 +254,20 @@ applyAndViewTransformation
 
 !["Transformation Editor View"](./img/posts/2025-10-15-transformation-operations/transformation_editor.PNG)
 
-Once the tool is setup, the most important method is `applyCodeTransformation`, which... applies the transformation! Of course, it will also return the transformed code. You can also see that the tool proposes some auxilliary output in the instanciation call of the `TransformationEditor` class (if you don't know this class, check the [third blog post](https://modularmoose.org/blog/2025-06-13-transformation-third/) on code transformation!). Once a transformation is done, the transformation tool saves up information to highlight the transformations in the `TransformationEditor` using the `addedHighlights` and `removedHighlights` messages.  
-Another information the tool can give is available through the `transformationPointers` method, which is quite useful in the `TransformationEditor` when the entity being transformed is a class. Using the button in the top right corner allows you to jump between entities who got a transformation, allowing you to easily verify those, even in the case of only a few transformations applied in a big class.
+Once the tool is set up, the most important method is `applyCodeTransformation`, which... applies the transformation!
+Of course, it will also return the transformed code.
+You can also see that the tool proposes some auxiliary output in the instantiation call of the `TransformationEditor` class (if you don't know this class, check the [third blog post](https://modularmoose.org/blog/2025-06-13-transformation-third/) on code transformation!).
+Once a transformation is done, the transformation tool saves up information to highlight the transformations in the `TransformationEditor` using the `addedHighlights` and `removedHighlights` messages.  
+Another information the tool can give is available through the `transformationPointers` method, which is quite useful in the `TransformationEditor` when the entity being transformed is a class.
+Using the button in the top right corner allows you to jump between entities who got a transformation, allowing you to easily verify those, even in the case of only a few transformations applied in a big class.
 
 ## Try it yourself!
 
 With this, we've seen most of what transformation operations have to offer!
 
-Our little showcase tool allowed us to discover and manipulate those code transformation operations to create an actual transformation case. Some types of operations are not covered here, however you can find the necessary explanations and examples through the tests and class documentations. As you can see in this post, the way of using operations is also almost always the same independently of the type of the operation. 
+Our little showcase tool allowed us to discover and manipulate those code transformation operations to create an actual transformation case.
+Some types of operations are not covered here, however you can find the necessary explanations and examples through the tests and class documentations.
+As you can see in this post, the way of using operations is also almost always the same independently of the type of the operation. 
 
 Feel free to also try the code shown in this post in a Playground, or even to modify it to familiarize yourself with transformation operations!
 
@@ -236,11 +276,14 @@ tool := TransformationOperationShowcaseTool new.
 tool applyAndViewTransformation 
 ```
 
-The source code written in this blog post is available on this [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation). If you followed the previous blog post series on code transformation, you may have recognized the repository! Indeed, additionally to the code shown within this blog post, you will find on this branch the version of the tool shown in the previous blog post series, but replacing the previous transformation logic with transformation operations.
+The source code detailed in this blog post is available on this [repository](https://github.com/RomainDeg/Moose-BlogPost-Transformation).
+If you followed the previous blog post series on code transformation, you may have recognized the repository!
+Indeed, additionally to the code shown within this blog post, you will find on this branch the version of the tool shown in the previous blog post series, but replacing the previous transformation logic with transformation operations.
 
 ## Conclusion
 
 In this blog post we used transformation operations, a new transformation system allowing for easier definition and seamless edits to keep comments and indentation after applying the transformation.
 
-The focus was on the operations system and not on everything else that matters when doing code transformation, like the querying and search through the Famix or FAST models to find the entities to transform, or how to apply the transformation on the actual source code of our software. However, all of this was shown in the previous blog post series starting from [this post](https://modularmoose.org/blog/2024-04-01-transformation-first/). The transformation operations system integrates perfectly with the other tools for code transformation, giving you everything necessary for your transformation needs! :smile:
-
+The focus was on the operations system and not on everything else that matters when doing code transformation, like the querying and search through the Famix or FAST models to find the entities to transform, or how to apply the transformation on the actual source code of our software.
+However, all of this was shown in the previous blog post series starting from [this post](https://modularmoose.org/blog/2024-04-01-transformation-first/).
+The transformation operations system integrates perfectly with the other tools for code transformation, giving you everything necessary for your transformation needs! :smile:
