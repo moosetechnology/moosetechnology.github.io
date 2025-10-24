@@ -34,5 +34,5 @@ img {
 }
 
 :root {
-    --sl-content-width: 80rem;
-  }
+  --sl-content-width: calc(50vw);
+}
