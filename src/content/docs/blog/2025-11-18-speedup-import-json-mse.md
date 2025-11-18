@@ -9,8 +9,6 @@ tags:
 - optimization
 ---
 
-import { Code } from '@astrojs/starlight/components';
-
 ## Context 
 
 In order to be able to work with Moose there is a prerequisite we cannot avoid: we need a model to analyze. This can be archieved in 2 principal ways:
