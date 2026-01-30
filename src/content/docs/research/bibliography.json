@@ -1,5 +1,65 @@
 [
 	{
+		"event": "IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER)",
+		"title": "Migrating Esope to Fortran 2008 using model transformations",
+		"title-short": "Esope To Fortran 2008",
+		"URL": "https://inria.hal.science/hal-05468029v1",
+		"PDF": "https://hal.science/hal-05468029v1/document",
+		"year": 2026,
+		"author": [
+			{
+				"family": "Sow",
+				"given": "Younoussa"
+			},
+			{
+				"family": "Anquetil",
+				"given": "Nicolas"
+			},
+			{
+				"family": "Brault",
+				"given": "Léandre"
+			},
+			{
+				"family": "Ducasse",
+				"given": "Stéphane"
+			}
+		]
+	},
+	{
+		"event": "IEEE International Conference on Software Maintenance and Evolution (ICSME)",
+		"title": "Parsing FORTRAN 77 with proprietary extensions",
+		"title-short": "Parsing Esope with FORTRAN 77 parser",
+		"URL": "https://inria.hal.science/hal-04205262v1",
+		"PDF": "https://inria.hal.science/hal-04205262v1/document",
+		"year": 2023,
+		"author": [
+			{
+				"family": "Sow",
+				"given": "Younoussa"
+			},
+			{
+				"family": "Safina",
+				"given": "Larisa"
+			},
+			{
+				"family": "Brault",
+				"given": "Léandre"
+			},
+			{
+				"family": "Diouf",
+				"given": "Papa Ibou"
+			},
+			{
+				"family": "Anquetil",
+				"given": "Nicolas"
+			},
+			{
+				"family": "Ducasse",
+				"given": "Stéphane"
+			}
+		]
+	},
+	{
 		"event": "IEEE/ACM International Conference on Mining Software Repositories (MSR)",
 		"title": "GitProjectHealth: an Extensible Framework for Git Social Platform Mining",
 		"title-short": "GitProjectHealth",
