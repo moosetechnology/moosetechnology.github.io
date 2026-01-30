@@ -26,6 +26,27 @@
 		]
 	},
 	{
+		"event": "IEEE/ACM International Conference on Mining Software Repositories (MSR)",
+		"title": "GitProjectHealth: an Extensible Framework for Git Social Platform Mining",
+		"title-short": "GitProjectHealth",
+		"URL": "https://ieeexplore.ieee.org/abstract/document/11025626",
+		"year": 2025,
+		"author": [
+			{
+				"family": "Hlad",
+				"given": "Nicolas"
+			},
+			{
+				"family": "Verhaeghe",
+				"given": "Benoit"
+			},
+			{
+				"family": "Bauvent",
+				"given": "Kilian"
+			}
+		]
+	},
+	{
 		"event": "IEEE International Conference on Software Maintenance and Evolution (ICSME)",
 		"title": "Parsing FORTRAN 77 with proprietary extensions",
 		"title-short": "Parsing Esope with FORTRAN 77 parser",
@@ -56,27 +77,6 @@
 			{
 				"family": "Ducasse",
 				"given": "Stéphane"
-			}
-		]
-	},
-	{
-		"event": "IEEE/ACM International Conference on Mining Software Repositories (MSR)",
-		"title": "GitProjectHealth: an Extensible Framework for Git Social Platform Mining",
-		"title-short": "GitProjectHealth",
-		"URL": "https://ieeexplore.ieee.org/abstract/document/11025626",
-		"year": 2025,
-		"author": [
-			{
-				"family": "Hlad",
-				"given": "Nicolas"
-			},
-			{
-				"family": "Verhaeghe",
-				"given": "Benoit"
-			},
-			{
-				"family": "Bauvent",
-				"given": "Kilian"
 			}
 		]
 	},
