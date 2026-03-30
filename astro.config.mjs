@@ -114,7 +114,7 @@ export default defineConfig({
 						},
 						RomainDegrave: {
 							name: "Romain Degrave",
-							title: "Master degree intern in software analysis",
+							title: "PHD student",
 							url: "https://github.com/RomainDeg",
 							picture: "https://avatars.githubusercontent.com/u/98580879"
 						},
