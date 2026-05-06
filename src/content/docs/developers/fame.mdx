@@ -87,8 +87,7 @@ To import a model please use the following script:
 model := FMModel withMetamodel: aMetamodel.
 importer := aBlock
     value:
-        ((FMImporter model: model) autorizeDandlingReferencesAtEnd
-"Replace FMJSONParser with FMMSEParser when importing a model stored in a MSE file"
+        ((FMImporter model: model) autorizeDandlingReferencesAtEndß
             parser: FMJSONParser; 
             stream: aStream;
         yourself).
