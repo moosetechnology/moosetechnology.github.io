@@ -436,12 +436,12 @@ Let's query:
     ```smalltalk
     class1 query incoming dependencies. "=> { inheritance1 . reference1 }"
     class1 query incoming objects dependencies. "=> { class2 . method2 }"
-    class1 query outgoing dependencies. "=> { access1 } This is here because Class1 contains Method1 that access Attribute1 and queries are recursive by default"
-    class1 query outgoing objects dependencies. "=> { attribute1 }"
+    class1 query outgoing dependencies. "=> { access1 } This is here because Class1 contains Method1 that access AttributeA and queries are recursive by default"
+    class1 query outgoing objects dependencies. "=> { attributeA }"
     ```
 
 - Local dependencies to Class1:
-    As we have seen, asking the outgoing dependencies of `Class1` gives `Attribute1` because it is accessed in `Method1` that is contained in `Class1`.
+    As we have seen, asking the outgoing dependencies of `Class1` gives `AttributeA` because it is accessed in `Method1` that is contained in `Class1`.
     To get only local dependencies:
 
     ```smalltalk
