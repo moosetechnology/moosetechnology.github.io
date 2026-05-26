@@ -94,7 +94,7 @@ visitFASTTReturnStatement: aTReturnStatement
 
 In some cases, we need to skip the visit for some entities, but not all of them. For example, with conditional statements. In that case we generate a method like this:
 
-```Smalltalk
+```smalltalk
 visitFASTTConditionalStatement: aTConditionalStatement
 
 	<generated>
