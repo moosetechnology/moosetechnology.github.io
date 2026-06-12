@@ -17,9 +17,9 @@ export default defineConfig({
 			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
 			remarkGemoji
 		],
-		rehypePlugins: [
-			rehypeMermaid
-		]
+		rehypePlugins: [[rehypeMermaid, {
+            strategy: 'img-svg',
+        }],]
 	},
 	image: {
 		service: sharpImageService({ limitInputPixels: false }),
@@ -239,6 +239,10 @@ export default defineConfig({
 												{
 													label: 'FAST Pharo',
 													link: '/users/ast/fast-pharo',
+												},
+												{
+													label: 'FAST Python',
+													link: '/users/ast/fast-python',
 												}
 
 											]

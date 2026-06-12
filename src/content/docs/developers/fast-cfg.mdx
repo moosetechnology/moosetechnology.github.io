@@ -1,0 +1,496 @@
+---
+authors:
+- CyrilFerlicot
+title: "Building a Control Flow Graph (CFG) for FAST"
+---
+
+
+FAST models represent the AST of a programming language. 
+
+Multiple static analysis we might do on those models requires the ability to have a control flow graph (CFG). Due to the nature of FAST, it is not possible to have a CFG for FAST languages since we have no intermediate representation of the AST. But FAST now provides helpers to speedup the implementation of a CFG algo for your language.
+
+## Introduction
+
+### CFG explanation
+
+A control flow graph is an algorithm that will represent the AST as a graph of blocks splitting each time a conditional appears. We can consider that if multiple expressions are in the same block, they will be executed together. Multiple structures in different programming languages can create those splits such as:
+- if
+- elif
+- conditional expressions (or one linne if)
+- while
+- for
+- switch
+- try catch
+
+Here is an example of possible CFG for this python code:
+
+```python
+def process_data(items):
+    index = 0
+    
+    while index < len(items):
+        item = items[index]
+        
+        if item == "STOP":
+            print("Stopping processing.")
+            break  # Exits the loop immediately
+        
+        if item == "SKIP":
+            index += 1
+            continue  # Skips to next iteration
+        
+        print(f"Processing: {item}")
+        index += 1
+    
+    return "Done"
+```
+
+CFG:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		823041280
+	end
+
+
+subgraph Exit
+		direction TB
+		498546176
+	end
+
+
+823041280{"index = 0 "}
+	823041280 ----> 536387584
+	536387584("index < len(items) ")
+	536387584 -- True --> 915574016
+	536387584 -- False --> 498546176
+	915574016("item = items[index]<br/>        <br/>        if item == &quot;STOP&quot; ")
+	915574016 -- True --> 261902848
+	915574016 -- False --> 1007007488
+	261902848("print(&quot;Stopping processing.&quot;)<br/>            break ")
+	261902848 ----> 498546176
+	498546176((("return &quot;Done&quot; ")))
+	1007007488("item == &quot;SKIP&quot; ")
+	1007007488 -- True --> 459178752
+	1007007488 -- False --> 438291456
+	459178752("index += 1<br/>            continue ")
+	459178752 ----> 536387584
+	438291456("print(f&quot;Processing: {item}&quot;)<br/>        index += 1 ")
+	438291456 ----> 536387584
+```
+
+For more information you can read external documentations on CFG.
+
+### Variations 
+
+The CFG algo can have variations depending on the analysis we need to do with it.
+
+A first variation is that some CFG want an unique exit for our graph while other allows multiple exits. The current FAST implementation choose to have only one exit. It create a `FASTCFGNullBlock` in case we have multiple exits. In case you want multiple exits, it would be possible to add a setting for this.
+
+Another variation is on the try catch. Some implementation create one normal block for each statement of the try block because an error car arise at each statement. We decided to create a unique try block to avoid having a graph that is too big. If you want to use the CFG to do analysis about excetions, we could add an option to split the node into 
+ultiple nodes. 
+
+A last variation is that some CFG decide to split each blocks into one statements blocks. The default implementation provided by this project groups each statements executed together.  
+
+## Getting started
+
+:::note
+This project was done while building the CFG of FAST-Python. All examples will be illustrated with pieces of code of the Python CFG except of the feature is not required in Python.
+:::
+
+### Metamodel requirements
+
+In order to use all features provided by the CFG algorithm, a metamodel need to use some traits:
+- `FASTTStatement` needs to be used by all statements of the model. This will be used to collect the statements to add in a block
+- `FASTTStatementBlock` needs to be used to navigate the blocks of code in the AST
+- `FASTTReturnStatement` needs to be used to stop the visit of the current branch of a function/method when the node is encountered
+- `FASTTBreakStatement` and `FASTTContinueStatement` needs to be used to manage the loops
+- `FASTTConditionalStatement` needs to be used to ease the building of conditional blocks
+
+If those traits are missing or missused, it will be much more complex to build the CFG.
+
+### Getting a visitor
+
+A requirement in order to build a CFG is to have a visitor for our FAST model. 
+
+This task can be long and we can easily do mistakes if we do it by hand so I recommand to generate it. It is possible to generate it automatically since Moose 13:
+
+Using the visitor generator is as simple as adding one method on the class side of your generator. For example, in FAST-Python:
+
+```smalltalk
+FASTPythonMetamodelGenerator class>>metamodelToolGenerators
+
+	^ { FamixVisitorGenerator }
+```
+
+This will tell the generator to also generate a visitor trait.
+
+It is possible to also customize the package in which the visitor is generated by overridin `#packageNameForVisitor`:
+
+```smalltalk
+FASTPythonMetamodelGenerator class>>packageNameForVisitor
+
+	^ #'FAST-Python-Visitor'
+```
+
+For more information on this visitor, you can check [this blog post](blog/2026-05-20-improving-visitor-generator.md).
+
+Now we have a trait `FASTPyTVisitor` with all visit methods.
+
+In my case I choose to implement a class using this trait:
+
+```smalltalk
+Object << #FASTPythonVisitor
+	traits: {FASTPyTVisitor};
+	slots: {};
+	tag: 'Visitor';
+	package: 'FAST-Python-Model'
+```
+
+### Initializing the CFG builder
+
+`FAST` is providing a trait to help build a CFG algo: `FASTCFGUtility`. 
+
+The first step to do is to create a class using this trait:
+
+```smalltalk
+FASTPythonVisitor << #FASTPythonCFGVisitor
+	traits: {FASTTCFGUtility};
+	tag: 'CFG/DataFlow';
+	package: 'FAST-Python-Tools'
+```
+
+This class needs to initialize its trait like this:
+
+```smallatlk
+initialize
+
+	super initialize.
+	self initializeCFG.
+	started := false
+```
+
+This class needs to be adapted in order to build a CFG. This will be covered in future sections, but before this, I will explain how the algorithm is working so that you can understand what is happening during the constructions of the CFG. Depending on the language, this might not be needed, but if you language has some uncommon features, this might be useful. 
+
+### Algorithm explanation
+
+#### Building of blocks
+
+This algorithm is a second version of FAST CFG. The first implementation choose to create nodes when we encountered the first statement of the node. This made complexe the management of the previous nodes. This new version decide to save all statements we encounter in the variable `#currentStatement` of the visitor and to use those statements to build a block once we know the block is done.
+
+The management of statements will be done automatically via this method provided by `FASTCFGUtility`:
+
+```smalltalk
+visitFASTTStatement: aStatement
+	"Register the statement in the list of statements to create the current block once we find a conditional or the end of a block"
+
+	self addStatement: aStatement
+```
+
+This has just one problem: it will add control structures as statements. In order to remediate to this, all control structure visit methods will need to be overriden to skip the invocation of `visitTStatement:`. We will go over all of those in the next sections.
+
+In order to build a bloc, the API used will depend on the kind of block. This will be covered in the next sections of this documentation.
+
+#### The kinds of blocks
+
+It exists multiple kind of blocks. 
+
+All blocks store:
+- A boolean to know if they are the start of a CFG graph via `#isStart`
+- A list of statements that are in the block. At the exception of a `FASTCFGTryBlock` that can be stopped at any statement, all statements of a block will be executed if the execution enter this block
+- The previous blocks pointing to me in the graph
+
+All blocks should be able to provide their next blocks via `#nextBlocks`, but the number of blocks possible vary depending on the node. 
+
+A node should return true to `#isFull` if it has all its required next blocks. 
+
+A node should return true to `#isFinal` if it is the exit of the CFG graph. A CFG graph will always have one exit. In case of multiple exits, we create a `FASTCFGNullBlock` to join the exits.
+
+##### FASTCFGBlock
+
+I am a block to represent a basic execution block in a CFG graph.
+
+A basic execution block is a block that does not end with a conditional and that have only one next block.
+
+For example, this function only has one normal block:
+
+```python
+def func():
+	index = 0
+	index += 3
+	return index
+```
+CFG: 
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		409149184
+	end
+
+
+409149184{"index = 0<br/>	index += 3<br/>	return index "}
+```
+
+##### FASTConditionalBlock 
+
+I am a node representing a two way conditional block.
+
+I should have 2 next blocks. The first one is the one happening if the condition is true. The second, when the condition is false.
+
+I am mostly used to define an if or an elif or a loop (while/for).
+
+If return true to `#isLoop` if I am a loop. This is important to build the CFG.
+
+Example:
+
+```python
+def func(a):
+	index = 0
+	if a > 3:
+		index += 3
+	return index
+```
+
+CFG: 
+
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		937046272
+	end
+
+
+subgraph Exit
+		direction TB
+		663880704
+	end
+
+
+937046272{"index = 0<br/>	if a > 3 "}
+	937046272 -- True --> 368856576
+	937046272 -- False --> 663880704
+	368856576("index += 3 ")
+	368856576 ----> 663880704
+	663880704((("return index ")))
+	
+```
+
+##### FASTCFGSwitchBlock and FASTCFGTryBlock
+
+Those blocks represent conditional blocks with multiple exits (0 to n).
+
+This will be used to define blocks for switch or try catch.
+
+They keep an ordered dictionary for the next blocks association the pattern determining the next block condition and the block executed if the pattern matches.
+
+In case the pattern is nil, it means that we have the default block (for example: a default case in a switch or a finally block in a try catch).
+
+Example:
+
+```python
+def func(a):
+	match a:
+		case 1: b()
+		case 2: c()
+		case _: d()
+```
+CFG:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		79900672
+	end
+
+
+subgraph Exit
+		direction TB
+		1008715264
+	end
+
+
+79900672{"a "}
+	79900672 -- 1 --> 716809984
+	79900672 -- 2 --> 45093632
+	79900672 -- nil --> 904182784
+	716809984("b() ")
+	716809984 ----> 1008715264
+	1008715264(((" ")))
+	45093632("c() ")
+	45093632 ----> 1008715264
+	904182784("d() ")
+	904182784 ----> 1008715264
+	
+```
+
+##### FASTNullBlock
+
+I am a node that is created if a CFG have multiple exits. In that case I am created and I follow those nodes to have only one exit point.
+
+If the CFG already has one exit, I am not present in the graph.
+
+#### Context management 
+
+`FASTCFGUtility` is keeping a context of the current visit of the FAST tree. This will be used for multiple things such as:
+- Determining the blocks preceding a block we are currently creating
+- Determining which loop is impacted by a break or continue in case of imbricated loops 
+- Determining which nodes should loop when we finish to visit the main statement block of a loop 
+
+The context is a stack of `FASTCFGContextEntry`. It will have a root entry for the CFG and we will stack one entry each time we enter a conditional. The entry will save the conditional block associated to it. Once we get out of this conditional, we pop the entry.
+
+In a context entry, on top of the conditional we save the current blocks created in the active branch of the conditional been visited. If a branch is finished, this collection of blocks should be flushed.
+
+This is needed because when we resolve the previous blocks of a block. If a block is the first of its branch, then its previous block in the top conditional in the stack. Else, it will be all "unfinished" blocks in the current list of blocks. An unfinished block is a block that does not have all its next blocks.
+
+To illustrate this, let's check the CFG of this Python function:
+
+```python
+def func(i):
+	if i > 4:
+		if i > 10:
+			print(1)
+		else:
+			print(2)
+		pass
+```
+
+Let's imagine we already create a conditional block for `i > 4` and we are creating the conditional block for `i > 10`. 
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		72218624
+	end
+
+
+
+72218624{"i > 4 "}
+	
+```
+
+Currently our context stack has 2 entries. The root entry and an entry for the `i > 4` conditional block. This last entry does not have any current block. Since the current blocks are empty, we should add our block next to the top conditional.
+
+
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		72218624
+	end
+
+
+    72218624{"i > 4 "}
+	72218624 -- True --> 317195520
+	317195520("i > 10 ")
+	
+```
+
+Now let's fast forward to the creation of the `pass` block. Here is our current graph:
+
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		72218624
+	end
+
+
+72218624{"i > 4 "}
+	72218624 -- True --> 317195520
+	317195520("i > 10 ")
+	317195520 -- True --> 1053648128
+	317195520 -- False --> 517421568
+	1053648128("print(1) ")
+	517421568("print(2) ")
+	
+```
+
+In the context we still have two entries. One for the root and one for the `i > 4` conditional. And we have the `i > 10` conditional block in the list of current blocks of the top entry.
+
+When looking for the pervious blocks of the `pass` block, since it has previous blocks, we check all of them to find unfinished blocks and we find two blocks that do not have their required amount of next blocks: `print(1)` and `print(2)` that are both basic blocks without next block. Thus we add those two blocks as previous blocks of `pass`:
+
+
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		72218624
+	end
+
+72218624{"i > 4 "}
+	72218624 -- True --> 317195520
+	317195520("i > 10 ")
+	317195520 -- True --> 1053648128
+	317195520 -- False --> 517421568
+	1053648128("print(1) ")
+	1053648128 ----> 453648128
+	453648128("pass ")
+	517421568("print(2) ")
+	517421568 ----> 453648128
+	
+```
+
+And now we are only missing the exit since we have 2 exits currently. We build this Null block the same way as other blocks. Once we build it, we only have a root context entry left with the `i > 4` conditional block in its current blocks. Since the list of current blocks is not empty, we are in the second case. When checking this previous block, we can find that two blocks are not finished: `i > 4` and `pass`:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		72218624
+	end
+
+
+subgraph Exit
+		direction TB
+		900094720
+	end
+
+
+72218624{"i > 4 "}
+	72218624 -- True --> 317195520
+	72218624 -- False --> 900094720
+	317195520("i > 10 ")
+	317195520 -- True --> 1053648128
+	317195520 -- False --> 517421568
+	1053648128("print(1) ")
+	1053648128 ----> 453648128
+	453648128("pass ")
+	453648128 ----> 900094720
+	900094720(((" ")))
+	517421568("print(2) ")
+	517421568 ----> 453648128
+	
+```
+
+:::caution
+This explanation on how to determine the previous blocks of a block is simplified. There is one case that was not explained: the break or continue statements. 
+When we are in the second solution (the block to create is not the first block of its statement block), we select all unfinished blocks as previous blocks. But in case some of those blocks ends with a break or continue statement, we select them only if they are not stopping the loop in their scope. 
+This will be more detailed once we will explain how to use `FASTCFGUtility` to build loops.
+:::
+
+Now that we explained a little the inner mecanism of the CFG, let's implement our Python CFG!
+
+## Managing the entry points 
+
+This section will be mostly specific to Python but canr give you ideas on how to implement your own visitor.
+
+Some CFG are simpler to implement than others. Some languages can have only one structure used as base of a CFG. For example, a function. 
+
+In Python, we can build a CFG from:
+- A function
+- A method
+- A class
+- A lambda
+- A module 
+
+This change the action to do when we visit those methods. For the provided FAST node, we need 
