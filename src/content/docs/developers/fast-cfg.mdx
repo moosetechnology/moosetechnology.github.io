@@ -9,6 +9,10 @@ FAST models represent the AST of a programming language.
 
 Multiple static analysis we might do on those models requires the ability to have a control flow graph (CFG). Due to the nature of FAST, it is not possible to have a CFG for FAST languages since we have no intermediate representation of the AST. But FAST now provides helpers to speedup the implementation of a CFG algo for your language.
 
+:::note
+During the documentation, when we talk about "blocks" it means the blocks of the CFG graph. When we talk about "nodes", it means the nodes of the FAST model.
+:::
+
 ## Introduction
 
 ### CFG explanation
@@ -659,5 +663,202 @@ I needed to do that for `FASTPyBreakStatement` and `FASTPyContinueStatemet` also
 :::
 
 ## Managing if and elif 
+
+One of the most used conditional structures in programming languages are the conditions: if.
+
+In order to manage those we have the method `#buildAndUseConditionalDuring:`. This method needs to be called one the condition of the if has been visited and takes as parameter a block executing the visit of the `then` and `else` statement blocks:
+
+```smalltalk
+FASTPythonCFGVisitor>>visitFASTPyIfStatement: anIfStatement
+
+	self visitFASTTConditionalStatement: anIfStatement.
+
+	self buildAndUseConditionalDuring: [
+			self visitEntity: anIfStatement thenClause.
+			self visitFASTPyTWithElseClause: anIfStatement ]
+```
+
+Here is what is happening:
+- First it will create a conditional block with the current statements
+- It will find the previous blocks of this new node
+- It pushes a new context entry on the context stack linked to this conditional
+- During the visit of the `then`, the blocks created will be saved in the current blocks of the context entry
+- After the visit of the statement block of the `then`, the current blocks will be flushed
+- If we have an else, the same operation apply once again
+- At the end of the visit we pop this context entry
+
+Now we are able to generate the CFG of pieces of code like this:
+
+```python
+def f(i):
+    y()
+    if i > 3:
+        print(i)
+    else:
+        pass
+    return True
+```
+
+CFG:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		1
+	end
+
+	subgraph Exit
+		direction TB
+		4
+	end
+
+	1{"y()<br/>    if i > 3 "}
+	2("print(i) ")
+	3("pass ")
+	4("return True ")
+	1 -- True --> 2
+	1 -- False --> 3
+	2 ----> 4
+	3 ----> 4	
+```
+
+### Elif management
+
+Elif if a little more tricky to manage because the "false" branch is often not contained in the `elif` FAST node, but in the if statement directly either in the form of another elif, as an else or as nothing. 
+
+The first step to manage them is to visit them in our if. The previous piece of code becomes:
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyIfStatement: anIfStatement
+
+	self visitFASTTConditionalStatement: anIfStatement.
+
+	self buildAndUseConditionalDuring: [
+			self visitEntity: anIfStatement thenClause.
+			self visitCollection: anIfStatement elifClauses.
+			self visitFASTPyTWithElseClause: anIfStatement ]
+```
+
+Now we need to define what is happening during the visit of the elif. We cannot use `#buildAndUseConditionalDuring:` as we do in the if because it would pop the elif conditional block from the context stack once it is done and the next elif or else will not be linked to the right conditional. 
+
+Instead we can use a little trick allowed by `FASTCFGUtility`: We can create and push a new conditional block on the context without poping it at the end. Instead, it will be poped at the end of the closest `#buildAndUseConditionalDuring:` finalization. This method does not just pop the last context. It pops all context entries until it poped the context entry it created. Thus, the visit of the elif can be done like this:
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyElifClause: anElifClause
+
+	self visitFASTTConditionalStatement: anElifClause.
+	
+	"In the case of the elif, the else clause is in the parent and not here. So we create a conditional that will be automatically popped when we will finalize the containing if."
+	self buildAndPushBlockOfType: FASTCFGConditionalBlock.
+	self visitFASTTStatementBlock: anElifClause
+```
+
+For example here is what happens if we build the CFG of this function:
+
+```python
+def f(i):
+    if i > 3:
+        print(i)
+    elif i < 8:
+        pass
+    else:
+      a()
+```
+
+Here is what is happening:
+1) We visit the conditional `i > 3` and add it to the current code to save
+2) `#buildAndUseConditionalDuring:` will create a conditional block with `i > 3` (flushinf the current statement doing this) and pushes it on the context stack
+3) We visit the `then` statement block. This will save `print(i)` in the list of current statements
+4) At the end of the statement block, `#endBlock` is invoked. It create a new basic block and add it after the top conditional block `i > 3` becoming the "true" branch
+5) We visit the `elif` and add save the condition
+6) `#buildAndPushBlockOfType:` will create a new conditional block with the condition we just saved and will be pushed on the context stack
+7) We visit the statement block of the elif. This will save `pass` in the current statements and create a basic block with it. It will associate it to the top conditional in the stack: the elif `1 < 8`.
+8) We finish the visit of the elif but we do not pop the top context to be able to manage the false branch
+9) We visit the else statement block. This will save the call to `a()` then create a new basic block with it. It will associate it to the top conditional which is still the elif `i < 8` becoming its "false" branch
+10) At the end of `#buildAndUseConditionalDuring:`, we pop every context until we poped the `i > 3` conditional block. This will pop 2 context entries in our case: `i > 8` and `i < 3`
+11) We generate the null block since we have 3 exits (`print(i)`, `pass` and `a()`)
+
+This produces
+
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		1
+	end
+
+	subgraph Exit
+		direction TB
+		4
+	end
+
+	1{"i > 3 "}
+	2("print(i) ")
+	3{"i < 8 "}
+	4(((" ")))
+	5("pass ")
+	6("a() ")
+	1 -- True --> 2
+	1 -- False --> 3
+	2 ----> 4
+	3 -- True --> 5
+	3 -- False --> 6
+	5 ----> 4
+	6 ----> 4
+	
+```
+
+### Conditional expression
+
+Another case to manage are conditional expression. Those are if/then/else that can be done in one line but the then and else contains only one statement instead of a statement block.
+
+For example in python:
+
+```python
+def f(i):
+    x() if i % 2 == 0 else y()
+```
+
+It management is similar to the one of the if statement with one difference. Since we do not have statement blocks to visit, we need to declare ourselves that the `then` and `else` blocks are finished:
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyConditionalExpression: aConditionalExpression
+
+	self visitFASTTConditionalStatement: aConditionalExpression.
+
+	self buildAndUseConditionalDuring: [
+			self addStatement: aConditionalExpression thenExpression.
+			self endBlock.
+			self addStatement: aConditionalExpression elseExpression.
+			self endBlock ]
+```
+
+This will produce this CFG:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		1
+	end
+
+	subgraph Exit
+		direction TB
+		4
+	end
+
+	1{"i % 2 == 0 "}
+	2("x() ")
+	3("y() ")
+	4(((" ")))
+	1 -- True --> 2
+	1 -- False --> 3
+	2 ----> 4
+	3 ----> 4
+```
+
+### Loops
 
 TODO
