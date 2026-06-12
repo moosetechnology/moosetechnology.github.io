@@ -17,9 +17,13 @@ export default defineConfig({
 			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
 			remarkGemoji
 		],
-		rehypePlugins: [[rehypeMermaid, {
-            strategy: 'img-svg',
-        }],]
+		rehypePlugins: [
+			[
+				rehypeMermaid, {
+            		strategy: 'img-svg',
+        		}
+			],
+		]
 	},
 	image: {
 		service: sharpImageService({ limitInputPixels: false }),

@@ -51,35 +51,48 @@ CFG:
 flowchart TD
 	subgraph Entry
 		direction TB
-		823041280
+		1
 	end
 
-
-subgraph Exit
+	subgraph Exit
 		direction TB
-		498546176
+		4
 	end
 
-
-823041280{"index = 0 "}
-	823041280 ----> 536387584
-	536387584("index < len(items) ")
-	536387584 -- True --> 915574016
-	536387584 -- False --> 498546176
-	915574016("item = items[index]<br/>        <br/>        if item == &quot;STOP&quot; ")
-	915574016 -- True --> 261902848
-	915574016 -- False --> 1007007488
-	261902848("print(&quot;Stopping processing.&quot;)<br/>            break ")
-	261902848 ----> 498546176
-	498546176((("return &quot;Done&quot; ")))
-	1007007488("item == &quot;SKIP&quot; ")
-	1007007488 -- True --> 459178752
-	1007007488 -- False --> 438291456
-	459178752("index += 1<br/>            continue ")
-	459178752 ----> 536387584
-	438291456("print(f&quot;Processing: {item}&quot;)<br/>        index += 1 ")
-	438291456 ----> 536387584
+	1("index = 0 ")
+	2(("index < len(items) "))
+	3{"item = items[index]<br/><br/>        if item == &quot;STOP&quot; "}
+	4("return &quot;Done&quot; ")
+	5("print(&quot;Stopping processing.&quot;)<br/>            break ")
+	6{"item == &quot;SKIP&quot; "}
+	7("index += 1<br/>            continue ")
+	8("print(f&quot;Processing: {item}&quot;)<br/>        index += 1 ")
+	1 ----> 2
+	2 -- True --> 3
+	2 -- False --> 4
+	3 -- True --> 5
+	3 -- False --> 6
+	5 ----> 4
+	6 -- True --> 7
+	6 -- False --> 8
+	7 ----> 2
+	8 ----> 2
+	
 ```
+
+:::note
+Here is the legend of blocks shape used for this documentation:
+
+```mermaid
+flowchart TD
+    A("Basic Block")
+    B((("Null block")))
+    C(("Loop"))
+    D{"If"}
+    E{{"Switch"}}
+    F[/"Try Catch"\]
+```
+:::
 
 For more information you can read external documentations on CFG.
 
@@ -246,11 +259,10 @@ CFG:
 flowchart TD
 	subgraph Entry
 		direction TB
-		409149184
+		1
 	end
 
-
-409149184{"index = 0<br/>	index += 3<br/>	return index "}
+	1("index = 0<br/>	index += 3<br/>	return index ")
 ```
 
 ##### FASTConditionalBlock 
@@ -280,22 +292,20 @@ CFG:
 flowchart TD
 	subgraph Entry
 		direction TB
-		937046272
+		1
 	end
 
-
-subgraph Exit
+	subgraph Exit
 		direction TB
-		663880704
+		3
 	end
 
-
-937046272{"index = 0<br/>	if a > 3 "}
-	937046272 -- True --> 368856576
-	937046272 -- False --> 663880704
-	368856576("index += 3 ")
-	368856576 ----> 663880704
-	663880704((("return index ")))
+	1{"index = 0<br/>	if a > 3 "}
+	2("index += 3 ")
+	3("return index ")
+	1 -- True --> 2
+	1 -- False --> 3
+	2 ----> 3
 	
 ```
 
@@ -324,27 +334,25 @@ CFG:
 flowchart TD
 	subgraph Entry
 		direction TB
-		79900672
+		1
 	end
 
-
-subgraph Exit
+	subgraph Exit
 		direction TB
-		1008715264
+		5
 	end
 
-
-79900672{"a "}
-	79900672 -- 1 --> 716809984
-	79900672 -- 2 --> 45093632
-	79900672 -- nil --> 904182784
-	716809984("b() ")
-	716809984 ----> 1008715264
-	1008715264(((" ")))
-	45093632("c() ")
-	45093632 ----> 1008715264
-	904182784("d() ")
-	904182784 ----> 1008715264
+	1{{"a "}}
+	2("b() ")
+	3("c() ")
+	4("d() ")
+	5(((" ")))
+	1 -- 1 --> 2
+	1 -- 2 --> 3
+	1 -- nil --> 4
+	2 ----> 5
+	3 ----> 5
+	4 ----> 5
 	
 ```
 
@@ -382,16 +390,14 @@ def func(i):
 Let's imagine we already create a conditional block for `i > 4` and we are creating the conditional block for `i > 10`. 
 
 ```mermaid
+
 flowchart TD
 	subgraph Entry
 		direction TB
-		72218624
+		1
 	end
 
-
-
-72218624{"i > 4 "}
-	
+	1{"i > 4 "}
 ```
 
 Currently our context stack has 2 entries. The root entry and an entry for the `i > 4` conditional block. This last entry does not have any current block. Since the current blocks are empty, we should add our block next to the top conditional.
@@ -402,13 +408,12 @@ Currently our context stack has 2 entries. The root entry and an entry for the `
 flowchart TD
 	subgraph Entry
 		direction TB
-		72218624
+		1
 	end
 
-
-    72218624{"i > 4 "}
-	72218624 -- True --> 317195520
-	317195520("i > 10 ")
+	1{"i > 4 "}
+	2{"i > 10 "}
+	1 -- True --> 2
 	
 ```
 
@@ -419,18 +424,16 @@ Now let's fast forward to the creation of the `pass` block. Here is our current 
 flowchart TD
 	subgraph Entry
 		direction TB
-		72218624
+		1
 	end
 
-
-72218624{"i > 4 "}
-	72218624 -- True --> 317195520
-	317195520("i > 10 ")
-	317195520 -- True --> 1053648128
-	317195520 -- False --> 517421568
-	1053648128("print(1) ")
-	517421568("print(2) ")
-	
+	1{"i > 4 "}
+	2{"i > 10 "}
+	4("print(1) ")
+	5("print(2) ")
+	1 -- True --> 2
+	2 -- True --> 4
+	2 -- False --> 5
 ```
 
 In the context we still have two entries. One for the root and one for the `i > 4` conditional. And we have the `i > 10` conditional block in the list of current blocks of the top entry.
@@ -443,20 +446,19 @@ When looking for the pervious blocks of the `pass` block, since it has previous 
 flowchart TD
 	subgraph Entry
 		direction TB
-		72218624
+		1
 	end
 
-72218624{"i > 4 "}
-	72218624 -- True --> 317195520
-	317195520("i > 10 ")
-	317195520 -- True --> 1053648128
-	317195520 -- False --> 517421568
-	1053648128("print(1) ")
-	1053648128 ----> 453648128
-	453648128("pass ")
-	517421568("print(2) ")
-	517421568 ----> 453648128
-	
+	1{"i > 4 "}
+	2{"i > 10 "}
+	4("print(1) ")
+	5("print(2) ")
+	6("pass ")
+	1 -- True --> 2
+	2 -- True --> 4
+	2 -- False --> 5
+	4 ----> 6
+	5 ----> 6
 ```
 
 And now we are only missing the exit since we have 2 exits currently. We build this Null block the same way as other blocks. Once we build it, we only have a root context entry left with the `i > 4` conditional block in its current blocks. Since the list of current blocks is not empty, we are in the second case. When checking this previous block, we can find that two blocks are not finished: `i > 4` and `pass`:
@@ -465,30 +467,28 @@ And now we are only missing the exit since we have 2 exits currently. We build t
 flowchart TD
 	subgraph Entry
 		direction TB
-		72218624
+		1
 	end
 
-
-subgraph Exit
+	subgraph Exit
 		direction TB
-		900094720
+		3
 	end
 
-
-72218624{"i > 4 "}
-	72218624 -- True --> 317195520
-	72218624 -- False --> 900094720
-	317195520("i > 10 ")
-	317195520 -- True --> 1053648128
-	317195520 -- False --> 517421568
-	1053648128("print(1) ")
-	1053648128 ----> 453648128
-	453648128("pass ")
-	453648128 ----> 900094720
-	900094720(((" ")))
-	517421568("print(2) ")
-	517421568 ----> 453648128
-	
+	1{"i > 4 "}
+	2{"i > 10 "}
+	3(((" ")))
+	4("print(1) ")
+	5("print(2) ")
+	6("pass ")
+	1 -- True --> 2
+	1 -- False --> 3
+	2 -- True --> 4
+	2 -- False --> 5
+	4 ----> 6
+	5 ----> 6
+	6 ----> 3
+		
 ```
 
 :::caution
@@ -562,24 +562,22 @@ Will produce this:
 flowchart TD
 	subgraph Entry
 		direction TB
-		817844992
+		1
 	end
 
-
-subgraph Exit
+	subgraph Exit
 		direction TB
-		495434240
+		4
 	end
 
-
-817844992{"print(i) "}
-	817844992 ----> 554649344
-	554649344("i > 3 ")
-	554649344 -- True --> 842246144
-	554649344 -- False --> 495434240
-	842246144("i -= 1 ")
-	842246144 ----> 554649344
-	495434240(((" ")))
+	1("print(i) ")
+	2(("i > 3 "))
+	3("i -= 1 ")
+	4(((" ")))
+	1 ----> 2
+	2 -- True --> 3
+	2 -- False --> 4
+	3 ----> 2
 ```
 
 Since there is generic structure for loops in FAST, we need to manage their visit ourselves. This start with the production of a block in the loop is preceeded by statements. 
@@ -620,12 +618,10 @@ Will be:
 flowchart TD
 	subgraph Entry
 		direction TB
-		531223296
+		1
 	end
 
-
-531223296{"return 3 "}
-
+	1("return 3 ")
 ```
 
 This is managed by `FASTCFGUtility` if your return statement is using `FASTTReturnStatement`. Its visit will raise an exception to skip the rest of the block. 
