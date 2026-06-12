@@ -193,6 +193,25 @@ This has just one problem: it will add control structures as statements. In orde
 
 In order to build a bloc, the API used will depend on the kind of block. This will be covered in the next sections of this documentation.
 
+:::note
+Depending on the FAST language, it is possible that expressions are also statements. This is the case in Python. In that case we need to add expressions only if they are an expression statement like this:
+
+```smalltalk
+FASTPythonCFGVisitor>>visitFASTPyExpression: aFASTPyExpression
+	"We ignore expressions that are not in a statement block"
+
+	aFASTPyExpression isExpressionStatement ifTrue: [ ^ super visitFASTPyExpression: aFASTPyExpression ]
+```
+
+```smalltalk
+FASTPyExpression>>isExpressionStatement
+
+	self containersDo: [ :container | (container isOfType: FASTTStatementBlock) ifTrue: [ ^ true ] ].
+
+	^ false
+```
+:::
+
 #### The kinds of blocks
 
 It exists multiple kind of blocks. 
@@ -493,4 +512,156 @@ In Python, we can build a CFG from:
 - A lambda
 - A module 
 
-This change the action to do when we visit those methods. For the provided FAST node, we need 
+This change the action to do when we visit those methods. For the provided FAST node, we need to visit the content of its statement block. But in all other cases, we need to just add them as a statement to the next block to create. 
+
+In order to do that I decided to add a `#started` instance variable initialized to false and add this method:
+
+```smalltalk
+FASTPythonCFGVisitor>>visitPossibleEntryPoints: aFASTEntity
+	"I am the definition of a function, method, class, module or lambda. I can be the entry point of a CFG but I can also be a statement encountered in another definition. 
+	
+	In the first case I visit the definition's statement block. Else I consider the definition as a statement only."
+
+	started
+		ifTrue: [ self visitFASTTStatement: aFASTEntity ]
+		ifFalse: [
+				started := true.
+				self visitFASTTStatementBlock: aFASTEntity ]
+```
+
+Then I just need to call this method from the visit method of each entry points:X
+
+```smalltalk
+FASTPythonCFGVisitor>>visitFASTPyModule: aModule
+
+	self visitPossibleEntryPoints: aModule
+```
+
+:::note
+Maybe this could be made easier, but FAST does not have the necessary information to automate this and it was decided by FAST maintainer to not add those missing information for now in FAST. 
+:::
+
+## Handling basic blocks
+
+A basic block is a block with only one next block. They can be created by `FASTCFGUtility` directly or manually depending on the case.
+
+`FASTCFGUtility` will create a basic node automatically each time we finish to visit a `FASTTStatementBlock` even if it is stopped by a Break, Continue or Return statement. This happens for example at the end of a function, if branch, switch branch, loop...
+
+In some other cases, we will need to build a basic block ourselves. For example, before managing a loop. Everything that happens before a loop should be in their own block because the condition of the loop can be executed alone at each step of the loop. 
+
+```python
+def func(i):
+	print(i)
+	while i > 3:
+		i -= 1
+```
+
+Will produce this:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		817844992
+	end
+
+
+subgraph Exit
+		direction TB
+		495434240
+	end
+
+
+817844992{"print(i) "}
+	817844992 ----> 554649344
+	554649344("i > 3 ")
+	554649344 -- True --> 842246144
+	554649344 -- False --> 495434240
+	842246144("i -= 1 ")
+	842246144 ----> 554649344
+	495434240(((" ")))
+```
+
+Since there is generic structure for loops in FAST, we need to manage their visit ourselves. This start with the production of a block in the loop is preceeded by statements. 
+
+`FASTCFGUtility` propose two ways to create a basic block:
+- `#buildBlockIfNeeded` : Produces a basic block if we have statements saved and add it in the graph
+- `#endBlock` : This method does the same as the previous one, but also flushes the current blocks at the top of the context
+
+Most of the time, you will need to `#buildBlockIfNeeded`, but in some cases we might need `#endBlock`. For example, for conditional expressions that do not contain statement blocks.
+
+So now we can start our loop like this:
+
+```smalltalk
+FASTPythonCFGVisitor>>visitFASTPyWhileStatement: aWhileStatement
+
+	self buildBlockIfNeeded.
+	self visitFASTTConditionalStatement: aWhileStatement.
+
+	"We will detail the remaining implementation in a future section"
+```
+
+### Case of the return statement
+
+When we encounter a return statement, we should stop the visit of the current statement block.
+
+The CFG of:
+
+```python
+def i():
+    return 3
+    if y > 4:
+	a()
+```
+
+Will be:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		531223296
+	end
+
+
+531223296{"return 3 "}
+
+```
+
+This is managed by `FASTCFGUtility` if your return statement is using `FASTTReturnStatement`. Its visit will raise an exception to skip the rest of the block. 
+
+```FASTCFGPythonVisitor>>visitFASTTReturnStatement: aTReturnStatement
+
+	super visitFASTTReturnStatement: aTReturnStatement.
+	FASTCFGStatementBlockInterruption signal
+```
+
+:::caution
+It can happen that the visitor will visit `FASTTReturnStatement` before `FASTTStatement`. If that happens, the return statement will be missing in the statements of the current block.
+
+For example, in python the generator creats this visit method:
+
+```smalltalk
+FASTPyTVisitor>>visitFASTPyReturnStatement: aReturnStatement
+
+	<generated>
+	self visitFASTTReturnStatement: aReturnStatement.
+	self visitFASTPyStatement: aReturnStatement
+```
+
+We need to override it to change the order and start by adding the statement:
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyReturnStatement: aReturnStatement
+	"We need to visit the statement before the TReturnStatement to add the return statement in the list of statements. Else the visit of #FASTPyStatement will be skipped by the exception raised FASTCFGStatementBlockInterruption"
+
+	self visitFASTPyStatement: aReturnStatement.
+	self visitFASTTReturnStatement: aReturnStatement.
+```
+
+I needed to do that for `FASTPyBreakStatement` and `FASTPyContinueStatemet` also.
+:::
+
+## Managing if and elif 
+
+TODO
