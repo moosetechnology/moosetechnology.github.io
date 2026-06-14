@@ -503,7 +503,19 @@ This will be more detailed once we will explain how to use `FASTCFGUtility` to b
 
 Now that we explained a little the inner mecanism of the CFG, let's implement our Python CFG!
 
-## Managing the entry points 
+## Development of the CFG visitor
+
+We will now develop the CFG visitor to be able to use it like this:
+
+```smalltalk
+FASTPythonCFGVisitor buildCFGOf: aModel allFunctionDefinitions first.
+
+"or"
+
+aModel allFunctionDefinitions first cfg
+```
+
+### Managing the entry points 
 
 This section will be mostly specific to Python but canr give you ideas on how to implement your own visitor.
 
@@ -545,7 +557,7 @@ FASTPythonCFGVisitor>>visitFASTPyModule: aModule
 Maybe this could be made easier, but FAST does not have the necessary information to automate this and it was decided by FAST maintainer to not add those missing information for now in FAST. 
 :::
 
-## Handling basic blocks
+### Handling basic blocks
 
 A basic block is a block with only one next block. They can be created by `FASTCFGUtility` directly or manually depending on the case.
 
@@ -603,7 +615,7 @@ FASTPythonCFGVisitor>>visitFASTPyWhileStatement: aWhileStatement
 	"We will detail the remaining implementation in a future section"
 ```
 
-### Case of the return statement
+#### Case of the return statement
 
 When we encounter a return statement, we should stop the visit of the current statement block.
 
@@ -662,7 +674,7 @@ FASTCFGPythonVisitor>>visitFASTPyReturnStatement: aReturnStatement
 I needed to do that for `FASTPyBreakStatement` and `FASTPyContinueStatemet` also.
 :::
 
-## Managing if and elif 
+### Managing if and elif 
 
 One of the most used conditional structures in programming languages are the conditions: if.
 
@@ -723,7 +735,7 @@ flowchart TD
 	3 ----> 4	
 ```
 
-### Elif management
+#### Elif management
 
 Elif if a little more tricky to manage because the "false" branch is often not contained in the `elif` FAST node, but in the if statement directly either in the form of another elif, as an else or as nothing. 
 
@@ -810,7 +822,7 @@ flowchart TD
 	
 ```
 
-### Conditional expression
+#### Conditional expression
 
 Another case to manage are conditional expression. Those are if/then/else that can be done in one line but the then and else contains only one statement instead of a statement block.
 
@@ -861,4 +873,305 @@ flowchart TD
 
 ### Loops
 
-TODO
+Loops are similar to if in that it has 2 next blocks. One if the condition is true and one if the condition is false. But it is more tricky to use because some blocks will loop to the conditional block and it can contain break or continue statements that impact the CFG.
+
+We will need to use loops for two kind of nodes in Python: while and for statements.
+
+Because of the loop, we need to split the block preceding the loop and the condition in two different blocks since next blocks can loop on them. We can do that by using `#buildBlockIfNeeded`.
+
+In order to manage the loop, we use `#buildAndUseLoopDuring:` instead of `#buildAndUseConditionalDuring:` like we did in the if. 
+
+In case of Python, there is also an else block to manage.
+
+Our visit method will look like this:
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyWhileStatement: aWhileStatement
+
+	self buildBlockIfNeeded.
+	self visitFASTTConditionalStatement: aWhileStatement.
+
+	self buildAndUseLoopDuring: [
+			self visitFASTTStatementBlock: aWhileStatement.
+			
+			"We add the loops after finishing the first statement block, so the else can be managed in this block to be in the right context."
+			self visitFASTPyTWithElseClause: aWhileStatement ]
+```
+
+Using `#buildAndUseLoopDuring:` will impact the management of edges. When we finish to visit the statement block defining the code to execute in the loop, `FASTCFGUtility` will look for loops to define. Each unfinished blocks that do not end in a break that is directly in the loop (in case of imbricated loops) will loop to the conditional block. 
+
+We are now able to build the CFG of functions like this:
+
+```python
+def f(i):
+	while i < 4:
+		while i < 2:
+			if i < 1:
+				break
+			else:
+				a()
+```
+
+It will produce this CFG:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		1
+	end
+
+	subgraph Exit
+		direction TB
+		3
+	end
+
+	1(("i < 4 "))
+	2(("i < 2 "))
+	3(((" ")))
+	4{"i < 1 "}
+	5("break ")
+	6("a() ")
+	1 -- True --> 2
+	1 -- False --> 3
+	2 -- True --> 4
+	2 -- False --> 1
+	4 -- True --> 5
+	4 -- False --> 6
+	5 ----> 1
+	6 ----> 2
+	
+```
+
+:::caution
+Note that in this example, the break is breaking the inner while, but not the outer while since most programming languages are working like this.
+:::
+
+### Switches
+
+In python the switch is the match statement. A Match statement has a subject (what should be compared) and statements blocks depending on the pattern provided in the cases. 
+
+For this, we produce a `FASTCFGSwitch` node that associate a pattern to a next block. 
+
+The `_` pattern defines a default case. This next block will be added with `nil` as pattern. 
+
+We can manage a switch using `#buildAndUseSwitchDuring:`. This method will mark the conditional node as finished once the block is done executing.
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyMatchStatement: aMatchStatement
+	"We skip the visit of the statement. We add the subject as last thing to execute of the previous block then we declare a switch."
+
+	self addStatement: aMatchStatement subject.
+
+	self buildAndUseSwitchDuring: [ self visitCollection: aMatchStatement cases ]
+```
+
+Then we need to manage the cases:
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyCaseClause: aCaseClause
+
+	self assert: self currentConditional isSwitch.
+	
+	self currentConditional addPattern: aCaseClause pattern. "The next block created will be associated to this pattern"
+	self visitFASTTStatementBlock: aCaseClause
+```
+
+With this we can now parse:
+
+```python
+def f(day):
+	a()
+	match day:
+		case "Saturday" | "Sunday":
+			print(f"{day} is a weekend.")
+		case "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday":
+			print(f"{day} is a weekday.")
+		case _:
+			print("That's not a valid day of the week.")
+	b()
+```
+
+Will produce:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		1
+	end
+
+	subgraph Exit
+		direction TB
+		5
+	end
+
+	1{{"a()<br/>	match day "}}
+	2("print(f&quot;{day} is a weekend.&quot;) ")
+	3("print(f&quot;{day} is a weekday.&quot;) ")
+	4("print(&quot;That's not a valid day of the week.&quot;) ")
+	5("b() ")
+	1 -- "&quot;Saturday&quot; | &quot;Sunday&quot;" --> 2
+	1 -- "&quot;Monday&quot; | &quot;Tuesday&quot; | &quot;Wednesday&quot; | &quot;Thursday&quot;" --> 3
+	1 -- nil --> 4
+	2 ----> 5
+	3 ----> 5
+	4 ----> 5
+```
+
+### Try catch
+
+Try catch is similar to the switch in that it has 0 to N next blocks. 
+
+This block will be asociated to a pattern like the Switch block. 
+
+This block is considered full when it has a next block associated to nil (there is no pattern).
+
+We can build it using `#buildAndUseTryDuring:`.
+
+In Python we need to manage the try statement, the exclude clauses (exceptions to catch), an else clause to execute if no exception happened and a finally clause. 
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyTryStatement: aTryStatement
+
+	self buildBlockIfNeeded.
+	self visitCollection: aTryStatement statements.
+
+	self buildAndUseTryDuring: [
+			self visitCollection: aTryStatement excepts.
+
+			aTryStatement elseClause ifNotNil: [ :clause |
+					context top conditional addPattern: nil.
+					self visitEntity: clause ].
+
+			self visitEntity: aTryStatement finally ]
+```
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyExceptClause: anExceptClause
+
+	self assert: self currentConditional isTry.
+
+	self currentConditional addPattern: anExceptClause expression.
+
+	self visitFASTTStatementBlock: anExceptClause
+```
+
+And 
+
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTPyFinallyClause: aFinallyClause
+	"We do not want to create the block immediatly because this content will be added with the following instructions after the try since they should be executed together."
+
+	aFinallyClause statements do: [ :statement | self addStatement: statement ]
+```
+
+With this, we are now able to finish our Python CFG algo and we are able to build a CFG for:
+
+```python
+def f(day):
+	a()
+	try:
+		b()
+		c()
+		d()
+	except Exception1:
+		e()
+	except Exception2:
+		f()
+	except Exception3:
+		g()
+	else: 
+		h()
+	finally: 
+		i()
+	j()
+```
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		1
+	end
+
+	subgraph Exit
+		direction TB
+		7
+	end
+
+	1("a() ")
+	2[/"b()<br/>		c()<br/>		d() "\]
+	3("e() ")
+	4("f() ")
+	5("g() ")
+	6("h() ")
+	7("i()<br/>	j() ")
+	1 ----> 2
+	2 -- Exception1 --> 3
+	2 -- Exception2 --> 4
+	2 -- Exception3 --> 5
+	2 -- nil --> 6
+	3 ----> 7
+	4 ----> 7
+	5 ----> 7
+	6 ----> 7
+```
+
+## Utilites
+
+The CFG currently has two utilities. 
+
+### Mermaid export
+
+It is possible to export the graph as a [mermaid script](https://mermaid.js.org/). 
+
+```smalltalk
+
+aFunction cfg asMermaidScript
+
+```
+
+For example, the script for the try statement section earlier would export this:
+
+```
+flowchart TD
+	subgraph Entry
+		direction TB
+		1
+	end
+
+	subgraph Exit
+		direction TB
+		7
+	end
+
+	1("a() ")
+	2[/"b()<br/>		c()<br/>		d() "\]
+	3("e() ")
+	4("f() ")
+	5("g() ")
+	6("h() ")
+	7("i()<br/>	j() ")
+	1 ----> 2
+	2 -- PyIdentifier(50 - 59) --> 3
+	2 -- PyIdentifier(76 - 85) --> 4
+	2 -- PyIdentifier(102 - 111) --> 5
+	2 -- Nil --> 6
+	3 ----> 7
+	4 ----> 7
+	5 ----> 7
+	6 ----> 7
+```
+
+### Roassal visualization
+
+Another utility is a roassal visualization of the CFG. It is `FASTCFGVisualizationBuilder`. We can see it while inspecting a CFG. 
+
+```smalltalk
+aFunction cfg inspect
+```
+
+## Conclusion
+
+It should now be easier to write a FAST CFG. In the future I would like to have a test generator to be able to produce regression tests. Maybe if I need to build another one in the future :)
