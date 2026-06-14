@@ -18,7 +18,11 @@ export default defineConfig({
 			remarkGemoji
 		],
 		rehypePlugins: [
-			rehypeMermaid
+			[
+				rehypeMermaid, {
+            		strategy: 'img-svg',
+        		}
+			],
 		]
 	},
 	image: {
@@ -239,6 +243,10 @@ export default defineConfig({
 												{
 													label: 'FAST Pharo',
 													link: '/users/ast/fast-pharo',
+												},
+												{
+													label: 'FAST Python',
+													link: '/users/ast/fast-python',
 												}
 
 											]
