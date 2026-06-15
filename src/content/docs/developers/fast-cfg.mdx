@@ -109,7 +109,7 @@ A first variation is that some CFG want an unique exit for our graph while other
 Another variation is on the try catch. Some implementation create one normal block for each statement of the try block because an error car arise at each statement. We decided to create a unique try block to avoid having a graph that is too big. If you want to use the CFG to do analysis about excetions, we could add an option to split the node into 
 ultiple nodes. 
 
-A last variation is that some CFG decide to split each blocks into one statements blocks. The default implementation provided by this project groups each statements executed together.  
+A last variation is that some CFG decide to split each blocks into one statements blocks. The default implementation provided by this project groups each statements executed together. For the implementation of FAST-Python CFG I also choose to have the conditions in the same block as the previous statements and the finally with the next statements when they are always executed together in order to simplify the analysis I need to make with the CFG.
 
 ## Getting started
 
