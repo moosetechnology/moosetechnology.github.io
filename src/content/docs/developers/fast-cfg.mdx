@@ -65,22 +65,23 @@ flowchart TD
 
 	1("index = 0 ")
 	2(("index < len(items) "))
-	3{"item = items[index]<br/><br/>if item == &quot;STOP&quot; "}
+	3{"item = items[index]
+	if item == 'STOP' "}
 	4("return &quot;Done&quot; ")
-	5("print(&quot;Stopping processing.&quot;)<br/>            break ")
+	5("print(&quot;Stopping processing.&quot;)<br/>break ")
 	6{"item == &quot;SKIP&quot; "}
-	7("index += 1<br/>            continue ")
-	8("print(f&quot;Processing: {item}&quot;)<br/>        index += 1 ")
-	1 ----> 2
+	7("index += 1<br/>continue ")
+	8("print(f&quot;Processing: {item}&quot;)<br/>index += 1 ")
+	1 --> 2
 	2 -- True --> 3
 	2 -- False --> 4
 	3 -- True --> 5
 	3 -- False --> 6
-	5 ----> 4
+	5 --> 4
 	6 -- True --> 7
 	6 -- False --> 8
-	7 ----> 2
-	8 ----> 2
+	7 --> 2
+	8 --> 2
 	
 ```
 

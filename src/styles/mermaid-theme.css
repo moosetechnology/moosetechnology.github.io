@@ -50,6 +50,14 @@
     stroke: none !important;
 }
 
+/* Mermaid sizes HTML labels for one break but emits two adjacent <br> tags. */
+.label br + br,
+.nodeLabel br + br,
+.edgeLabel br + br,
+.cluster-label br + br {
+    display: none;
+}
+
 .node .label-icon path {
     fill: currentColor !important;
     stroke: currentColor !important;

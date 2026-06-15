@@ -18,3 +18,11 @@
     --mm-mermaid-cluster-stroke: var(--sl-color-accent-high);
     --mm-mermaid-cluster-text: var(--sl-color-black);
 }
+
+/* Mermaid sizes HTML labels for one break but emits two adjacent <br> tags. */
+.label br + br,
+.nodeLabel br + br,
+.edgeLabel br + br,
+.cluster-label br + br {
+    display: none;
+}
