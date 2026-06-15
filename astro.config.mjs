@@ -25,13 +25,26 @@ const mermaidThemeCSS = `
     color: var(--sl-color-text) !important;
   }
 
-  .node rect,
-  .node circle,
-  .node ellipse,
-  .node polygon,
-  .node path {
+  .node .label-container,
+  .node .outer-circle,
+  .node .inner-circle {
     fill: var(--sl-color-bg-nav) !important;
     stroke: var(--sl-color-gray-4) !important;
+  }
+
+  .node .label-container path {
+    fill: var(--sl-color-bg-nav) !important;
+    stroke: var(--sl-color-gray-4) !important;
+  }
+
+  .node .label rect {
+    fill: transparent !important;
+    stroke: none !important;
+  }
+
+  .node .label-icon path {
+    fill: currentColor !important;
+    stroke: currentColor !important;
   }
 
   .cluster rect {
