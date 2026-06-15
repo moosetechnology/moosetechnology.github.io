@@ -310,7 +310,7 @@ flowchart TD
 	3("return index ")
 	1 -- True --> 2
 	1 -- False --> 3
-	2 ----> 3
+	2 --> 3
 	
 ```
 
@@ -347,17 +347,17 @@ flowchart TD
 		5
 	end
 
-	1{{"a "}}
-	2("b() ")
-	3("c() ")
-	4("d() ")
+	1{{"a"}}
+	2("b()")
+	3("c()")
+	4("d()")
 	5(((" ")))
 	1 -- 1 --> 2
 	1 -- 2 --> 3
 	1 -- nil --> 4
-	2 ----> 5
-	3 ----> 5
-	4 ----> 5
+	2 --> 5
+	3 --> 5
+	4 --> 5
 	
 ```
 
@@ -462,8 +462,8 @@ flowchart TD
 	1 -- True --> 2
 	2 -- True --> 4
 	2 -- False --> 5
-	4 ----> 6
-	5 ----> 6
+	4 --> 6
+	5 --> 6
 ```
 
 And now we are only missing the exit since we have 2 exits currently. We build this Null block the same way as other blocks. Once we build it, we only have a root context entry left with the `i > 4` conditional block in its current blocks. Since the list of current blocks is not empty, we are in the second case. When checking this previous block, we can find that two blocks are not finished: `i > 4` and `pass`:
@@ -490,9 +490,9 @@ flowchart TD
 	1 -- False --> 3
 	2 -- True --> 4
 	2 -- False --> 5
-	4 ----> 6
-	5 ----> 6
-	6 ----> 3
+	4 --> 6
+	5 --> 6
+	6 --> 3
 		
 ```
 
@@ -591,10 +591,10 @@ flowchart TD
 	2(("i > 3 "))
 	3("i -= 1 ")
 	4(((" ")))
-	1 ----> 2
+	1 --> 2
 	2 -- True --> 3
 	2 -- False --> 4
-	3 ----> 2
+	3 --> 2
 ```
 
 Since there is generic structure for loops in FAST, we need to manage their visit ourselves. This start with the production of a block in the loop is preceeded by statements. 
@@ -732,8 +732,8 @@ flowchart TD
 	4("return True ")
 	1 -- True --> 2
 	1 -- False --> 3
-	2 ----> 4
-	3 ----> 4	
+	2 --> 4
+	3 --> 4	
 ```
 
 #### Elif management
@@ -815,11 +815,11 @@ flowchart TD
 	6("a() ")
 	1 -- True --> 2
 	1 -- False --> 3
-	2 ----> 4
+	2 --> 4
 	3 -- True --> 5
 	3 -- False --> 6
-	5 ----> 4
-	6 ----> 4
+	5 --> 4
+	6 --> 4
 	
 ```
 
@@ -868,8 +868,8 @@ flowchart TD
 	4(((" ")))
 	1 -- True --> 2
 	1 -- False --> 3
-	2 ----> 4
-	3 ----> 4
+	2 --> 4
+	3 --> 4
 ```
 
 ### Loops
@@ -939,8 +939,8 @@ flowchart TD
 	2 -- False --> 1
 	4 -- True --> 5
 	4 -- False --> 6
-	5 ----> 1
-	6 ----> 2
+	5 --> 1
+	6 --> 2
 	
 ```
 
@@ -1015,9 +1015,9 @@ flowchart TD
 	1 -- "&quot;Saturday&quot; | &quot;Sunday&quot;" --> 2
 	1 -- "&quot;Monday&quot; | &quot;Tuesday&quot; | &quot;Wednesday&quot; | &quot;Thursday&quot;" --> 3
 	1 -- nil --> 4
-	2 ----> 5
-	3 ----> 5
-	4 ----> 5
+	2 --> 5
+	3 --> 5
+	4 --> 5
 ```
 
 ### Try catch
@@ -1108,15 +1108,15 @@ flowchart TD
 	5("g() ")
 	6("h() ")
 	7("i()<br/>	j() ")
-	1 ----> 2
+	1 --> 2
 	2 -- Exception1 --> 3
 	2 -- Exception2 --> 4
 	2 -- Exception3 --> 5
 	2 -- nil --> 6
-	3 ----> 7
-	4 ----> 7
-	5 ----> 7
-	6 ----> 7
+	3 --> 7
+	4 --> 7
+	5 --> 7
+	6 --> 7
 ```
 
 ## Utilites
@@ -1154,15 +1154,15 @@ flowchart TD
 	5("g() ")
 	6("h() ")
 	7("i()<br/>	j() ")
-	1 ----> 2
+	1 --> 2
 	2 -- PyIdentifier(50 - 59) --> 3
 	2 -- PyIdentifier(76 - 85) --> 4
 	2 -- PyIdentifier(102 - 111) --> 5
 	2 -- Nil --> 6
-	3 ----> 7
-	4 ----> 7
-	5 ----> 7
-	6 ----> 7
+	3 --> 7
+	4 --> 7
+	5 --> 7
+	6 --> 7
 ```
 
 ### Roassal visualization
