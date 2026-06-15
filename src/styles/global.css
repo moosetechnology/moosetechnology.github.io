@@ -3,6 +3,7 @@
 @import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
+@import './mermaid.css';
 
 /* Support SVG dark theme */
 .svg-theme {
@@ -34,5 +35,11 @@ img {
 }
 
 :root {
-  --sl-content-width: calc(50vw);
+  --sl-content-width: 50vw;
+}
+
+@media (max-width: 71.999rem) {
+  :root {
+    --sl-content-width: 100%;
+  }
 }

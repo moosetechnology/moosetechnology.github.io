@@ -1,0 +1,92 @@
+.label,
+.node .label,
+.edgeLabel,
+.cluster-label {
+    color: var(--sl-color-text) !important;
+}
+
+.label text,
+.nodeLabel,
+.edgeLabel,
+.cluster-label text,
+.flowchartTitleText {
+    fill: var(--sl-color-text) !important;
+    color: var(--sl-color-text) !important;
+}
+
+.node .label-container,
+.node .outer-circle,
+.node .inner-circle {
+    fill: var(--mm-mermaid-node-fill, var(--sl-color-accent)) !important;
+    stroke: var(--mm-mermaid-node-stroke, var(--sl-color-accent-high)) !important;
+    stroke-width: 2px !important;
+}
+
+.node .label-container path {
+    fill: var(--mm-mermaid-node-fill, var(--sl-color-accent)) !important;
+    stroke: var(--mm-mermaid-node-stroke, var(--sl-color-accent-high)) !important;
+    stroke-width: 2px !important;
+}
+
+.node .label-container path[fill="none"] {
+    fill: none !important;
+    stroke: var(--mm-mermaid-node-stroke, var(--sl-color-accent-high)) !important;
+}
+
+.node .label,
+.node .label span,
+.node .label p,
+.node .nodeLabel {
+    fill: var(--mm-mermaid-node-text, var(--sl-color-text)) !important;
+    color: var(--mm-mermaid-node-text, var(--sl-color-text)) !important;
+}
+
+.node .label text {
+    fill: var(--mm-mermaid-node-text, var(--sl-color-text)) !important;
+}
+
+.node .label rect {
+    fill: transparent !important;
+    stroke: none !important;
+}
+
+.node .label-icon path {
+    fill: currentColor !important;
+    stroke: currentColor !important;
+}
+
+.cluster rect {
+    fill: var(--mm-mermaid-cluster-fill, transparent) !important;
+    stroke: var(--mm-mermaid-cluster-stroke, var(--sl-color-accent-high)) !important;
+    stroke-width: 2px !important;
+}
+
+.cluster-label,
+.cluster-label span,
+.cluster-label p,
+.cluster-label text {
+    fill: var(--mm-mermaid-cluster-text, var(--sl-color-text)) !important;
+    color: var(--mm-mermaid-cluster-text, var(--sl-color-text)) !important;
+}
+
+.edgePath .path,
+.flowchart-link,
+.relationshipLine {
+    stroke: var(--mm-mermaid-edge, var(--sl-color-accent-high)) !important;
+    stroke-width: 2.25px !important;
+}
+
+.arrowheadPath,
+.arrowMarkerPath,
+.marker {
+    fill: var(--mm-mermaid-edge, var(--sl-color-accent-high)) !important;
+    stroke: var(--mm-mermaid-edge, var(--sl-color-accent-high)) !important;
+}
+
+.edgeLabel,
+.edgeLabel p,
+.edgeLabel rect,
+.labelBkg {
+    background-color: var(--sl-color-bg) !important;
+    fill: var(--sl-color-bg) !important;
+}

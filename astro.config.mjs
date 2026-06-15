@@ -1,6 +1,8 @@
 // @ts-check
+import { readFileSync } from 'node:fs';
 import { defineConfig, sharpImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightCatppuccin from '@catppuccin/starlight';
 import starlightBlog from 'starlight-blog'
 import starlightSidebarTopics from 'starlight-sidebar-topics';
 import tailwindcss from "@tailwindcss/vite";
@@ -8,71 +10,10 @@ import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 import rehypeMermaid from 'rehype-mermaid';
 import remarkGemoji from 'remark-gemoji';
 
-const mermaidThemeCSS = `
-  .label,
-  .node .label,
-  .edgeLabel,
-  .cluster-label {
-    color: var(--sl-color-text) !important;
-  }
-
-  .label text,
-  .nodeLabel,
-  .edgeLabel,
-  .cluster-label text,
-  .flowchartTitleText {
-    fill: var(--sl-color-text) !important;
-    color: var(--sl-color-text) !important;
-  }
-
-  .node .label-container,
-  .node .outer-circle,
-  .node .inner-circle {
-    fill: var(--sl-color-bg-nav) !important;
-    stroke: var(--sl-color-gray-4) !important;
-  }
-
-  .node .label-container path {
-    fill: var(--sl-color-bg-nav) !important;
-    stroke: var(--sl-color-gray-4) !important;
-  }
-
-  .node .label rect {
-    fill: transparent !important;
-    stroke: none !important;
-  }
-
-  .node .label-icon path {
-    fill: currentColor !important;
-    stroke: currentColor !important;
-  }
-
-  .cluster rect {
-    fill: var(--sl-color-gray-6) !important;
-    stroke: var(--sl-color-gray-5) !important;
-  }
-
-  .edgePath .path,
-  .flowchart-link,
-  .relationshipLine {
-    stroke: var(--sl-color-gray-2) !important;
-  }
-
-  .arrowheadPath,
-  .marker {
-    fill: var(--sl-color-gray-2) !important;
-    stroke: var(--sl-color-gray-2) !important;
-  }
-
-  .edgeLabel,
-  .edgeLabel p,
-  .edgeLabel rect,
-  .labelBkg {
-    background-color: var(--sl-color-bg) !important;
-    fill: var(--sl-color-bg) !important;
-  }
-`;
-
+const mermaidThemeCSS = readFileSync(
+	new URL('./src/styles/mermaid-theme.css', import.meta.url),
+	'utf8'
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -114,6 +55,10 @@ export default defineConfig({
 			{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/QewZMZa' }
 			],
 			plugins: [
+				starlightCatppuccin({
+					dark: { flavor: 'mocha', accent: 'blue' },
+					light: { flavor: 'latte', accent: 'blue' },
+				}),
 				starlightBlog({
 					authors: {
 						NicolasAnquetil: {
@@ -361,8 +306,8 @@ export default defineConfig({
 									]
 								}, {
 									label: 'Developers',
-									// Autogenerate a group of links for the 'constellations' directory.
-									autogenerate: { directory: 'developers' },
+									// Autogenerate a group of links for the 'developers' directory.
+									items: [{ autogenerate: { directory: 'developers' } }],
 								},
 							],
 						},

@@ -1,0 +1,20 @@
+:root,
+:root[data-theme="dark"] {
+    --mm-mermaid-node-fill: var(--sl-color-accent);
+    --mm-mermaid-node-stroke: var(--sl-color-accent-high);
+    --mm-mermaid-node-text: var(--sl-color-gray-7);
+    --mm-mermaid-edge: var(--sl-color-accent-high);
+    --mm-mermaid-cluster-fill: #303d56;
+    --mm-mermaid-cluster-stroke: var(--sl-color-accent-high);
+    --mm-mermaid-cluster-text: var(--sl-color-white);
+}
+
+:root[data-theme="light"] {
+    --mm-mermaid-node-fill: var(--sl-color-accent-high);
+    --mm-mermaid-node-stroke: var(--sl-color-accent-high);
+    --mm-mermaid-node-text: var(--sl-color-black);
+    --mm-mermaid-edge: var(--sl-color-accent-high);
+    --mm-mermaid-cluster-fill: #303d56;
+    --mm-mermaid-cluster-stroke: var(--sl-color-accent-high);
+    --mm-mermaid-cluster-text: var(--sl-color-black);
+}
