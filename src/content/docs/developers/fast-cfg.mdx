@@ -63,15 +63,18 @@ flowchart TD
 		4
 	end
 
-	1("index = 0 ")
-	2(("index < len(items) "))
+	1("index = 0")
+	2(("index < len(items)"))
 	3{"item = items[index]
-	if item == 'STOP' "}
+if item == 'STOP' "}
 	4("return &quot;Done&quot; ")
-	5("print(&quot;Stopping processing.&quot;)<br/>break ")
+	5("print(&quot;Stopping processing.&quot;)
+break")
 	6{"item == &quot;SKIP&quot; "}
-	7("index += 1<br/>continue ")
-	8("print(f&quot;Processing: {item}&quot;)<br/>index += 1 ")
+	7("index += 1
+continue ")
+	8("print(f&quot;Processing: {item}&quot;)
+index += 1 ")
 	1 --> 2
 	2 -- True --> 3
 	2 -- False --> 4
@@ -267,7 +270,9 @@ flowchart TD
 		1
 	end
 
-	1("index = 0<br/>	index += 3<br/>	return index ")
+	1("index = 0
+index += 3
+return index ")
 ```
 
 ##### FASTConditionalBlock 
@@ -305,7 +310,8 @@ flowchart TD
 		3
 	end
 
-	1{"index = 0<br/>	if a > 3 "}
+	1{"index = 0
+if a > 3 "}
 	2("index += 3 ")
 	3("return index ")
 	1 -- True --> 2
