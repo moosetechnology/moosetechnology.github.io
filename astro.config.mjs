@@ -8,6 +8,58 @@ import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 import rehypeMermaid from 'rehype-mermaid';
 import remarkGemoji from 'remark-gemoji';
 
+const mermaidThemeCSS = `
+  .label,
+  .node .label,
+  .edgeLabel,
+  .cluster-label {
+    color: var(--sl-color-text) !important;
+  }
+
+  .label text,
+  .nodeLabel,
+  .edgeLabel,
+  .cluster-label text,
+  .flowchartTitleText {
+    fill: var(--sl-color-text) !important;
+    color: var(--sl-color-text) !important;
+  }
+
+  .node rect,
+  .node circle,
+  .node ellipse,
+  .node polygon,
+  .node path {
+    fill: var(--sl-color-bg-nav) !important;
+    stroke: var(--sl-color-gray-4) !important;
+  }
+
+  .cluster rect {
+    fill: var(--sl-color-gray-6) !important;
+    stroke: var(--sl-color-gray-5) !important;
+  }
+
+  .edgePath .path,
+  .flowchart-link,
+  .relationshipLine {
+    stroke: var(--sl-color-gray-2) !important;
+  }
+
+  .arrowheadPath,
+  .marker {
+    fill: var(--sl-color-gray-2) !important;
+    stroke: var(--sl-color-gray-2) !important;
+  }
+
+  .edgeLabel,
+  .edgeLabel p,
+  .edgeLabel rect,
+  .labelBkg {
+    background-color: var(--sl-color-bg) !important;
+    fill: var(--sl-color-bg) !important;
+  }
+`;
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,7 +70,12 @@ export default defineConfig({
 			remarkGemoji
 		],
 		rehypePlugins: [
-			rehypeMermaid
+			[rehypeMermaid, {
+				mermaidConfig: {
+					theme: 'base',
+					themeCSS: mermaidThemeCSS
+				}
+			}]
 		]
 	},
 	image: {
