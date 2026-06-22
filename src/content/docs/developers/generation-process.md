@@ -15,33 +15,23 @@ When we generate our metamodel, a process is taking place:
 
 ```mermaid
 flowchart LR
-	subgraph Models
-		direction LR
-		1
-        2
-        3
-        4
-        5
-	end
-
 	subgraph Steps
 		direction LR
-		6
-        7
-        8
-        9
+		1("Execute Generator")
+        2("Generate changes")
+        3("Filter changes")
+        4("Generate the code")
+        5("Build the Fame Metamodel")
 	end
 
-	1("Execute Generator")
-	2("Generate changes")
-    3("Filter changes")
-    4("Generate the code")
-    5("Build the Fame Metamodel")
+	subgraph Models
+		direction LR
+		6[("FmxMB model")]
+        7[("Changes model")]
+        8[("Famix Code")]
+        9[("Metamodel")]
+	end
 
-    6[("FmxMB model")]
-    7[("Changes model")]
-    8[("Famix Code")]
-    9[("Metamodel")]
 	1 --> 6
 	6 --> 2
 	2 --> 7
