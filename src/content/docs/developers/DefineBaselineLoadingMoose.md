@@ -12,36 +12,18 @@ One way to do it is to use [custom project attributes from Metacello](https://gi
 
 To define the attributes you need to implement a method `#customProjectAttributes` that will return an array with the custom attributes. 
 
-For example, if I just want to ensure any version of Famix is present I can implement it like this:
+If I want to ensure Famix is in the image I can define it like this:
 
 ```smalltalk
 customProjectAttributes
-    self class environment at: #MooseEntity ifAbsent: [ ^ #(#WithoutFamix) ].
 
-    ^ #()
+	'BaselineOfFamix' asPackageIfAbsent: [ ^ #( #NeedsFamix ) ].
+	^ #(  )
 ```
 
-If I want to ensure Moose is in the image I can define it like this:
-
-```smalltalk
-customProjectAttributes
-    RPackageOrganizer default packages detect: [ :package | package name = 'BaselineOfMoose' ] ifNone: [ ^#(#WithoutMoose) ].
-
-    ^ #()
-```
-
-Or I can also define both:
-
-```smalltalk
-customProjectAttributes
-    | attributes |
-    attributes := OrderedCollection new.
-    self class environment at: #MooseEntity ifAbsent: [ attributes add: #WithoutFamix ].
-
-    RPackageOrganizer default packages detect: [ :package | package name = 'BaselineOfMoose' ] ifNone: [ attributes add: #WithoutMoose ].
-
-    ^ attributes asArray
-```
+:::note[Note]
+You need to adapt this to the project you depend on. Maybe you'll need to check the baseline of Moose instead of Famix, or a specifi package not present in the default famix.
+:::
 
 And now I can use those attributes in a baseline via the `#for:do:` message.
 
@@ -49,9 +31,9 @@ And now I can use those attributes in a baseline via the `#for:do:` message.
 
 ```smalltalk
 customProjectAttributes
-    self class environment at: #MooseEntity ifAbsent: [ ^ #(#WithoutFamix) ].
 
-    ^ #()
+	'BaselineOfFamix' asPackageIfAbsent: [ ^ #( #NeedsFamix ) ].
+	^ #(  )
 ```
 
 ```smalltalk
@@ -59,11 +41,10 @@ baseline: spec
     <baseline>
     spec
         for: #common
-        do: [
-            spec package: 'MyProject'.
+        do: [ spec package: 'MyProject' ].
 
-            spec
-                for: #(#'WithoutFamix') do: [
-                    spec baseline: 'Moose' with: [ spec repository: 'github://moosetechnology/Moose:development/src' ]
-                    spec package: 'MyProject' with: [ spec requires: #('Moose') ] ]
+    spec
+        for: #(#'NeedsFamix') do: [
+            spec baseline: 'Famix' with: [ spec repository: 'github://moosetechnology/Famix/src' ]
+            spec package: 'MyProject' with: [ spec requires: #('Famix') ] ]
 ```

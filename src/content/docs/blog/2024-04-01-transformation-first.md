@@ -1,5 +1,5 @@
 ---
-title: "Transformation journey (1/2) : Locating entities and nodes"
+title: "Transformation journey (1/3) : Locating entities and nodes"
 subtitle: >-
   How to use queries and tools to find entities and their specific nodes to transform
 date: 2024-04-01
@@ -16,17 +16,15 @@ This can happen in order to fix a recurring bug, to introduce a new design patte
 When many entities are concerned or when the edits to perform are complicated and take too much time, it can be interesting to consider building a transformation tool to help us and make that task easier.
 Fortunately, Moose is here to help with several modeling levels and powerful tools enabling us to build what we need! 
 
-# Preface
+## Preface
 
-This little transformation journey will be divided into two blog posts. We will see how to build a simple transformation tool, with each post focusing on a different aspect:
+This little transformation journey will be divided into three blog posts. We will see how to build a simple transformation tool, with each post focusing on a different aspect:
 
 - First post : Locating entities and nodes to transform
 - Second post : Creating AST copies and AST nodes to make a transformation
-{::comment}
 - Final post : Viewing and editing our transformation, and applying it to the source files
-{:/comment}
 
-Throughout those two posts, we will follow a simple transformation scenario, based on the software ArgoUML, an open-source Java project used in this [wiki](/beginners/moose-in-action).
+Throughout those three posts, we will follow a simple transformation scenario, based on the software ArgoUML, an open-source Java project used in this [wiki](/beginners/moose-in-action).
 The first step is to create the model for the software, using the [sources](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-src.zip) and [libraries](https://github.com/argouml-tigris-org/argouml/releases/download/VERSION_0_34/ArgoUML-0.34-libs.zip) available on that wiki post, but creating the model on the latest stable version of [VerveineJ](moose-wiki/Developers/Parsers/VerveineJ).
 
 Using the available Docker image, this command (on Windows) will create the model and store it in the sources repository : 
@@ -38,12 +36,12 @@ All that remains to do is to create a fresh image, and import this model (with t
 
 Note : As the creation of that tool is divided in three blog posts, keeping that image for all three blog posts is recommended.
 
-# The scenario
+## The scenario
 
 The transformation case we will be dealing with in those blog posts is rather simple.
 In the ArgoUML system, three classes define and use a method named `logError`. In our scenario, a class `ArgoLogger` has been defined and contains a static method `logError`. The transformation task is to add a receiver node to each `logError` method invocation so that the method is called using the right class.
 
-# Tools to import
+## Tools to import
 
 For this blog post, we will have to import two tools :
 
@@ -65,7 +63,7 @@ Metacello new
     load: 'MoTion-Moose'
 ```
 
-# Querying the model
+## Querying the model
 
 Finally done with explanations and setup! :smile:
 Let us start by creating a class with a `model` instance variable, accessors, and add a class side initializer method for ease of use:
@@ -100,7 +98,7 @@ fetchLogErrorMethodInvocations
 Using [MooseQuery](https://moosequery.ferlicot.fr/userdocumentation.html), you should be able to find any Famix entities you are seeking.
 From those Famix entities, we want to get the FAST nodes that we need to transform. We will look at two different methods to do so.
 
-# Using Carrefour
+## Using Carrefour
 
 In this context, Carrefour is the perfect tool to use to find the nodes we want to transform in the FAST of our methods.
 Now that we found the entities that we have to transform in the Famix model, all that remains is building and binding the FAST node of every entity within our method, and then fetch the ones from our method invocations.
@@ -125,7 +123,7 @@ fetchAllFastNodesUsingCarrefour
 
 And just like that, we now have the complete list of FAST nodes to transform!
 
-# Using MoTion
+## Using MoTion
 
 But before celebrating, we should keep in mind that this transformation is a very simple use case. Here, it is easy to find the entities to transform using Famix, but in some other cases it might be much more complex to find the methods that are candidates to a transformation, not to mention every node that must be transformed.
 
@@ -180,7 +178,7 @@ fetchAllFastNodesUsingMotion
 ```
 As you can see, we still use Carrefour even in this context, as it remains the easiest way to get the FAST of our method before looking through it using MoTion. Those two tools can therefore be used together when dealing with complex transformation cases.
 
-# Try it yourself!
+## Try it yourself!
 
 Now that our class is done, we are able to locate candidates methods for transformation and the specific nodes to transform using Famix, FAST, Carrefour and MoTion.
 You can use a Playground to test out our class and model and see for yourself the results of each method :

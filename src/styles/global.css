@@ -3,6 +3,16 @@
 @import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
+@import './mermaid.css';
+
+/* Support SVG dark theme */
+.svg-theme {
+    fill: #222;
+    transition: fill 0.3s;
+}
+[data-theme="dark"] .svg-theme {
+    fill: #eee;
+}
 
 .hero:where(.astro-jbfsktt5) {
     grid-template-columns: 5fr 5fr;
@@ -14,4 +24,22 @@
 
 .astro-eboeziq4 {
     display: none;
+}
+
+html[data-theme="dark"] .sl-markdown-content img {
+    background-color: lightgrey;
+}
+
+img {
+    margin: auto;
+}
+
+:root {
+  --sl-content-width: 50vw;
+}
+
+@media (max-width: 71.999rem) {
+  :root {
+    --sl-content-width: 100%;
+  }
 }

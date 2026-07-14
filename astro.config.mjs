@@ -1,6 +1,8 @@
 // @ts-check
+import { readFileSync } from 'node:fs';
 import { defineConfig, sharpImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightCatppuccin from '@catppuccin/starlight';
 import starlightBlog from 'starlight-blog'
 import starlightSidebarTopics from 'starlight-sidebar-topics';
 import tailwindcss from "@tailwindcss/vite";
@@ -8,6 +10,10 @@ import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 import rehypeMermaid from 'rehype-mermaid';
 import remarkGemoji from 'remark-gemoji';
 
+const mermaidThemeCSS = readFileSync(
+	new URL('./src/styles/mermaid-theme.css', import.meta.url),
+	'utf8'
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,7 +24,12 @@ export default defineConfig({
 			remarkGemoji
 		],
 		rehypePlugins: [
-			rehypeMermaid
+			[rehypeMermaid, {
+				mermaidConfig: {
+					theme: 'base',
+					themeCSS: mermaidThemeCSS
+				}
+			}]
 		]
 	},
 	image: {
@@ -44,6 +55,10 @@ export default defineConfig({
 			{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/QewZMZa' }
 			],
 			plugins: [
+				starlightCatppuccin({
+					dark: { flavor: 'mocha', accent: 'blue' },
+					light: { flavor: 'latte', accent: 'blue' },
+				}),
 				starlightBlog({
 					authors: {
 						NicolasAnquetil: {
@@ -142,6 +157,12 @@ export default defineConfig({
 							url: "https://alesshosry.github.io",
 							picture: "https://alesshosry.github.io/assets/myImage2.jpeg"
 						},
+						CyrilFerlicot: {
+							name: "Cyril Ferlicot-Delbecque",
+							title: "Research engineer at Inria",
+							url: "https://ferlicot.fr",
+							picture: "https://avatars.githubusercontent.com/u/9519971"
+						},
 					},
 				}),
 				starlightSidebarTopics(
@@ -233,6 +254,10 @@ export default defineConfig({
 												{
 													label: 'FAST Pharo',
 													link: '/users/ast/fast-pharo',
+												},
+												{
+													label: 'FAST Python',
+													link: '/users/ast/fast-python',
 												}
 
 											]
@@ -246,8 +271,7 @@ export default defineConfig({
 												},
 												{
 													label: 'Moose Query',
-													link: 'https://moosequery.ferlicot.fr',
-													badge: { text: 'Outside', variant: 'tip' }
+													link: '/users/moosequery',
 												},
 												{
 													label: 'Tree Query',
@@ -282,8 +306,8 @@ export default defineConfig({
 									]
 								}, {
 									label: 'Developers',
-									// Autogenerate a group of links for the 'constellations' directory.
-									autogenerate: { directory: 'developers' },
+									// Autogenerate a group of links for the 'developers' directory.
+									items: [{ autogenerate: { directory: 'developers' } }],
 								},
 							],
 						},
