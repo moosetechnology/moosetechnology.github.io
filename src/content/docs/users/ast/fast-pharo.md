@@ -5,7 +5,7 @@ title: FAST-Pharo
 ---
 
 
-FAST-Pharo is a [FAST](FAST) meta-model used to represent AST of a Pharo class, trait or method.
+FAST-Pharo is a [FAST](fast) meta-model used to represent AST of a Pharo class, trait or method.
 It comes with a meta-model, an importer, and tools to manipulate and explore models.
 
 
@@ -31,7 +31,7 @@ Metacello new
     load: 'importer'.
 ```
 
-This script installs the [FAST](FAST) project, the PetitParser project, the FAST-Pharo project, and all the dependencies.
+This script installs the [FAST](fast) project, the PetitParser project, the FAST-Pharo project, and all the dependencies.
 
 ### Import
 

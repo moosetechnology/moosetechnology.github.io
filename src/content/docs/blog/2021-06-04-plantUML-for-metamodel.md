@@ -12,7 +12,7 @@ tags:
 ## Note
 
 This post describes a tool that has been replaced by a new `FamixUMLDocumentor`.
-The new tool is described [in another post](/blog/2023-09-26-new-UMLDocumentor).
+The new tool is described [in another post](/blog/2023-09-26-new-umldocumentor).
 
 ## Old post content
 

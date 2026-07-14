@@ -8,11 +8,11 @@ The meta-model describes the entities that compose a program in the given langua
 
 In the following, we describe how to create a new meta-model or extend an existing one.
 Moose being more specifically dedicated to source code analysis, there are a number of pre-set entities/traits that should help one define new meta-models for a given programming language.
-These are described in [another page](./predefinedEntities).
+These are described in [another page](./predefinedentities).
 
 ## Set up
 
-First of all, we need to [download Moose](../Beginners/InstallMoose) version 7 or higher.
+First of all, we need to [download Moose](../beginners/install-moose) version 7 or higher.
 
 The first step is to create a FamixMetamodelGenerator.
 It will describe our meta-model.
@@ -78,7 +78,7 @@ This can be done with the `#newClassNamed:comment:` method.
 class := builder newClassNamed: #Class comment: 'I represent a Smalltalk class'.
 ```
 
-It is also possible to use entities that are already defined in a [library of predefined entities](predefinedEntities) or in another meta-model (see [submetamodels](#introducing-submetamodels)).
+It is also possible to use entities that are already defined in a [library of predefined entities](predefinedentities) or in another meta-model (see [submetamodels](#introducing-submetamodels)).
 
 ### Define hierarchy
 
@@ -182,7 +182,7 @@ Moose defines the following types for properties:
 - Boolean
 - Object
 
-> Using the *Object*, you will not be able to export the property in *.mse* and *.json* (see: [import and export model](../Users/ImportingAndExportingModels)).
+> Using the *Object*, you will not be able to export the property in *.mse* and *.json* (see: [import and export model](../users/importing-and-exporting-models)).
 
 ### Generate
 

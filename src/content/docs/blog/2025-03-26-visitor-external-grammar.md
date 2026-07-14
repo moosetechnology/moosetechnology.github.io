@@ -66,7 +66,7 @@ Several of the ["Famix-tools"](/blog/tag/famix-tools/) blog-posts are based on v
 
 ## An external AST
 
-In a [preceding blog-post](/blog/2025-03-25-tree-sitter.md) we saw how to create an AST from a Perl program using the Tree-Sitter Perl grammar.
+In a [preceding blog-post](/blog/2025-03-25-tree-sitter) we saw how to create an AST from a Perl program using the Tree-Sitter Perl grammar.
 
 We will use this as an example to see how to create a visitor on this external AST.
 Here "external" means it was created by an external tool and we don't have control on the structure of the AST.

@@ -16,7 +16,7 @@ When creating or studying a meta-model, it is often convenient to be able to "se
 UML looks like a natural solution for this.
 
 So in the past we had a tool to create UML diagrams of the meta-models through PlantUML (a small language and a tool to generate UML diagrams).
-The post [Generate a plantUML visualization for a meta-model](/blog/2021-06-04-plantUML-for-metamodel) explained how to use this tool
+The post [Generate a plantUML visualization for a meta-model](/blog/2021-06-04-plantuml-for-metamodel) explained how to use this tool
 
 But the tool had some limitations, one of which was that it was not easy to add a different backend than PlantUML.
 

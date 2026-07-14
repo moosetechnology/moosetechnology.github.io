@@ -63,7 +63,7 @@ It consists on:
 In the **first case**, you have two options:
 
 - you can create entities and export to the file format. This is the common way to work and would allow fast analysis.
-- Or, you can implement [Fame](/developers/Fame), the meta-meta-model used in Moose. Then, this meta-meta-model can be used to create generic code that would generate meta-model in your programming language, or generate easily model in the Moose file format. For instance, one can found Fame implementation for [Java](https://github.com/moosetechnology/FameJava) and [Pharo](https://github.com/moosetechnology/Fame).
+- Or, you can implement [Fame](/developers/fame), the meta-meta-model used in Moose. Then, this meta-meta-model can be used to create generic code that would generate meta-model in your programming language, or generate easily model in the Moose file format. For instance, one can found Fame implementation for [Java](https://github.com/moosetechnology/FameJava) and [Pharo](https://github.com/moosetechnology/Fame).
 
 ### Creating a meta-model
 
@@ -74,4 +74,4 @@ Also, remember, you first want to represent the entities you will use for your a
 
 To create the meta-model in pharo, you should look at the [full documentation](/developers/create-new-metamodel).
 If it is your first meta-model, you can look for the [Coaster Meta-model tutorial](/blog/2021-02-04-coasters).
-Finally, use the [UMLDocumentor](/blog/2023-09-26-new-UMLDocumentor) to *see* your meta-model.
+Finally, use the [UMLDocumentor](/blog/2023-09-26-new-umldocumentor) to *see* your meta-model.

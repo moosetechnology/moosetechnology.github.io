@@ -8,7 +8,7 @@ This page is here to explain the generation process of Metamodels in Moose. The 
 
 ## Introduction
 
-When we create a new metamodel, it is recommended not to do it by hand, but to use a generator by subclassing `FamixMetamodelGenerator`, as we describe in [this page](../create-new-metamodel).
+When we create a new metamodel, it is recommended not to do it by hand, but to use a generator by subclassing `FamixMetamodelGenerator`, as we describe in [this page](./create-new-metamodel).
 
 When we generate our metamodel, this process is taking place:
 

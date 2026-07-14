@@ -7,7 +7,7 @@ authors:
 ---
 
 
-FAST-Python is a [FAST](FAST) meta-model used to represent AST of a Python modules.
+FAST-Python is a [FAST](fast) meta-model used to represent AST of a Python modules.
 It comes with a meta-model, an importer, a visitor and tools to manipulate and explore models.
 
 ## Importer
