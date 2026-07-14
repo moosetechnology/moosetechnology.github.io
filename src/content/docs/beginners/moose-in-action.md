@@ -14,7 +14,7 @@ A typical question is which of these classes we can remove.
 Essentially, this boils down to finding the classes annotated with `@Deprecated` and then selecting those that are not used anywhere (we ignore reflection for this exercise).
 This is an analysis.
 
-We first need to build a model of our system, and for this we will use [VerveineJ](/developers/Parsers/VerveineJ):
+We first need to build a model of our system, and for this we will use [VerveineJ](/developers/parsers/verveinej):
 
 You can do this using the [docker](https://github.com/Evref-BL/VerveineJ-Docker) image.
 
