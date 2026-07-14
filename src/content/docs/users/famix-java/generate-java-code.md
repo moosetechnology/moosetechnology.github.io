@@ -7,7 +7,7 @@ It is often the last part of performing [Model Driven Engineering](https://en.wi
 It is also named, the *Forward Engineering*.
 
 The Moose platform includes a tool to perform such an action, it is named [FAMIX2Java](https://github.com/moosetechnology/FAMIX2Java).
-In this page, you will learn how to install the tool and generate Java code based on a [Famix Java model pre-loaded from a file](../ImportingAndExportingModels), and generated with [VerveineJ](../../Developers/Parsers/VerveineJ).
+In this page, you will learn how to install the tool and generate Java code based on a [Famix Java model pre-loaded from a file](../ImportingAndExportingModels), and generated with [VerveineJ](../../developers/parsers/verveinej).
 
 ## Installation
 
@@ -117,5 +117,5 @@ You can also modify this line to export in a specific file, or any other stream 
 You might want to modify the code inside method and export it.
 This is not part of the FamixJava exporter project, however, the Moose platform includes two other projects that can help you.
 
-First, you should check [FAST-Java](../../Developers/Parsers/FAST-Java) which allows one to represent the code of a method, modify it, and regenerate it.
+First, you should check [FAST-Java](../../users/ast/fast-java) which allows one to represent the code of a method, modify it, and regenerate it.
 Second, if you want to use both FAST-Java, and Famix, you can have a look at [Carrefour](/blog/2022-06-30-carrefour) which brings together the two world.

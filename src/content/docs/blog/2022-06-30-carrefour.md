@@ -41,7 +41,7 @@ class MyClass {
 }
 ```
 
-Let's prepare the ground for using Carrefour by generating the Famix model of the MyClass class using [VerveineJ](/developers/Parsers/VerveineJ).
+Let's prepare the ground for using Carrefour by generating the Famix model of the MyClass class using [VerveineJ](/developers/parsers/verveinej).
 Open a code editor and create a new `MyClass.java` file.
 Inside the Java file, we add the code above.
 
