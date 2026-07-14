@@ -7,7 +7,7 @@ It is often the last part of performing [Model Driven Engineering](https://en.wi
 It is also named, the *Forward Engineering*.
 
 The Moose platform includes a tool to perform such an action, it is named [FAMIX2Java](https://github.com/moosetechnology/FAMIX2Java).
-In this page, you will learn how to install the tool and generate Java code based on a [Famix Java model pre-loaded from a file](../ImportingAndExportingModels), and generated with [VerveineJ](../../developers/parsers/verveinej).
+In this page, you will learn how to install the tool and generate Java code based on a [Famix Java model pre-loaded from a file](../importing-and-exporting-models), and generated with [VerveineJ](../../developers/parsers/verveinej).
 
 ## Installation
 
@@ -35,7 +35,7 @@ FAMIX2JavaVisitor new
 ```
 
 **Note** that since FamixJava is a high-level meta-model (*not representing the code inside a method*), it will not be able to regenerate the code inside the method, but only the structural part.
-However, if you have set a root folder (see [Import model](../ImportingAndExportingModels)), and not modified that much the model, the exporter will retrieve the code of the method to export based on the sources.
+However, if you have set a root folder (see [Import model](../importing-and-exporting-models)), and not modified that much the model, the exporter will retrieve the code of the method to export based on the sources.
 If you need to modify the code of methods, see you next section :smile:
 
 ## Example

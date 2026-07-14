@@ -12,7 +12,7 @@ It is also possible to link the repository commits with a Famix model to have ev
 
 ## Installation GitProjectHealth
 
-To install GitProjectHealth, you'll need a Moose11+ image (see the [install Moose page](/Beginners/InstallMoose)).
+To install GitProjectHealth, you'll need a Moose11+ image (see the [install Moose page](/beginners/install-moose)).
 
 In the Moose image, in a playground (`Ctrl+O`, `Ctrl+W`), perform:
 

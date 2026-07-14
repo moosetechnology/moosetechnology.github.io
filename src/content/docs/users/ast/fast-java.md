@@ -4,7 +4,7 @@ background: '/img/bg-wiki.jpg'
 title: FAST-Java
 ---
 
-FAST-Java is a [FAST](FAST) meta-model used to represent AST of a Java class or method.
+FAST-Java is a [FAST](fast) meta-model used to represent AST of a Java class or method.
 It comes with a meta-model, an importer, and tools to manipulate and explore models.
 
 ## FAST-Java meta-model
@@ -29,7 +29,7 @@ Metacello new
     load: 'smacc'.
 ```
 
-This script installs the [FAST](FAST) project, the SmaCC project, the FAST-Java project, and all the dependencies.
+This script installs the [FAST](fast) project, the SmaCC project, the FAST-Java project, and all the dependencies.
 
 ### Import
 

@@ -48,7 +48,7 @@ If it is not included, you need to follow the instructions in the readme file of
 For this blog post we will assume that the language is already supported and we will continue with "Python" 🐍🐍🐍.
 
 To be able to continue, and if this is the first time you're using this project (Pharo-Tree-Sitter), you need to launch the tests of python in package "TreeSitter-Tests" class "TSParserPythonTest".
-This is needed to launch the process of downloading the original **[tree-sitter](https://github.com/tree-sitter/tree-sitter)** and **[tree-sitter-python](github.com/tree-sitter/tree-sitter-python)** projects from GitHub, generating the correspondent libraries and moving them to the correspondent VM folder based on the image version you create: for example Moose 12. 
+This is needed to launch the process of downloading the original **[tree-sitter](https://github.com/tree-sitter/tree-sitter)** and **[tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python)** projects from GitHub, generating the correspondent libraries and moving them to the correspondent VM folder based on the image version you create: for example Moose 12. 
 If you create another image of another version, you need to launch the tests again to make sure the libraries are again moved to the correspondent folder.
 Now that you have the libraries, you can parse python code and get an AST, but not FAST-Python model.
 So in the next step we explain how this can be possible.
