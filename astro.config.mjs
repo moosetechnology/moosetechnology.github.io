@@ -224,7 +224,16 @@ export default defineConfig({
 										},
 										{
 											label: 'Mining Software Repository with GitProjectHealth',
-											link: '/users/git-project-health/getting-started-with-gitproject-health',
+											items: [ 
+												{
+													label: 'Getting started with Mining Software Repository',
+													link: '/users/git-project-health/getting-started-with-gitproject-health',
+												},
+												{
+													label: 'Local GitProject Health',
+													link: '/users/git-project-health/local-gitproject-health',
+												}
+											]
 										},
 										{
 											label: 'Moose Generic',
