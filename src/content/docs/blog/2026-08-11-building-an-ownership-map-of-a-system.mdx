@@ -8,6 +8,8 @@ tags:
 - Mining Software Repositories
 ---
 
+import 'katex/dist/katex.min.css';
+
 ## Context  
 
 when managing a software system, it is important to know who is responsible for which part of the system.
@@ -88,7 +90,7 @@ But let's investigate a running example for the [pharo](https://github.com/pharo
 After cloning the project, I create a Moose image with the GitProject Health project installed.
 Then, I load the pharo project.
 
-```st
+```smalltalk
 glhModel := GLHModel new.
 repository := GLHRepository new
     cacheAt: #localImporterReference
@@ -113,7 +115,7 @@ To do so, I decided to build a TreeMap using the Roassal framework.
 
 First, I need to load the Roassal TreeMap support
 
-```st
+```smalltalk
 Metacello new
     baseline: 'Roassal';
     repository: 'github://pharo-graphics/Roassal:Pharo13';
@@ -127,8 +129,7 @@ Then, start the fun.
 
 We build a dictionary with the degree of authorship for everyfile.
 
-```st
-
+```smalltalk
 filesAuthorShip := ((glhModel allWithSubTypesOf: GLHFile)
     select: [ :file | file diffs size ~= 0 ])
     collect: [ :file |
@@ -139,7 +140,7 @@ filesAuthorShip := ((glhModel allWithSubTypesOf: GLHFile)
 
 We look for the folder that is the root of the tree map, and we compute the max number of authorship that will be used for coloring the vizualisation.
 
-```st
+```smalltalk
 appsFolder := (glhModel allWithSubTypesOf: GLHFileDirectory)
     detect: [ :fi | fi path = 'src' ].
 
@@ -148,7 +149,7 @@ max := (filesAuthorShip collect: #sum) max.
 
 Finally, we build the tree map.
 
-```st
+```smalltalk
 palette := RSQualitativeColorPalette qualitative set39.
 b := RSTreeMap new.
 b inset: 2 asPoint.
@@ -207,7 +208,8 @@ b shapes
         box borderWidth: 1.
         box isSLeaf
         ifTrue: [ 
-            filesAuthorShip at: box model ifPresent: [ :dic | |author|
+            filesAuthorShip at: box model ifPresent: [ :dic |
+                | author |
                 author := (dic associations sorted: [ :a :b | a value > b value ]) first key.
                 box color: (paletteContributor scale: author) ] ]
         ifFalse: [

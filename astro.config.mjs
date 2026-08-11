@@ -10,7 +10,8 @@ import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 import rehypeMermaid from 'rehype-mermaid';
 import remarkGemoji from 'remark-gemoji';
 import remarkMath from 'remark-math';
-import rehypeMathjax from 'rehype-mathjax';
+import rehypeKatex from 'rehype-katex';
+import { unified } from '@astrojs/markdown-remark';
 
 const mermaidThemeCSS = readFileSync(
 	new URL('./src/styles/mermaid-theme.css', import.meta.url),
@@ -21,20 +22,22 @@ const mermaidThemeCSS = readFileSync(
 export default defineConfig({
 	markdown: {
 		// Applied to .md and .mdx files
-		remarkPlugins: [
-			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
-			remarkGemoji,
-			remarkMath
-		],
-		rehypePlugins: [
-			[rehypeMermaid, {
-				mermaidConfig: {
-					theme: 'base',
-					themeCSS: mermaidThemeCSS
-				}
-			}],
-			rehypeMathjax
-		]
+		processor: unified({
+			remarkPlugins: [
+				[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
+				remarkGemoji,
+				remarkMath
+			],
+			rehypePlugins: [
+				[rehypeMermaid, {
+					mermaidConfig: {
+						theme: 'base',
+						themeCSS: mermaidThemeCSS
+					}
+				}],
+				rehypeKatex
+			]
+		})
 	},
 	image: {
 		service: sharpImageService({ limitInputPixels: false }),

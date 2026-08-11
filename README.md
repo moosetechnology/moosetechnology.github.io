@@ -98,3 +98,16 @@ If you need to be added as author.
 
 1. Edit the file `astro.config.mjs` if the appropriate data.
 2; Edit the file `src/content/docs/about/authors.json` with the appropriate data.
+
+## Using Latex
+
+To use Latex in your blogpost, you need to:
+
+- Create a file in `mdx` format, for example `src/content/docs/blog/2026-08-11-building-an-ownership-map-of-a-system.mdx`
+- add `import 'katex/dist/katex.min.css';`
+
+Then, inline math can be written as `$x^2$` and block math can be written as 
+
+$$
+x^2
+$$
