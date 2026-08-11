@@ -6,7 +6,7 @@ authors:
 - BenoitVerhaeghe
 tags:
 - Famix-tools
-- GitProjectHealth
+- Mining Software Repositories
 ---
 
 When it comes to understand a software system, we are often focusing on the software artifact itself.

@@ -9,6 +9,8 @@ import tailwindcss from "@tailwindcss/vite";
 import remarkSimplePlantumlPlugin from "@akebifiky/remark-simple-plantuml"
 import rehypeMermaid from 'rehype-mermaid';
 import remarkGemoji from 'remark-gemoji';
+import remarkMath from 'remark-math';
+import rehypeMathjax from 'rehype-mathjax';
 
 const mermaidThemeCSS = readFileSync(
 	new URL('./src/styles/mermaid-theme.css', import.meta.url),
@@ -21,7 +23,8 @@ export default defineConfig({
 		// Applied to .md and .mdx files
 		remarkPlugins: [
 			[remarkSimplePlantumlPlugin, { baseUrl: "https://www.plantuml.com/plantuml/svg" }],
-			remarkGemoji
+			remarkGemoji,
+			remarkMath
 		],
 		rehypePlugins: [
 			[rehypeMermaid, {
@@ -29,7 +32,8 @@ export default defineConfig({
 					theme: 'base',
 					themeCSS: mermaidThemeCSS
 				}
-			}]
+			}],
+			rehypeMathjax
 		]
 	},
 	image: {
@@ -224,7 +228,7 @@ export default defineConfig({
 										},
 										{
 											label: 'Mining Software Repository with GitProjectHealth',
-											items: [ 
+											items: [
 												{
 													label: 'Getting started with Mining Software Repository',
 													link: '/users/git-project-health/getting-started-with-gitproject-health',
