@@ -313,6 +313,10 @@ export default defineConfig({
 													link: '/users/moose-ide/moose-critics',
 												},
 												{
+													label: 'Distribution Map',
+													link: '/users/moose-ide/distribution-map',
+												},
+												{
 													label: 'Inspector',
 													link: '/users/moose-ide/inspector',
 												}
