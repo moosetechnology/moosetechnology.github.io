@@ -1125,6 +1125,194 @@ flowchart TD
 	6 --> 7
 ```
 
+## Visiting the Control Flow Graph
+
+`FASTCFGTVisitor` is a trait provided in FAST alongside the CFG nodes. It adds the capability to visit a Control Flow Graph (CFG).
+
+It is neither a depth-first nor a breadth-first traversal of the graph: it follows the control flow, but it always finishes visiting **all the blocks of a conditional before visiting the blocks that follow it**, based on the merge point of the conditional. 
+
+### How to use it
+
+`FASTCFGTVisitor` is a trait meant to be used by any class wanting to visit the CFG. It can be combined with the visitor of your language if you wish to visit the contents of the nodes, but this is not an obligation. Without the language visitor, the graph itself is still fully visited; it is up to you to handle the statements of the blocks, since the default block visits send them to your visitor with `accept:` (you can for example override the block visits).
+
+For Python, `FASTPythonVisitor` is the language visitor. A CFG visitor is then a subclass of `FASTPythonVisitor` using the trait `FASTCFGTVisitor`:
+
+```smalltalk
+FASTPythonVisitor subclass: #MyPythonCFGVisitor
+	uses: FASTCFGTVisitor
+	instanceVariableNames: ''
+	classVariableNames: ''
+	package: 'MyPackage'
+```
+
+This is exactly how `FASTPythonSSAVisitor` is defined: it subclasses `FASTPythonVisitor` and uses `FASTCFGTVisitor` (and its class trait).
+
+If you work better by checking some actual code, take a look in the [FAST-Python repository](https://github.com/moosetechnology/FAST-Python/).
+
+To run the visit:
+
+1. Build the CFG of a behavioral entity, for example in python we can do `FASTPythonCFGVisitor buildCFGOf: aModule` or use the `#cfg` shortcut.
+2. Send `visit: cfg` to your visitor.
+
+```smalltalk
+cfg := aFunction cfg.
+MyPythonCFGVisitor new visit: cfg
+```
+
+### A traversal that is neither depth-first nor breadth-first
+
+The visitor follows the control flow from block to block. When it reaches a conditional, it does not continue directly with what follows it: it first visits **all the branches of the conditional**, one after the other. Only once every branch is done does it continue with the blocks following the conditional, starting from its merge point.
+
+Compared to the two classic traversals:
+
+- A depth-first traversal would follow the first branch and visit everything that comes after the conditional through it, before coming back for the remaining branches. Here, everything following the conditional is guaranteed to be visited **after** all the branches.
+- A breadth-first traversal would interleave the branches of nested conditionals with the blocks of the outer levels. Here, each conditional is completed branch by branch: all the branches of a nested conditional are visited before the next branch of the conditional containing it.
+
+Loops are safe: the blocks following a loop are visited only once, even if they are reachable from several places. In case you need to do a special management of loops, in `FASTCFGTVisitor>>#visitCFGConditionalBlock:`, you can ask `#isLoop` to the node to know if the node can loop back to itself or not. But be careful, some loops might not loop in case the language supports a break.
+
+Each kind of block (simple, conditional, switch, try, null block) is handled by its own `visitCFG...` method, that you can override if needed. But they also each call `FASTCFGTVisitor>>#visitCFGAbstractBlock:` if your need is general.
+
+The example section below shows a complete verified visit order on a CFG built from Python code to build a SSA.
+
+### The hooks
+
+Four hooks, all defined as no-ops by the trait, let a visitor hook into the visit of conditionals.
+
+| Hook | When it is called |
+|---|---|
+| `preConditionalsBranchesVisitOf:` | Before the branches of a conditional are visited (after the condition block). |
+| `preConditionalsBranchVisitOf:conditional:` | Before each individual branch is visited. |
+| `postConditionalsBranchVisitOf:conditional:` | After each individual branch has been visited. |
+| `postConditionalsBranchesVisitOf:` | After all the branches have been visited, just before the visit restarts from the merge block. |
+
+This is the natural place to save state before a branch, collect the state produced by each branch, and merge the results when all branches are done.
+
+In the building of Python SSA, this is where we build the Phi SSA variables.
+
+### Example: the Python SSA
+
+`FASTPythonSSAVisitor` is a real-world user of `FASTCFGTVisitor`. Before looking at it, a really short explanation of SSA: **Static Single Assignment** gives each assignment to a variable its own *version* of this variable (for example `x = 1` creates the version `x_1`). This way, a use of a variable can be linked to the assignments that can impact it. Most of the time there is only one version involved, but when the control flow merges, for example after an `if`/`else`, a use can be impacted by the assignments of several branches. In this case the use is linked to a **Phi SSA version**: a special version referencing all the possible versions coming from the branches.
+
+Knowing the merge points and their branches requires knowing the control flow: this is why the SSA needs the CFG. `FASTPythonSSAVisitor` combines the Python model visit, to process the content of the nodes, with the CFG visit, to know where to build the Phi versions.
+
+This section does not explain the whole SSA implementation. It only shows how the Phi versions are built, since it is the reason why the CFG is needed. You can find the actual code in the [FAST-Python repository](https://github.com/moosetechnology/FAST-Python/).
+
+```smalltalk
+FASTPythonVisitor << #FASTPythonSSAVisitor
+	traits: {FASTCFGTVisitor};
+	slots: { #newVariablesMap . #localDeclarations };
+	tag: 'CFG/LocalResolver/SSA';
+	package: 'FAST-Python-Tools'
+```
+
+#### The code and its CFG
+
+All the examples of this section use the following function:
+
+```python
+def f():
+	x = 1
+	if z > 3:
+		x = 2
+	else:
+		x = 3
+	print(x)
+	return x
+```
+
+Its CFG has four blocks:
+
+```mermaid
+flowchart TD
+	subgraph Entry
+		direction TB
+		1
+	end
+
+	subgraph Exit
+		direction TB
+		4
+	end
+
+	1[/"x = 1<br/>if z > 3: "/]
+	2("x = 2 ")
+	3("x = 3 ")
+	4("print(x)<br/>return x ")
+	1 -- "z > 3" --> 2
+	1 -- "else" --> 3
+	2 --> 4
+	3 --> 4
+```
+
+#### The visit order
+
+On this CFG, the visitor does the following:
+
+1. It visits the entry block: the statements `x = 1` and the condition `z > 3` are sent to your visitor.
+2. It visits the branches of the conditional, one after the other: first the then branch (`x = 2`), then the else branch (`x = 3`).
+3. Only once both branches are done does it continue from the merge point: the statements `print(x)` and `return x` are sent to your visitor.
+
+Note that `print(x)` and `return x` are visited last, even though a depth-first walk would have reached them at the end of the first branch, before the else branch.
+
+#### Building the Phi versions
+
+The entry point chains the three steps: local resolution, CFG building, then the CFG visit.
+
+```smalltalk
+FASTPythonSSAVisitor>>resolve: aFASTBehaviouralEntity
+	| cfg |
+	"First we do a local resolution so that each entity are linked to their local declaration"
+	FASTPythonLocalResolverVisitor resolve: aFASTBehaviouralEntity.
+
+	"Then we build the CFG to know the different paths on the entity"
+	cfg := aFASTBehaviouralEntity cfg.
+
+	"And lastly, I can build the SSA now that I have the CFG and Local declarations."
+	self visit: cfg
+```
+
+The visitor keeps two pieces of state for the Phi building: `newVariablesMap`, a map from the conditional block currently being visited to its bookkeeping, and `currentActiveVersions`, the SSA versions currently in scope. Three of the four hooks are used to build the Phi versions.
+
+**Before all branches** -- remember the versions that exist before entering the conditional:
+
+```smalltalk
+preConditionalsBranchesVisitOf: aConditionalBlock
+	newVariablesMap at: aConditionalBlock put: (IdentityDictionary with: #previousVariables -> self currentActiveVersions)
+```
+
+**After each branch** -- compute and store the versions created by this branch, i.e. the difference between the versions active at the end of the branch and the versions active before the conditional:
+
+```smalltalk
+postConditionalsBranchVisitOf: firstBranchBlock conditional: aConditionalBlock
+	| mapForConditional |
+	mapForConditional := newVariablesMap at: aConditionalBlock.
+	mapForConditional at: firstBranchBlock put: (self currentActiveVersions difference: (mapForConditional at: #previousVariables))
+```
+
+**After all branches** -- combine the versions of every branch into Phi versions for the variables that were reassigned, then clean the bookkeeping. This runs right before the visit restarts from the merge block, so the merge block reads variables through the fresh Phi versions:
+
+```smalltalk
+postConditionalsBranchesVisitOf: aConditionalBlock
+	| mapForConditional previousVariables |
+	mapForConditional := newVariablesMap at: aConditionalBlock.
+	previousVariables := mapForConditional at: #previousVariables.
+	mapForConditional removeKey: #previousVariables.
+	self producePhiVersionBasedOnPreviousVariables: previousVariables andNewVariableMap: mapForConditional.
+	newVariablesMap removeKey: aConditionalBlock
+```
+
+Running it on the example above produces, for the variable `x`:
+
+| Node | SSA version |
+|---|---|
+| write `x = 1` (entry block) | `FASTVariableVersionSSA [x_1]` |
+| write `x = 2` (then branch) | `FASTVariableVersionSSA [x_2]` |
+| write `x = 3` (else branch) | `FASTVariableVersionSSA [x_3]` |
+| reads `print(x)` and `return x` (merge block) | `FASTVariablePhiVersionSSA ['x_3', 'x_2']` |
+
+The hooks collect `x_2` and `x_3` while each branch is visited, and the last hook builds the Phi before the merge block is reached. It could not be built earlier: only at that point are the versions of all the branches known, which is exactly the guarantee provided by the traversal.
+
+
 ## Utilites
 
 The CFG currently has two utilities. 
