@@ -58,7 +58,7 @@ Or
 
 FAST-Python ships with a set of tools to explore and analyse a model once it is imported. The importer builds a `FASTPyModel` made of `FASTPy*` entities representing the whole AST:
 
-![An example of a FAST Python model](./img/model.png)
+<img src="./img/model.png" alt="An example of a FAST Python model" width="55%">
 
 The analysis tools described below can be combined. A typical analysis runs some (or all) of them:
 `FAST utilities` → `Local resolution` → `CFG` → `SSA`. Each tool explains what it does, how to use it and what you can do with the result.
