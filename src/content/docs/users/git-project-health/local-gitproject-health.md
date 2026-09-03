@@ -11,6 +11,20 @@ The major one is that it cannot load information hosted by the git social platfo
 
 However it is much faster to load commits and commits diff.
 
+## Clone git repository
+
+To analyse a git repository, you simply have to clone it our your local computer.
+
+If you need to analyse all the branches, you need a more deep clone.
+One approach is to use this script
+
+```sh
+git clone --mirror path/to/original path/to/dest/.git
+cd path/to/dest
+git config --bool core.bare false
+git checkout main
+```
+
 ## Usage
 
 After loading the project, the easiest way to use the project is to use this code snippet:
