@@ -19,10 +19,11 @@ If you need to analyse all the branches, you need a more deep clone.
 One approach is to use this script
 
 ```sh
-git clone --mirror path/to/original path/to/dest/.git
-cd path/to/dest
-git config --bool core.bare false
-git checkout main
+git clone gitrepo
+cd gitrepo
+for branch in `git branch -a | grep remotes | grep -v HEAD | grep -v master | grep -v main `; do
+   git branch --track ${branch#remotes/origin/} $branch
+done
 ```
 
 ## Usage
