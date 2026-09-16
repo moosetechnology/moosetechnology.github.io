@@ -87,8 +87,8 @@ There is no keyword, no type, no way to distinguish "declare a fresh variable" f
 
 In our implementation this all boils down to a single rule expressed in `visitFASTTCanBeVariable:` (see [below](#the-heart-visitfasttcanbevariable)): **a write access declares and bind, a read access binds**. Everything else is scope management around that rule.
 
-:::note[**A note on "first write access"**: the "declaration" is the *lexically* first write access (or parameter, or walrus) in a scope — but not necessarily the first at runtime.]
-A variable assigned inside a branch that is not taken, or behind a condition that is false, is still the declaration for the resolver. This may sound wrong if you think of declarations as a runtime concept, but local resolution is not about execution semantics: its purpose is to **link all the entities that represent the same variable in the source**. For that purpose, the lexically first declaration is a good enough anchor — it gives us a stable, deterministic reference point for every name in a scope, regardless of control flow.
+:::note[]
+**A note on "first write access"**: the "declaration" is the *lexically* first write access (or parameter, or walrus) in a scope — but not necessarily the first at runtime.A variable assigned inside a branch that is not taken, or behind a condition that is false, is still the declaration for the resolver. This may sound wrong if you think of declarations as a runtime concept, but local resolution is not about execution semantics: its purpose is to **link all the entities that represent the same variable in the source**. For that purpose, the lexically first declaration is a good enough anchor — it gives us a stable, deterministic reference point for every name in a scope, regardless of control flow.
 :::
 
 ### A scope stack
@@ -399,7 +399,8 @@ visitFASTPyComprehension: aComprehension
 
 We also had to choose a Python version:
 
-:::note[The resolver is implemented for **Python 3** semantics. In Python 2, comprehensions had *no* scope at all and their variable leaked to the enclosing scope. We explicitly did not support Python 2 scoping; supporting both would require making the comprehension scoping rule configurable.]
+:::note[]
+The resolver is implemented for **Python 3** semantics. In Python 2, comprehensions had *no* scope at all and their variable leaked to the enclosing scope. We explicitly did not support Python 2 scoping; supporting both would require making the comprehension scoping rule configurable.
 :::
 
 ### Other constructs that declare names
