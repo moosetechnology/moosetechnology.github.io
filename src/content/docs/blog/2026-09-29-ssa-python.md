@@ -6,6 +6,7 @@ date:  2026-09-29
 tags:
 - FAST
 - SSA
+- Python
 ---
 
 # Implementing the SSA of Python in FAST-Python

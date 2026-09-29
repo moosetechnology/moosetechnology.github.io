@@ -5,6 +5,7 @@ authors:
 - AlessHosry
 tags:
 - meta-model
+- Python
 ---
 
 If you’re here, you’re probably interested in creating a new FAST metamodel and expanding Moose to represent the AST (Abstract Syntax Tree) of an additional language.
