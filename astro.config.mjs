@@ -239,6 +239,10 @@ export default defineConfig({
 												{
 													label: 'Local GitProject Health',
 													link: '/users/git-project-health/local-gitproject-health',
+												},
+												{
+													label: 'Hybrid Importer',
+													link: '/users/git-project-health/mixed-gitproject-health',
 												}
 											]
 										},
