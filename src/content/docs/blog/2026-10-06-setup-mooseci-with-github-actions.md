@@ -19,8 +19,8 @@ MooseCI is built on top of Moose. It can run in headless mode, so you can use it
 
 You can use MooseCI in two ways:
 
-- as a command line tool, with Docker;
-- inside a CI, with its GitHub Action.
+- as a command line tool, with Docker
+- inside a CI, with its GitHub Action for example
 
 For now, MooseCI supports Java and Python.
 
