@@ -154,7 +154,7 @@ export default defineConfig({
 						},
 						tokyRT: {
 							name: "Toky RATOLOJANHARY",
-							title: "Software engineer intern",
+							title: "Software engineer",
 							url: "https://github.com/tokyRT",
 							picture: "https://avatars.githubusercontent.com/u/57077076"
 						},
