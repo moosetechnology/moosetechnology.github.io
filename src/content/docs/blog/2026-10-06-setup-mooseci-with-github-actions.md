@@ -100,10 +100,10 @@ MooseCIConfig {
 
 In this file, you can:
 
-- set the language with `#projectLanguage`;
-- choose the metrics to compute with `#metrics`;
-- choose the quality rules with `#rules`, and give a threshold to some rules (for example `#too_many_parameters : 10`);
-- choose the report format and location with `#outputFormats` and `#outputPath`.
+- set the language with `#projectLanguage`
+- choose the metrics to compute with `#metrics`
+- choose the quality rules with `#rules`, and give a threshold to some rules (for example `#too_many_parameters : 10`)
+- choose the report format and location with `#outputFormats` and `#outputPath`
 
 Then add the workflow. Create `.github/workflows/moose-ci.yml`:
 
