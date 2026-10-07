@@ -24,6 +24,8 @@ You can use MooseCI in two ways:
 
 For now, MooseCI supports Java and Python.
 
+MooseCI runs its analyses on the [Famix](https://github.com/moosetechnology/Famix) model of your project, not on the FAST model.
+
 ## Run MooseCI with Docker
 
 The easiest way to try MooseCI is with Docker.
@@ -142,6 +144,16 @@ On each pull request, MooseCI comments with the analysis. For VerveineJ, the sum
 The report also contains the list of rule violations, with the location of each problem in the source code.
 
 ![Content of the downloaded JSON report](./img/posts/2026-10-06-setup-mooseci-with-github-actions/setup-mooseci-vvj-report-json.png)
+
+## Use MooseCI in another CI
+
+MooseCI is not limited to GitHub. In any other CI, you can run the same Docker image and the same commands as the CLI, for example:
+
+```bash
+docker run -v "$(pwd):/src" ghcr.io/moosetechnology/moose-ci:latest analyze
+```
+
+The report is written in the MooseCI report folder (`.moose-ci/report`). Your CI can then publish it as an artifact.
 
 ## Conclusion
 
