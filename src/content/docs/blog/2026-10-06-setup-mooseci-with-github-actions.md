@@ -57,9 +57,9 @@ MooseCI is also available as a [GitHub Action](https://github.com/moosetechnolog
 
 The Action:
 
-- runs MooseCI on your project;
-- uploads the report as an artifact;
-- comments on the pull request with a download link and a short summary of the analysis.
+- runs MooseCI on your project
+- uploads the report as an artifact
+- comments on the pull request with a download link and a short summary of the analysis
 
 ### Example with VerveineJ
 
