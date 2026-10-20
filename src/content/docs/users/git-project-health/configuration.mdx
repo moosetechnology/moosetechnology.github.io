@@ -1,0 +1,142 @@
+---
+title: Configuration reference
+description: Complete reference of GitProjectHealth importer options (defaults, effects, API cost), constructors, and the import methods supported by GitLab, GitHub, Bitbucket, local and mixed importers.
+sidebar:
+  label: Configuration reference
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This page lists everything you can configure on a GitProjectHealth importer.
+It is a reference: for a guided tour, read [Importers](/users/git-project-health/importers/) first.
+
+## Constructors
+
+| Constructor | Returns | Preset options |
+| --- | --- | --- |
+| `GitModelImporter forGitlabWithToken: token andModel: model` | `GitlabModelImporter` on `https://gitlab.com/api/v4` | same as below |
+| `GitModelImporter forGitlabHostOn: url withToken: token andModel: model` | `GitlabModelImporter` on `url` (must end with `/api/v4`) | `withFiles: false`, `withCommitsSince: 3 days`, `withCommitDiffs: false` |
+| `GitModelImporter forGithubWithToken: token andModel: model` | `GithubModelImporter` | `withCommitsSince: 3 days` |
+| `GitModelImporter forBitbucketHostOn: url withToken: token andModel: model` | `BitBucketModelImporter` on `url` | `withFiles: false`, `withCommitsSince: 3 days`, `withCommitDiffs: false` |
+| `GitlabModelImporter new` | GitLab importer, API to set with `repoApi:` | class defaults (see below) |
+| `GithubModelImporter new` | GitHub importer, token to set with `privateToken:` | class defaults |
+| `BitBucketModelImporter new` | Bitbucket importer, API to set with `repoApi:` | class defaults |
+| `GitLocalModelImporter new` | local importer | class defaults |
+| `GitModelMixedImporter new` | mixed importer, set `apiImporter:` and `localImporter:` | — |
+
+## Importer options
+
+Options are set on the importer **before** importing.
+They are defined in `GitModelImporter` and apply to every importer, unless noted otherwise.
+
+| Option | Type | Default (`new`) | Effect | Cost |
+| --- | --- | --- | --- | --- |
+| `glhModel:` | `GLHModel` | — (required) | Model in which entities are added. | — |
+| `repoApi:` | `GitlabApi`, `GithubApi`, `BitbucketApi` | GitHub: created automatically | API client used by platform importers. | — |
+| `privateToken:` | `String` | — | GitHub only: sets the token of the GitHub API client. | — |
+| `withCommitsSince:` | `Duration` (`30 days`, `2 years`) or `DateAndTime` | `1 week` | Oldest commit to import. A duration is subtracted from today. | high: more commits, more calls |
+| `withCommitDiffs:` | `Boolean` | GitLab, GitHub, local: `true`; Bitbucket: unset | Import the diff (`GLHDiff`) of each commit, and of merge requests on GitLab and GitHub. | high: one call per commit |
+| `withDiffRanges:` | `Boolean` | `false` | Local importer: split diffs into ranges and line changes (`GLHDiffRange`, `GLHAddition`, `GLHDeletion`, `GLHLineOfCode`). | memory |
+| `withFiles:` | `Boolean` | `false` | Import the file tree (`GLHFileDirectory`, `GLHFileBlob`) of each branch. Required for degree of authorship and truck factor. | very high on APIs |
+| `beWithFiles` / `beWithoutFiles` | — | — | Shortcuts for `withFiles: true` / `withFiles: false`. | — |
+| `withInitialCommits:` | `Boolean` | GitLab: `false` | GitLab: import the commits of every branch when a project is completed. | very high |
+| `userCatalogue:` | `GLHUserCatalogue` | `GLHUserCatalogueV2` | Matches commit author names and e-mails with platform users. | — |
+
+<Aside type="caution">
+With `BitBucketModelImporter new`, `withCommitDiffs` is not initialized: always set it explicitly (`withCommitDiffs: false` or `true`). The Bitbucket constructor sets it for you.
+</Aside>
+
+### Local importer
+
+The local importer reads the path of the clone from the repository cache:
+
+```smalltalk
+repository cacheAt: #localImporterReference put: '/path/to/clone' asFileReference.
+```
+
+If this entry is missing, the importer clones the project from its `web_url` into `./msr/<project name>`, using your Iceberg credentials.
+
+### Mixed importer
+
+| Option | Effect |
+| --- | --- |
+| `apiImporter:` | Platform importer used for projects, merge requests, notes, pipelines, tags and users. |
+| `localImporter:` | Local importer used for branches, commits and diffs. |
+| `glhModel:` | Sets the model on the mixed importer **and** on both importers already set. |
+| `withCommitDiffs:`, `withDiffRanges:` | Forwarded to the local importer. |
+
+## Import methods by platform
+
+✅ supported, ❌ not supported. For the mixed importer, the column says which importer does the work.
+Arguments: `project` is a `GLHProject`, `mr` a `GLHMergeRequest`, `commit` a `GLHCommit`, `branch` a `GLHBranch`, dates are `DateAndTime`.
+
+### Groups, projects, users
+
+| Method | GitLab | GitHub | Bitbucket | Local | Mixed |
+| --- | --- | --- | --- | --- | --- |
+| `importGroup:` | ✅ ID, with sub-groups | ✅ org name | ✅ project key | ❌ | ❌ |
+| `importAllGroups` (top-level groups, not their projects) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `importProject:` | ✅ ID | ❌ | ❌ (import the group) | ❌ | API |
+| `importProjects` / `importProjectsSince:` | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `importContributedProjectsOfUser:` | ✅ | ✅ | ✅ | ❌ | ❌ |
+| `importUser:` (ID) | ✅ | ✅ | ❌ | ❌ | API |
+| `importUserByUsername:` | ✅ | ✅ | ✅ | ❌ | API |
+| `importActiveHumanUsers` | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+### Repositories, branches, files, tags
+
+| Method | GitLab | GitHub | Bitbucket | Local | Mixed |
+| --- | --- | --- | --- | --- | --- |
+| `importRepository:` (branches + commits) | ❌ | ❌ | ❌ | ✅ | ❌ |
+| `importBranchesOfProject:` | ✅ | ✅ | ✅ | ✅ | local |
+| `importFilesOfBranch:` | ✅ | ✅ | ❌ | ✅ | ❌ |
+| `importFileWithPath:ofProject:inBranch:` | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `importTagsForProject:` | ✅ | ❌ | ❌ | ❌ | API |
+| `importLatestReleaseOfProject:` | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+### Commits and diffs
+
+| Method | GitLab | GitHub | Bitbucket | Local | Mixed |
+| --- | --- | --- | --- | --- | --- |
+| `importCommitsOfProject:since:until:` | ✅ | ❌ | ✅ | ✅ | local |
+| `importAndLoadLatestsCommitsOfProject:` | ✅ | ❌ | ✅ | ❌ | ❌ |
+| `importLatestCommitsOfProject:` | ✅ | ✅ (50 latest) | ❌ | ✅ | ❌ |
+| `importCommitsOfProject:` (period of `withCommitsSince:`) | ❌ | ✅ | ❌ | ❌ | ❌ |
+| `importCommitsOfBranch:` and `…since:`, `…until:`, `…since:until:`, `…fromCommit:` | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `importCommitsOfTag:`, `importCommitsFromTag:toTag:` | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `importCommit:ofProject:` (commit ID) | ✅ | ✅ | ✅ | ✅ | local, then API |
+| `importDiffOfCommit:` | ✅ | ✅ | ✅ | ✅ | local, then API |
+| `importParentCommitsOfCommit:since:` | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `importSZZFromCommit:` (bug-introducing commits) | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+### Merge requests (pull requests)
+
+| Method | GitLab | GitHub | Bitbucket | Local | Mixed |
+| --- | --- | --- | --- | --- | --- |
+| `importLatestMergeRequestsOfProject:` | ✅ (20 latest) | ✅ | ❌ | ❌ | ❌ |
+| `importMergeRequestsOfProject:` | ✅ | ✅ | ❌ | ❌ | ❌ |
+| `importMergeRequestsOfProject:since:until:` | ✅ | ❌ | ✅ | ❌ | API |
+| `importMergeRequestCommits:` | ✅ | ❌ | ✅ | ❌ | API |
+| `importMergeRequestMergeCommits:` | ✅ | ✅ | ✅ | ❌ | API |
+| `importDiffOfMergeRequest:` | ✅ | ✅ | ❌ | ❌ | ❌ |
+| `importMergeResquestApprovals:` | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `importMergeResquestAuthor:`, `importMergeResquestMerger:` | ✅ | ✅ | ✅ | ❌ | ❌ |
+| `importNotesOfMergeRequest:` | ✅ | ❌ | ✅ | ❌ | API |
+| `importMergeRequestStats:` | ❌ | ❌ | ✅ | ❌ | ❌ |
+
+### Pipelines, jobs, issues
+
+| Method | GitLab | GitHub | Bitbucket | Local | Mixed |
+| --- | --- | --- | --- | --- | --- |
+| `importLatestPipelinesOfProject:` | ✅ | ❌ | ❌ | ❌ | API |
+| `importPipelinesOfProject:` | ✅ | ✅ | ❌ | ❌ | ❌ |
+| `importAllPipelinesOfProject:` | ✅ | ✅ | ❌ | ❌ | ❌ |
+| `importPipelinesOfProject:after:andBefore:` (`…onBranch:`) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `importPipelinesOfMergeRequest:` | ✅ | ✅ | ❌ | ❌ | ❌ |
+| `importJobsOfPipeline:` | ✅ | ✅ | ❌ | ❌ | ❌ |
+| `importIssuesOfProject:` | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+<Aside type="note">
+This table was generated from the code of the importers. If you add a method to an importer, please update it.
+</Aside>

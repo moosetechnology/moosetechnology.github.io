@@ -1,0 +1,61 @@
+---
+title: GitProjectHealth
+description: Overview of GitProjectHealth, the Moose toolkit to mine Git repositories and GitLab, GitHub and Bitbucket platforms, and how to choose the right importer.
+sidebar:
+  label: Overview
+  order: 0
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+**GitProjectHealth** (GPH) is a set of importers, a meta-model, analyses and visualizations that let you study the history and the _health_ of software repositories inside Moose.
+
+With GitProjectHealth you can, for instance:
+
+- list the repositories of a group or organization, and see which have failing pipelines;
+- count commits, contributors, merge requests (pull requests) or code churn over a period;
+- find who knows which part of a system (degree of authorship, truck factor);
+- export dozens of metrics per user or per project in CSV;
+- link commits and merge requests to Jira tickets, or to the source code entities of a Famix model.
+
+<Aside type="note" title="Naming">
+The project is hosted at [moosetechnology/GitProjectHealth](https://github.com/moosetechnology/GitProjectHealth), but its Metacello baseline is still called `GitLabHealth` and most classes are prefixed with `GLH` (GitLab Health), because the project started as a GitLab-only tool.
+The model is a `GLHModel` whatever the platform you import from.
+</Aside>
+
+## Choose your importer
+
+GitProjectHealth can read data from two kinds of sources: the **REST API** of a Git platform, and a **local clone** of a repository.
+Each importer is a subclass of `GitModelImporter` and fills the same `GLHModel`.
+
+| Importer | Class | Source | Commits & diffs | Merge requests, pipelines, notes | Speed |
+| --- | --- | --- | --- | --- | --- |
+| GitLab | `GitlabModelImporter` | GitLab REST API (gitlab.com or self-hosted) | ✅ | ✅ (most complete) | slow on big histories |
+| GitHub | `GithubModelImporter` | GitHub REST API | ✅ | ✅ pull requests, workflow runs | slow, rate-limited |
+| Bitbucket | `BitBucketModelImporter` | Bitbucket Server / Data Center REST API | ✅ | ✅ pull requests, comments | slow |
+| Local | `GitLocalModelImporter` | a cloned repository on disk | ✅ | ❌ | **fast** |
+| Mixed | `GitModelMixedImporter` | local clone **and** platform API | ✅ (from the clone) | ✅ (from the API) | fast for history |
+
+Rule of thumb:
+
+- you only need the **history** (commits, diffs, files, authors) → use the **local importer**;
+- you need the **social** information (merge requests, reviews, pipelines) on a few projects → use a **platform importer**;
+- you need **both** on large histories → use the **mixed importer**.
+
+## Documentation map
+
+<CardGrid>
+	<LinkCard title="Getting started" description="Install GitProjectHealth and import your first repository in 10 minutes." href="/users/git-project-health/getting-started/" />
+	<LinkCard title="Importers" description="GitLab, GitHub, Bitbucket, local and mixed importers in detail." href="/users/git-project-health/importers/" />
+	<LinkCard title="Configuration reference" description="Every importer option, its default value and its cost, plus the import methods supported by each platform." href="/users/git-project-health/configuration/" />
+	<LinkCard title="Meta-model" description="Entities of a GLHModel and how to navigate between them." href="/users/git-project-health/metamodel/" />
+	<LinkCard title="Recipes" description="Ready-to-run scripts for common questions." href="/users/git-project-health/recipes/" />
+	<LinkCard title="Metrics and analyses" description="GitMetricExporter, the 50+ built-in metrics, churn, truck factor and degree of authorship." href="/users/git-project-health/metrics/" />
+	<LinkCard title="Visualizations" description="Inspector tabs and Roassal visualizations, with SVG and CSV export." href="/users/git-project-health/visualizations/" />
+	<LinkCard title="Connectors" description="Link your Git model with Jira issues or with a Famix model of the code." href="/users/git-project-health/connectors/" />
+	<LinkCard title="Troubleshooting" description="Common errors, API limits and the migration table for deprecated classes." href="/users/git-project-health/troubleshooting/" />
+</CardGrid>
+
+## Demo
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BIoF_mj6dDk?si=AwHflEKdpekI9c_B" title="GitProjectHealth demo video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

@@ -44,6 +44,11 @@ export default defineConfig({
 	},
 	site: 'https://modularmoose.org',
 	base: '',
+	redirects: {
+		'/users/git-project-health/getting-started-with-gitproject-health': '/users/git-project-health/getting-started',
+		'/users/git-project-health/local-gitproject-health': '/users/git-project-health/importers#local-importer',
+		'/users/git-project-health/mixed-gitproject-health': '/users/git-project-health/importers#mixed-importer',
+	},
 	integrations: [
 		starlight({
 			title: 'Modular Moose',
@@ -231,20 +236,7 @@ export default defineConfig({
 										},
 										{
 											label: 'Mining Software Repository with GitProjectHealth',
-											items: [
-												{
-													label: 'Getting started with Mining Software Repository',
-													link: '/users/git-project-health/getting-started-with-gitproject-health',
-												},
-												{
-													label: 'Local GitProject Health',
-													link: '/users/git-project-health/local-gitproject-health',
-												},
-												{
-													label: 'Hybrid Importer',
-													link: '/users/git-project-health/mixed-gitproject-health',
-												}
-											]
+											items: [{ autogenerate: { directory: 'users/git-project-health' } }],
 										},
 										{
 											label: 'Moose Generic',

@@ -1,0 +1,98 @@
+---
+title: Troubleshooting
+description: Common GitProjectHealth problems (slow imports, API limits, local importer errors, memory) and the migration table from deprecated classes and selectors to the current API.
+sidebar:
+  label: Troubleshooting
+  order: 9
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## Migrating from deprecated classes and selectors
+
+Older scripts, including some blog posts, use names that are now deprecated or removed. Use the current name instead.
+
+| Old name | Status | Use instead |
+| --- | --- | --- |
+| `GLHModelImporter` | deprecated | `GitlabModelImporter` |
+| `GLPHModelImporter` | deprecated | `GitlabModelImporter` |
+| `GitlabWithMergeRequestModelImporter` | deprecated | `GitlabModelImporter` |
+| `GHModelImporter` | deprecated | `GithubModelImporter` |
+| `GHApi` | deprecated | `GithubApi` (created by `GithubModelImporter`) |
+| `GLPHApi` | removed | `GitlabApi` |
+| `GLPHEMergeRequest` | removed | `GLHMergeRequest` |
+| `baseAPIUrl:` (GitLab API) | removed | `hostUrl:` |
+| `makeGlobal:` (importer) | removed | — (store the importer in a variable) |
+| `importMergeRequests:` | removed | `importMergeRequestsOfProject:` |
+| `importMergeRequests:since:until:` | removed | `importMergeRequestsOfProject:since:until:` |
+| `toScope:` | deprecated (Moose) | `containedEntitiesOfType:` |
+| `allToScope:` | deprecated (Moose) | `allContainedEntitiesOfType:` |
+| `allProjectstoScope` | uses `toScope:` | `containedEntitiesOfType: GLHProject` |
+| `GitMetricExporter>>exportFor:`, `exportFor:over:` | deprecated | `generateAnalysesOver:` then `exportInCSV` |
+| `GitMetricExporter>>addEntitiesFromUserNames:` | deprecated | `setupAnalysisForUsersWithNames:` |
+
+<Aside type="caution" title="Automatic rewriting">
+When a deprecated method has an automatic transformation, Pharo may **rewrite the calling method** the first time it is called. If this happens in a package of GitProjectHealth, Iceberg will show it as modified: discard the change, or propose a pull request with it.
+</Aside>
+
+## Frequent problems
+
+### The import is very slow
+
+API imports send one or more HTTP requests per entity. To speed them up:
+
+- reduce the period: `withCommitsSince: 7 days`;
+- disable what you do not need: `withCommitDiffs: false`, `withFiles: false`;
+- import merge requests for a period (`importMergeRequestsOfProject:since:until:`) rather than all of them;
+- use the [local importer](/users/git-project-health/importers/#local-importer) for the history, or the [mixed importer](/users/git-project-health/importers/#mixed-importer) if you also need merge requests.
+
+### GitHub stops answering (rate limit)
+
+The GitHub REST API allows 5,000 requests per hour with a token (60 without).
+Large organizations can exceed this limit: import fewer repositories at once, reduce the period, or wait for the limit to reset.
+
+### `Local GLHRepository without importer reference`
+
+The local importer cannot find the clone. Set the path on the repository before importing:
+
+```smalltalk
+repository cacheAt: #localImporterReference put: '/path/to/clone' asFileReference.
+```
+
+If the repository belongs to a project with a `web_url`, the importer tries to clone it into `./msr/<project name>`: check that your Iceberg credentials give access to it.
+
+### Some branches are missing with the local importer
+
+The local importer reads local branches only. Create local tracking branches for the remote ones (see [Clone the repository](/users/git-project-health/importers/#clone-the-repository)).
+
+### Only 20 merge requests are imported
+
+`importLatestMergeRequestsOfProject:` imports the 20 latest merge requests only. Use `importMergeRequestsOfProject:since:until:` to import a period.
+
+### `Bitbucket api cannot import directly a project`
+
+On Bitbucket, import the Bitbucket project with `importGroup: 'KEY'`: its repositories are imported as `GLHProject`s.
+
+### The GitLab URL is not accepted
+
+The GitLab host URL must point to the API, including `/api/v4`, for instance `https://gitlab.mycompany.com/api/v4`.
+
+### The image uses too much memory
+
+The local importer keeps caches on the imported entities. Clear them after the import:
+
+```smalltalk
+model flush.
+model entities do: #flush.
+```
+
+Avoid `withDiffRanges: true` and `withFiles: true` unless you need them.
+
+### Where are the logs?
+
+Importers log their progress with [MoreLogger](https://github.com/badetitou/MoreLogger) (`recordInfo`). See its documentation to choose where the logs are written.
+
+## Getting help
+
+- Ask on the [Moose Discord](https://discord.gg/QewZMZa).
+- Report bugs on [GitProjectHealth issues](https://github.com/moosetechnology/GitProjectHealth/issues).

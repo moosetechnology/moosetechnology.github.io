@@ -1,0 +1,160 @@
+---
+title: Getting started with GitProjectHealth
+description: Install GitProjectHealth in a Moose image, import a GitLab group, a GitHub organization, a Bitbucket project or a local clone, and run a first query.
+sidebar:
+  label: Getting started
+  order: 1
+---
+
+import { Steps, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+This page takes you from an empty Moose image to a first answer about your repositories.
+It takes about ten minutes, plus the import time.
+
+## Prerequisites
+
+- A Moose image (see [Install Moose](/beginners/install-moose)). This documentation was checked with Moose on Pharo 13.
+- For platform importers, an **access token** (see below). The local importer needs no token, only a clone on disk.
+- All the code below is Pharo code, to run in a **Playground** (`Ctrl+O`, `Ctrl+W`): select it and _Do it_ (`Ctrl+D`) or _Inspect it_ (`Ctrl+I`).
+
+## First import
+
+<Steps>
+
+1. **Install GitProjectHealth.** In a Playground, run:
+
+    ```smalltalk
+    Metacello new
+      repository: 'github://moosetechnology/GitProjectHealth:main/src';
+      baseline: 'GitLabHealth';
+      onConflict: [ :ex | ex useIncoming ];
+      onUpgrade: [ :ex | ex useIncoming ];
+      onDowngrade: [ :ex | ex useLoaded ];
+      load
+    ```
+
+    This loads the `default` group: the meta-model, every importer, the analyses and the visualizations.
+    The [Jira and Famix connectors](/users/git-project-health/connectors/) are optional groups.
+
+2. **Get an access token** for your platform.
+
+    <Tabs syncKey="gph-platform">
+      <TabItem label="GitLab">
+        In GitLab, open _User settings → Access tokens_ and create a personal access token with the `read_api` scope (`read_repository` is also needed if you import files).
+      </TabItem>
+      <TabItem label="GitHub">
+        In GitHub, open [_Settings → Developer settings → Personal access tokens_](https://github.com/settings/tokens). A token with the `repo` (or fine-grained _Contents_, _Pull requests_, _Actions_: read) permissions is enough.
+      </TabItem>
+      <TabItem label="Bitbucket">
+        In Bitbucket Server / Data Center, create an HTTP access token with _read_ permission on the projects and repositories you want to analyze.
+      </TabItem>
+      <TabItem label="Local">
+        No token is needed. Clone the repository on your disk:
+
+        ```sh
+        git clone https://github.com/moosetechnology/GitProjectHealth.git
+        ```
+      </TabItem>
+    </Tabs>
+
+    <Aside type="caution">
+    Never commit a script containing your token. Prefer reading it from an environment variable, for instance `Smalltalk os environment at: 'GITLAB_TOKEN'`.
+    </Aside>
+
+3. **Import.** Create an empty model, configure an importer, and import.
+
+    <Tabs syncKey="gph-platform">
+      <TabItem label="GitLab">
+        ```smalltalk
+        model := GLHModel new name: 'my-gitlab-analysis'.
+
+        importer := GitModelImporter
+          forGitlabHostOn: 'https://gitlab.com/api/v4' "or your own instance, ending with /api/v4"
+          withToken: '<YOUR-GITLAB-TOKEN>'
+          andModel: model.
+
+        "Import the commits of the last 30 days (default of this constructor: 3 days)"
+        importer withCommitsSince: 30 days.
+
+        "A group is identified by its numeric ID, shown on the group page in GitLab"
+        group := importer importGroup: 1234.
+        ```
+      </TabItem>
+      <TabItem label="GitHub">
+        ```smalltalk
+        model := GLHModel new name: 'my-github-analysis'.
+
+        importer := GitModelImporter
+          forGithubWithToken: '<YOUR-GITHUB-TOKEN>'
+          andModel: model.
+
+        "Import the commits of the last 30 days (default of this constructor: 3 days)"
+        importer withCommitsSince: 30 days.
+
+        "A GitHub organization is imported as a group, identified by its name"
+        group := importer importGroup: 'moosetechnology'.
+        ```
+      </TabItem>
+      <TabItem label="Bitbucket">
+        ```smalltalk
+        model := GLHModel new name: 'my-bitbucket-analysis'.
+
+        importer := GitModelImporter
+          forBitbucketHostOn: 'https://bitbucket.mycompany.com'
+          withToken: '<YOUR-BITBUCKET-TOKEN>'
+          andModel: model.
+
+        importer withCommitsSince: 30 days.
+
+        "A Bitbucket project is imported as a group, identified by its key"
+        group := importer importGroup: 'MYPROJECT'.
+        ```
+      </TabItem>
+      <TabItem label="Local">
+        ```smalltalk
+        model := GLHModel new name: 'my-local-analysis'.
+
+        "The local importer needs a project and a repository pointing to the clone"
+        repository := GLHRepository new.
+        repository
+          cacheAt: #localImporterReference
+          put: '/path/to/GitProjectHealth' asFileReference.
+        project := GLHProject new
+          name: 'GitProjectHealth';
+          repository: repository;
+          yourself.
+        model add: project; add: repository.
+
+        importer := GitLocalModelImporter new
+          glhModel: model;
+          withCommitsSince: 30 days;
+          yourself.
+
+        "Imports every branch and the commits (with diffs) of the period"
+        importer importRepository: repository.
+        ```
+      </TabItem>
+    </Tabs>
+
+    Importing a large group through an API can take several minutes.
+
+4. **Explore the model.** Inspect it (`Ctrl+I` on `model`) and browse the entities by type, or open the inspector on the group (`group inspect`) to get the _Group Quality_ view.
+
+5. **Ask a first question.** For instance, _who committed the most during the period?_
+
+    ```smalltalk
+    ((model allWithType: GLHCommit)
+      collect: [ :commit | commit commitCreator ifNil: [ commit author_name ] ])
+      asBag sortedCounts
+    ```
+
+    `sortedCounts` returns the number of commits per user, highest first.
+
+</Steps>
+
+## What's next?
+
+- Understand what was imported: [the meta-model](/users/git-project-health/metamodel/).
+- Import more (merge requests, pipelines, files, diffs): [importers](/users/git-project-health/importers/) and [configuration reference](/users/git-project-health/configuration/).
+- Copy a ready-made script: [recipes](/users/git-project-health/recipes/).
+- Compute metrics: [metrics and analyses](/users/git-project-health/metrics/).

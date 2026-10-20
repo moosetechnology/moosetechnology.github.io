@@ -1,0 +1,334 @@
+---
+title: Importers
+description: How to configure and use the GitLab, GitHub, Bitbucket, local and mixed importers of GitProjectHealth, with complete runnable examples.
+sidebar:
+  label: Importers
+  order: 2
+---
+
+import { Tabs, TabItem, Aside, Badge } from '@astrojs/starlight/components';
+
+All importers are subclasses of `GitModelImporter`.
+They share the same [options](/users/git-project-health/configuration/#importer-options) and fill a `GLHModel`.
+This page shows how to create each importer and what it can import.
+For the full list of import methods per platform, see the [support matrix](/users/git-project-health/configuration/#import-methods-by-platform).
+
+## Platform importers (REST API)
+
+### Create an importer
+
+There are two ways to create a platform importer: a **one-line constructor**, or a **manual configuration** that gives you full control.
+
+<Tabs syncKey="gph-platform">
+  <TabItem label="GitLab">
+    ```smalltalk
+    model := GLHModel new name: 'gitlab'.
+
+    "One-line constructor, for gitlab.com"
+    importer := GitModelImporter forGitlabWithToken: '<TOKEN>' andModel: model.
+
+    "One-line constructor, for a self-hosted GitLab"
+    importer := GitModelImporter
+      forGitlabHostOn: 'https://gitlab.mycompany.com/api/v4'
+      withToken: '<TOKEN>'
+      andModel: model.
+
+    "Manual configuration"
+    api := GitlabApi new
+      privateToken: '<TOKEN>';
+      hostUrl: 'https://gitlab.mycompany.com/api/v4';
+      output: 'json';
+      yourself.
+
+    importer := GitlabModelImporter new
+      repoApi: api;
+      glhModel: model;
+      withFiles: false;
+      withCommitsSince: 30 days;
+      withCommitDiffs: false;
+      yourself.
+    ```
+  </TabItem>
+  <TabItem label="GitHub">
+    ```smalltalk
+    model := GLHModel new name: 'github'.
+
+    "One-line constructor"
+    importer := GitModelImporter forGithubWithToken: '<TOKEN>' andModel: model.
+
+    "Manual configuration (the GitHub API object is created by the importer)"
+    importer := GithubModelImporter new
+      glhModel: model;
+      privateToken: '<TOKEN>';
+      withCommitsSince: 30 days;
+      withCommitDiffs: false;
+      yourself.
+    ```
+  </TabItem>
+  <TabItem label="Bitbucket">
+    ```smalltalk
+    model := GLHModel new name: 'bitbucket'.
+
+    "One-line constructor"
+    importer := GitModelImporter
+      forBitbucketHostOn: 'https://bitbucket.mycompany.com'
+      withToken: '<TOKEN>'
+      andModel: model.
+
+    "Manual configuration"
+    api := BitbucketApi new
+      host: 'https://bitbucket.mycompany.com';
+      bearerToken: '<TOKEN>';
+      yourself.
+
+    importer := BitBucketModelImporter new
+      repoApi: api;
+      glhModel: model;
+      withFiles: false;
+      withCommitsSince: 30 days;
+      withCommitDiffs: false;
+      yourself.
+    ```
+  </TabItem>
+</Tabs>
+
+<Aside type="caution" title="Defaults differ">
+The one-line constructors set `withCommitsSince: 3 days`, `withFiles: false` and, for GitLab and Bitbucket, `withCommitDiffs: false`.
+A plain `GitlabModelImporter new` uses `withCommitsSince: 1 week` and `withCommitDiffs: true`.
+Always set the options you rely on explicitly.
+</Aside>
+
+### Import groups and projects
+
+GitProjectHealth maps every platform to the same concepts: a **group** (`GLHGroup`) contains **projects** (`GLHProject`), and each project has one **repository** (`GLHRepository`).
+
+| Platform | Group is… | `importGroup:` argument | Sub-groups |
+| --- | --- | --- | --- |
+| GitLab | a group | numeric group ID (`1234`) | imported recursively |
+| GitHub | an organization | organization name (`'moosetechnology'`) | — |
+| Bitbucket | a project | project key (`'MYPROJECT'`) | — |
+
+When a project is imported, the importer _completes_ it: it creates its repository, imports its branches and, depending on the options, its commits, files and latest pipelines.
+
+```smalltalk
+"Import a whole group, its projects, and (GitLab) its sub-groups"
+group := importer importGroup: 1234.
+
+"All the projects of the group and of its sub-groups"
+projects := group containedEntitiesOfType: GLHProject.
+```
+
+<Tabs syncKey="gph-platform">
+  <TabItem label="GitLab">
+    ```smalltalk
+    "Import a single project by its numeric ID"
+    project := importer importProject: 5678.
+
+    "List the top-level groups you can access (does not import their projects)"
+    groups := importer importAllGroups.
+    groups do: [ :each | importer importGroup: each id ].
+    ```
+  </TabItem>
+  <TabItem label="GitHub">
+    ```smalltalk
+    "On GitHub, import the organization; projects are its repositories"
+    group := importer importGroup: 'moosetechnology'.
+    project := (group containedEntitiesOfType: GLHProject)
+      detect: [ :each | each name = 'GitProjectHealth' ].
+    ```
+  </TabItem>
+  <TabItem label="Bitbucket">
+    ```smalltalk
+    "Bitbucket cannot import a project (repository) alone:
+     import its Bitbucket project (group) first"
+    group := importer importGroup: 'MYPROJECT'.
+    ```
+  </TabItem>
+</Tabs>
+
+### Import commits
+
+Commits are imported for the period defined by `withCommitsSince:`, or for an explicit period:
+
+```smalltalk
+"Commits of the configured period (withCommitsSince:), with their details"
+commits := importer importAndLoadLatestsCommitsOfProject: project.
+
+"Commits between two dates"
+commits := importer
+  importCommitsOfProject: project
+  since: (Date year: 2026 month: 1 day: 1) asDateAndTime
+  until: DateAndTime now.
+```
+
+`importAndLoadLatestsCommitsOfProject:` is available for GitLab and Bitbucket. On GitHub, commits of the period are imported automatically when the project is completed, and `importLatestCommitsOfProject:` loads the 50 latest ones.
+
+### Import merge requests (pull requests)
+
+Merge requests are not imported by default, because they cost many API calls.
+
+<Tabs syncKey="gph-platform">
+  <TabItem label="GitLab">
+    ```smalltalk
+    "The 20 latest merge requests"
+    importer importLatestMergeRequestsOfProject: project.
+
+    "All merge requests created in a period"
+    mergeRequests := importer
+      importMergeRequestsOfProject: project
+      since: (Date today - 30 days) asDateAndTime
+      until: DateAndTime now.
+
+    "Then enrich them (one or more API calls per merge request)"
+    mergeRequests do: [ :mr |
+      importer importMergeResquestApprovals: mr. "approvals and reviewers"
+      importer importMergeResquestAuthor: mr. "author"
+      importer importMergeResquestMerger: mr. "merger"
+      importer importNotesOfMergeRequest: mr ]. "comments"
+    ```
+
+    <Aside type="note">The selectors `importMergeResquest…` contain a typo (`Resquest`): that is their real name.</Aside>
+  </TabItem>
+  <TabItem label="GitHub">
+    ```smalltalk
+    "Latest pull requests of a repository, with their commits
+     (and their diffs if withCommitDiffs is true)"
+    pullRequests := importer importMergeRequestsOfProject: project.
+    ```
+  </TabItem>
+  <TabItem label="Bitbucket">
+    ```smalltalk
+    "All pull requests (any state) created in a period"
+    pullRequests := importer
+      importMergeRequestsOfProject: project
+      since: (Date today - 30 days) asDateAndTime
+      until: DateAndTime now.
+
+    pullRequests do: [ :pr | importer importNotesOfMergeRequest: pr ].
+    ```
+  </TabItem>
+</Tabs>
+
+### Import pipelines
+
+The latest pipelines of each project are imported when a GitLab project is completed (used by the _Group Quality_ view).
+To import more:
+
+```smalltalk
+"GitLab and GitHub"
+importer importPipelinesOfProject: project.
+
+"GitLab only: pipelines in a period, optionally on one branch"
+importer
+  importPipelinesOfProject: project
+  after: (Date today - 7 days) asDateAndTime
+  andBefore: DateAndTime now.
+```
+
+## Local importer
+
+`GitLocalModelImporter` reads a repository cloned on your disk with [libgit2](https://libgit2.org/) (through Iceberg).
+It is **much faster** than the APIs to import commits, diffs and files, but it cannot import information that only exists on the platform: merge requests, comments, pipelines, issues…
+
+### Clone the repository
+
+Clone the repository yourself. The local importer reads **local branches**: to analyze every branch, create a local branch for each remote one.
+
+```sh
+git clone https://github.com/moosetechnology/GitProjectHealth.git
+cd GitProjectHealth
+for branch in $(git branch -r | grep -v HEAD | grep -v -E 'origin/(main|master)$'); do
+  git branch --track "${branch#origin/}" "$branch"
+done
+```
+
+### Import
+
+The local importer needs a `GLHProject` and a `GLHRepository` whose cache entry `#localImporterReference` points to the clone.
+
+```smalltalk
+model := GLHModel new name: 'local'.
+
+repository := GLHRepository new.
+repository
+  cacheAt: #localImporterReference
+  put: '/path/to/GitProjectHealth' asFileReference.
+project := GLHProject new
+  name: 'GitProjectHealth';
+  repository: repository;
+  yourself.
+model add: project; add: repository.
+
+importer := GitLocalModelImporter new
+  glhModel: model;
+  withCommitsSince: 2 years; "how far back in history"
+  withCommitDiffs: true; "default for the local importer"
+  withFiles: true; "build the file tree (needed for authorship and truck factor)"
+  withDiffRanges: false;
+  yourself.
+
+importer importRepository: repository.
+
+"Optional: drop the caches built during the import to save memory"
+model flush.
+model entities do: #flush.
+```
+
+To import the **whole history**, use a long period such as `withCommitsSince: 30 years`.
+
+<Aside type="tip" title="Automatic clone">
+If a repository has no `#localImporterReference`, the local importer tries to clone its project from `web_url` into `./msr/<project name>` (next to the image), using your Iceberg credentials.
+This is what the [mixed importer](#mixed-importer) relies on.
+</Aside>
+
+## Mixed importer
+
+`GitModelMixedImporter` combines a platform importer and a local importer:
+
+- **history** (branches, commits, diffs, files) comes from the **local clone**;
+- **social data** (projects, merge requests, notes, pipelines, users, tags) comes from the **API**;
+- if a diff cannot be found locally, it falls back to the API.
+
+```smalltalk
+model := GLHModel new name: 'mixed'.
+
+api := GitlabApi new
+  privateToken: '<TOKEN>';
+  hostUrl: 'https://gitlab.mycompany.com/api/v4';
+  output: 'json';
+  yourself.
+
+apiImporter := GitlabModelImporter new
+  repoApi: api;
+  yourself.
+
+localImporter := GitLocalModelImporter new
+  withDiffRanges: true;
+  yourself.
+
+importer := GitModelMixedImporter new
+  apiImporter: apiImporter;
+  localImporter: localImporter;
+  glhModel: model; "set the model last: it is propagated to both importers"
+  withCommitDiffs: true;
+  yourself.
+
+"Project metadata from the API"
+project := importer importProject: 5678.
+
+"Commits from the local clone (cloned automatically in ./msr/ if needed)"
+importer
+  importCommitsOfProject: project
+  since: (Date today - 365 days) asDateAndTime
+  until: DateAndTime now.
+
+"Merge requests from the API"
+importer
+  importMergeRequestsOfProject: project
+  since: (Date today - 365 days) asDateAndTime
+  until: DateAndTime now.
+```
+
+<Aside type="note">
+Set `glhModel:` **after** `apiImporter:` and `localImporter:`: the mixed importer forwards the model to the importers it already knows.
+</Aside>

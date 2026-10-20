@@ -1,0 +1,146 @@
+---
+title: Recipes
+description: Ready-to-run GitProjectHealth scripts - top committers, most modified files, failing pipelines, pull request states, time to merge, merge requests without review.
+sidebar:
+  label: Recipes
+  order: 5
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+Each recipe is self-contained: copy it in a Playground, replace the values between `<…>`, and run it.
+Recipes that only need the history use the **local importer** (fast, no token); recipes about merge requests or pipelines need a **platform importer**.
+
+## Who commits the most? <Badge text="Local" variant="tip" />
+
+```smalltalk
+model := GLHModel new name: 'top-committers'.
+repository := GLHRepository new.
+repository cacheAt: #localImporterReference put: '<PATH-TO-CLONE>' asFileReference.
+project := GLHProject new name: 'my-project'; repository: repository; yourself.
+model add: project; add: repository.
+
+(GitLocalModelImporter new
+  glhModel: model;
+  withCommitsSince: 1 year;
+  withCommitDiffs: false; "not needed here, much faster"
+  yourself) importRepository: repository.
+
+"Number of commits per author, highest first"
+((model allWithType: GLHCommit)
+  collect: [ :commit | commit commitCreator ifNotNil: #name ifNil: [ commit author_name ] ])
+  asBag sortedCounts
+```
+
+## Which files change the most? <Badge text="Local" variant="tip" />
+
+```smalltalk
+model := GLHModel new name: 'hotspots'.
+repository := GLHRepository new.
+repository cacheAt: #localImporterReference put: '<PATH-TO-CLONE>' asFileReference.
+project := GLHProject new name: 'my-project'; repository: repository; yourself.
+model add: project; add: repository.
+
+(GitLocalModelImporter new
+  glhModel: model;
+  withCommitsSince: 1 year;
+  withCommitDiffs: true;
+  yourself) importRepository: repository.
+
+"The 20 paths modified by the largest number of commits"
+((model allWithType: GLHDiff) collect: #new_path) asBag sortedCounts first: 20
+```
+
+## Commits per week <Badge text="Local" variant="tip" />
+
+Reuse the `model` of one of the recipes above:
+
+```smalltalk
+((model allWithType: GLHCommit)
+  groupedBy: [ :commit | commit committed_date asDate asWeek ])
+  associations
+    collect: [ :weekToCommits | weekToCommits key printString -> weekToCommits value size ]
+```
+
+## Which projects have a failing pipeline? <Badge text="GitLab" />
+
+```smalltalk
+model := GLHModel new name: 'pipelines'.
+importer := GitModelImporter
+  forGitlabHostOn: '<GITLAB-URL>/api/v4'
+  withToken: '<TOKEN>'
+  andModel: model.
+importer withCommitsSince: 1 day. "we only need the projects and their latest pipelines"
+
+group := importer importGroup: <GROUP-ID>.
+
+(group containedEntitiesOfType: GLHProject) select: [ :project |
+  project lastPipeline isNotNil and: [ project lastPipeline status ~= 'success' ] ]
+```
+
+The same information is shown graphically by the [_Group Quality_ view](/users/git-project-health/visualizations/#group-quality).
+
+## Pull request states of a GitHub organization <Badge text="GitHub" />
+
+This example takes a few minutes on a large organization such as `eclipse`.
+
+```smalltalk
+model := GLHModel new name: 'pull-requests'.
+importer := GitModelImporter forGithubWithToken: '<TOKEN>' andModel: model.
+importer withCommitsSince: 10 days.
+
+organization := importer importGroup: 'eclipse'.
+
+"Import the latest pull requests of each repository"
+(organization containedEntitiesOfType: GLHProject) do: [ :project |
+  importer importMergeRequestsOfProject: project ].
+
+"Count them by state (open / closed)"
+((organization containedEntitiesOfType: GLHMergeRequest) collect: #state) asBag
+```
+
+## Average time to merge <Badge text="GitLab" />
+
+```smalltalk
+model := GLHModel new name: 'time-to-merge'.
+importer := GitModelImporter
+  forGitlabHostOn: '<GITLAB-URL>/api/v4'
+  withToken: '<TOKEN>'
+  andModel: model.
+
+project := importer importProject: <PROJECT-ID>.
+mergeRequests := importer
+  importMergeRequestsOfProject: project
+  since: (Date today - 90 days) asDateAndTime
+  until: DateAndTime now.
+
+merged := mergeRequests select: [ :mr | mr merged_at isNotNil ].
+durations := merged collect: [ :mr |
+  (mr merged_at asDateAndTime - mr created_at asDateAndTime) asHours ].
+durations ifNotEmpty: [ (durations sum / durations size) printShowingDecimalPlaces: 1 ] "hours"
+```
+
+## Merge requests merged without approval <Badge text="GitLab" />
+
+```smalltalk
+model := GLHModel new name: 'approvals'.
+importer := GitModelImporter
+  forGitlabHostOn: '<GITLAB-URL>/api/v4'
+  withToken: '<TOKEN>'
+  andModel: model.
+
+project := importer importProject: <PROJECT-ID>.
+mergeRequests := importer
+  importMergeRequestsOfProject: project
+  since: (Date today - 30 days) asDateAndTime
+  until: DateAndTime now.
+
+"One API call per merge request"
+mergeRequests do: [ :mr | importer importMergeResquestApprovals: mr ].
+
+mergeRequests select: [ :mr | mr merged_at isNotNil and: [ mr approved_by isEmpty ] ]
+```
+
+<Aside type="tip">
+More recipes, such as linking merge requests to Jira tickets, are in [Connectors](/users/git-project-health/connectors/). Ready-made metrics (churn, commit frequency, self-merged merge requests…) are in [Metrics and analyses](/users/git-project-health/metrics/).
+</Aside>

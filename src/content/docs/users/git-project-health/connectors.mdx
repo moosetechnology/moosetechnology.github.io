@@ -1,0 +1,151 @@
+---
+title: Connectors
+description: Connect a GitProjectHealth model with Jira issues (GPJCConnector) or with a Famix model of the source code (GPCGitToFamixConnector).
+sidebar:
+  label: Connectors
+  order: 8
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+Connectors link a `GLHModel` with other models, so that you can navigate, for instance, from a merge request to its Jira ticket, or from a Java class to the commits that modified it.
+Each connector is an optional Metacello group of the `GitLabHealth` baseline.
+
+## Jira
+
+The Jira connector uses the [Jira Pharo API](https://github.com/Evref-BL/Jira-Pharo-API) project.
+It links a commit or a merge request to the Jira issue whose **key** (for instance `WERH-918`) appears in the commit message or in the merge request title.
+
+### Install
+
+```smalltalk
+Metacello new
+  repository: 'github://moosetechnology/GitProjectHealth:main/src';
+  baseline: 'GitLabHealth';
+  onConflict: [ :ex | ex useIncoming ];
+  onUpgrade: [ :ex | ex useIncoming ];
+  onDowngrade: [ :ex | ex useLoaded ];
+  load: #( 'default' 'Jira' )
+```
+
+Loading `'default'` is optional if GitProjectHealth is already loaded.
+
+### Use
+
+```smalltalk
+GPJCConnector new
+  gpModel: aGLHModel;
+  jiraModel: aJiraModel;
+  connect
+```
+
+`connect` looks at every `GLHCommit` and `GLHMergeRequest` of the model; then `commit jiraIssue` and `mergeRequest jiraIssue` return the linked issue.
+It can be run several times safely. On large models, connect only what you need with `connectCommits:` or `connectMergeRequests:`.
+
+### Complete example: issue types of the merge requests of a GitLab group
+
+<Steps>
+
+1. **Import the merge requests and commits of the last 30 days.**
+
+    ```smalltalk
+    model := GLHModel new name: 'git-and-jira'.
+
+    gitImporter := GitModelImporter
+      forGitlabHostOn: '<GITLAB-URL>/api/v4'
+      withToken: '<GITLAB-TOKEN>'
+      andModel: model.
+    gitImporter withCommitsSince: 30 days.
+
+    group := gitImporter importGroup: <GROUP-ID>.
+    (group containedEntitiesOfType: GLHProject) do: [ :project |
+      gitImporter
+        importMergeRequestsOfProject: project
+        since: (Date today - 30 days) asDateAndTime
+        until: DateAndTime now.
+      gitImporter importAndLoadLatestsCommitsOfProject: project ].
+    ```
+
+2. **Import the Jira issues.** Here, the issues of every commit author, matched by e-mail.
+
+    ```smalltalk
+    jiraApi := JiraPharoAPI new
+      endpoint: '<MY-COMPANY>.atlassian.net';
+      basePath: 'rest/api/latest';
+      beHttps;
+      user: '<JIRA-ACCOUNT-EMAIL>';
+      apiToken: '<JIRA-TOKEN>';
+      yourself.
+
+    jiraImporter := JiraPharoImporter new
+      model: model;
+      api: jiraApi;
+      yourself.
+
+    authors := ((group containedEntitiesOfType: GLHCommit)
+      collect: [ :commit | commit commitCreator ])
+      select: [ :user | user isNotNil and: [ user isRealUser ] ].
+
+    authors asSet do: [ :user |
+      jiraImporter importAllCurrentAndPastIssuesOf: user username , '@mycompany.com' ].
+    ```
+
+    You can also import issues with a JQL query (`importAllIssuesFromQuery:`) or one by one (`importIssue:`).
+
+3. **Connect and analyze.**
+
+    ```smalltalk
+    GPJCConnector new
+      gpModel: model;
+      jiraModel: jiraImporter model;
+      connect.
+
+    mergeRequests := group containedEntitiesOfType: GLHMergeRequest.
+    withTicket := mergeRequests select: [ :mr | mr jiraIssue isNotNil ].
+
+    "Number of merge requests per Jira issue type"
+    (withTicket collect: [ :mr | mr jiraIssue type name ]) asBag
+    ```
+
+</Steps>
+
+## Famix
+
+The Famix connector links a `GLHProject` with a [Famix](/beginners/moose-in-action) model of its source code (for instance a Java model built with [VerveineJ](/users/famix-java/famix-java)).
+It matches the files of the Git model with the types of the Famix model using their **paths**.
+
+### Install
+
+```smalltalk
+Metacello new
+  repository: 'github://moosetechnology/GitProjectHealth:main/src';
+  baseline: 'GitLabHealth';
+  onConflict: [ :ex | ex useIncoming ];
+  onUpgrade: [ :ex | ex useIncoming ];
+  onDowngrade: [ :ex | ex useLoaded ];
+  load: #( 'default' 'Famix' )
+```
+
+### Use
+
+<Steps>
+
+1. Import a Famix model of the code (see [Famix Java](/users/famix-java/famix-java)).
+2. Import the history of the same repository with the [local importer](/users/git-project-health/importers/#local-importer), with `withFiles: true` and `withCommitDiffs: true`.
+3. Connect them:
+
+    ```smalltalk
+    GPCGitToFamixConnector new
+      famixModel: famixModel;
+      glhProject: project;
+      connect.
+    ```
+
+</Steps>
+
+Once connected, Famix classes understand `appliedDiffs` (the diffs that modified their file), and you can navigate from a Git diff to the corresponding Famix entity.
+The blog post [Mixing up analysis of project architecture (Famix) and its history](/blog/2026-08-27-msr-and-famix/) shows a complete analysis.
+
+<Aside type="caution">
+If `GPCGitToFamixConnector` is unknown in your image, the `Famix` group is not loaded: run the install script above.
+</Aside>

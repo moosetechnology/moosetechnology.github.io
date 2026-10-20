@@ -1,0 +1,196 @@
+---
+title: Metrics and analyses
+description: Compute and export GitProjectHealth metrics per user and per project with GitMetricExporter, and run code churn, degree of authorship and truck factor analyses.
+sidebar:
+  label: Metrics and analyses
+  order: 6
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+GitProjectHealth provides three levels of analysis:
+
+- **built-in metrics** (about 50 of them), computed per user or per project over periods, and exported in CSV with `GitMetricExporter`;
+- **code churn**, computed on a commit and the commits that follow it;
+- **ownership analyses**: degree of authorship of a file, and truck factor of a set of directories.
+
+## Export metrics with GitMetricExporter
+
+`GitMetricExporter` imports what it needs through an importer, computes every metric for each user or project and each period, and writes CSV files.
+It was designed for GitLab: user metrics rely on `importUserByUsername:` and `importContributedProjectsOfUser:`.
+
+<Steps>
+
+1. **Create an importer** (see [Importers](/users/git-project-health/importers/)).
+
+    ```smalltalk
+    model := GLHModel new name: 'metrics'.
+    importer := GitModelImporter
+      forGitlabHostOn: '<GITLAB-URL>/api/v4'
+      withToken: '<TOKEN>'
+      andModel: model.
+    importer withCommitDiffs: true. "needed by code addition, deletion and churn metrics"
+    ```
+
+2. **Create the exporter** and choose what to analyze: users, projects, or both.
+
+    ```smalltalk
+    exporter := GitMetricExporter new
+      glhImporter: importer;
+      label: 'my-team'; "used in the CSV file names"
+      withEmailDomain: '@mycompany.com'; "to match Git users with Jira accounts"
+      maxCommitWindow: 3; "number of following commits considered for churn"
+      yourself.
+
+    "Users, by platform username: imports each user and the projects they contributed to"
+    exporter setupAnalysisForUsersWithNames: #( 'alice' 'bob' ).
+
+    "Projects, by ID"
+    exporter setupAnalysisForProjectsWithIds: #( 1234 5678 ).
+    ```
+
+3. **Add one or more periods.** Pass `Date`s, or strings in the `mm-dd-yyyy` format.
+
+    ```smalltalk
+    exporter
+      addAPeriodFrom: (Date year: 2026 month: 1 day: 1)
+      to: (Date year: 2026 month: 3 day: 31).
+    exporter addAPeriodFrom: '04-01-2026' to: '06-30-2026'.
+    ```
+
+4. **Compute and export.** The argument of `generateAnalysesOver:` is the granularity used to average the metrics: `Date`, `Week`, `Month` or `Year`.
+
+    ```smalltalk
+    exporter generateAnalysesOver: Week.
+    exporter exportInCSV.
+    ```
+
+    Two files are written in your home directory: `GitlabHealth-'my-team'-Week-'users'-<timestamp>.csv` and `…-'projects'-….csv`, with one row per user (or project) and one column per metric and period.
+
+</Steps>
+
+To compute only some metrics, set them before generating the analyses:
+
+```smalltalk
+exporter metrics: { CommitFrequencyMetric. CodeChurnMetric. MergedMergeRequestMetric }.
+```
+
+Metrics about Jira (`UserJiraMetric` subclasses, `…LinkedToJira…`) also need a Jira importer: `exporter jiraImporter: aJiraPharoImporter` (see [Jira connector](/users/git-project-health/connectors/#jira)).
+
+<Aside type="note">
+Results can also be sent to a database (`exportInDB:`, using Voyage) or to an S3 bucket (`exportInS3:accessKey:secretKey:region:`).
+</Aside>
+
+### Available metrics
+
+User metrics are computed for each user given to `setupAnalysisForUsersWithNames:`; project metrics for each project given to `setupAnalysisForProjectsWithIds:`.
+
+| Metric class | Scope | Description |
+| --- | --- | --- |
+| `CommitFrequencyMetric` | user | commits frequency (avg) |
+| `TimeBetweenCommitMetric` | user | average time between commits (seconds) |
+| `CodeAdditionMetric` | user | code addition (avg) |
+| `CodeDeletionMetric` | user | code deletion (avg) |
+| `CodeChurnMetric` | user | churn % (window of `maxCommitWindow` commits) |
+| `DelayUntilFirstChurnMetric` | user | delay until first churn |
+| `CommentContributionMetric` | user | comment contribution (avg) |
+| `ContributedProjectMetric` | user | number of projects with at least one commit of the user |
+| `OpenedMergeRequestMetric` | user | number of opened merge requests |
+| `MergedMergeRequestMetric` | user | number of merge requests created by the user and merged |
+| `ClosedMergeRequestMetric` | user | number of closed merge requests |
+| `PendingMergeRequestMetric` | user | merge requests opened during a period and still open at its end |
+| `MergeRequestDurationMetric` | user | average time to merge a merge request (seconds) |
+| `MergeRequestMergedByUserMetric` | user | number of merge requests merged by the user |
+| `ReviewedByUserMergeRequestMetric` | user | number of merge requests reviewed by the user |
+| `SelfMergedUnderAMinuteMergeRequestMetric` | user | merge requests merged by their author less than a minute after creation |
+| `CodeAdditionByMRMetric`, `CodeDeletionByMRMetric` | user | average code addition / deletion by merge request |
+| `CommitsLinkWithTicketMetric` | user (Jira) | number of commits linked to a Jira ticket |
+| `CommitsNumberByJiraTicketsMetric` | user (Jira) | average number of commits by merge request linked to a Jira ticket |
+| `ClosedTicketsMetric` | user (Jira) | number of closed merge requests linked to a Jira ticket |
+| `CodeAdditionByTicketMetric`, `CodeDeletionByTicketMetric` | user (Jira) | average code addition / deletion by merge request linked to a Jira ticket |
+| `JiraTimeMRTimeDifferenceMetric` | user (Jira) | difference between Jira estimate and merge request time (seconds) |
+| `CommitFrequencyProjectMetric` | project | commits frequency (avg) |
+| `ContributorsProjectMetric` | project | number of contributors (avg) |
+| `CommitWithoutUsernameProjectMetric` | project | commits without a real username (avg) |
+| `CodeAdditionByCommitProjectMetric` | project | code addition by commit (avg) |
+| `CodeDeletionProjectMetric` | project | code deletion |
+| `CodeChurnOnCommitsProjectMetric` | project | churn % in project |
+| `CodeChurnOnMergedMergeRequestProjectMetric` | project | churn % made by a merge request (avg) |
+| `CommentLinesAddedProjectMetric` | project | comment lines added (avg) |
+| `ActiveBranchesProjectMetric`, `InactiveBranchesProjectMetric` | project | number of active / inactive branches in the period (avg) |
+| `CreatedMergeRequestProjectMetric` | project | created merge requests (avg) |
+| `MergedMergeRequestProjectMetric`, `ClosedMergeRequestProjectMetric` | project | merged / closed merge requests (avg) |
+| `MergedMergeRequestDurationProjectMetric`, `ClosedMergeRequestDurationProjectMetric`, `OpenedMergeRequestDurationProjectMetric` | project | duration of merged, closed, and still open merge requests (seconds) |
+| `CodeAdditionByMergeRequestProjectMetric`, `CodeDeletionByMergeRequestProjectMetric` | project | average code addition / deletion by merge request |
+| `CodeAdditionDuringAndByMergeRequestProjectMetric`, `CodeDeletionDuringAndByMergeRequestProjectMetric` | project | average code addition / deletion during and by merge requests |
+| `SelfMergedUnderAMinuteMergeRequestProjectMetric` | project | merge requests merged by their author less than a minute after creation |
+| `CreatedNoteInMergedOrClosedMergeRequest` | project | notes created in merged or closed merge requests |
+| `AutoCodeReviewCommitFrequencyProjectMetric`, `CreatedACRPipelineByProject`, `CreatedNotesByACRByProjectMetric` | project | activity of an automatic code review bot (commits, pipelines, notes) |
+| `CommitLinkedToJiraProjectMetric`, `MergeRequestLinkedToJiraProjectMetric` | project (Jira) | commits / merged merge requests linked to a Jira ticket |
+| `JiraTimeMRTimeDifferenceProjectMetric` | project (Jira) | difference between Jira estimate and merge request time (seconds) |
+
+All metrics are subclasses of `UserMetric` or `ProjectMetric`; new subclasses are picked up automatically by `GitMetricExporter`.
+
+## Code churn
+
+The churn of a commit is the share of the lines it added that are modified again by the following commits.
+It needs commits with **diff ranges**: with the local importer, use `withDiffRanges: true`.
+
+```smalltalk
+model := GLHModel new name: 'churn'.
+repository := GLHRepository new.
+repository cacheAt: #localImporterReference put: '<PATH-TO-CLONE>' asFileReference.
+project := GLHProject new name: 'my-project'; repository: repository; yourself.
+model add: project; add: repository.
+
+(GitLocalModelImporter new
+  glhModel: model;
+  withCommitsSince: 90 days;
+  withCommitDiffs: true;
+  withDiffRanges: true;
+  yourself) importRepository: repository.
+
+commit := (model allWithType: GLHCommit) detect: [ :each | each short_id = '<SHORT-SHA>' ].
+
+"Churn of the commit, looking at the 3 following commits"
+churn := commit computeChurnForMaxCommits: 3.
+churn at: #totalContribution. "lines added by the commit and the following ones"
+churn at: #churns. "per file: churned lines of code"
+```
+
+## Degree of authorship
+
+The degree of authorship (DOA) estimates how much each developer _knows_ a file, from the history of its changes.
+It is based on the paper [A Novel Approach for Estimating Truck Factors](https://arxiv.org/abs/1604.06766) and requires an import with `withFiles: true` and `withCommitDiffs: true`.
+
+```smalltalk
+"model: a model imported with the local importer, withFiles: true"
+file := (model allWithSubTypesOf: GLHFile) detect: [ :each | each path = 'src/BaselineOfGitLabHealth/BaselineOfGitLabHealth.class.st' ].
+
+file degreeOfAuthorship. "normalized DOA of every contributor, between 0 and 1"
+file degreeOfAuthorshipAuthors. "only the authors (normalized DOA above 0.75)"
+file mainAuthor. "same as degreeOfAuthorship"
+```
+
+The blog post [Building an ownership cartography of a system](/blog/2026-08-11-building-an-ownership-cartography-of-a-system/) uses it to draw an ownership tree map.
+
+## Truck factor
+
+The truck factor is the minimal number of developers that have to leave a project before more than half of its files have no author left.
+
+```smalltalk
+"model: a model imported with the local importer, withFiles: true, on the whole history"
+root := (model allWithType: GLHFileDirectory) detect: [ :directory | directory path = 'src' ].
+
+info := GLPTruckFactor new
+  directories: { root };
+  truckFactor.
+
+info truckFactor. "the truck factor"
+info coverage. "share of files still covered by an author after removing them"
+info totalFiles. "number of files considered"
+```
+
+<Aside type="caution">
+Authorship is computed from the imported history only. Import the **whole** history (`withCommitsSince: 30 years`) to get meaningful truck factors: on a short period most files have no author.
+</Aside>
