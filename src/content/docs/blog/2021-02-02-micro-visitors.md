@@ -1,10 +1,9 @@
 ---
 title: "Micro-Visitors for Parsing Programming Languages"
+description: "Micro-visitors: a way to modularize the huge visitors needed when writing parsers for Moose."
 date: 2021-01-26
-background: './img/posts/bg-posts.jpg'
 authors:
 - NicolasAnquetil
-comments: true
 tags:
 - infrastructure
 ---

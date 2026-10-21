@@ -2,6 +2,7 @@
 authors:
 - CyrilFerlicot
 title: "Speed up models creation: application to JSON/MSE parsing"
+description: "How profiling a 330MB JSON import led to much faster model creation in Moose."
 date:  2025-11-18
 lastUpdated:  2025-11-18
 tags:

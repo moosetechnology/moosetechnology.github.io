@@ -2,11 +2,13 @@
 authors:
 - CyrilFerlicot
 title: "Implementing a Static Single Assigment (SSA) in FAST-Python"
+description: "Implement a Static Single Assignment (SSA) representation on top of FAST-Python."
 date:  2026-09-29
 tags:
 - FAST
 - SSA
 - Python
+series: "FAST-Python analyses"
 ---
 
 # Implementing the SSA of Python in FAST-Python

@@ -1,0 +1,10 @@
+---
+// Wraps the starlight-blog override to show the series a blog post belongs to
+import BlogMarkdownContent from 'starlight-blog/overrides/MarkdownContent.astro';
+import BlogSeries from './BlogSeries.astro';
+---
+
+<BlogMarkdownContent>
+	<BlogSeries />
+	<slot />
+</BlogMarkdownContent>

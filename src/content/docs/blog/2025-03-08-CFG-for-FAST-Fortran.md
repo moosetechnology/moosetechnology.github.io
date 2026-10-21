@@ -1,10 +1,9 @@
 ---
 title: "Control Flow Graph for FAST Fortran"
+description: "Build and visualize a Control Flow Graph from a FAST Fortran model."
 date: 2025-03-08
-background: './img/posts/bg-posts.jpg'
 authors:
 - NicolasAnquetil
-comments: true
 tags:
 - Famix-tools
 - FAST

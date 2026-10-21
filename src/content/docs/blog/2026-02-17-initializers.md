@@ -2,7 +2,7 @@
 authors:
 - ClotildeToullec
 title: "Introducing Java initializers"
-subtitle: The Famix metamodel evolves again
+description: "The Famix metamodel evolves again"
 date: 2026-02-17
 tags:
 - meta-model

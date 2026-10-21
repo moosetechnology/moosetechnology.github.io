@@ -3,6 +3,7 @@ import 'remixicon/fonts/remixicon.css';
 import bibliography from '../content/docs/research/bibliography.json';
 import authors from '../content/docs/about/authors.json';
 import { avatarUrl } from '../utils/avatar';
+import { profileLink } from '../utils/authors';
 
 type Author = { family: string; given: string };
 type Reference = (typeof bibliography)[number] & { PDF?: string };
@@ -13,8 +14,6 @@ const normalize = (s: string) =>
 // Team members (from the About page) are shown with their avatar and profile link
 const team = new Map(Object.values(authors).map((a) => [normalize(a.name), a]));
 const teamMember = (author: Author) => team.get(normalize(`${author.given} ${author.family}`));
-const profileLink = (member: any) =>
-	member['personnal-website'] ?? member.orcid ?? member.github ?? member.linkedin;
 
 const isJournal = (event: string) => /\(jrnl\)|journal|, \d+/i.test(event);
 const venueName = (event: string) => event.replace(/\s*\(jrnl\)/, '').replace(/(, \d+)+$/, '');

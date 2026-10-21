@@ -1,16 +1,15 @@
 ---
 title: Dependency Structure Matrix for a Java project using Moose
-header-img: img/posts/DSM.jpg
-subtitle: >-
-  In this post I will show how one can create a Design Structure Matrix (DSM) in Moose, in particular from a model of a Java project. 
-background: './img/posts/2021-04-20-DSM-Java-Moose/DSM.jpg'
+description: "In this post I will show how one can create a Design Structure Matrix (DSM) in Moose, in particular from a model of a Java project."
 date: 2021-04-20
 authors:
 - ChristopherFuhrman
-comments: true
 tags:
 - browser
 - story
+cover:
+  image: "./img/posts/2021-04-20-DSM-Java-Moose/DSM.jpg"
+  alt: ""
 ---
 ## Dependency Structure Matrix for a Java project using Moose
 

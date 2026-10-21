@@ -2,12 +2,13 @@
 authors:
 - BenoitVerhaeghe
 title: "Automatic meta-model documentation generation"
-subtitle: "How to use GitHub actions to update its meta-model UML?"
-background: './img/posts/2021-07-19-automatic-metamodel-documentation-generation/bg.png'
+description: "How to use GitHub actions to update its meta-model UML?"
 date:  2021-07-19
-comments: true
 tags:
 - Famix-tools
+cover:
+  image: "./img/posts/2021-07-19-automatic-metamodel-documentation-generation/bg.png"
+  alt: ""
 ---
 
 When you are developing with Moose everyday, you know how to create an excellent visualization of your meta-model.

@@ -2,6 +2,7 @@
 authors:
 - tokyRT
 title: "Setup MooseCI on your repository with GitHub Actions"
+description: "Run MooseCI code-quality analyses on your repository with GitHub Actions."
 date: 2026-10-05
 tags:
 - CI

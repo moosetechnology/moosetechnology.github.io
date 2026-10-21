@@ -1,14 +1,14 @@
 ---
 title: "Carrefour: The bridge between FAMIX and FAST"
-subtitle: Here we will present how to bind FAST with FAMIX
-header-img: img/posts/2022-03-18-carrefour/bg-post.jpg
+description: "Here we will present how to bind FAST with FAMIX"
 authors:
 - AhmedZakiBENNECER
-background: "./img/posts/2022-03-18-carrefour/bg-post.jpg"
 date: 2022-06-30
-comments: true
 tags:
 - FAST
+cover:
+  image: "./img/posts/2022-03-18-carrefour/bg-post.jpg"
+  alt: ""
 ---
 
 ## Introduction

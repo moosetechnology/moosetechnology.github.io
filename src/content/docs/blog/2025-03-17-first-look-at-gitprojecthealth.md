@@ -1,7 +1,7 @@
 ---
 title: "First look at GitProjectHealth"
+description: "Explore the git history of a project with GitProjectHealth to understand how it evolves."
 date: 2025-03-24
-background: './img/posts/bg-posts.jpg'
 authors:
 - BenoitVerhaeghe
 tags:

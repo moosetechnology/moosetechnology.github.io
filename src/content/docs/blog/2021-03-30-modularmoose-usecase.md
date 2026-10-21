@@ -1,11 +1,9 @@
 ---
 title: "Analysis of Sindarin API: a modular Moose use case"
-subtitle: New modular Moose browsers are put to the test
+description: "New modular Moose browsers are put to the test"
 date: 2021-03-30
-background: './img/posts/bg-posts.jpg'
 authors:
 - ClotildeToullec
-comments: true
 tags:
 - story
 ---

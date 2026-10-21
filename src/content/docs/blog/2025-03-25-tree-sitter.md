@@ -1,12 +1,15 @@
 ---
 title: "Creating a Parser based on Tree-Sitter grammar"
+description: "Create a parser for a new language in Pharo based on a Tree-sitter grammar."
 date: 2025-03-25
-background: './img/posts/treesitter-banner.png'
 authors:
 - NicolasAnquetil
-comments: true
 tags:
 - infrastructure
+cover:
+  image: "./img/posts/treesitter-banner.png"
+  alt: ""
+series: "Moose and Tree-sitter"
 ---
 
 Moose is a huge consumer of language parsers.

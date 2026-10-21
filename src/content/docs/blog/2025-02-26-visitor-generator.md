@@ -1,15 +1,16 @@
 ---
 title: "Generating a visitor infrastructure for a given meta-model"
+description: "Generate a visitor infrastructure for any Famix meta-model."
 date: 2025-02-26
-background: './img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg'
 authors:
 - NicolasAnquetil
-comments: true
 tags:
 - Famix-tools
+cover:
+  image: "./img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg"
+  alt: ""
+series: "Famix Tools"
 ---
-
-*This post is part of a serie dedicated to* Famix Tools
 
 Once we have a model of a program in Famix, we often find ourselves wanting to ¨ go through it" to apply some systematic analysis or modification.
 For example one could want to export the model as source-code [https://github.com/moosetechnology/FAMIX2Java](https://github.com/moosetechnology/FAMIX2Java).

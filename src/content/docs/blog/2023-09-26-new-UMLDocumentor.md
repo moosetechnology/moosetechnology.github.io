@@ -1,15 +1,16 @@
 ---
 title: "Generate a class diagram visualization for a meta-model"
+description: "Use FamixUMLDocumentor to generate a UML class diagram of a meta-model."
 date: 2023-09-26
-background: './img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg'
 authors:
 - NicolasAnquetil
-comments: true
 tags:
 - Famix-tools
+cover:
+  image: "./img/posts/2023-09-26-new-UMLDocumentor/bg-post.jpg"
+  alt: ""
+series: "Famix Tools"
 ---
-
-*This post is the first in a serie dedicated to* Famix Tools
 
 When creating or studying a meta-model, it is often convenient to be able to "see" it as a whole.
 

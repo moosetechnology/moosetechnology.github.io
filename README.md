@@ -9,16 +9,19 @@ Inside of your project, you'll see the following folders and files:
 ├── public/
 ├── src/
 │   ├── assets/
+│   ├── components/
 │   ├── content/
-│   │   ├── docs/
-│   │   ├── blog/
+│   │   └── docs/
+│   │       ├── about/authors.json
+│   │       └── blog/
+│   ├── utils/
 │   └── content.config.ts
 ├── astro.config.mjs
 ├── package.json
 └── tsconfig.json
 ```
 
-Folder **Blog** is used for the blogs
+Folder `src/content/docs/blog/` is used for the blog posts.
 
 Other folders are used for classic website navigation.
 
@@ -63,23 +66,63 @@ It allows one to organize the page.
 
 ## Authoring a blog post
 
-1. Create a new file under `src/content/blog`
-2. add the yaml
+1. Create a new file under `src/content/docs/blog/`, named `YYYY-MM-DD-short-title.md` (or `.mdx` to use Starlight components)
+2. Add the frontmatter
 
 ```yaml
 ---
 authors:
 - BenoitVerhaeghe
 title: "Coasters collection"
-subtitle: "Or how to create a minimal model in Moose 8"
-date:  2021-02-15
-lastUpdated:  2021-03-04
+description: "How to create a minimal model in Moose"
+date: 2021-02-15
+lastUpdated: 2021-03-04
 tags:
 - meta-model
+cover:
+  image: "./img/posts/2021-02-04-Coasters/background.jpg"
+  alt: ""
+series: "Famix Tools"
 ---
 ```
 
-For authors, use the key identified in `astro.config.mjs`
+| Field         | Required | Usage                                                                                      |
+| :------------ | :------- | :----------------------------------------------------------------------------------------- |
+| `authors`     | yes      | Keys of [`authors.json`](src/content/docs/about/authors.json) (see [Authors](#authors))     |
+| `title`       | yes      |                                                                                            |
+| `date`        | yes      | Publication date, used to sort the posts. Keep it consistent with the file name            |
+| `description` | no       | One sentence, used for SEO and link previews (not displayed on the page)                   |
+| `lastUpdated` | no       | Date of the last significant update                                                        |
+| `tags`        | no       | See [Tags](#tags)                                                                          |
+| `cover`       | no       | Image displayed at the top of the post and in the blog list                                |
+| `series`      | no       | Name of a series of posts. All posts sharing the same name are listed in a box at the top |
+
+> Fields from the former Jekyll blog (`subtitle`, `background`, `header-img`, `comments`) are ignored by Starlight: do not use them.
+
+Images of a post go in `src/content/docs/blog/img/posts/<file name of the post>/` and are referenced with a relative link.
+
+### Tags
+
+Reuse an existing tag before creating a new one, and respect its exact spelling (tags are case-sensitive).
+
+| Tag                           | Usage                                                         |
+| :---------------------------- | :------------------------------------------------------------ |
+| `meta-model`                  | Famix meta-models, their design and evolution                 |
+| `Famix-tools`                 | Tools working on Famix models (visitors, UML, queries…)       |
+| `FAST`                        | FAST models (AST) and the tools on top of them               |
+| `infrastructure`              | Parsers, importers, and Moose internals                       |
+| `browser`                     | Moose browsers and UI (Spec)                                  |
+| `CI`                          | Running Moose in a continuous integration                     |
+| `Mining Software Repositories`| Analysis of the history of a project (git, GitProjectHealth)  |
+| `transformation`              | Code transformation                                           |
+| `story`                       | Real use case of Moose on a project                           |
+| `Python`, `Java`              | Language-specific posts                                       |
+
+### Series
+
+When writing several posts on the same topic, give them the same `series` value.
+A box listing all the posts of the series (sorted by date) is then displayed at the top of each of them.
+Current series are: `Transformation journey`, `Ownership cartography`, `Parametrics in Famix`, `Famix Tools`, `Moose and Tree-sitter`, `FAST-Python analyses`.
 
 ### Draft
 
@@ -92,12 +135,32 @@ draft: true
 ---
 ```
 
-## Add authors
+## Authors
 
-If you need to be added as author.
+All the people of the project are described in a single file: [`src/content/docs/about/authors.json`](src/content/docs/about/authors.json).
+It is used by the [team page](src/components/Team.astro), the [publications](src/components/Publications.astro) (to link the team members), and the blog posts authors (through [`src/utils/authors.ts`](src/utils/authors.ts)).
 
-1. Edit the file `astro.config.mjs` if the appropriate data.
-2; Edit the file `src/content/docs/about/authors.json` with the appropriate data.
+To add yourself, add an entry to `authors.json`:
+
+```json
+"BenoitVerhaeghe": {
+    "name": "Benoit Verhaeghe",
+    "role": "Cookie Lover",
+    "bio": "R&D engineer at <a href='https://berger-levrault.com/'>Berger-Levrault</a>",
+    "image": "https://avatars.githubusercontent.com/u/6225039",
+    "github": "https://github.com/badetitou",
+    "linkedin": "https://www.linkedin.com/in/benoitverhaeghe/",
+    "orcid": "https://orcid.org/0000-0002-4588-2698",
+    "personnal-website": "https://badetitou.fr"
+}
+```
+
+- The **key** (`BenoitVerhaeghe`) is the identifier used in the `authors` field of the blog posts. Use only ASCII letters (no accent, no space).
+- `name`, `role` and `image` are required. `role` is also the title displayed on the blog posts.
+- `bio` is optional and may contain HTML links.
+- `github`, `linkedin`, `twitter`, `orcid`, `personnal-website` are optional. The first available among `personnal-website`, `orcid`, `github` and `linkedin` is used as profile link.
+- `gravatar-hash` is optional: if set, the Gravatar is used instead of `image`.
+- The `name` must match the way you are named in [`bibliography.json`](src/content/docs/research/bibliography.json) to be linked in the publications.
 
 ## Using Latex
 

@@ -1,12 +1,14 @@
 ---
 title: "Connecting/Extending meta-models"
+description: "How to extend a meta-model and connect it with another one, or reuse an existing meta-model in your own."
 date: 2021-05-15
-background: './img/posts/2021-05-15-connecting-meta-models/bg-post.png'
 authors:
 - BenoitVerhaeghe
-comments: true
 tags:
 - meta-model
+cover:
+  image: "./img/posts/2021-05-15-connecting-meta-models/bg-post.png"
+  alt: ""
 ---
 
 Sometimes, a meta-model does not have all the information you want.
