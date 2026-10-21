@@ -135,6 +135,7 @@
         "role": "Research engineer at Berger-Levrault",
         "bio": "Research engineer at <a href='https://www.berger-levrault.com/fr/'>Berger-Levrault</a> ",
         "github": "https://github.com/alesshosry",
+        "personnal-website": "https://alesshosry.github.io",
         "image": "https://alesshosry.github.io/assets/myImage2.jpeg",
         "linkedin": "https://www.linkedin.com/in/aless-hosry-697791186"
     },
@@ -144,5 +145,28 @@
         "github": "https://github.com/jecisc",
         "personnal-website": "https://ferlicot.fr/",
         "image": "https://ferlicot.fr/assets/img/photos/Avatar.jpg"
+    },
+    "Stéphane Ducasse": {
+        "name": "Stéphane Ducasse",
+        "role": "Research director at Inria",
+        "bio": "Research director at <a href='https://www.inria.fr/'>Inria</a>, leading the Evref team",
+        "github": "https://github.com/Ducasse",
+        "orcid": "https://orcid.org/0000-0001-6070-6599",
+        "personnal-website": "http://stephane.ducasse.free.fr/",
+        "image": "https://avatars.githubusercontent.com/u/432549"
+    },
+    "Gabriel Darbord": {
+        "name": "Gabriel Darbord",
+        "role": "Moose expert",
+        "bio": "R&D engineer at <a href='https://www.berger-levrault.com/'>Berger-Levrault</a>",
+        "github": "https://github.com/Gabriel-Darbord",
+        "image": "https://avatars.githubusercontent.com/u/78592838"
+    },
+    "Nicolas Hlad": {
+        "name": "Nicolas Hlad",
+        "role": "Moose expert",
+        "bio": "R&D engineer at <a href='https://www.berger-levrault.com/'>Berger-Levrault</a>",
+        "github": "https://github.com/alkalinan",
+        "image": "https://avatars.githubusercontent.com/u/19858911"
     }
 }

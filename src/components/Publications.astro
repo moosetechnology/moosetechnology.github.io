@@ -1,0 +1,383 @@
+---
+import 'remixicon/fonts/remixicon.css';
+import bibliography from '../content/docs/research/bibliography.json';
+import authors from '../content/docs/about/authors.json';
+import { avatarUrl } from '../utils/avatar';
+
+type Author = { family: string; given: string };
+type Reference = (typeof bibliography)[number] & { PDF?: string };
+
+const normalize = (s: string) =>
+	s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+
+// Team members (from the About page) are shown with their avatar and profile link
+const team = new Map(Object.values(authors).map((a) => [normalize(a.name), a]));
+const teamMember = (author: Author) => team.get(normalize(`${author.given} ${author.family}`));
+const profileLink = (member: any) =>
+	member['personnal-website'] ?? member.orcid ?? member.github ?? member.linkedin;
+
+const isJournal = (event: string) => /\(jrnl\)|journal|, \d+/i.test(event);
+const venueName = (event: string) => event.replace(/\s*\(jrnl\)/, '').replace(/(, \d+)+$/, '');
+
+const venueAcronym = (event: string) => {
+	const inParens = event.match(/\(([A-Z][A-Za-z]+)(?:['’ ]?\d+)?\)/);
+	if (inParens) return inParens[1];
+	const prefix = event.match(/^([A-Z]{3,}):/);
+	if (prefix) return prefix[1];
+	return isJournal(event) ? 'Journal' : 'Conference';
+};
+
+const bibkey = (ref: Reference) => {
+	const firstWord = normalize(ref.title).replace(/[^a-z0-9 ]/g, '').split(' ').find((w) => w.length > 3) ?? '';
+	return `${normalize(ref.author[0].family).replace(/[^a-z]/g, '')}${ref.year}${firstWord}`;
+};
+
+const bibtex = (ref: Reference) => {
+	const fields: [string, string | number][] = [
+		['title', `{${ref.title}}`],
+		['author', ref.author.map((a) => `${a.family}, ${a.given}`).join(' and ')],
+		[isJournal(ref.event) ? 'journal' : 'booktitle', venueName(ref.event)],
+	];
+	const [, volume, number] = ref.event.match(/, (\d+)(?:, (\d+))?$/) ?? [];
+	if (volume) fields.push(['volume', volume]);
+	if (number) fields.push(['number', number]);
+	fields.push(['year', ref.year]);
+	if (ref.URL) fields.push(['url', ref.URL]);
+	const body = fields.map(([k, v]) => `  ${k.padEnd(9)} = {${v}}`).join(',\n');
+	return `@${isJournal(ref.event) ? 'article' : 'inproceedings'}{${bibkey(ref)},\n${body}\n}`;
+};
+
+const plainCitation = (ref: Reference) =>
+	`${ref.author.map((a) => `${a.given} ${a.family}`).join(', ')}. ${ref.title}. ${venueName(ref.event)}, ${ref.year}.`;
+
+const byYear = Object.entries(
+	Object.groupBy(bibliography as Reference[], (ref) => String(ref.year))
+).sort(([a], [b]) => Number(b) - Number(a));
+
+const years = bibliography.map((r) => r.year);
+---
+
+<div class="publications not-content">
+	<p class="summary">
+		<strong>{bibliography.length}</strong> peer-reviewed publications built with or about Moose, from{' '}
+		{Math.min(...years)} to {Math.max(...years)}.
+	</p>
+
+	{byYear.map(([year, refs]) => (
+		<section class="year">
+			<h2 id={`year-${year}`}>
+				<span>{year}</span>
+				<small>{refs!.length} {refs!.length > 1 ? 'papers' : 'paper'}</small>
+			</h2>
+
+			<ol>
+				{refs!.map((ref) => (
+					<li class="card">
+						<div class="venue">
+							<span class:list={['badge', { journal: isJournal(ref.event) }]}>{venueAcronym(ref.event)}</span>
+							<span class="venue-name">{venueName(ref.event)}</span>
+						</div>
+
+						<h3>{ref.URL ? <a href={ref.URL}>{ref.title}</a> : ref.title}</h3>
+
+						<ul class="authors">
+							{ref.author.map((author) => {
+								const member = teamMember(author);
+								const name = `${author.given} ${author.family}`;
+								return member ? (
+									<li>
+										<a class="author member" href={profileLink(member)} title={member.role}>
+											<img src={avatarUrl(member, 44)} alt="" loading="lazy" width="22" height="22" />
+											{name}
+										</a>
+									</li>
+								) : (
+									<li class="author">{name}</li>
+								);
+							})}
+						</ul>
+
+						<div class="actions">
+							{ref.URL && (
+								<a class="action" href={ref.URL}>
+									<i class="ri-external-link-line" aria-hidden="true"></i> Publisher
+								</a>
+							)}
+							{ref.PDF && (
+								<a class="action" href={ref.PDF}>
+									<i class="ri-file-pdf-2-line" aria-hidden="true"></i> PDF
+								</a>
+							)}
+							<button type="button" class="action cite-toggle" aria-expanded="false" aria-controls={`cite-${bibkey(ref)}`}>
+								<i class="ri-double-quotes-l" aria-hidden="true"></i> Cite
+							</button>
+						</div>
+
+						<div class="cite-panel" id={`cite-${bibkey(ref)}`} hidden>
+							<p class="cite-text">{plainCitation(ref)}</p>
+							<div class="bibtex">
+								<pre><code>{bibtex(ref)}</code></pre>
+								<button type="button" class="copy" data-copy={bibtex(ref)} aria-label="Copy BibTeX">
+									<i class="ri-file-copy-line" aria-hidden="true"></i>
+									<span>Copy BibTeX</span>
+								</button>
+							</div>
+						</div>
+					</li>
+				))}
+			</ol>
+		</section>
+	))}
+</div>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>('.publications .cite-toggle').forEach((toggle) => {
+		const panel = document.getElementById(toggle.getAttribute('aria-controls')!)!;
+		toggle.addEventListener('click', () => {
+			const open = toggle.getAttribute('aria-expanded') !== 'true';
+			toggle.setAttribute('aria-expanded', String(open));
+			panel.hidden = !open;
+		});
+	});
+
+	document.querySelectorAll<HTMLButtonElement>('.publications .copy').forEach((button) => {
+		const label = button.querySelector('span')!;
+		button.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(button.dataset.copy ?? '');
+				label.textContent = 'Copied!';
+			} catch {
+				label.textContent = 'Copy failed';
+			}
+			setTimeout(() => (label.textContent = 'Copy BibTeX'), 1500);
+		});
+	});
+</script>
+
+<style>
+	.publications {
+		margin-top: 1.5rem;
+	}
+
+	.summary {
+		color: var(--sl-color-gray-3);
+		margin-bottom: 2rem;
+	}
+
+	.summary strong {
+		color: var(--sl-color-text-accent);
+	}
+
+	.year + .year {
+		margin-top: 2.5rem;
+	}
+
+	.year h2 {
+		display: flex;
+		align-items: baseline;
+		gap: 0.75rem;
+		font-size: var(--sl-text-2xl);
+		font-weight: 700;
+		color: var(--sl-color-white);
+		padding-bottom: 0.5rem;
+		margin-bottom: 1rem;
+		border-bottom: 1px solid var(--sl-color-hairline);
+	}
+
+	.year h2 small {
+		font-size: var(--sl-text-sm);
+		font-weight: 400;
+		color: var(--sl-color-gray-3);
+	}
+
+	ol,
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	ol {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 1rem;
+	}
+
+	.card {
+		min-width: 0;
+		padding: 1.25rem 1.25rem 1rem;
+		border: 1px solid var(--sl-color-hairline);
+		border-left: 3px solid var(--sl-color-accent);
+		border-radius: 0.5rem;
+		background: var(--sl-color-bg-nav);
+		transition: border-color 0.2s, box-shadow 0.2s;
+	}
+
+	.card:hover {
+		border-color: var(--sl-color-accent);
+		box-shadow: var(--sl-shadow-md);
+	}
+
+	.venue {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-3);
+	}
+
+	.venue-name {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.badge {
+		flex-shrink: 0;
+		padding: 0.1rem 0.5rem;
+		border-radius: 999px;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		color: var(--sl-color-accent-high);
+		background: var(--sl-color-accent-low);
+	}
+
+	.badge.journal {
+		color: var(--sl-color-green-high);
+		background: var(--sl-color-green-low);
+	}
+
+	h3 {
+		margin: 0.5rem 0 0.75rem;
+		font-size: var(--sl-text-lg);
+		font-weight: 600;
+		line-height: 1.35;
+		color: var(--sl-color-white);
+	}
+
+	h3 a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	h3 a:hover {
+		color: var(--sl-color-text-accent);
+	}
+
+	.authors {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.4rem;
+		font-size: var(--sl-text-sm);
+	}
+
+	.author {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.1rem 0.55rem;
+		border-radius: 999px;
+		color: var(--sl-color-gray-2);
+		background: var(--sl-color-gray-6);
+	}
+
+	.author.member {
+		padding-left: 0.15rem;
+		text-decoration: none;
+		color: var(--sl-color-white);
+		background: var(--sl-color-accent-low);
+	}
+
+	.author.member:hover {
+		color: var(--sl-color-text-accent);
+	}
+
+	.author img {
+		width: 22px;
+		height: 22px;
+		margin: 0;
+		border-radius: 50%;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		gap: 0.5rem;
+		margin-top: 1rem;
+	}
+
+	.action {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.3rem 0.75rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.375rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-2);
+		text-decoration: none;
+		cursor: pointer;
+		transition: color 0.15s, border-color 0.15s, background 0.15s;
+	}
+
+	.action:hover,
+	.cite-toggle[aria-expanded='true'] {
+		color: var(--sl-color-text-accent);
+		border-color: var(--sl-color-accent);
+		background: var(--sl-color-accent-low);
+	}
+
+	.cite-toggle {
+		font: inherit;
+		font-size: var(--sl-text-sm);
+		background: none;
+	}
+
+	.cite-panel {
+		margin-top: 0.75rem;
+	}
+
+	.cite-text {
+		margin: 0 0 0.75rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-2);
+	}
+
+	.bibtex {
+		position: relative;
+	}
+
+	.bibtex pre {
+		margin: 0;
+		padding: 2.5rem 1rem 0.75rem;
+		overflow-x: auto;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 0.375rem;
+		font-size: var(--sl-text-xs);
+		line-height: 1.5;
+		color: var(--sl-color-gray-2);
+		background: var(--sl-color-bg);
+	}
+
+	.copy {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		padding: 0.2rem 0.5rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.25rem;
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-2);
+		background: var(--sl-color-bg-nav);
+		cursor: pointer;
+	}
+
+	.copy:hover {
+		color: var(--sl-color-text-accent);
+		border-color: var(--sl-color-accent);
+	}
+</style>

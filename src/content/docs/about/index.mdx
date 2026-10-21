@@ -4,6 +4,7 @@ description: Analyse and model your software system
 ---
 
 import authors from './authors.json';
+import { avatarUrl } from '../../../utils/avatar';
 import 'remixicon/fonts/remixicon.css';
 
 ## Moose is a community. <span class="text-blue-500">Get involved.</span>
@@ -26,7 +27,7 @@ Its development is currently supported by several research groups, startups, and
   {Object.values(authors).map((author) => (
     <div key={author.name} class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 flex flex-col items-center mt-0">
       <img
-        src={author.image}
+        src={avatarUrl(author)}
         alt={author.name}
         class="w-24 h-24 rounded-full mb-4"
       />
@@ -72,7 +73,6 @@ Its development is currently supported by several research groups, startups, and
 
 - [Prof. Alexandre Bergel](http://bergel.eu/)
 - [Dr. Andrei Chis](http://andreichis.com/)
-- [Dr. Stéphane Ducasse](http://stephane.ducasse.free.fr/)
 - [Dr. Tudor Girba](http://tudorgirba.com/)
 - Pavel Krivanek
 - [And more...](https://github.com/orgs/moosetechnology/people)
