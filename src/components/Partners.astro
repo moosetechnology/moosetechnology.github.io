@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import bergerLevrault from '../content/docs/about/img/contributor-berger-levrault.png';
+import unibe from '../content/docs/about/img/contributor-unibe.jpg';
+import rmod from '../content/docs/about/img/contributor-rmod.png';
+import pleiad from '../content/docs/about/img/contributor-pleiad.png';
+import usi from '../content/docs/about/img/contributor-usi.png';
+import ummisco from '../content/docs/about/img/contributor-ummisco.jpg';
+import feenk from '../content/docs/about/img/contributor-feenk.png';
+import objectProfile from '../content/docs/about/img/contributor-objectprofile.png';
+import sensus from '../content/docs/about/img/contributor-sensus.png';
+
+const partners = [
+	{ name: 'Berger-Levrault', href: 'https://www.berger-levrault.com/', logo: bergerLevrault },
+	{ name: 'University of Bern', href: 'http://scg.unibe.ch', logo: unibe },
+	{ name: 'RMoD', href: 'http://rmod.inria.fr', logo: rmod },
+	{ name: 'Pleiad Lab', href: 'http://pleiad.dcc.uchile.cl', logo: pleiad },
+	{ name: 'USI', href: 'http://www.inf.usi.ch/faculty/lanza/reveal.html', logo: usi },
+	{ name: 'UMMISCO', href: 'http://www.ummisco.ird.fr/', logo: ummisco },
+	{ name: 'Feenk', href: 'http://feenk.com', logo: feenk },
+	{ name: 'Object Profile', href: 'http://objectprofile.com', logo: objectProfile },
+	{ name: 'Sensus', href: 'http://legacycode.nl', logo: sensus },
+];
+---
+
+<ul class="partners not-content">
+	{partners.map(({ name, href, logo }) => (
+		<li>
+			<a href={href} target="_blank" rel="noopener noreferrer">
+				<span class="logo">
+					<Image src={logo} alt={name} height={160} />
+				</span>
+				<span class="name">{name}</span>
+			</a>
+		</li>
+	))}
+</ul>
+
+<style>
+	.partners {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+		gap: 1rem;
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0 0;
+	}
+
+	a {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 0.5rem;
+		overflow: hidden;
+		background: var(--sl-color-bg-nav);
+		text-decoration: none;
+		transition: border-color 0.2s, box-shadow 0.2s;
+	}
+
+	a:hover {
+		border-color: var(--sl-color-accent);
+		box-shadow: var(--sl-shadow-md);
+	}
+
+	/* Logos are designed for light backgrounds, so they keep a light tile in both themes */
+	.logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 6.5rem;
+		padding: 1rem;
+		background: #fff;
+	}
+
+	img {
+		background: none !important;
+		max-width: 100%;
+		max-height: 100%;
+		width: auto;
+		height: auto;
+		margin: 0;
+		object-fit: contain;
+	}
+
+	.name {
+		padding: 0.5rem 0.75rem;
+		border-top: 1px solid var(--sl-color-hairline);
+		font-size: var(--sl-text-sm);
+		text-align: center;
+		color: var(--sl-color-gray-2);
+		transition: color 0.15s;
+	}
+
+	a:hover .name {
+		color: var(--sl-color-text-accent);
+	}
+</style>

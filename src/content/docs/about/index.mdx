@@ -3,9 +3,8 @@ title: About us
 description: Analyse and model your software system
 ---
 
-import authors from './authors.json';
-import { avatarUrl } from '../../../utils/avatar';
-import 'remixicon/fonts/remixicon.css';
+import Team from '../../../components/Team.astro';
+import Partners from '../../../components/Partners.astro';
 
 ## Moose is a community. <span class="text-blue-500">Get involved.</span>
 
@@ -23,51 +22,7 @@ Its development is currently supported by several research groups, startups, and
 
 ## Team
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  {Object.values(authors).map((author) => (
-    <div key={author.name} class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 flex flex-col items-center mt-0">
-      <img
-        src={avatarUrl(author)}
-        alt={author.name}
-        class="w-24 h-24 rounded-full mb-4"
-      />
-      <h3 class="text-lg text-center font-semibold text-gray-900 dark:text-white">{author.name}</h3>
-      <p class="text-sm text-gray-600 dark:text-gray-300">{author.role}</p>
-      <div class="flex space-x-3 mt-4">
-        {author.github && (
-          <a href={author.github} target="_blank" rel="noopener noreferrer" class="no-underline">
-            <i class="ri-github-fill w-5 h-5 text-gray-700 dark:text-white"></i>
-          </a>
-        )}
-        {author.linkedin && (
-          <a href={author.linkedin} target="_blank" rel="noopener noreferrer" class="no-underline">
-            <i class="ri-linkedin-box-fill w-5 h-5 text-blue-700 dark:text-white"></i>
-          </a>
-        )}
-        {author.twitter && (
-          <a href={author.twitter} target="_blank" rel="noopener noreferrer" class="no-underline">
-            <i class="ri-twitter-x-line w-5 h-5 text-blue-500 dark:text-white"></i>
-          </a>
-        )}
-        {author.orcid && (
-          <a href={author.orcid} target="_blank" rel="noopener noreferrer" class="no-underline">
-            <i class="ri-graduation-cap-fill w-5 h-5 text-green-500 dark:text-white"></i>
-          </a>
-        )}
-        {author['personnal-website'] && (
-          <a
-            href={author['personnal-website']}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="no-underline"
-          >
-            <i class="ri-global-fill w-5 h-5 text-gray-700 dark:text-white"></i>
-          </a>
-        )}
-      </div>
-    </div>
-  ))}
-</div>
+<Team />
 
 **And also:**
 
@@ -80,32 +35,4 @@ Its development is currently supported by several research groups, startups, and
 
 ## Partners
 
-<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-<div>
-    [![Berger Levrault](./img/contributor-berger-levrault.png)](https://www.berger-levrault.com/)
-</div>
-<div>
-    [![University of Bern](./img/contributor-unibe.jpg)](http://scg.unibe.ch)
-</div>
-<div>
-    [![RMoD](./img/contributor-rmod.png)](http://rmod.inria.fr)
-</div>
-<div>
-    [![Pleiad Lab](./img/contributor-pleiad.png)](http://pleiad.dcc.uchile.cl)
-</div>
-<div>
-    [![USI](./img/contributor-usi.png)](http://www.inf.usi.ch/faculty/lanza/reveal.html)
-</div>
-<div>
-    [![UMMISCO](./img/contributor-ummisco.jpg)](http://www.ummisco.ird.fr/)
-</div>
-<div>
-    [![Feenk](./img/contributor-feenk.png)](http://feenk.com)
-</div>
-<div>
-    [![Object Profile](./img/contributor-objectprofile.png)](http://objectprofile.com)
-</div>
-<div>
-    [![Sensus](./img/contributor-sensus.png)](http://legacycode.nl)
-</div>
-</div>
+<Partners />

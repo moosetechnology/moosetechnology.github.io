@@ -160,13 +160,22 @@
         "role": "Moose expert",
         "bio": "R&D engineer at <a href='https://www.berger-levrault.com/'>Berger-Levrault</a>",
         "github": "https://github.com/Gabriel-Darbord",
-        "image": "https://avatars.githubusercontent.com/u/78592838"
+        "image": "https://avatars.githubusercontent.com/u/78592838",
+        "orcid": "https://orcid.org/0000-0001-7364-7567"
     },
     "Nicolas Hlad": {
         "name": "Nicolas Hlad",
         "role": "Moose expert",
         "bio": "R&D engineer at <a href='https://www.berger-levrault.com/'>Berger-Levrault</a>",
         "github": "https://github.com/alkalinan",
-        "image": "https://avatars.githubusercontent.com/u/19858911"
+        "image": "https://avatars.githubusercontent.com/u/19858911",
+        "orcid": "https://orcid.org/0000-0003-4989-2508"
+    },
+    "Kilian Bauvent": {
+        "name": "Kilian Bauvent",
+        "role": "Software engineer",
+        "bio": "Software engineer at <a href='https://www.berger-levrault.com/'>Berger-Levrault</a>",
+        "github": "https://github.com/knowbased",
+        "image": "https://avatars.githubusercontent.com/u/60846047"
     }
 }
