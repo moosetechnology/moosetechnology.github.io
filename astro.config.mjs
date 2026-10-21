@@ -52,6 +52,14 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Modular Moose',
+			expressiveCode: {
+				shiki: {
+					langAlias: {
+						st: 'smalltalk',
+						ston: 'smalltalk'
+					 },
+				},
+			},
 			customCss: [
 				// Path to your Tailwind base styles:
 				'./src/styles/global.css',

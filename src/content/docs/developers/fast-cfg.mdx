@@ -185,7 +185,7 @@ FASTPythonVisitor << #FASTPythonCFGVisitor
 
 This class needs to initialize its trait like this:
 
-```smallatlk
+```smalltalk
 initialize
 
 	super initialize.
@@ -649,7 +649,8 @@ flowchart TD
 
 This is managed by `FASTCFGUtility` if your return statement is using `FASTTReturnStatement`. Its visit will raise an exception to skip the rest of the block. 
 
-```FASTCFGPythonVisitor>>visitFASTTReturnStatement: aTReturnStatement
+```smalltalk
+FASTCFGPythonVisitor>>visitFASTTReturnStatement: aTReturnStatement
 
 	super visitFASTTReturnStatement: aTReturnStatement.
 	FASTCFGStatementBlockInterruption signal
