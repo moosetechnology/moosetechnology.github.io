@@ -14,7 +14,7 @@ VerveineC-Cpp (VerveineC in short) is a tool written in java that create a *json
 
 #### Download Eclipse
 
-To install VerveineC, you need to clone it form [VerveineC github repositiory](https://github.com/moosetechnology/VerveineC-Cpp).
+To install VerveineC, you need to clone it from the [VerveineC GitHub repository](https://github.com/moosetechnology/VerveineC-Cpp).
 We advice you to contact us to know which branch is the best for now (probably `famix-7`).
 
 ```bash

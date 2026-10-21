@@ -6,7 +6,7 @@ VerveineJ is a tool written in java that create a *json* or a  _mse_ file from J
 
 ## Installation
 
-To install VerveineJ, you need to clone it form [VerveineJ github repositiory](https://github.com/moosetechnology/VerveineJ).
+To install VerveineJ, you need to clone it from the [VerveineJ GitHub repository](https://github.com/moosetechnology/VerveineJ).
 You might prefer the [latest released version](https://github.com/moosetechnology/VerveineJ/releases).
 
 ```bash

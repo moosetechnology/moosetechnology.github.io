@@ -1,0 +1,62 @@
+---
+title: 'What is Moose?'
+description: 'The key concepts to know before your first analysis with Moose'
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Moose is a platform to analyze software systems.
+It helps you answer questions about your code, such as *"Which deprecated classes are still used?"*, *"What depends on this module?"*, or *"Where is this database table accessed?"*.
+
+To do so, Moose does not work directly on your source code: it works on a **model** of it.
+
+## How an analysis works
+
+<Steps>
+
+1. **Parse** your source code with a parser dedicated to its language (for example [VerveineJ](/developers/parsers/verveinej/) for Java).
+    The parser produces a model file, usually in JSON.
+
+2. **Import** this model file into Moose.
+
+3. **Explore and query** the model using the Moose IDE browsers, or by writing small scripts.
+
+</Steps>
+
+## Key concepts
+
+**Model**
+: A representation of your system as entities (packages, classes, methods, attributes, invocations, accesses...) and the relations between them.
+
+**Famix**
+: The family of meta-models used by Moose to describe models.
+There is one meta-model per language: `FamixJava`, `FamixTypeScript`, `FamixPython`, `FamixSQL`...
+When you import a model, you tell Moose which meta-model it follows (for example `FamixJavaModel` for a Java project).
+
+**Pharo**
+: Moose is built on top of [Pharo](https://pharo.org), a live programming environment.
+The scripts you write in Moose are written in Pharo (a Smalltalk dialect).
+
+## Pharo vocabulary you will meet
+
+**Image**
+: A Pharo environment saved as a file. A *Moose image* is a Pharo image with all the Moose tools installed. You can have several images side by side.
+
+**Pharo Launcher**
+: The application used to download, create and launch images.
+
+**Playground**
+: A window to write and execute code. Open it with <kbd>Ctrl</kbd> + <kbd>O</kbd>, <kbd>Ctrl</kbd> + <kbd>W</kbd>.
+
+**Inspector**
+: A tool to look at any object, including a model or a list of entities, and to run scripts on it.
+
+<Aside type="tip" title="Keyboard shortcuts">
+On macOS, use <kbd>Cmd</kbd> instead of <kbd>Ctrl</kbd>.
+The most useful shortcuts are <kbd>Ctrl</kbd> + <kbd>D</kbd> to execute the selected code (*Do it*) and <kbd>Ctrl</kbd> + <kbd>G</kbd> to execute it and show the result (*Do it and go*).
+</Aside>
+
+<Aside title="New to Pharo?">
+You do not need to master Pharo to start with Moose: the next pages give you every script you need.
+If you want to go further, the [Pharo MOOC](https://mooc.pharo.org) and the [Pharo open documentation](https://github.com/pharo-open-documentation) are good places to start.
+</Aside>

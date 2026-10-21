@@ -1,0 +1,73 @@
+---
+title: 'Analyze your own project'
+description: 'Create a model of your project, load it in Moose and start exploring'
+---
+
+import { Aside, LinkCard, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+You now know how to analyze a model in Moose.
+This page explains how to do the same with your own project.
+
+## 1. Create a model of your project
+
+The tool to use depends on the language of your project.
+
+<Tabs>
+<TabItem label="Java">
+Use [VerveineJ](/developers/parsers/verveinej/), the Java parser of Moose.
+It is available as a [release](https://github.com/moosetechnology/VerveineJ/releases) or as a [docker image](https://github.com/Evref-BL/VerveineJ-Docker).
+
+```sh
+./verveinej.sh -format json -o MyProject.json -autocp ../MyProjectDependenciesOrLib/ ../MyProjectSrcFolder/
+```
+
+On Windows, use `verveinej.bat` instead of `verveinej.sh`.
+
+Meta-model to select when importing: `FamixJavaModel`.
+</TabItem>
+<TabItem label="TypeScript">
+Use `ts2famix`, described in [this external tutorial](https://fuhrmanator.github.io/posts/typescript-in-moose/index.html).
+</TabItem>
+<TabItem label="Python">
+The Python importer runs directly inside Moose: see the [Python importer](/developers/parsers/pythonimporter/) page.
+</TabItem>
+<TabItem label="C / C++">
+Use [VerveineC](/developers/parsers/verveinec-cpp/).
+It is less stable than the other parsers: do not hesitate to contact us.
+</TabItem>
+<TabItem label="SQL database">
+FamixSQL builds a model directly from a database connection: see [Getting started with FamixSQL](/users/famix-sql/getting-started-with-famixsql/).
+</TabItem>
+<TabItem label="Git repository">
+To analyze the history and activity of a GitHub or GitLab project, see [GitProjectHealth](/users/git-project-health/getting-started/).
+</TabItem>
+</Tabs>
+
+## 2. Import the model in Moose
+
+<Steps>
+
+1. Open the *Models browser* from the Moose menu.
+2. Click on the JSON button and select your model file. You can also drag and drop the file into Moose.
+3. Select the meta-model corresponding to your language.
+4. *(Optional)* Right-click on the model, choose `Utilities >> Set root folder`, and select the folder of your project to browse its source code.
+
+</Steps>
+
+<Aside type="tip">
+Importing a big model can take some time.
+The [Importing and exporting models](/users/importing-and-exporting-models/) page gives other ways to load a model, including from a script.
+</Aside>
+
+## 3. Explore your model
+
+<LinkCard
+	title="Moose IDE browsers"
+	description="Navigate in your model, run queries and visualize the results without writing code."
+	href="/users/moose-ide/browsers/"
+/>
+<LinkCard
+	title="Typical queries"
+	description="Ready-to-use queries to find classes, dependencies, dead code..."
+	href="/users/typical-queries/"
+/>
