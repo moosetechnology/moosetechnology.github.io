@@ -2,9 +2,8 @@
 authors:
 - BenoitVerhaeghe
 title:  "Test your Moose code using CIs"
+description: "Create realistic test resources for your Moose code and run the tests in a CI."
 date: 2022-10-28
-background: './img/posts/bg-posts.jpg'
-comment: true
 tags:
 - CI
 - infrastructure

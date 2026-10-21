@@ -1,11 +1,9 @@
 ---
 title: "Model your Fame/Famix Meta-model using Graphical Editors"
-subtitle: "Generate your Generator"
+description: "Generate your Generator"
 date: 2021-03-02
-background: './img/posts/bg-posts.jpg'
 authors:
 - VincentAranega
-comments: true
 tags:
 - infrastructure
 ---

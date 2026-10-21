@@ -2,10 +2,12 @@
 authors:
   - tokyRT
 title: Building a Famix importer with TreeSitterFamixIntegration
-date: 2025-05-11
+description: "Build a Famix importer for C code with the TreeSitterFamixIntegration framework."
+date: 2025-08-11
 lastUpdated: 2025-05-11
 tags:
   - infrastructure
+series: "Moose and Tree-sitter"
 ---
 
 Analyzing source code starts with parsing and for this you need _semantic understanding_ of how symbols in the code relate to each other.

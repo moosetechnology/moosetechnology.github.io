@@ -1,5 +1,5 @@
 {
-    "Nicolas Anquetil": {
+    "NicolasAnquetil": {
         "name": "Nicolas Anquetil",
         "role": "Moose expert",
         "bio": "Software engineer researcher specialized in software evolution",
@@ -9,7 +9,7 @@
         "personnal-website": "http://researchers.lille.inria.fr/~nanqueti/",
         "image": "https://avatars.githubusercontent.com/u/14889146"
     },
-    "Benoit Verhaeghe": {
+    "BenoitVerhaeghe": {
         "name": "Benoit Verhaeghe",
         "role": "Cookie Lover",
         "bio": "R&D engineer at <a href='https://berger-levrault.com/'>Berger-Levrault</a>",
@@ -20,7 +20,7 @@
         "image": "https://avatars.githubusercontent.com/u/6225039",
         "gravatar-hash": "ab4070086241400a4a428bf8994f05e0"
     },
-    "Anne Etien": {
+    "AnneEtien": {
         "name": "Anne Etien",
         "role": "Moose expert",
         "bio": "Software engineer researcher specialized in software evolution",
@@ -28,7 +28,7 @@
         "image": "https://avatars.githubusercontent.com/u/17824579",
         "personnal-website": "https://www.cristal.univ-lille.fr/profil/etien/"
     },
-    "Vincent Aranega": {
+    "VincentAranega": {
         "name": "Vincent Aranega",
         "role": "MDE and beers lover",
         "bio": "Software engineer researcher focused on MDE and Language engineering",
@@ -39,7 +39,7 @@
         "orcid": "https://orcid.org/0000-0003-4465-1289",
         "image": "https://avatars.githubusercontent.com/u/2317394"
     },
-    "Pascal Zaragoza": {
+    "PascalZaragoza": {
         "name": "Pascal Zaragoza",
         "role": "MDE and AI",
         "bio": "R&D engineer at <a href='https://berger-levrault.com/'>Berger-Levrault</a>",
@@ -48,7 +48,7 @@
         "orcid": "https://orcid.org/0000-0002-5033-6392",
         "image": "https://avatars.githubusercontent.com/u/8062930"
     },
-    "Clotilde Toullec": {
+    "ClotildeToullec": {
         "name": "Clotilde Toullec",
         "role": "Research engineer",
         "bio": "Software engineer, maintains and develops Moose",
@@ -56,7 +56,7 @@
         "linkedin": "https://www.linkedin.com/in/clotilde-toullec-3aa685105/",
         "image": "https://avatars.githubusercontent.com/u/39184695"
     },
-    "Christopher Fuhrman": {
+    "ChristopherFuhrman": {
         "name": "Christopher Fuhrman",
         "role": "Moose herder",
         "bio": "Software engineering researcher specializing in software design",
@@ -66,7 +66,7 @@
         "orcid": "https://orcid.org/0000-0001-8010-1087",
         "image": "https://avatars.githubusercontent.com/u/7606540"
     },
-    "Sebastian Jordan": {
+    "SebastianJordan": {
         "name": "Sebastian Jordan",
         "role": "Moose developer",
         "bio": "Software engineer",
@@ -75,7 +75,7 @@
         "linkedin": "https://linkedin.com/in/jordanmontt",
         "twitter": "https://twitter.com/jordanmontt"
     },
-    "Théo Lanord": {
+    "TheoLanord": {
         "name": "Théo Lanord",
         "role": "Trainee / Apprentice engineer",
         "bio": "Student at <a href='http://www.polytech-lille.fr/'>Polytech Lille</a> in IS (Computer Science and Statistics)",
@@ -83,7 +83,7 @@
         "linkedin": "https://www.linkedin.com/in/théo-lanord/",
         "image": "https://avatars.githubusercontent.com/u/58632394?v=4"
     },
-    "Réda Id-taleb": {
+    "RedaIdtaleb": {
         "name": "Réda Id-taleb",
         "role": "Working on LabelContractor and color palette project for my internship",
         "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a>",
@@ -91,7 +91,7 @@
         "linkedin": "https://www.linkedin.com/in/r%C3%A9daid-taleb/",
         "image": "https://avatars.githubusercontent.com/u/82438570"
     },
-    "Ahmed Zaki BENNECER": {
+    "AhmedZakiBENNECER": {
         "name": "Ahmed Zaki BENNECER",
         "role": "Working on data flow analysis project for my internship",
         "bio": "Computer science student at <a href='https://www.esi.dz/'>ESI</a> Algiers",
@@ -100,14 +100,14 @@
         "personnal-website": "https://ahmed-zaki-bennecer.web.app/",
         "image": "https://avatars.githubusercontent.com/u/45533819"
     },
-    "Romain Degrave": {
+    "RomainDegrave": {
         "name": "Romain Degrave",
         "role": "Master degree intern in software analysis",
         "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a>",
         "github": "https://github.com/RomainDeg",
         "image": "https://avatars.githubusercontent.com/u/98580879"
     },
-    "Patricia TOTOUM": {
+    "PatriciaTOTOUM": {
         "name": "Patricia TOTOUM",
         "role": "Intern working on Famix-Aggregator",
         "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a>",
@@ -115,14 +115,14 @@
         "linkedin": "https://www.linkedin.com/in/patricia-totoum-988179255/",
         "image": "https://zupimages.net/up/23/31/lxci.jpeg"
     },
-    "Thomas Wattebled": {
+    "ThomasWattebled": {
         "name": "Thomas Wattebled",
         "role": "working on parametric types for my intership",
         "bio": "Student at <a href='https://www.univ-lille.fr/'>University of Lille</a> ",
         "github": "https://github.com/thomasWattebled",
         "image": "https://avatars.githubusercontent.com/u/124277643"
-    }, 
-    "Toky RATOLOJANHARY": {
+    },
+    "tokyRT": {
         "name": "Toky RATOLOJANHARY",
         "role": "Software engineer",
         "bio": "Software engineer",
@@ -130,7 +130,7 @@
         "linkedin": "https://www.linkedin.com/in/tokyratolojanahary/",
         "image": "https://avatars.githubusercontent.com/u/57077076"
     },
-    "Aless Hosry": {
+    "AlessHosry": {
         "name": "Aless Hosry",
         "role": "Research engineer at Berger-Levrault",
         "bio": "Research engineer at <a href='https://www.berger-levrault.com/fr/'>Berger-Levrault</a> ",
@@ -139,14 +139,14 @@
         "image": "https://alesshosry.github.io/assets/myImage2.jpeg",
         "linkedin": "https://www.linkedin.com/in/aless-hosry-697791186"
     },
-     "Cyril Ferlicot-Delbecque": {
+    "CyrilFerlicot": {
         "name": "Cyril Ferlicot-Delbecque",
         "role": "Moose Expert",
         "github": "https://github.com/jecisc",
         "personnal-website": "https://ferlicot.fr/",
         "image": "https://ferlicot.fr/assets/img/photos/Avatar.jpg"
     },
-    "Stéphane Ducasse": {
+    "StephaneDucasse": {
         "name": "Stéphane Ducasse",
         "role": "Research director at Inria",
         "bio": "Research director at <a href='https://www.inria.fr/'>Inria</a>, leading the Evref team",
@@ -155,7 +155,7 @@
         "personnal-website": "http://stephane.ducasse.free.fr/",
         "image": "https://avatars.githubusercontent.com/u/432549"
     },
-    "Gabriel Darbord": {
+    "GabrielDarbord": {
         "name": "Gabriel Darbord",
         "role": "Moose expert",
         "bio": "R&D engineer at <a href='https://www.berger-levrault.com/'>Berger-Levrault</a>",
@@ -163,7 +163,7 @@
         "image": "https://avatars.githubusercontent.com/u/78592838",
         "orcid": "https://orcid.org/0000-0001-7364-7567"
     },
-    "Nicolas Hlad": {
+    "NicolasHlad": {
         "name": "Nicolas Hlad",
         "role": "Moose expert",
         "bio": "R&D engineer at <a href='https://www.berger-levrault.com/'>Berger-Levrault</a>",
@@ -171,7 +171,7 @@
         "image": "https://avatars.githubusercontent.com/u/19858911",
         "orcid": "https://orcid.org/0000-0003-4989-2508"
     },
-    "Kilian Bauvent": {
+    "KilianBauvent": {
         "name": "Kilian Bauvent",
         "role": "Software engineer",
         "bio": "Software engineer at <a href='https://www.berger-levrault.com/'>Berger-Levrault</a>",

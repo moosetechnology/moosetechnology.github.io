@@ -1,14 +1,9 @@
 ---
-# published: true
 title: A real example on using tags
-header-img: img/posts/DSM.jpg
-subtitle: >-
-  In this post I show step by step how one can use tags to perform a real, concrete, analysis. 
+description: "In this post I show step by step how one can use tags to perform a real, concrete, analysis."
 date: 2025-03-05
-background: './img/posts/bg-posts.jpg'
 authors:
 - NicolasAnquetil
-comments: true
 tags:
 - story
 ---

@@ -1,11 +1,13 @@
 ---
 title: "Generation of new FAST-Language metamodel using Pharo-Tree-Sitter project"
+description: "Generate a first version of a new FAST-Language meta-model with Pharo-Tree-Sitter."
 date: 2025-09-15
 authors:
 - AlessHosry
 tags:
 - meta-model
 - Python
+series: "Moose and Tree-sitter"
 ---
 
 If you’re here, you’re probably interested in creating a new FAST metamodel and expanding Moose to represent the AST (Abstract Syntax Tree) of an additional language.

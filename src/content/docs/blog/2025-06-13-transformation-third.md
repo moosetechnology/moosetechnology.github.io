@@ -1,14 +1,12 @@
 ---
 title: "Transformation journey (3/3) : Visualize and apply code transformations"
-subtitle: >-
-  How to visualize, edit, and apply code transformations to source files
-date: 2024-06-13
-background: '/img/posts/bg-posts.jpg'
+description: "How to visualize, edit, and apply code transformations to source files"
+date: 2025-06-13
 authors: 
 - RomainDegrave
-comments: true
 tags:
 - transformation
+series: "Transformation journey"
 ---
 
 Once again, let me welcome you to the final blog post in those three blog posts about code transformations! During the [first blog](https://modularmoose.org/blog/2024-04-01-transformation-first/) post, we used queries and tools to locate the entities we seek to transform, before implementing the actual transformation logic in the [second blog](https://modularmoose.org/blog/2024-04-14-transformation-second/) post.

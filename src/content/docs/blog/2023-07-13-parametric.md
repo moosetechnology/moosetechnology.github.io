@@ -1,11 +1,12 @@
 ---
 title: "Representation of parametrics"
-subtitle: "In Java generic types allow you to write a general, generic class (or method) that works with different types, allowing code reuse. But their modeling and how it works can be difficult to understand."
+description: "In Java generic types allow you to write a general, generic class (or method) that works with different types, allowing code reuse. But their modeling and how it works can be difficult to understand."
 date: 2023-07-13
 authors:
 - ThomasWattebled
 tags:
 - meta-model
+series: "Parametrics in Famix"
 ---
 
 Note that this blog post is rendered obsolete by the new [Parametrics next generation](/blog/2025-05-07-parametrics-next-generation/) blog post.

@@ -2,11 +2,12 @@
 authors:
 - CyrilFerlicot
 title: "Implementing the Local Resolver of Python in FAST-Python"
-subtitle: Why the hell is python so bad?
+description: "Why the hell is python so bad?"
 date:  2026-09-16
 tags:
 - FAST
 - Python
+series: "FAST-Python analyses"
 ---
 
 # Implementing the Local Resolver of Python in FAST-Python

@@ -1,13 +1,9 @@
 ---
 title: "How to build a new Moose tool: The MooseInspector"
-header-img: img/posts/DSM.jpg
-subtitle: >-
-  In this post I am going to show you how to create a new Moose Tool Browser from scratch. How to connect this new tool to the Moose Data bus to listen and to propagate new entities.
-background: './img/posts/bg-posts.jpg'
+description: "In this post I am going to show you how to create a new Moose Tool Browser from scratch. How to connect this new tool to the Moose Data bus to listen and to propagate new entities."
 date: 2021-05-04
 authors:
 - SebastianJordan
-comments: true
 tags:
 - infrastructure
 - browser

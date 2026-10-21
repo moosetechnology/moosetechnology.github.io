@@ -1,13 +1,14 @@
 ---
 title: "Towards analyzing TypeScript with Moose"
-subtitle: "I discuss an imperfect but useful approach to analyze TypeScript projects using existing elements."
+description: "I discuss an imperfect but useful approach to analyze TypeScript projects using existing elements."
 date: 2021-06-23
-background: './img/posts/towards-analyzing-typescript/patchwork-beads-by-various-brennemans.jpg'
 authors:
 - ChristopherFuhrman
-comments: true
 tags:
 - story
+cover:
+  image: "./img/posts/towards-analyzing-typescript/patchwork-beads-by-various-brennemans.jpg"
+  alt: ""
 ---
 
 TypeScript is a more and more popular programming language, and so it would be great if we could analyze TypeScript projects using Moose.

@@ -1,8 +1,7 @@
 ---
 title: "Enhancing software analysis with Moose's aggregation"
-subtitle: Simplify model import
+description: "Simplify model import"
 date: 2023-08-07
-background: './img/posts/bg-posts.jpg'
 authors:
 - PatriciaTOTOUM
 ---

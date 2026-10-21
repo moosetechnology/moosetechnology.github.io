@@ -1,13 +1,9 @@
 ---
 title: "Introducing the new Queries Browser"
-header-img: img/posts/DSM.jpg
-subtitle: >-
-  Here I am going to show you the new Queries Browser!
-background: './img/posts/bg-posts.jpg'
+description: "Here I am going to show you the new Queries Browser!"
 date: 2021-10-10
 authors:
 - SebastianJordan
-comments: true
 tags:
 - browser
 ---

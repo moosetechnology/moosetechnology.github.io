@@ -1,10 +1,9 @@
 ---
 title: "Some tools on FAST models"
+description: "An overview of the tools and algorithms available in FAST-Core-Tools for FAST models."
 date: 2025-03-07
-background: './img/posts/bg-posts.jpg'
 authors:
 - NicolasAnquetil
-comments: true
 tags:
 - Famix-tools
 - FAST

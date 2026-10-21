@@ -1,11 +1,15 @@
 ---
 title: "Creating an importer for an alien grammar"
+description: "Tricks to write a visitor for an alien AST, for example to build a Famix model from a Tree-sitter AST."
 date: 2025-03-29
-background: './img/posts/treesitter-banner.png'
 authors:
 - NicolasAnquetil
 tags:
 - infrastructure
+cover:
+  image: "./img/posts/treesitter-banner.png"
+  alt: ""
+series: "Moose and Tree-sitter"
 ---
 
 In this blog-post, we see some tricks to create a visitor for an alien AST.

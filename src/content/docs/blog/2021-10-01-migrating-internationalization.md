@@ -2,8 +2,7 @@
 authors:
 - BenoitVerhaeghe
 title: "Migrating internationalization files"
-subtitle: "A nice MDE example"
-background: './img/posts/bg-posts.jpg'
+description: "A nice MDE example"
 date: 2021-10-01
 tags:
 - story

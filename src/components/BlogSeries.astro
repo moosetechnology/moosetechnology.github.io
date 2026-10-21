@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+
+const { series } = Astro.locals.starlightRoute.entry.data;
+const currentId = Astro.locals.starlightRoute.entry.id;
+
+const posts = series
+	? (await getCollection('docs', ({ data }) => data.series === series && !data.draft)).sort(
+			(a, b) => a.data.date.getTime() - b.data.date.getTime()
+		)
+	: [];
+---
+
+{
+	posts.length > 1 && (
+		<aside class="series not-content" aria-label={`Series: ${series}`}>
+			<p class="series-title">
+				Series · <strong>{series}</strong>
+			</p>
+			<ol>
+				{posts.map((post) => (
+					<li>
+						{post.id === currentId ? (
+							<span aria-current="page">{post.data.title}</span>
+						) : (
+							<a href={`/${post.id}/`}>{post.data.title}</a>
+						)}
+					</li>
+				))}
+			</ol>
+		</aside>
+	)
+}
+
+<style>
+	.series {
+		margin-block: 1.5rem;
+		padding: 1rem 1.25rem;
+		border: 1px solid var(--sl-color-hairline);
+		border-inline-start: 3px solid var(--sl-color-accent);
+		border-radius: 0.5rem;
+		background: var(--sl-color-bg-nav);
+		font-size: var(--sl-text-sm);
+	}
+
+	.series-title {
+		margin: 0 0 0.5rem;
+		color: var(--sl-color-gray-3);
+	}
+
+	.series-title strong {
+		color: var(--sl-color-white);
+	}
+
+	ol {
+		margin: 0;
+		padding-inline-start: 1.25rem;
+	}
+
+	li + li {
+		margin-top: 0.25rem;
+	}
+
+	a {
+		color: var(--sl-color-text-accent);
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+	[aria-current='page'] {
+		font-weight: 600;
+		color: var(--sl-color-white);
+	}
+</style>

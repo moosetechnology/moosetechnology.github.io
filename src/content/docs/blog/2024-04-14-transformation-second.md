@@ -1,14 +1,12 @@
 ---
 title: "Transformation journey (2/3) : Copying FASTs and creating nodes"
-subtitle: >-
-  How to copy and create FAST nodes to create code transformations
+description: "How to copy and create FAST nodes to create code transformations"
 date: 2024-04-15
-background: './img/posts/bg-posts.jpg'
 authors:
 - RomainDegrave
-comments: true
 tags:
 - transformation
+series: "Transformation journey"
 ---
 
 Welcome back to the little series of blog posts surrounding code transformation! In the previous post, we started to build a transformation tool using a basic fictional transformation use case on the software ArgoUML.

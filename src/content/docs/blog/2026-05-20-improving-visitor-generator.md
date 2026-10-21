@@ -2,11 +2,13 @@
 authors:
 - CyrilFerlicot
 title: "Improving the generation of visitors"
+description: "How to use the visitor generator, the problems found while using it on FAST-Python, and their fixes."
 date:  2026-05-20
 lastUpdated:  2026-05-20
 tags:
 - infrastructure
 - famix-tools
+series: "Famix Tools"
 ---
 
 ## Context  

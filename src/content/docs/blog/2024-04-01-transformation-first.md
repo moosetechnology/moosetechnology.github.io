@@ -1,14 +1,12 @@
 ---
 title: "Transformation journey (1/3) : Locating entities and nodes"
-subtitle: >-
-  How to use queries and tools to find entities and their specific nodes to transform
+description: "How to use queries and tools to find entities and their specific nodes to transform"
 date: 2024-04-01
-background: './img/posts/bg-posts.jpg'
 authors:
 - RomainDegrave
-comments: true
 tags:
 - transformation
+series: "Transformation journey"
 ---
 
 Sometimes we have to perform several similar edits on our source code. 

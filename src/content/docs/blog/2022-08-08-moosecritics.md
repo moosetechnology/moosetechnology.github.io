@@ -1,13 +1,9 @@
 ---
 title: "Manage rules using MooseCritics"
-header-img: img/posts/DSM.jpg
-subtitle: >-
-  Create and manage rules to apply on your software
-background: './img/posts/bg-posts.jpg'
+description: "Create and manage rules to apply on your software"
 date: 2022-08-08 15:00:00
 authors:
 - RomainDegrave
-comments: true
 tags:
 - browser
 ---

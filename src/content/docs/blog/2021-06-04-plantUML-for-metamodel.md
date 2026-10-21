@@ -1,12 +1,14 @@
 ---
 title: "Generate a plantUML visualization for a meta-model"
+description: "Generate a PlantUML class diagram of a meta-model (tool now replaced by FamixUMLDocumentor)."
 date: 2021-06-04
-background: './img/posts/2021-06-04-plantUML-for-metamodel/bg-post.jpg'
 authors:
-- ThéoLanord
-comments: true
+- TheoLanord
 tags:
 - Famix-tools
+cover:
+  image: "./img/posts/2021-06-04-plantUML-for-metamodel/bg-post.jpg"
+  alt: ""
 ---
 
 ## Note
