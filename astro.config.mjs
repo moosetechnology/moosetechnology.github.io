@@ -189,18 +189,30 @@ export default defineConfig({
 					[
 						{
 							label: 'Documentation',
-							link: '/beginners/install-moose/',
+							link: '/beginners/what-is-moose/',
 							items: [
 								{
-									label: 'Beginners',
+									label: 'Getting started',
 									items: [
+										{
+											label: 'What is Moose?',
+											link: '/beginners/what-is-moose/',
+										},
 										{
 											label: 'Install Moose',
 											link: '/beginners/install-moose/',
 										},
 										{
-											label: 'Moose in Action',
+											label: 'Your first analysis',
 											link: '/beginners/moose-in-action/',
+										},
+										{
+											label: 'Analyze your own project',
+											link: '/beginners/analyze-your-project/',
+										},
+										{
+											label: 'Next steps',
+											link: '/beginners/next-steps/',
 										},
 										{
 											label: 'Demo video',

@@ -11,9 +11,9 @@ This chapter provides a short guide for how to deal with these.
 ### Importing and exporting with JSON
 
 The preferred way to load a model in Moose is via a JSON file.
-To load an JSON file, all you have to do is to press the _``Import from JSON''_ button in the Moose Panel and indicate the file to load.
+To load an JSON file, all you have to do is to press the JSON button in the *Models browser* and indicate the file to load.
 This creates a model, populates it with the entities from the file and adds the model to the repository.
-Visually, the model appears in the list of models from the Moose Panel.
+The model then appears in the list of models of the Models browser.
 
 > You can also drag and drop the Json file within the Pharo Image
 
@@ -25,7 +25,7 @@ To import a model from a JSON format, you can execute the following snippet:
 ```
 
 
-More information about JSON format are available [here](./file-format#json).
+More information about JSON format are available [here](/users/file-format/#json).
 
 > Sugar methods will be added in future release
 
@@ -42,7 +42,7 @@ model exportToJSON.
 
 ### Importing and exporting with MSE
 
-As one can import and export using JSON, it is possible to import and export using the [MSE format](./file-format#mse).
+As one can import and export using JSON, it is possible to import and export using the [MSE format](/users/file-format/#mse).
 
 Another way is to import the model from a playground by executing (in the case of a FamixJava model):
 
@@ -51,11 +51,11 @@ Another way is to import the model from a playground by executing (in the case o
     [:stream | model := FamixJavaModel importFromMSEStream: stream].
 ```
 
-More information about MSE are available [here](./file-format#mse).
+More information about MSE are available [here](/users/file-format/#mse).
 
 Once a model is loaded, it can be easily exported as an MSE file.
 This can be done via the contextual menu of the model.
-By choosing the _``Export to MSE''_ menu item you will be prompted to indicate the desired file name and location, and the result is an MSE file saved on the disk containing the entities in the model.
+By choosing the *Export to MSE* menu item you will be prompted to indicate the desired file name and location, and the result is an MSE file saved on the disk containing the entities in the model.
 
 It is also possible to do it programmatically by executing: 
 
@@ -100,7 +100,7 @@ You can try the following command that will create a process that perform the lo
 
 Moose comes with a built-in importer for Pharo code. The prerequisite for using this importer is that you first need the target source code present in the Pharo image.
 
-Once the code is present, simply press on the ``Load from Pharo'' item from the menu of the Moose Panel, and follow the steps from the opening wizard.
+Once the code is present, simply press on the *Load from Pharo* item from the menu of the Models browser, and follow the steps from the opening wizard.
 
 This importer works out of the box for code built for Pharo.
 For code written in other Smalltalk dialects, the code must first be made loadable into Pharo.
