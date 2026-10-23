@@ -169,6 +169,26 @@ The two outputs serve different needs:
 - a **model artifact** is smaller and can be imported into a compatible existing Moose image;
 - an **image artifact** is a ready-to-open environment containing the model and its compatible runtime.
 
+### What an image artifact contains
+
+An image artifact is selective rather than a copy of the complete build workspace. Its portable ZIP contains:
+
+- at its root, the `.image` file, its `.changes` file when available, the available Pharo `.sources` files, `meta-inf.ston`, `pharo.version`, and a CLI build report;
+- under `pharo-local/MooseNexus/`, the recorded project metadata, model artifact, and a copy of the analyzed source project.
+
+Other image-local directories, such as `pharo-local/iceberg`, and the Pharo VM are not included. MooseNexus does not scan these files for credentials or remove secrets: the source copy, saved image, or changes file may contain sensitive information. Review an artifact before publishing it.
+
+### Reuse an image artifact
+
+An installed image artifact can be adopted several times, much like making working copies from a template. Each adoption creates a separate writable image while leaving the repository artifact unchanged:
+
+```bash
+moosenexus adopt-image com.example:demo:1.0.0
+moosenexus adopt-image com.example:demo:1.0.0 --adopt-as demo-alice
+```
+
+By default, these copies are placed in the standard Pharo images directory and appear in Pharo Launcher. This is not a Launcher template: MooseNexus copies the image files and launcher metadata from an installed artifact. The recorded project and source copy remain in the local MooseNexus repository rather than being duplicated into every adopted image.
+
 Use `moosenexus artifacts` to see what is installed locally. Build options can also be kept in a YAML file and passed with `--config`, which is preferable for repeatable scripts and continuous integration. `--dry-run` shows the resolved workflow without executing it, and `--json` produces machine-readable output for automation.
 
 ## Share artifacts through a registry
