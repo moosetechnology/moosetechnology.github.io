@@ -57,6 +57,10 @@ All commands are run from the root of the project, from a terminal:
 We are using the [Starlight](https://starlight.astro.build/components/steps/) with many components that can be used directly in markdown!
 Do not hesitate to use them.
 
+### LLM-friendly documentation
+
+The Starlight `starlight-llms-txt` plugin generates `llms.txt`, `llms-full.txt`, and `llms-small.txt` from the documentation pages during the site build. These files are served from the site root to help LLMs discover and read the documentation.
+
 ### Adding a new docs page
 
 When adding a new wiki page, you must link the page in the [astro.config.mjs](astro.config.mjs) under the `starlightSidebarTopics` item.

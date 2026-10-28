@@ -4,6 +4,7 @@ import { defineConfig, sharpImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightCatppuccin from '@catppuccin/starlight';
 import starlightBlog from 'starlight-blog'
+import starlightLlmsTxt from 'starlight-llms-txt';
 import { blogAuthors } from './src/utils/authors';
 import starlightSidebarTopics from 'starlight-sidebar-topics';
 import tailwindcss from "@tailwindcss/vite";
@@ -80,6 +81,7 @@ export default defineConfig({
 			{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/QewZMZa' }
 			],
 			plugins: [
+				starlightLlmsTxt(),
 				starlightCatppuccin({
 					dark: { flavor: 'mocha', accent: 'blue' },
 					light: { flavor: 'latte', accent: 'blue' },
