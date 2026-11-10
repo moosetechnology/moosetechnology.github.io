@@ -219,6 +219,10 @@ export default defineConfig({
 											label: 'Moose IDE',
 											items: [
 												{
+													label: 'Moose Tools Overview',
+													link: '/users/moose-tools',
+												},
+												{
 													label: 'Moose IDE Browsers',
 													link: '/users/moose-ide/browsers',
 												},

@@ -1,0 +1,161 @@
+---
+title: 'Moose tools'
+description: 'An overview of all the tools available in Moose, organized by what they help you do'
+---
+
+import { Aside, Badge } from '@astrojs/starlight/components';
+
+Moose comes with many tools.
+This page lists them, grouped by the step of an analysis they help with: getting a model, exploring it, querying it, visualizing it, running specialized analyses, and extending Moose.
+
+Each tool is marked with how you get it:
+
+- <Badge text="Default" variant="success" /> the tool is part of the default Moose image. Most tools are opened from the **Moose** menu of the menu bar.
+- <Badge text="Load" variant="caution" /> the tool must be loaded first, from the **Library** menu, under **Famix > Load additional modules**.
+
+<Aside title="How the Moose IDE tools work together">
+Most tools of the Moose IDE (the *browsers*) communicate through **buses**.
+When you select entities in one browser, you can *propagate* them, and every browser listening to the same bus receives them.
+You build an analysis by chaining browsers: select classes in a query, propagate them, and look at them in a visualization.
+See [Moose IDE browsers](/users/moose-ide/browsers/) for details.
+In the tables below, the *Input* column says what a browser expects to receive from the bus.
+</Aside>
+
+## 1. Getting a model into Moose
+
+Before any analysis you need a model of your system.
+It can be produced by a parser outside of Moose (for example [VerveineJ](/developers/parsers/verveinej/) for Java), then imported.
+See also [Importing and exporting models](/users/importing-and-exporting-models/).
+
+| Tool | What it does | Availability |
+|---|---|---|
+| **Models browser** | The entry point of Moose. Lists the models in the image, imports new ones, and propagates the selected model. Imports from a JSON or MSE file, from a folder of files, or from Pharo code already in the image. | <Badge text="Default" variant="success" /> |
+| **Github Importer** | Searches GitHub for a project, downloads the versions you choose, parses them with VerveineJ, and imports one model per version. Java projects only for now. Also available from the Models browser toolbar. | <Badge text="Default" variant="success" /> |
+| **Moose Nexus** | Build automation and dependency management for models, similar to Maven or Gradle. Resolves the dependencies of a Java project (Maven, Gradle), runs VerveineJ, and keeps versioned models. | <Badge text="Load" variant="caution" /> |
+| **Famix Java Fusionner** | Scripting API (`FamixFusionnerJava`). Merges two Java models by replacing the *stub* entities of one model with their full definition from another model (for example a library). | <Badge text="Default" variant="success" /> |
+
+## 2. Exploring a model
+
+General-purpose tools to navigate a model, look at its entities and script on it.
+
+| Tool | What it does | Input | Availability |
+|---|---|---|---|
+| **MooseIDE Overview** | Shows all open browsers and the buses they listen to. Use it to manage buses. | — | <Badge text="Default" variant="success" /> |
+| **Moose Inspector** | The Pharo inspector connected to the buses. Navigates any entity and its relations. See [Inspector](/users/moose-ide/inspector/). | A Moose entity | <Badge text="Default" variant="success" /> |
+| **Moose Playground** | The Pharo playground connected to the buses. Write scripts on your models. Each model of the image is available as a variable, and the last received entity as `receivedEntity`. | Anything | <Badge text="Default" variant="success" /> |
+| **Notebook** | A notebook mixing text cells (Microdown) and code cells, to document an analysis and export it as a report. | An entity of a model | <Badge text="Default" variant="success" /> |
+| **Source code** | Shows the source code of an entity, with highlighting. | An entity with a source anchor | <Badge text="Default" variant="success" /> |
+| **Files** | Explores the root folder of a model and shows the entities defined in each file. | A model with a root folder | <Badge text="Default" variant="success" /> |
+| **Aggregator Browser** | Collects entities propagated from several tools, then propagates them all together. | Entities | <Badge text="Default" variant="success" /> |
+| **Logger** | Shows the history of what was propagated on each bus. | — | <Badge text="Default" variant="success" /> |
+| **Spotter** | The Pharo Spotter (<kbd>Shift</kbd> + <kbd>Enter</kbd>), extended to search entities in the models. | — | <Badge text="Default" variant="success" /> |
+
+## 3. Querying and checking rules
+
+Select the entities that answer your question, and check rules on a model.
+See also [MooseQuery](/users/moosequery/) and [Typical queries](/users/typical-queries/).
+
+| Tool | What it does | Input | Availability |
+|---|---|---|---|
+| **Queries Browser** | Builds queries step by step, without code: filter by type, property, name, navigate relations, combine queries. Propagates the result. | A group of entities | <Badge text="Default" variant="success" /> |
+| **Queries dashboard** | Shows predefined queries that apply to a model, with their results. | An entity of a model | <Badge text="Default" variant="success" /> |
+| **Moose Critic Browser** | Defines rules as queries and lists their violations on a model. Rules can be exported and imported. See [Moose Critics](/users/moose-ide/moose-critics/). | Entities | <Badge text="Default" variant="success" /> |
+| **MoTion** | Declarative pattern matching on objects. Describes the shape of the entities you look for instead of writing navigation code. Scripting only. | — | <Badge text="Load" variant="caution" /> |
+
+## 4. Tagging
+
+Tags let you mark entities by hand (or by script) to record what you learn during an analysis: *"to remove"*, *"UI layer"*, *"checked"*...
+Many visualizations can color entities by tag.
+
+| Tool | What it does | Input | Availability |
+|---|---|---|---|
+| **Tag browser** | Creates tags, gives them a name and a color, puts them in a hierarchy, and adds or removes tagged entities. Tags can be exported and imported. | An entity of a model | <Badge text="Default" variant="success" /> |
+
+## 5. Visualizing
+
+### Structure of the system
+
+| Tool | What it does | Input | Availability |
+|---|---|---|---|
+| **Architectural map** | Shows the containment hierarchy of entities (packages, classes, methods...) as nested boxes, with their tags. | Entities | <Badge text="Default" variant="success" /> |
+| **Distribution map** | Shows how a property (for example a tag) is distributed over parts of the system (for example packages). See [Distribution map](/users/moose-ide/distribution-map/). | Entities | <Badge text="Default" variant="success" /> |
+| **Heat map** | Like the distribution map, with entities colored by a numeric property. | Entities | <Badge text="Default" variant="success" /> |
+| **System complexity** | Shows the class hierarchies, each class drawn as a box whose size and color show metrics (attributes, methods, lines of code). | A group of classes | <Badge text="Default" variant="success" /> |
+| **Class Blueprint** | Shows the internal structure of one class: its methods and attributes, how they call each other, and which are dead. | A class | <Badge text="Default" variant="success" /> |
+| **UML** | Draws a UML class diagram of the received types. Found under **Moose > Old browsers**. | Types | <Badge text="Default" variant="success" /> |
+| **Layer visualization** | Partitions a model into layers and shows the links between them. Each system must describe its layers by subclassing `MiLayerVisualizationModel`. Not in the menu. | An entity of a model | <Badge text="Default" variant="success" /> |
+| **ClassName Distribution** | Shows how the words used in class names (the *concepts*) are distributed over class hierarchies, for Java and Pharo. Opened from the **Library** menu once loaded. | A model | <Badge text="Load" variant="caution" /> |
+
+### Dependencies
+
+| Tool | What it does | Input | Availability |
+|---|---|---|---|
+| **Butterfly map** | Shows the clients (left) and the providers (right) of a central entity, over several levels. | An entity | <Badge text="Default" variant="success" /> |
+| **Dependency Structural Matrix** | Shows the dependencies between entities as a matrix and highlights the cycles. | Entities depending on each other | <Badge text="Default" variant="success" /> |
+| **Co Usage Map** | Shows which *containers* (for example methods) use which *used entities* (for example attributes). Useful to split a class or to find cohesive groups. | A group of entities | <Badge text="Default" variant="success" /> |
+| **API Browser** | Shows the dependencies between two subsystems: what a *client* subsystem uses from a *provider* subsystem. Listens to two buses, one per subsystem. | Methods or classes, on each bus | <Badge text="Load" variant="caution" /> |
+| **Java call graph** | Builds the call graph of Java methods, solving polymorphic calls. Also loads FAST Java. | Java methods | <Badge text="Load" variant="caution" /> |
+| **Java call graph v2** | Second version of the Java call graph builder. Work in progress. | Java methods | <Badge text="Load" variant="caution" /> |
+
+## 6. Specialized analyses
+
+| Tool | What it does | Input | Availability |
+|---|---|---|---|
+| **Dead code browser** | Finds dead methods or functions, with a choice of heuristics. A first run finds the dead entities, and a recursion then adds the entities called only by dead ones. | Methods or functions | <Badge text="Default" variant="success" /> |
+| **Duplication browser** | Finds code clones and shows the duplicated fragments side by side. | Entities with source code | <Badge text="Default" variant="success" /> |
+| **Bulk editor** | Scripting API (`MiBulkEditor`). Rewrites Java source files in bulk, for example to comment out or remove a list of dead methods. | — | <Badge text="Default" variant="success" /> |
+| **Moose Security** | Finds possible security vulnerabilities in a system, tags them and shows them. Work in progress. | — | <Badge text="Load" variant="caution" /> |
+
+## 7. Exporting results
+
+| Tool | What it does | Input | Availability |
+|---|---|---|---|
+| **Entities exporter** | Exports entities as a CSV file, with a comment per entity. See [Moose exporter](/users/moose-ide/moose-exporter/). | Entities | <Badge text="Default" variant="success" /> |
+| **Model Report** | Generates a statistical report on a model in Markdown. You can edit it before exporting. | An entity of a model | <Badge text="Default" variant="success" /> |
+| **Model export** | Exports a whole model as JSON or MSE, from the Models browser or by script. See [Importing and exporting models](/users/importing-and-exporting-models/). | A model | <Badge text="Default" variant="success" /> |
+
+The **Notebook** and the **Model Report** (above) also produce documents you can export.
+
+## 8. Meta-models (languages)
+
+A model follows a meta-model, which depends on the language of the analyzed system.
+Moose includes some meta-models by default, and others can be loaded.
+
+### Famix meta-models
+
+| Meta-model | Language | Availability |
+|---|---|---|
+| **Famix Java** | Java. See [Famix Java](/users/famix-java/famix-java/). | <Badge text="Default" variant="success" /> |
+| **Famix Smalltalk** | Pharo code, imported directly from the image. | <Badge text="Default" variant="success" /> |
+| **MoosePy** | Python | <Badge text="Load" variant="caution" /> |
+| **Famix-Fortran** | Fortran | <Badge text="Load" variant="caution" /> |
+| **Famix-Cpp** | C++ | <Badge text="Load" variant="caution" /> |
+| **Famix-SQL** | SQL. See [Getting started with FamixSQL](/users/famix-sql/getting-started-with-famixsql/). | Loaded by script |
+
+### FAST meta-models (abstract syntax trees)
+
+Famix models stop at the level of methods. FAST models describe what is inside them: statements and expressions.
+See [FAST](/users/ast/fast/).
+
+| Meta-model | Language | Availability |
+|---|---|---|
+| **FAST Java** | Java. See [FAST Java](/users/ast/fast-java/). | <Badge text="Load" variant="caution" /> |
+| **FAST Pharo** | Pharo. See [FAST Pharo](/users/ast/fast-pharo/). | <Badge text="Load" variant="caution" /> |
+| **FAST Python** | Python, with analyses such as control flow graphs, SSA and local resolution. See [FAST Python](/users/ast/fast-python/). | <Badge text="Load" variant="caution" /> |
+| **FAST Fortran** | Fortran | <Badge text="Load" variant="caution" /> |
+
+## 9. Extending Moose
+
+Tools for people who build new meta-models, parsers or tools.
+See the [Developers](/developers/create-new-metamodel/) section.
+
+| Tool | What it does | Availability |
+|---|---|---|
+| **Famix meta-model builder** | Defines a new meta-model by describing its entities and relations, and generates its code. See [Create a new meta-model](/developers/create-new-metamodel/). | <Badge text="Default" variant="success" /> |
+| **Fame** | The meta-meta-model below Famix. Also handles reading and writing models (JSON, MSE). See [Fame](/developers/fame/). | <Badge text="Default" variant="success" /> |
+| **Meta Browser** | Browses a meta-model: its entities, their properties and their relations. Found under **Moose > Old browsers**. | <Badge text="Default" variant="success" /> |
+| **Famix UML Documentor** | Scripting API (`FamixUMLDocumentor`). Generates a UML diagram of a meta-model, exported as PlantUML, Mermaid, LaTeX, text or Roassal. | <Badge text="Default" variant="success" /> |
+| **MooseQuery** | The query API used by all the tools: navigate containment and dependencies between entities, whatever the meta-model. See [MooseQuery](/users/moosequery/). | <Badge text="Default" variant="success" /> |
+| **Roassal** | The visualization engine used by the Moose visualizations. Use it to build your own. | <Badge text="Default" variant="success" /> |
+| **PetitParser** | A framework to build parsers (PetitParser2). | <Badge text="Load" variant="caution" /> |
+| **SmaCC** | A parser generator, used for example to write importers for new languages. | <Badge text="Load" variant="caution" /> |
