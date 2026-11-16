@@ -47,7 +47,7 @@ You should look for AST parser that have this feature enabled.
 
 If you have no AST Parser existing, you can use a parser generator inside Pharo. We advice you three options:
 
-- [Pharo-Tree-Sitter](https://github.com/Evref-BL/Pharo-Tree-Sitter) if a tree sitter parser already exist (outside Pharo but easy to integrate)
+- [Pharo-Tree-Sitter](https://github.com/Evref-BL/Pharo-Tree-Sitter) if a tree sitter parser already exist (outside Pharo but easy to integrate). This is the best option because we are trying to get most of our importers on this stack that has better integration in Moose. Other stacks will need extra steps to be integrated in other FAST utilites
 - [SmaCC](https://books.pharo.org/booklet-Smacc/) if you have an existing grammar
 - [PetitParser2](https://kursjan.github.io/petitparser2/) in other cases
 
@@ -64,6 +64,12 @@ In the **first case**, you have two options:
 
 - you can create entities and export to the file format. This is the common way to work and would allow fast analysis.
 - Or, you can implement [Fame](/developers/fame), the meta-meta-model used in Moose. Then, this meta-meta-model can be used to create generic code that would generate meta-model in your programming language, or generate easily model in the Moose file format. For instance, one can found Fame implementation for [Java](https://github.com/moosetechnology/FameJava) and [Pharo](https://github.com/moosetechnology/Fame).
+
+### Importer and description (FAST)
+
+If your language is supported by FAST, the importer must be described to FAST as well.
+Write the importer with the `FASTTImporter` trait (see [FAST](/users/ast/fast#add-a-language)), then add a `FASTImporterDescription` subclass for the project.
+Without this description, FAST cannot load your project when the language is not in the image, and the agnostic importer cannot import your files.
 
 ### Creating a meta-model
 
